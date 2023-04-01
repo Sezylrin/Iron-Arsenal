@@ -5,32 +5,45 @@ using UnityEngine;
 public class Bullet : MonoBehaviour, ICannonProjectile
 {
     private Vector3 direction;
-    public float speed;
-    private BoxCollider boxCollider;
-
     public Vector3 Direction
     {
-        get
-        {
-            return direction;
-        }
-        set
-        {
-            direction = value;
-        }
+        get { return direction; }
+        set { direction = value; }
     }
-    
+
+    private float damage = 10f;
+    public float Damage
+    {
+        get { return damage; }
+        set { damage = value; }
+    }
+
+    private float speed = 0.1f;
+    public float ProjectileSpeed
+    {
+        get { return speed; }
+        set { speed = value; }
+    }
+
+    private float fireDelay = 0.3f;
+    public float FireDelay
+    {
+        get { return fireDelay; }
+        set { fireDelay = value; }
+    }
+
+    private BoxCollider boxCollider;
+
     void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
-        boxCollider.enabled = false;
-        Invoke("enableCollider", 0.1f);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = 0.1f;
+        boxCollider.enabled = false;
+        Invoke("enableCollider", 0.1f);
         Invoke("delete", 3f);
     }
 

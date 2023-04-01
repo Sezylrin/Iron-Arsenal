@@ -9,19 +9,23 @@ public class Cannon : MonoBehaviour
     private Vector3 worldPosition;
     private GameObject newCannonProjectile;
     private Transform cannonProjectileSpawnPoint;
-    public GameObject[] cannonProjectileArray;
     public int activeCannonProjectile;
+    public GameObject[] cannonProjectileArray;
+    public Transform projectilesParent;
+    private bool ableToShoot;
 
     void Awake()
     {
         rotatePoint = GameObject.Find("Cannon Rotation Point").transform;
         cannonProjectileSpawnPoint = GameObject.Find("Cannon Projectile Spawn Point").transform;
+        projectilesParent = GameObject.Find("Projectiles").transform;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         activeCannonProjectile = 0;
+        ableToShoot = true;
     }
 
     // Update is called once per frame
@@ -35,11 +39,18 @@ public class Cannon : MonoBehaviour
 
         rotatePoint.LookAt(worldPosition);
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && ableToShoot)
         {
-            newCannonProjectile = Instantiate(cannonProjectileArray[activeCannonProjectile], cannonProjectileSpawnPoint.position, transform.rotation);
+            ableToShoot = false;
+            newCannonProjectile = Instantiate(cannonProjectileArray[activeCannonProjectile], cannonProjectileSpawnPoint.position, transform.rotation, projectilesParent);
             ICannonProjectile cannonProjectileScript = newCannonProjectile.GetComponent<ICannonProjectile>();
             cannonProjectileScript.Direction = (mouseLocation - cannonProjectileSpawnPoint.position).normalized;
+            Invoke("delayFiring", cannonProjectileScript.FireDelay);
         }
+    }
+
+    void delayFiring()
+    {
+        ableToShoot = true;
     }
 }
