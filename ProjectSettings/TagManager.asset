@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ore
   - FriendlyProjectile
+  - Enemy
   layers:
   - Default
   - TransparentFX

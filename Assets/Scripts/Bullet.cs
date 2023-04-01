@@ -32,18 +32,14 @@ public class Bullet : MonoBehaviour, ICannonProjectile
         set { fireDelay = value; }
     }
 
-    private BoxCollider boxCollider;
-
     void Awake()
     {
-        boxCollider = GetComponent<BoxCollider>();
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        boxCollider.enabled = false;
-        Invoke("enableCollider", 0.1f);
         Invoke("delete", 3f);
     }
 
@@ -58,8 +54,12 @@ public class Bullet : MonoBehaviour, ICannonProjectile
         Destroy(gameObject);
     }
 
-    void enableCollider()
+    void OnCollisionEnter(Collision col)
     {
-        boxCollider.enabled = true;
+        if (col.gameObject.tag == "Enemy")
+        {
+            col.gameObject.GetComponent<tempEnemy>().takeDamage(damage);
+            Destroy(gameObject);
+        }
     }
 }

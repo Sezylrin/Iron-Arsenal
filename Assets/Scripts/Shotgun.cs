@@ -51,22 +51,27 @@ public class Shotgun : MonoBehaviour, ICannonProjectile
         newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, 10f, 0), projectilesParent); //2
         bulletScript = newBullet.GetComponent<Bullet>();
         bulletScript.Direction = this.Direction;
+        bulletScript.Damage = damage;
 
         newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, 5f, 0), projectilesParent); //1
         bulletScript = newBullet.GetComponent<Bullet>();
         bulletScript.Direction = this.Direction;
+        bulletScript.Damage = damage;
 
         newBullet = Instantiate(bullet, transform.position, transform.rotation, projectilesParent); //0
         bulletScript = newBullet.GetComponent<Bullet>();
         bulletScript.Direction = this.Direction;
+        bulletScript.Damage = damage;
 
         newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, -10f, 0), projectilesParent); //-1
         bulletScript = newBullet.GetComponent<Bullet>();
         bulletScript.Direction = this.Direction;
+        bulletScript.Damage = damage;
 
         newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, -5f, 0), projectilesParent); //-2
         bulletScript = newBullet.GetComponent<Bullet>();
         bulletScript.Direction = this.Direction;
+        bulletScript.Damage = damage;
     }
 
     // Update is called once per frame
