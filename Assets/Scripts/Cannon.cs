@@ -7,20 +7,21 @@ public class Cannon : MonoBehaviour
     private Transform rotatePoint;
     private Vector3 mouseLocation;
     private Vector3 worldPosition;
-    private Transform bulletSpawnPoint;
-    public GameObject[] bulletArray;
-    private GameObject newBullet;
+    private GameObject newCannonProjectile;
+    private Transform cannonProjectileSpawnPoint;
+    public GameObject[] cannonProjectileArray;
+    public int activeCannonProjectile;
 
     void Awake()
     {
-        rotatePoint = GameObject.Find("Gun Rotation Point").transform;
-        bulletSpawnPoint = GameObject.Find("Bullet Spawn Point").transform;
+        rotatePoint = GameObject.Find("Cannon Rotation Point").transform;
+        cannonProjectileSpawnPoint = GameObject.Find("Cannon Projectile Spawn Point").transform;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-       
+        activeCannonProjectile = 0;
     }
 
     // Update is called once per frame
@@ -36,9 +37,9 @@ public class Cannon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            newBullet = Instantiate(bulletArray[0], bulletSpawnPoint.position, transform.rotation);
-            Bullet bulletScript = newBullet.GetComponent<Bullet>();
-            bulletScript.direction = (mouseLocation - bulletSpawnPoint.position).normalized;
+            newCannonProjectile = Instantiate(cannonProjectileArray[activeCannonProjectile], cannonProjectileSpawnPoint.position, transform.rotation);
+            ICannonProjectile cannonProjectileScript = newCannonProjectile.GetComponent<ICannonProjectile>();
+            cannonProjectileScript.Direction = (mouseLocation - cannonProjectileSpawnPoint.position).normalized;
         }
     }
 }

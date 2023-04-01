@@ -2,11 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, ICannonProjectile
 {
-    public Vector3 direction;
+    private Vector3 direction;
     public float speed;
     private BoxCollider boxCollider;
+
+    public Vector3 Direction
+    {
+        get
+        {
+            return direction;
+        }
+        set
+        {
+            direction = value;
+        }
+    }
     
     void Awake()
     {

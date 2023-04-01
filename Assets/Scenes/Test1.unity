@@ -295,6 +295,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  totalResourcesInDeposit: 0
+  currentResourcesInDeposit: 0
 --- !u!65 &564109810
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -550,7 +552,7 @@ GameObject:
   - component: {fileID: 1070703017}
   - component: {fileID: 1070703020}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -654,8 +656,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c69eb3c5eeb924c80f1d6a5521f38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletArray:
+  cannonProjectileArray:
   - {fileID: 1123763005487040603, guid: c4a3e8f0491194748ada7e901664ded6, type: 3}
+  activeCannonProjectile: 0
 --- !u!1 &1214364558
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1214364559}
   m_Layer: 0
-  m_Name: Bullet Spawn Point
+  m_Name: Cannon Projectile Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -825,6 +828,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  totalResourcesInDeposit: 0
+  currentResourcesInDeposit: 0
 --- !u!65 &1488259509
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1038,6 +1043,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  totalResourcesInDeposit: 0
+  currentResourcesInDeposit: 0
 --- !u!65 &1914509499
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1134,7 +1141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2111552860}
   m_Layer: 0
-  m_Name: Gun Rotation Point
+  m_Name: Cannon Rotation Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
