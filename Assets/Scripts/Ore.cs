@@ -1,4 +1,3 @@
-using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +14,8 @@ public class Ore : MonoBehaviour
     public OreType type;
     private tempPlayer playerScript;
     private tempGameManager gameManager;
+    public int totalResourcesInDeposit;
+    public int currentResourcesInDeposit;
 
     void Awake()
     {
@@ -25,7 +26,8 @@ public class Ore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        totalResourcesInDeposit = Random.Range(100, 501);
+        currentResourcesInDeposit = totalResourcesInDeposit;
     }
 
     // Update is called once per frame
@@ -38,15 +40,42 @@ public class Ore : MonoBehaviour
     {
         if (type == OreType.Ore1) 
         {
-            gameManager.ore1 += playerScript.miningOutput;
+            if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
+            {
+                gameManager.ore1 += currentResourcesInDeposit;
+                Destroy(gameObject);
+            }
+            else
+            {
+                currentResourcesInDeposit -= playerScript.miningOutput;
+                gameManager.ore1 += playerScript.miningOutput;
+            }
         }
         else if (type == OreType.Ore2)
         {
-            gameManager.ore2 += playerScript.miningOutput;
+            if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
+            {
+                gameManager.ore2 += currentResourcesInDeposit;
+                Destroy(gameObject);
+            }
+            else
+            {
+                currentResourcesInDeposit -= playerScript.miningOutput;
+                gameManager.ore2 += playerScript.miningOutput;
+            }
         }
         else if (type == OreType.Ore3)
         {
-            gameManager.ore3 += playerScript.miningOutput;
+            if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
+            {
+                gameManager.ore3 += currentResourcesInDeposit;
+                Destroy(gameObject);
+            }
+            else
+            {
+                currentResourcesInDeposit -= playerScript.miningOutput;
+                gameManager.ore3 += playerScript.miningOutput;
+            }
         }
     }
 
