@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : MonoBehaviour, ICannonProjectile
+public class RapidFire : MonoBehaviour, ICannonProjectile
 {
     private Vector3 direction;
     public Vector3 Direction
@@ -25,7 +25,7 @@ public class Shotgun : MonoBehaviour, ICannonProjectile
         set { speed = value; }
     }
 
-    private float fireDelay = 0.8f;
+    private float fireDelay = 0.2f;
     public float FireDelay
     {
         get { return fireDelay; }
@@ -47,27 +47,7 @@ public class Shotgun : MonoBehaviour, ICannonProjectile
     {
         Invoke("delete", 3f);
 
-        newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, 10f, 0), projectilesParent); //2
-        bulletScript = newBullet.GetComponent<Bullet>();
-        bulletScript.Direction = this.Direction;
-        bulletScript.Damage = damage;
-
-        newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, 5f, 0), projectilesParent); //1
-        bulletScript = newBullet.GetComponent<Bullet>();
-        bulletScript.Direction = this.Direction;
-        bulletScript.Damage = damage;
-
         newBullet = Instantiate(bullet, transform.position, transform.rotation, projectilesParent); //0
-        bulletScript = newBullet.GetComponent<Bullet>();
-        bulletScript.Direction = this.Direction;
-        bulletScript.Damage = damage;
-
-        newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, -10f, 0), projectilesParent); //-1
-        bulletScript = newBullet.GetComponent<Bullet>();
-        bulletScript.Direction = this.Direction;
-        bulletScript.Damage = damage;
-
-        newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, -5f, 0), projectilesParent); //-2
         bulletScript = newBullet.GetComponent<Bullet>();
         bulletScript.Direction = this.Direction;
         bulletScript.Damage = damage;

@@ -25,16 +25,11 @@ public class Bullet : MonoBehaviour, ICannonProjectile
         set { speed = value; }
     }
 
-    private float fireDelay = 0.3f;
+    private float fireDelay = 0.5f;
     public float FireDelay
     {
         get { return fireDelay; }
         set { fireDelay = value; }
-    }
-
-    void Awake()
-    {
-
     }
 
     // Start is called before the first frame update
