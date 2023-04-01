@@ -6,7 +6,15 @@ public class Bullet : MonoBehaviour
 {
     public Vector3 direction;
     public float speed;
+    private BoxCollider boxCollider;
     
+    void Awake()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+        boxCollider.enabled = false;
+        Invoke("enableCollider", 0.1f);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +31,10 @@ public class Bullet : MonoBehaviour
     void delete()
     {
         Destroy(gameObject);
+    }
+
+    void enableCollider()
+    {
+        boxCollider.enabled = true;
     }
 }
