@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - UISelection
+  - UIDeletion
   - Ore
   - FriendlyProjectile
   - Enemy
@@ -14,10 +16,10 @@ TagManager:
   - 
   - Water
   - UI
+  - Ground
   - 
-  - 
-  - 
-  - 
+  - Build
+  - Socket
   - 
   - 
   - 
