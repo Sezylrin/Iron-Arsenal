@@ -34,8 +34,9 @@ public class Cannon : MonoBehaviour
         mouseLocation = Input.mousePosition;
         mouseLocation.z += 1000000;
 
-        worldPosition = Camera.main.ScreenToWorldPoint(mouseLocation);
-        worldPosition.y = 0;
+        //worldPosition = Camera.main.ScreenToWorldPoint(mouseLocation);
+        worldPosition = MousePosition.MouseToWorld3D(Camera.main, -1);
+        worldPosition.y = transform.position.y;
 
         rotatePoint.LookAt(worldPosition);
 

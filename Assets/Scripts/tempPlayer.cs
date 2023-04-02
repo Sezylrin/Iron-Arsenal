@@ -48,7 +48,7 @@ public class tempPlayer : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Space))
         {
-            if (inOreTrigger && ore && ableToMine && !mining)
+            if (ore && inOreTrigger && ableToMine && !mining)
             {
                 mining = true;
                 ableToMine = false;

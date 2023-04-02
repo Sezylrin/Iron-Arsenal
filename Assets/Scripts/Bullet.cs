@@ -49,11 +49,11 @@ public class Bullet : MonoBehaviour, ICannonProjectile
         Destroy(gameObject);
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider other)
     {
-        if (col.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
-            col.gameObject.GetComponent<tempEnemy>().takeDamage(damage);
+            other.gameObject.GetComponent<tempEnemy>().takeDamage(damage);
             Destroy(gameObject);
         }
     }

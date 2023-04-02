@@ -8,5 +8,4 @@ public interface ICannonProjectile
     float Damage { get; set; }
     float ProjectileSpeed { get; set; }
     float FireDelay { get; set; }
-
 }
