@@ -9,6 +9,8 @@ TagManager:
   - Ore
   - FriendlyProjectile
   - Enemy
+  - CenterPoint
+  - BulletSpawnPoint
   layers:
   - Default
   - TransparentFX
