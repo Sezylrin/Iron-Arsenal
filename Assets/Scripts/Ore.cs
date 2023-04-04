@@ -6,21 +6,21 @@ public class Ore : MonoBehaviour
 {
     public enum OreType
     {
-        Ore1,
-        Ore2,
-        Ore3
+        Iron,
+        Copper,
+        Gold
     };
 
     public OreType type;
     private tempPlayer playerScript;
-    private tempGameManager gameManager;
+    private LevelManager levelManager;
     public int totalResourcesInDeposit;
     public int currentResourcesInDeposit;
 
     void Awake()
     {
         playerScript = GameObject.Find("Player").GetComponent<tempPlayer>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<tempGameManager>();
+        levelManager = LevelManager.Instance;
     }
 
     // Start is called before the first frame update
@@ -38,43 +38,43 @@ public class Ore : MonoBehaviour
 
     public void mine()
     {
-        if (type == OreType.Ore1) 
+        if (type == OreType.Iron) 
         {
             if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
             {
-                gameManager.ore1 += currentResourcesInDeposit;
+                levelManager.GainIron(currentResourcesInDeposit);
                 Destroy(gameObject);
             }
             else
             {
                 currentResourcesInDeposit -= playerScript.miningOutput;
-                gameManager.ore1 += playerScript.miningOutput;
+                levelManager.GainIron(playerScript.miningOutput);
             }
         }
-        else if (type == OreType.Ore2)
+        else if (type == OreType.Copper)
         {
             if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
             {
-                gameManager.ore2 += currentResourcesInDeposit;
+                levelManager.GainCopper(currentResourcesInDeposit);
                 Destroy(gameObject);
             }
             else
             {
                 currentResourcesInDeposit -= playerScript.miningOutput;
-                gameManager.ore2 += playerScript.miningOutput;
+                levelManager.GainCopper(playerScript.miningOutput);
             }
         }
-        else if (type == OreType.Ore3)
+        else if (type == OreType.Gold)
         {
             if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
             {
-                gameManager.ore3 += currentResourcesInDeposit;
+                levelManager.GainGold(currentResourcesInDeposit);
                 Destroy(gameObject);
             }
             else
             {
                 currentResourcesInDeposit -= playerScript.miningOutput;
-                gameManager.ore3 += playerScript.miningOutput;
+                levelManager.GainGold(playerScript.miningOutput);
             }
         }
     }
