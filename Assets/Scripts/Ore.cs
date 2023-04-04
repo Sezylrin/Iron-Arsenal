@@ -20,7 +20,6 @@ public class Ore : MonoBehaviour
     void Awake()
     {
         playerScript = GameObject.Find("Player").GetComponent<tempPlayer>();
-        levelManager = LevelManager.Instance;
     }
 
     // Start is called before the first frame update
@@ -28,6 +27,7 @@ public class Ore : MonoBehaviour
     {
         totalResourcesInDeposit = Random.Range(100, 501);
         currentResourcesInDeposit = totalResourcesInDeposit;
+        levelManager = LevelManager.Instance;
     }
 
     // Update is called once per frame
