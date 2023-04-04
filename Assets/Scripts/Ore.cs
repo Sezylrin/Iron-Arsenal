@@ -6,9 +6,9 @@ public class Ore : MonoBehaviour
 {
     public enum OreType
     {
-        Ore1,
-        Ore2,
-        Ore3
+        Iron,
+        Copper,
+        Gold
     };
 
     public OreType type;
@@ -16,6 +16,10 @@ public class Ore : MonoBehaviour
     private tempGameManager gameManager;
     public int totalResourcesInDeposit;
     public int currentResourcesInDeposit;
+
+    public bool inOreTrigger;
+    public bool ableToMine;
+    public bool mining;
 
     void Awake()
     {
@@ -28,64 +32,91 @@ public class Ore : MonoBehaviour
     {
         totalResourcesInDeposit = Random.Range(100, 501);
         currentResourcesInDeposit = totalResourcesInDeposit;
+        inOreTrigger = false;
+        ableToMine = true;
+        mining = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void mine()
-    {
-        if (type == OreType.Ore1) 
+        if (Input.GetKey(KeyCode.Space))
         {
-            if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
+            if (inOreTrigger && ableToMine && !mining)
             {
-                gameManager.ore1 += currentResourcesInDeposit;
-                Destroy(gameObject);
-            }
-            else
-            {
-                currentResourcesInDeposit -= playerScript.miningOutput;
-                gameManager.ore1 += playerScript.miningOutput;
-            }
-        }
-        else if (type == OreType.Ore2)
-        {
-            if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
-            {
-                gameManager.ore2 += currentResourcesInDeposit;
-                Destroy(gameObject);
-            }
-            else
-            {
-                currentResourcesInDeposit -= playerScript.miningOutput;
-                gameManager.ore2 += playerScript.miningOutput;
-            }
-        }
-        else if (type == OreType.Ore3)
-        {
-            if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
-            {
-                gameManager.ore3 += currentResourcesInDeposit;
-                Destroy(gameObject);
-            }
-            else
-            {
-                currentResourcesInDeposit -= playerScript.miningOutput;
-                gameManager.ore3 += playerScript.miningOutput;
+                mining = true;
+                ableToMine = false;
+                StartMining();
             }
         }
     }
 
-    public void startMining()
+    public void Mine()
     {
-        InvokeRepeating("mine", 0f, playerScript.miningSpeed);
+        int i = -1;
+        switch (type)
+        {
+            case OreType.Iron:
+                i = 0;
+                break;
+            case OreType.Copper:
+                i = 1;
+                break;
+            case OreType.Gold:
+                i = 2;
+                break;
+        }
+            
+        if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
+        {
+            gameManager.ores[i] += currentResourcesInDeposit;
+            Destroy(gameObject);
+        }
+        else
+        {
+            currentResourcesInDeposit -= playerScript.miningOutput;
+            gameManager.ores[i] += playerScript.miningOutput;
+        }
     }
 
-    public void stopMining()
+    public void StartMining()
     {
-        CancelInvoke("mine");
+        InvokeRepeating("Mine", 0f, playerScript.miningSpeed);
+    }
+
+    public void StopMining()
+    {
+        if (mining)
+        {
+            mining = false;
+            CancelInvoke("MiningDelay");
+            Invoke("MiningDelay", 1f);
+            StopMining();
+        }
+        CancelInvoke("Mine");
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        //Collider
+        if (other.gameObject.tag == "Player")
+        {
+            //Collided With Player
+            inOreTrigger = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            StopMining();
+            inOreTrigger = false;
+        }
+    }
+
+    void MiningDelay()
+    {
+        ableToMine = true;
     }
 }
