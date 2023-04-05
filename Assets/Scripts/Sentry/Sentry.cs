@@ -42,21 +42,16 @@ public class Sentry : MonoBehaviour
             Debug.Log("No centerPoint for turrets to reference, please create an emepty transform at the center of the base");
             Debug.Break();
         }
-        if(!data)
-        {
-            Debug.Log("Missing Data, taking default values");
-            return;
-        }
         bulletSpawnpoint = GameObject.FindWithTag("BulletSpawnPoint").transform;
-        losAngle = data.losAngle;
-        range = data.range;
-        fireRate = data.fireRate;
-        timer = 1/fireRate;
+        if (data)
+            SetValue();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!data)
+            return;
         SetForward();
         if (!target)
             LocateTarget(tempList);
@@ -147,5 +142,20 @@ public class Sentry : MonoBehaviour
     public void RemoveTarget()
     {
         target = null;
+    }
+
+    private void SetValue()
+    {
+        losAngle = data.losAngle;
+        range = data.range;
+        fireRate = data.fireRate;
+        timer = 1 / fireRate;
+    }
+
+    public void SetData(SentryData data)
+    {
+        this.data = data;
+        if (data)
+            SetValue();
     }
 }

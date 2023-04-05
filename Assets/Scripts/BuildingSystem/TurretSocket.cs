@@ -7,13 +7,15 @@ public class TurretSocket : MonoBehaviour
 {
     private GameObject turret;
 
-    public GameObject turretPrefab;
+    public GameObject sentryPF;
 
     private GameObject buildMenu;
 
     private GameObject deletionMenu;
 
     private TurretBuildMenu buildMenuScript;
+
+    private TurretDeletion deletionScript;
 
     private GameObject menuTemp;
 
@@ -29,9 +31,10 @@ public class TurretSocket : MonoBehaviour
             Debug.Break();
             Debug.Log("Place a UISelection Prefab");
         }
+        buildMenuScript = buildMenu.GetComponent<TurretBuildMenu>();
         if (!deletionMenu)
             deletionMenu = GameObject.FindWithTag("UIDeletion");
-        if (!buildMenu)
+        if (!deletionMenu)
         {
             Debug.Break();
             Debug.Log("Place a UIDeletion Prefab");
@@ -53,35 +56,42 @@ public class TurretSocket : MonoBehaviour
                 //play animation for ui
                 if (menuTemp == null && turret == null)
                 {
+                    buildMenu.SetActive(true);
                     menuTemp = Instantiate(buildMenu, transform.position + Vector3.up, Quaternion.identity);
-                    menuTemp.transform.Rotate(new Vector3(90, 0, 0));
-                    menuTemp.GetComponent<TurretBuildMenu>().SetSocket(this);
+                    TurretBuildMenu temp = menuTemp.GetComponent<TurretBuildMenu>();
+                    temp.SetSocket(this);
+                    temp.SetValue(buildMenuScript.availableTurrets,buildMenuScript.unlockedTurrets);
                 }
                 else
                 {
                     menuTemp = Instantiate(deletionMenu, transform.position + Vector3.up, Quaternion.identity);
-                    menuTemp.transform.Rotate(new Vector3(90, 0, 0));
                     menuTemp.GetComponent<TurretDeletion>().SetSocket(this);
                 }
+                menuTemp.transform.Rotate(new Vector3(90, 0, 0));
             }
             else if (Vector3.Distance(MousePos, transform.position) >= (menuTemp != null && turret == null? 3.5f : 1.5f))
             {
-                //Debug.Log("Running");
                 RemoveMenu();
+               //deletionMenu.transform.Translate(Vector3.up * 100);
             }
         }
     }
 
-    public void SetTurret(GameObject turret)
+    public void SetTurret(SentryData data)
     {
-        if(this.turret == null)
-            this.turret = Instantiate(turret, transform.position, Quaternion.identity, transform);
+        if(turret == null)
+        {
+            turret = Instantiate(sentryPF, transform.position, Quaternion.identity, transform);
+            turret.GetComponent<Sentry>().SetData(data);
+        }
         RemoveMenu();
     }
 
     private void RemoveMenu()
     {
         //play leaving animation for ui
+        if (!menuTemp)
+            return;
         Destroy(menuTemp);
     }
 
