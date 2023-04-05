@@ -70,18 +70,21 @@ public class Cannon : MonoBehaviour
             {
                 newCannonProjectile = Instantiate(cannonProjectileArray[activeCannonProjectile], projectilesParent);
             }
+            newCannonProjectile.transform.rotation = transform.rotation;
+            newCannonProjectile.transform.position = cannonProjectileSpawnPoint.position;
+
             ICannonProjectile cannonProjectileScript = newCannonProjectile.GetComponent<ICannonProjectile>();
             cannonProjectileScript.Direction = (mouseLocation - cannonProjectileSpawnPoint.position).normalized;
             cannonProjectileScript.Owner = this;
-            newCannonProjectile.transform.rotation = transform.rotation;
-            newCannonProjectile.transform.position = cannonProjectileSpawnPoint.position;
             cannonProjectileScript.Shoot();
-            Invoke("DelayFiring", cannonProjectileScript.FireDelay);
+
+            StartCoroutine(DelayFiring(cannonProjectileScript.FireDelay));
         }
     }
 
-    void DelayFiring()
+    IEnumerator DelayFiring(float delay)
     {
+        yield return new WaitForSeconds(delay);
         ableToShoot = true;
     }
 
