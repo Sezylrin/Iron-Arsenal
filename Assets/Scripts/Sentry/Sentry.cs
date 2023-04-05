@@ -52,8 +52,6 @@ public class Sentry : MonoBehaviour
         if (!data)
             return;
         SetForward();
-        if (!target)
-            LocateTarget(tempList);
         else
         {
             if (timer <= 0)
