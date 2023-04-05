@@ -9,10 +9,19 @@ public class Cannon : MonoBehaviour
     private Vector3 worldPosition;
     private GameObject newCannonProjectile;
     private Transform cannonProjectileSpawnPoint;
-    public int activeCannonProjectile;
-    public GameObject[] cannonProjectileArray;
     public Transform projectilesParent;
     private bool ableToShoot;
+
+    public int activeCannonProjectile;                  // Determines which projectile  
+    public GameObject[] cannonProjectileArray;          // to fire using following list
+    private Pooling pooledBullets = new Pooling();      // 0 - Default (Bullets)
+    private Pooling pooledShotguns = new Pooling();     // 1 - Shotgun
+    private Pooling pooledRapidFires = new Pooling();   // 2 - Rapid Fire
+    private Pooling pooledSlowShots = new Pooling();    // 3 - Slow Gun
+    private Pooling pooledPoisonShots = new Pooling();  // 4 - Poison (DoT) Gun
+    private Pooling pooledRockets = new Pooling();      // 5 - Rocket Launcher
+    private Pooling pooledFlames = new Pooling();       // 6 - Flamethrower
+    public List<Pooling> pools = new List<Pooling>();
 
     void Awake()
     {
@@ -26,6 +35,14 @@ public class Cannon : MonoBehaviour
     {
         activeCannonProjectile = 0;
         ableToShoot = true;
+
+        pools.Add(pooledBullets);
+        pools.Add(pooledShotguns);
+        pools.Add(pooledRapidFires);
+        pools.Add(pooledSlowShots);
+        pools.Add(pooledPoisonShots);
+        pools.Add(pooledRockets);
+        pools.Add(pooledFlames);
     }
 
     // Update is called once per frame
@@ -34,23 +51,79 @@ public class Cannon : MonoBehaviour
         mouseLocation = Input.mousePosition;
         mouseLocation.z += 1000000;
 
-        worldPosition = Camera.main.ScreenToWorldPoint(mouseLocation);
-        worldPosition.y = 0;
+        worldPosition = MousePosition.MouseToWorld3D(Camera.main, -1);
+        worldPosition.y = transform.position.y;
 
         rotatePoint.LookAt(worldPosition);
 
         if (Input.GetKey(KeyCode.Mouse0) && ableToShoot)
         {
             ableToShoot = false;
-            newCannonProjectile = Instantiate(cannonProjectileArray[activeCannonProjectile], cannonProjectileSpawnPoint.position, transform.rotation, projectilesParent);
+
+            if (pools[activeCannonProjectile].ListCount() > 0)
+            {
+                newCannonProjectile = pools[activeCannonProjectile].FirstObj();
+                newCannonProjectile.SetActive(true);
+                pools[activeCannonProjectile].RemoveObj(newCannonProjectile);
+            }
+            else
+            {
+                newCannonProjectile = Instantiate(cannonProjectileArray[activeCannonProjectile], projectilesParent);
+            }
             ICannonProjectile cannonProjectileScript = newCannonProjectile.GetComponent<ICannonProjectile>();
             cannonProjectileScript.Direction = (mouseLocation - cannonProjectileSpawnPoint.position).normalized;
-            Invoke("delayFiring", cannonProjectileScript.FireDelay);
+            cannonProjectileScript.Owner = this;
+            newCannonProjectile.transform.rotation = transform.rotation;
+            newCannonProjectile.transform.position = cannonProjectileSpawnPoint.position;
+            cannonProjectileScript.Shoot();
+            Invoke("DelayFiring", cannonProjectileScript.FireDelay);
         }
     }
 
-    void delayFiring()
+    void DelayFiring()
     {
         ableToShoot = true;
+    }
+
+    public void PoolBullet(GameObject obj)
+    {
+        obj.SetActive(false);
+        pooledBullets.AddObj(obj);
+    }
+
+    public void PoolShotgun(GameObject obj)
+    {
+        obj.SetActive(false);
+        pooledShotguns.AddObj(obj);
+    }
+
+    public void PoolRapidFire(GameObject obj)
+    {
+        obj.SetActive(false);
+        pooledRapidFires.AddObj(obj);
+    }
+
+    public void PoolSlowShot(GameObject obj)
+    {
+        obj.SetActive(false);
+        pooledSlowShots.AddObj(obj);
+    }
+    
+    public void PoolPoisonShot(GameObject obj)
+    {
+        obj.SetActive(false);
+        pooledPoisonShots.AddObj(obj);
+    }
+    
+    public void PoolRocket(GameObject obj)
+    {
+        obj.SetActive(false);
+        pooledRockets.AddObj(obj);
+    }
+    
+    public void PoolFlame(GameObject obj)
+    {
+        obj.SetActive(false);
+        pooledFlames.AddObj(obj);
     }
 }

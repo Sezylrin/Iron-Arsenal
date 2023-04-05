@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class tempGameManager : MonoBehaviour
 {
-    public int ore1;
-    public int ore2;
-    public int ore3;
+    public int[] ores; // 0 - Iron, 1 - Copper, 2 - Gold
 
     // Start is called before the first frame update
     void Start()
     {
-        ore1 = 0;
-        ore2 = 0;
-        ore3 = 0;
+        ores = new int[3];
+        ores[0] = 0;
+        ores[1] = 0;
+        ores[2] = 0;
     }
 
     // Update is called once per frame

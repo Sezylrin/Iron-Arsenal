@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour, ICannonProjectile
 {
+    private Cannon owner;
+    public Cannon Owner
+    {
+        get { return owner; }
+        set { owner = value; }
+    }
+
     private Vector3 direction;
     public Vector3 Direction
     {
@@ -35,7 +42,7 @@ public class Bullet : MonoBehaviour, ICannonProjectile
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("delete", 3f);
+        
     }
 
     // Update is called once per frame
@@ -44,17 +51,22 @@ public class Bullet : MonoBehaviour, ICannonProjectile
         transform.Translate(direction.x * speed, 0, direction.z * speed);
     }
 
-    void delete()
+    public void Shoot()
     {
-        Destroy(gameObject);
+        Invoke("Delete", 3f);
     }
 
-    void OnCollisionEnter(Collision col)
+    public void Delete()
     {
-        if (col.gameObject.tag == "Enemy")
+        owner.PoolBullet(gameObject);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
         {
-            col.gameObject.GetComponent<tempEnemy>().takeDamage(damage);
-            Destroy(gameObject);
+            other.gameObject.GetComponent<tempEnemy>().takeDamage(damage);
+            Delete();
         }
     }
 }

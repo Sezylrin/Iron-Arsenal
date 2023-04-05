@@ -6,9 +6,7 @@ public class tempPlayer : MonoBehaviour
 {
     public float speed;
     public GameObject ore;
-    public bool inOreTrigger;
-    public bool ableToMine;
-    public bool mining;
+
     public float miningSpeed;
     public int miningOutput;
 
@@ -16,8 +14,6 @@ public class tempPlayer : MonoBehaviour
     void Start()
     {
         speed = 0.05f;
-        inOreTrigger = false;
-        ableToMine = true;
 
         miningSpeed = 1f; 
         miningOutput = 20;
@@ -29,30 +25,33 @@ public class tempPlayer : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.forward * speed);
-            stopMining();
+            if (ore)
+            {
+                ore.GetComponent<Ore>().StopMining();
+            } 
         }
         if (Input.GetKey(KeyCode.S))
         {
             transform.Translate(Vector3.back * speed);
-            stopMining();
+            if (ore)
+            {
+                ore.GetComponent<Ore>().StopMining();
+            }
         }
         if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector3.left * speed);
-            stopMining();
+            if (ore)
+            {
+                ore.GetComponent<Ore>().StopMining();
+            }
         }
         if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(Vector3.right * speed);
-            stopMining();
-        }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            if (inOreTrigger && ore && ableToMine && !mining)
+            if (ore)
             {
-                mining = true;
-                ableToMine = false;
-                ore.GetComponent<Ore>().startMining();
+                ore.GetComponent<Ore>().StopMining();
             }
         }
     }
@@ -61,7 +60,6 @@ public class tempPlayer : MonoBehaviour
     {
         if (other.gameObject.tag == "Ore")
         {
-            inOreTrigger = true;
             ore = other.gameObject;
         }
     }
@@ -70,27 +68,8 @@ public class tempPlayer : MonoBehaviour
     {
         if (other.gameObject.tag == "Ore")
         {
-            stopMining();
+            ore.GetComponent<Ore>().StopMining();
             ore = null;
         }
-    }
-
-    void stopMining()
-    {
-        if (mining)
-        {
-            mining = false;
-            CancelInvoke("miningDelay");
-            Invoke("miningDelay", 1f);
-            if (ore)
-            {
-                ore.GetComponent<Ore>().stopMining();
-            }     
-        }
-    }
-
-    void miningDelay()
-    {
-        ableToMine = true;
     }
 }

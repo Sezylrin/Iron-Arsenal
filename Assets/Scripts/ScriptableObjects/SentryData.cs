@@ -1,5 +1,12 @@
 
 using UnityEngine;
+using System.ComponentModel;
+
+public enum SentryName
+{
+    [Description("BasicSentry")]
+    BasicSentry,
+}
 
 [CreateAssetMenu(fileName = "SentryData",menuName ="ScriptableObjects/SentryData")]
 public class SentryData : ScriptableObject
@@ -12,4 +19,8 @@ public class SentryData : ScriptableObject
     public float fireRate;
 
     public ProjectileData projectileData;
+
+    public int ironCost;
+    public int copperCost;
+    public bool buildable;
 }

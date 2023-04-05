@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour, ICannonProjectile
 {
+    private Cannon owner;
+    public Cannon Owner
+    {
+        get { return owner; }
+        set { owner = value; }
+    }
+
     private Vector3 direction;
     public Vector3 Direction
     {
@@ -36,6 +43,7 @@ public class Shotgun : MonoBehaviour, ICannonProjectile
     private GameObject newBullet;
     private Bullet bulletScript;
     private Transform projectilesParent;
+    private float angleAdjustment;
 
     void Awake()
     {
@@ -45,32 +53,7 @@ public class Shotgun : MonoBehaviour, ICannonProjectile
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("delete", 3f);
-
-        newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, 10f, 0), projectilesParent); //2
-        bulletScript = newBullet.GetComponent<Bullet>();
-        bulletScript.Direction = this.Direction;
-        bulletScript.Damage = damage;
-
-        newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, 5f, 0), projectilesParent); //1
-        bulletScript = newBullet.GetComponent<Bullet>();
-        bulletScript.Direction = this.Direction;
-        bulletScript.Damage = damage;
-
-        newBullet = Instantiate(bullet, transform.position, transform.rotation, projectilesParent); //0
-        bulletScript = newBullet.GetComponent<Bullet>();
-        bulletScript.Direction = this.Direction;
-        bulletScript.Damage = damage;
-
-        newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, -10f, 0), projectilesParent); //-1
-        bulletScript = newBullet.GetComponent<Bullet>();
-        bulletScript.Direction = this.Direction;
-        bulletScript.Damage = damage;
-
-        newBullet = Instantiate(bullet, transform.position, transform.rotation * new Quaternion(1, 0, -5f, 0), projectilesParent); //-2
-        bulletScript = newBullet.GetComponent<Bullet>();
-        bulletScript.Direction = this.Direction;
-        bulletScript.Damage = damage;
+        
     }
 
     // Update is called once per frame
@@ -79,8 +62,41 @@ public class Shotgun : MonoBehaviour, ICannonProjectile
         
     }
 
-    void delete()
+    public void Shoot()
     {
-        Destroy(gameObject);
+        angleAdjustment = 10f;
+        for (int i = 0; i < 5; i++)
+        {
+            if (owner.pools[0].ListCount() > 0)
+            {
+                newBullet = owner.pools[0].FirstObj();
+                newBullet.SetActive(true);
+                owner.pools[0].RemoveObj(newBullet);
+            }
+            else
+            {
+                newBullet = Instantiate(bullet, projectilesParent);
+            }
+
+
+            bulletScript = newBullet.GetComponent<Bullet>();
+            bulletScript.Direction = this.Direction;
+            bulletScript.Damage = damage;
+            bulletScript.Owner = owner;
+            if (angleAdjustment == 0)
+            {
+                newBullet.transform.rotation = transform.rotation;
+            }
+            else newBullet.transform.rotation = transform.rotation * new Quaternion(1, 0, angleAdjustment, 0);
+            newBullet.transform.position = transform.position;
+            bulletScript.Shoot();
+            angleAdjustment -= 5;
+        }
+        Invoke("Delete", 1f);
+    }
+
+    public void Delete()
+    {
+        Owner.PoolShotgun(gameObject);
     }
 }
