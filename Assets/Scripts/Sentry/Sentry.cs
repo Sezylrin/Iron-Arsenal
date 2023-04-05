@@ -52,7 +52,7 @@ public class Sentry : MonoBehaviour
         if (!data)
             return;
         SetForward();
-        else
+        if(target)
         {
             if (timer <= 0)
             {
@@ -105,7 +105,9 @@ public class Sentry : MonoBehaviour
         Vector3 targetDir = target.position - bulletSpawnpoint.position;
         targetDir.y = 0;
         bulletProj.SetDirection(targetDir);
-        sentryHead.LookAt(target, Vector3.up);
+        Vector3 lookAt = target.position;
+        lookAt.y = sentryHead.position.y;
+        sentryHead.LookAt(lookAt, Vector3.up);
     }
 
 
