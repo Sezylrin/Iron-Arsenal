@@ -51,11 +51,11 @@ public class LevelCanvasManager : MonoBehaviour
 
     public void ShowAugmentChoices(List<AugmentData> augments)
     {
-        firstAugName.text = augments[0].augName + ": 1";
+        firstAugName.text = augments[0].augName + ": Press 1";
         firstAugDesc.text = augments[0].description;
         if (augments.Count >= 2)
         {
-            secondAugName.text = augments[1].augName + ": 2";
+            secondAugName.text = augments[1].augName + ": Press 2";
             secondAugDesc.text = augments[1].description;
         }
         else
@@ -65,7 +65,7 @@ public class LevelCanvasManager : MonoBehaviour
         }
         if (augments.Count >= 3)
         {
-            thirdAugName.text = augments[2].augName + ": 3";
+            thirdAugName.text = augments[2].augName + ": Press 3";
             thirdAugDesc.text = augments[2].description;
         }
         else

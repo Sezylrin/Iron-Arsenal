@@ -6,7 +6,7 @@ public class Shotgun : MonoBehaviour, ICannonProjectile
 {
     public Cannon Owner { get; set; }
     public Vector3 Direction { get; set; }
-    public float Damage { get; set; } = 8f;
+    public float Damage { get; set; } = 20f;
     public float ProjectileSpeed { get; set; } = 0f;
     public float FireDelay { get; set; } = 0.8f;
 

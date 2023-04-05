@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (LevelManager.Instance.currentState == State.Building)
+            return;
         Friction(playerData.frictionAmount);
         // MovePlayer(1);
         NewMovePlayer(1);

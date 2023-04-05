@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+public enum State
+{
+    Normal,
+    Building
+}
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
@@ -8,10 +12,11 @@ public class LevelManager : MonoBehaviour
     private GameManager gameManager;
     private BuildManager buildManager;
     private AugmentManager augmentManager;
-    private LevelCanvasManager levelCanvasManager;
+    public LevelCanvasManager levelCanvasManager;
     public TurretBuildMenu BuildUi;
     public SentryData[] possibleSentries;
-
+    public TempEnemyManager EnemyManager;
+    public State currentState = State.Normal;
 
     private void Awake()
     {
@@ -27,11 +32,11 @@ public class LevelManager : MonoBehaviour
         gameManager = GameManager.Instance;
         buildManager = new BuildManager();
         augmentManager = new AugmentManager();
-        levelCanvasManager = LevelCanvasManager.Instance;
     }
 
     public void Start()
     {
+        levelCanvasManager = LevelCanvasManager.Instance;
         if (BuildUi)
             BuildUi.AddToMenu(possibleSentries[0]);
     }
@@ -39,6 +44,14 @@ public class LevelManager : MonoBehaviour
     //Temp for now. Eventually these will be called by other classes
     public void Update()
     {
+        if (currentState == State.Normal && Input.GetKeyDown(KeyCode.B))
+        {
+            currentState = State.Building;
+        }
+        else if (Input.GetKeyDown(KeyCode.B))
+        {
+            currentState = State.Normal;
+        }
         //This will be done by mouseclick when we have menu functionality
         if (augmentManager.selectingAugment)
         {
@@ -66,7 +79,6 @@ public class LevelManager : MonoBehaviour
             SpawnAugmentChoice();
         }
     }
-
     public bool CanBuildSentry(SentryName sentryName)
     {
         return buildManager.CanBuildSentry(sentryName);
@@ -77,6 +89,7 @@ public class LevelManager : MonoBehaviour
         buildManager.BuildSentry(sentryName);
         levelCanvasManager.SetIronAmount(buildManager.iron);
         levelCanvasManager.SetCopperAmount(buildManager.copper);
+        levelCanvasManager.SetGoldAmount(buildManager.gold);
     }
 
     public void GainIron(int ironToAdd)
@@ -113,5 +126,13 @@ public class LevelManager : MonoBehaviour
         Debug.Log(augmentSelected.augName);
         augmentManager.SelectAugment(augmentSelected);
         levelCanvasManager.RemoveAugmentChoices();
+    }
+
+    public int GetMode()
+    {
+        if (augmentManager.currentAugment)
+            return augmentManager.currentAugment.mode;
+        else
+            return 0;
     }
 }

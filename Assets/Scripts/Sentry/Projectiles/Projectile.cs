@@ -64,4 +64,17 @@ public class Projectile : MonoBehaviour
         this.owner = owner;
         SetProjectileStat();
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("running");
+        if (other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<tempEnemy>().takeDamage(baseDamage);
+
+            owner.PoolBullet(gameObject);
+            gameObject.SetActive(false);
+        }
+    }
+
 }

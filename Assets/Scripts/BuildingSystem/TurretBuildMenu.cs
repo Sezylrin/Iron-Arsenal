@@ -39,10 +39,10 @@ public class TurretBuildMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             UpdateMenu();
-        }
+        }*/
     }
     public void UpdateMenu()
     {
@@ -72,9 +72,15 @@ public class TurretBuildMenu : MonoBehaviour
     public void SpawnButton(int assignedTurret)
     {
         //add check condition
-        Debug.Log("running");
+            
         if(availableTurrets.Count > assignedTurret)
-            SetTurret(availableTurrets[assignedTurret]);
+        {
+            if (LevelManager.Instance.CanBuildSentry(availableTurrets[assignedTurret].Sentry))
+            {
+                LevelManager.Instance.BuildSentry(availableTurrets[assignedTurret].Sentry);
+                SetTurret(availableTurrets[assignedTurret]);
+            }
+        }
     }
 
     private void GroupButton(GameObject newButton)

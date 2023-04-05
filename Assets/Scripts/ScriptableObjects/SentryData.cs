@@ -11,6 +11,7 @@ public enum SentryName
 [CreateAssetMenu(fileName = "SentryData",menuName ="ScriptableObjects/SentryData")]
 public class SentryData : ScriptableObject
 {
+    public SentryName Sentry;
     public Material Colour;
 
     public float range;
@@ -21,5 +22,6 @@ public class SentryData : ScriptableObject
 
     public int ironCost;
     public int copperCost;
+    public int goldCost;
     public bool buildable;
 }

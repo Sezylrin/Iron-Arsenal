@@ -49,6 +49,10 @@ public class Cannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (LevelManager.Instance.currentState == State.Building)
+            return;
+        //Change this in the future
+        activeCannonProjectile = LevelManager.Instance.GetMode();
         mouseLocation = Input.mousePosition;
         mouseLocation.z += 1000000;
 

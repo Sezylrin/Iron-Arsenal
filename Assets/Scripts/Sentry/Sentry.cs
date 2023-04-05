@@ -52,7 +52,11 @@ public class Sentry : MonoBehaviour
         if (!data)
             return;
         SetForward();
-        if(target)
+        if (!target)
+        {
+            LocateTarget(LevelManager.Instance.EnemyManager.enemyList);
+        }
+        else
         {
             if (timer <= 0)
             {
@@ -97,7 +101,7 @@ public class Sentry : MonoBehaviour
         else
         {
             //Debug.Log("Spawned new");
-            bullet = Instantiate(projectilePF, Vector3.zero, Quaternion.identity,transform);
+            bullet = Instantiate(projectilePF, Vector3.zero, Quaternion.identity);
         }
         Projectile bulletProj = bullet.GetComponent<Projectile>();
         bulletProj.SetProjectileData(data.projectileData, this);
