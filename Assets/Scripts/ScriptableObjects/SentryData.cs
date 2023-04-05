@@ -11,8 +11,7 @@ public enum SentryName
 [CreateAssetMenu(fileName = "SentryData",menuName ="ScriptableObjects/SentryData")]
 public class SentryData : ScriptableObject
 {
-    public Mesh SentryBase;
-    public Mesh SentryTurret;
+    public Material Colour;
 
     public float range;
     public float losAngle;

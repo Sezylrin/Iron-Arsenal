@@ -9,6 +9,9 @@ public class LevelManager : MonoBehaviour
     private BuildManager buildManager;
     private AugmentManager augmentManager;
     private LevelUIManager levelUIManager;
+    public TurretBuildMenu BuildUi;
+    public SentryData[] possibleSentries;
+
 
     private void Awake()
     {
@@ -20,11 +23,17 @@ public class LevelManager : MonoBehaviour
         {
             Instance = this;
         }
-
+        BuildUi = GameObject.FindWithTag("UISelection").GetComponent<TurretBuildMenu>();
         gameManager = GameManager.Instance;
         buildManager = new BuildManager();
         augmentManager = new AugmentManager();
         levelUIManager = GetComponent<LevelUIManager>();
+    }
+
+    public void Start()
+    {
+        if (BuildUi)
+            BuildUi.AddToMenu(possibleSentries[0]);
     }
 
     //Temp for now. Eventually these will be called by other classes

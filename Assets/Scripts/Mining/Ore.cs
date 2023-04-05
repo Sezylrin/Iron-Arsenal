@@ -13,7 +13,7 @@ public class Ore : MonoBehaviour
 
     public OreType type;
 
-    private tempPlayer playerScript; // Temp
+    private Mining miningScript; // Temp
     private LevelManager levelManager;
     private AudioSource audioClip;
 
@@ -28,7 +28,7 @@ public class Ore : MonoBehaviour
     private Coroutine miningCoroutine;
     void Awake()
     {
-        playerScript = GameObject.Find("Player").GetComponent<tempPlayer>();
+        miningScript = GameObject.Find("Player").GetComponent<Mining>();
         audioClip = GetComponent<AudioSource>();
     }
 
@@ -56,6 +56,11 @@ public class Ore : MonoBehaviour
                 StartMining();
             }
         }
+        if (inOreTrigger)
+        {
+            if (miningScript.playerRB.velocity.magnitude > 0.1f)
+                StopMining();
+        }
     }
 
     public IEnumerator Mine(float delay)
@@ -67,41 +72,41 @@ public class Ore : MonoBehaviour
 
             if (type == OreType.Iron)
             {
-                if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
+                if (currentResourcesInDeposit - miningScript.miningOutput <= 0)
                 {
                     levelManager.GainIron(currentResourcesInDeposit);
                     Destroy(gameObject);
                 }
                 else
                 {
-                    currentResourcesInDeposit -= playerScript.miningOutput;
-                    levelManager.GainIron(playerScript.miningOutput);
+                    currentResourcesInDeposit -= miningScript.miningOutput;
+                    levelManager.GainIron(miningScript.miningOutput);
                 }
             }
             else if (type == OreType.Copper)
             {
-                if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
+                if (currentResourcesInDeposit - miningScript.miningOutput <= 0)
                 {
                     levelManager.GainCopper(currentResourcesInDeposit);
                     Destroy(gameObject);
                 }
                 else
                 {
-                    currentResourcesInDeposit -= playerScript.miningOutput;
-                    levelManager.GainCopper(playerScript.miningOutput);
+                    currentResourcesInDeposit -= miningScript.miningOutput;
+                    levelManager.GainCopper(miningScript.miningOutput);
                 }
             }
             else if (type == OreType.Gold)
             {
-                if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
+                if (currentResourcesInDeposit - miningScript.miningOutput <= 0)
                 {
                     levelManager.GainGold(currentResourcesInDeposit);
                     Destroy(gameObject);
                 }
                 else
                 {
-                    currentResourcesInDeposit -= playerScript.miningOutput;
-                    levelManager.GainGold(playerScript.miningOutput);
+                    currentResourcesInDeposit -= miningScript.miningOutput;
+                    levelManager.GainGold(miningScript.miningOutput);
                 }
             }
         }
@@ -109,7 +114,7 @@ public class Ore : MonoBehaviour
 
     public void StartMining()
     {
-        miningCoroutine = StartCoroutine(Mine(playerScript.miningSpeed));
+        miningCoroutine = StartCoroutine(Mine(miningScript.miningSpeed));
         ableToStopMining = false;
         StartCoroutine(StopMiningDelay());
     }

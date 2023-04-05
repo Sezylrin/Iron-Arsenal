@@ -25,11 +25,11 @@ public class Sentry : MonoBehaviour
 
     private float timer;
 
-    private Transform bulletSpawnpoint;
-
-    private Pooling activeBullets = new Pooling();
+    public Transform bulletSpawnpoint;
 
     private Pooling pooledBullets = new Pooling();
+
+    public Transform sentryHead;
 
     public SentryData data;
     void Start()
@@ -42,7 +42,6 @@ public class Sentry : MonoBehaviour
             Debug.Log("No centerPoint for turrets to reference, please create an emepty transform at the center of the base");
             Debug.Break();
         }
-        bulletSpawnpoint = GameObject.FindWithTag("BulletSpawnPoint").transform;
         if (data)
             SetValue();
     }
@@ -96,20 +95,19 @@ public class Sentry : MonoBehaviour
             bullet = pooledBullets.FirstObj();
             bullet.SetActive(true);
             pooledBullets.RemoveObj(bullet);
-            activeBullets.AddObj(bullet);
         }
         else
         {
             //Debug.Log("Spawned new");
-            bullet = Instantiate(projectilePF, Vector3.zero, Quaternion.identity);
-            activeBullets.AddObj(bullet);
+            bullet = Instantiate(projectilePF, Vector3.zero, Quaternion.identity,transform);
         }
         Projectile bulletProj = bullet.GetComponent<Projectile>();
         bulletProj.SetProjectileData(data.projectileData, this);
         bulletProj.setSpawn(bulletSpawnpoint.position);
-        Vector3 targetDir = target.position - transform.position;
+        Vector3 targetDir = target.position - bulletSpawnpoint.position;
         targetDir.y = 0;
         bulletProj.SetDirection(targetDir);
+        sentryHead.LookAt(target, Vector3.up);
     }
 
 
@@ -117,7 +115,6 @@ public class Sentry : MonoBehaviour
     {
         //Debug.Log("Sent to pool");
         obj.SetActive(false);
-        activeBullets.RemoveObj(obj);
         pooledBullets.AddObj(obj);
     }
 
