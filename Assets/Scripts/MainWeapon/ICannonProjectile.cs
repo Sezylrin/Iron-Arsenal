@@ -10,5 +10,5 @@ public interface ICannonProjectile
     float ProjectileSpeed { get; set; }
     float FireDelay { get; set; }
     void Shoot();
-    void Delete();
+    IEnumerator Delete(float delay);
 }

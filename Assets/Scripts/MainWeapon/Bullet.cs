@@ -4,40 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour, ICannonProjectile
 {
-    private Cannon owner;
-    public Cannon Owner
-    {
-        get { return owner; }
-        set { owner = value; }
-    }
-
-    private Vector3 direction;
-    public Vector3 Direction
-    {
-        get { return direction; }
-        set { direction = value; }
-    }
-
-    private float damage = 10f;
-    public float Damage
-    {
-        get { return damage; }
-        set { damage = value; }
-    }
-
-    private float speed = 0.1f;
-    public float ProjectileSpeed
-    {
-        get { return speed; }
-        set { speed = value; }
-    }
-
-    private float fireDelay = 0.5f;
-    public float FireDelay
-    {
-        get { return fireDelay; }
-        set { fireDelay = value; }
-    }
+    public Cannon Owner { get; set; }
+    public Vector3 Direction { get; set; }
+    public float Damage { get; set; } = 10f;
+    public float ProjectileSpeed { get; set; } = 0.1f;
+    public float FireDelay { get; set; } = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -48,25 +19,27 @@ public class Bullet : MonoBehaviour, ICannonProjectile
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(direction.x * speed, 0, direction.z * speed);
+        transform.Translate(Direction.x * ProjectileSpeed, 0, Direction.z * ProjectileSpeed);
     }
 
     public void Shoot()
     {
-        Invoke("Delete", 3f);
+        StopCoroutine(Delete(0f));
+        StartCoroutine(Delete(2f));
     }
 
-    public void Delete()
+    public IEnumerator Delete(float delay)
     {
-        owner.PoolBullet(gameObject);
+        yield return new WaitForSeconds(delay);
+        Owner.PoolBullet(gameObject);
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<tempEnemy>().takeDamage(damage);
-            Delete();
+            other.gameObject.GetComponent<tempEnemy>().takeDamage(Damage);
+            StartCoroutine(Delete(0f));
         }
     }
 }
