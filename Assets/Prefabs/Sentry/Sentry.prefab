@@ -160,7 +160,7 @@ MonoBehaviour:
   target: {fileID: 0}
   testTransform: {fileID: 0}
   projectilePF: {fileID: 305608694543129271, guid: dc14465a1f1f1174c8c8619b097526b4, type: 3}
-  data: {fileID: 11400000, guid: 66217e87865c0d64bbe23256ded81bd0, type: 2}
+  data: {fileID: 0}
 --- !u!1 &2497997829222323733
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,4 +26,15 @@ public class TurretDeletion : MonoBehaviour
     {
         this.socket = socket;
     }
+
+    private void DestroySelf()
+    {
+        Destroy(this.gameObject);
+
+    }
+
+    public void InvokeDestroy()
+    {
+        Invoke("DestroySelf", 1f);
+    }
 }
