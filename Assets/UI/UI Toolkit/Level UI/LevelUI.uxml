@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/UI%20Toolkit/Level%20UI/LevelStyles.uss?fileID=7433441132597879392&amp;guid=d15860f844bdee94083b8c881b4741cd&amp;type=3#LevelStyles" />
+    <ui:VisualElement name="Outer" class="outer" >
+        <ui:VisualElement name="Augments Outer" class="augments-outer d-none">
+            <ui:VisualElement name="Augments Inner" class="augments-inner">
+                <ui:Label tabindex="-1" name="first-augment-name" class="heading" />
+                <ui:Label tabindex="-1" name="first-augment-desc" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Augments Inner" class="augments-inner">
+                <ui:Label tabindex="-1" name="second-augment-name" class="heading" />
+                <ui:Label tabindex="-1" name="second-augment-desc" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Augments Inner" class="augments-inner">
+                <ui:Label tabindex="-1" name="third-augment-name" class="heading" />
+                <ui:Label tabindex="-1" name="third-augment-desc" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Resource Outer" class="resource-outer">
+            <ui:VisualElement name="Iron" class="resource">
+                <ui:Label tabindex="-1" name="iron-label" text="Iron:" />
+                <ui:Label tabindex="-1" name="iron-value" text="0" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Copper" class="resource">
+                <ui:Label tabindex="-1" name="copper-label" text="Copper:" />
+                <ui:Label tabindex="-1" name="copper-value" text="0" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Gold" class="resource">
+                <ui:Label tabindex="-1" name="gold-label" text="Gold:" />
+                <ui:Label tabindex="-1" name="gold-value" text="0" />
+            </ui:VisualElement>
+            
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -6,6 +6,12 @@ TagManager:
   tags:
   - UISelection
   - UIDeletion
+  - Ore
+  - FriendlyProjectile
+  - Enemy
+  - CenterPoint
+  - BulletSpawnPoint
+  - TurretButton
   layers:
   - Default
   - TransparentFX
