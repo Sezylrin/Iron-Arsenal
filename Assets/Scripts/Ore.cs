@@ -13,7 +13,7 @@ public class Ore : MonoBehaviour
 
     public OreType type;
     private tempPlayer playerScript;
-    private tempGameManager gameManager;
+    private LevelManager levelManager;
     public int totalResourcesInDeposit;
     public int currentResourcesInDeposit;
 
@@ -24,7 +24,6 @@ public class Ore : MonoBehaviour
     void Awake()
     {
         playerScript = GameObject.Find("Player").GetComponent<tempPlayer>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<tempGameManager>();
     }
 
     // Start is called before the first frame update
@@ -35,6 +34,7 @@ public class Ore : MonoBehaviour
         inOreTrigger = false;
         ableToMine = true;
         mining = false;
+        levelManager = LevelManager.Instance;
     }
 
     // Update is called once per frame
