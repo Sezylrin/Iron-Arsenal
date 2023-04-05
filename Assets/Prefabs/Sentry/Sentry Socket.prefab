@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d6df2a5615e6f419b0b9adc82da17c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sentryPF: {fileID: 0}
+  sentryPF: {fileID: 2497997828539013430, guid: afbbde4d7a7f6c84b9edfe26a7980928, type: 3}
 --- !u!1001 &919787402794593468
 PrefabInstance:
   m_ObjectHideFlags: 0
