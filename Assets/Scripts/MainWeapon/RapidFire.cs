@@ -4,40 +4,11 @@ using UnityEngine;
 
 public class RapidFire : MonoBehaviour, ICannonProjectile
 {
-    private Cannon owner;
-    public Cannon Owner
-    {
-        get { return owner; }
-        set { owner = value; }
-    }
-
-    private Vector3 direction;
-    public Vector3 Direction
-    {
-        get { return direction; }
-        set { direction = value; }
-    }
-
-    private float damage = 8f;
-    public float Damage
-    {
-        get { return damage; }
-        set { damage = value; }
-    }
-
-    private float speed = 0f;
-    public float ProjectileSpeed
-    {
-        get { return speed; }
-        set { speed = value; }
-    }
-
-    private float fireDelay = 0.2f;
-    public float FireDelay
-    {
-        get { return fireDelay; }
-        set { fireDelay = value; }
-    }
+    public Cannon Owner { get; set; }
+    public Vector3 Direction { get; set; }
+    public float Damage { get; set; } = 8f;
+    public float ProjectileSpeed { get; set; } = 0f;
+    public float FireDelay { get; set; } = 0.2f;
 
     public GameObject bullet;
     private GameObject newBullet;
@@ -63,28 +34,32 @@ public class RapidFire : MonoBehaviour, ICannonProjectile
 
     public void Shoot()
     {
-        if (owner.pools[0].ListCount() > 0)
+        if (Owner.pools[0].ListCount() > 0)
         {
-            newBullet = owner.pools[0].FirstObj();
+            newBullet = Owner.pools[0].FirstObj();
             newBullet.SetActive(true);
-            owner.pools[0].RemoveObj(newBullet);
+            Owner.pools[0].RemoveObj(newBullet);
         }
         else
         {
             newBullet = Instantiate(bullet, projectilesParent);
         }
-        bulletScript = newBullet.GetComponent<Bullet>();
-        bulletScript.Direction = this.Direction;
-        bulletScript.Damage = damage;
-        bulletScript.Owner = owner;
         newBullet.transform.rotation = transform.rotation;
         newBullet.transform.position = transform.position;
+
+        bulletScript = newBullet.GetComponent<Bullet>();
+        bulletScript.Direction = this.Direction;
+        bulletScript.Damage = Damage;
+        bulletScript.Owner = Owner;
         bulletScript.Shoot();
-        Invoke("Delete", 1f);
+
+        StopCoroutine(Delete(0f));
+        StartCoroutine(Delete(0.5f));
     }
 
-    public void Delete()
+    public IEnumerator Delete(float delay)
     {
+        yield return new WaitForSeconds(delay);
         Owner.PoolRapidFire(gameObject);
     }
 }

@@ -12,18 +12,24 @@ public class Ore : MonoBehaviour
     };
 
     public OreType type;
-    private tempPlayer playerScript;
+
+    private tempPlayer playerScript; // Temp
     private LevelManager levelManager;
+    private AudioSource audioClip;
+
     public int totalResourcesInDeposit;
     public int currentResourcesInDeposit;
 
     public bool inOreTrigger;
     public bool ableToMine;
     public bool mining;
+    public bool ableToStopMining;
 
+    private Coroutine miningCoroutine;
     void Awake()
     {
         playerScript = GameObject.Find("Player").GetComponent<tempPlayer>();
+        audioClip = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -34,6 +40,7 @@ public class Ore : MonoBehaviour
         inOreTrigger = false;
         ableToMine = true;
         mining = false;
+        ableToStopMining = true;
         levelManager = LevelManager.Instance;
     }
 
@@ -51,49 +58,90 @@ public class Ore : MonoBehaviour
         }
     }
 
-    public void Mine()
+    public IEnumerator Mine(float delay)
     {
-        int i = -1;
-        switch (type)
+        while (true)
         {
-            case OreType.Iron:
-                i = 0;
-                break;
-            case OreType.Copper:
-                i = 1;
-                break;
-            case OreType.Gold:
-                i = 2;
-                break;
-        }
-            
-        if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
-        {
-            gameManager.ores[i] += currentResourcesInDeposit;
-            Destroy(gameObject);
-        }
-        else
-        {
-            currentResourcesInDeposit -= playerScript.miningOutput;
-            gameManager.ores[i] += playerScript.miningOutput;
+            yield return new WaitForSeconds(delay);
+            audioClip.Play();
+
+            if (type == OreType.Iron)
+            {
+                if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
+                {
+                    levelManager.GainIron(currentResourcesInDeposit);
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    currentResourcesInDeposit -= playerScript.miningOutput;
+                    levelManager.GainIron(playerScript.miningOutput);
+                }
+            }
+            else if (type == OreType.Copper)
+            {
+                if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
+                {
+                    levelManager.GainCopper(currentResourcesInDeposit);
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    currentResourcesInDeposit -= playerScript.miningOutput;
+                    levelManager.GainCopper(playerScript.miningOutput);
+                }
+            }
+            else if (type == OreType.Gold)
+            {
+                if (currentResourcesInDeposit - playerScript.miningOutput <= 0)
+                {
+                    levelManager.GainGold(currentResourcesInDeposit);
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    currentResourcesInDeposit -= playerScript.miningOutput;
+                    levelManager.GainGold(playerScript.miningOutput);
+                }
+            }
         }
     }
 
     public void StartMining()
     {
-        InvokeRepeating("Mine", 0f, playerScript.miningSpeed);
+        miningCoroutine = StartCoroutine(Mine(playerScript.miningSpeed));
+        ableToStopMining = false;
+        StartCoroutine(StopMiningDelay());
     }
 
     public void StopMining()
     {
-        if (mining)
+        if (ableToStopMining)
         {
-            mining = false;
-            CancelInvoke("MiningDelay");
-            Invoke("MiningDelay", 1f);
-            StopMining();
+            if (miningCoroutine != null)
+            {
+                StopCoroutine(miningCoroutine);
+            }
+
+            if (mining)
+            {
+                mining = false;
+                StopCoroutine(MiningDelay());
+                StartCoroutine(MiningDelay());
+            }
         }
-        CancelInvoke("Mine");
+    }
+
+    IEnumerator MiningDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        ableToMine = true;
+    }
+
+    IEnumerator StopMiningDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ableToStopMining = true;
     }
 
     void OnTriggerEnter(Collider other)
@@ -113,10 +161,5 @@ public class Ore : MonoBehaviour
             StopMining();
             inOreTrigger = false;
         }
-    }
-
-    void MiningDelay()
-    {
-        ableToMine = true;
     }
 }
