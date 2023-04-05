@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     private GameManager gameManager;
     private BuildManager buildManager;
     private AugmentManager augmentManager;
-    private LevelUIManager levelUIManager;
+    private LevelCanvasManager levelCanvasManager;
     public TurretBuildMenu BuildUi;
     public SentryData[] possibleSentries;
 
@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
         gameManager = GameManager.Instance;
         buildManager = new BuildManager();
         augmentManager = new AugmentManager();
-        levelUIManager = GetComponent<LevelUIManager>();
+        levelCanvasManager = LevelCanvasManager.Instance;
     }
 
     public void Start()
@@ -75,26 +75,26 @@ public class LevelManager : MonoBehaviour
     public void BuildSentry(SentryName sentryName)
     {
         buildManager.BuildSentry(sentryName);
-        levelUIManager.SetIronAmount(buildManager.iron);
-        levelUIManager.SetCopperAmount(buildManager.copper);
+        levelCanvasManager.SetIronAmount(buildManager.iron);
+        levelCanvasManager.SetCopperAmount(buildManager.copper);
     }
 
     public void GainIron(int ironToAdd)
     {
         buildManager.GainIron(ironToAdd);
-        levelUIManager.SetIronAmount(buildManager.iron);
+        levelCanvasManager.SetIronAmount(buildManager.iron);
     }
 
     public void GainCopper(int copperToAdd)
     {
         buildManager.GainCopper(copperToAdd);
-        levelUIManager.SetCopperAmount(buildManager.copper);
+        levelCanvasManager.SetCopperAmount(buildManager.copper);
     }
 
     public void GainGold(int goldToAdd)
     {
         buildManager.GainGold(goldToAdd);
-        levelUIManager.SetGoldAmount(buildManager.gold);
+        levelCanvasManager.SetGoldAmount(buildManager.gold);
     }
 
     public void SpawnAugmentChoice(int numAugments = 3)
@@ -102,7 +102,7 @@ public class LevelManager : MonoBehaviour
         augmentManager.CreateAugmentChoices(numAugments);
         if (augmentManager.augmentChoices.Count > 0)
         {
-            levelUIManager.ShowAugmentChoices(augmentManager.augmentChoices);
+            levelCanvasManager.ShowAugmentChoices(augmentManager.augmentChoices);
         }
     }
 
@@ -112,6 +112,6 @@ public class LevelManager : MonoBehaviour
         //TODO: Apply this to turrets
         Debug.Log(augmentSelected.augName);
         augmentManager.SelectAugment(augmentSelected);
-        levelUIManager.RemoveAugmentChoices();
+        levelCanvasManager.RemoveAugmentChoices();
     }
 }
