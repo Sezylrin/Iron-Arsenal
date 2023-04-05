@@ -23,6 +23,7 @@ public class Ore : MonoBehaviour
     public bool inOreTrigger;
     public bool ableToMine;
     public bool mining;
+    public bool ableToStopMining;
 
     private Coroutine miningCoroutine;
     void Awake()
@@ -39,6 +40,7 @@ public class Ore : MonoBehaviour
         inOreTrigger = false;
         ableToMine = true;
         mining = false;
+        ableToStopMining = true;
         levelManager = LevelManager.Instance;
     }
 
@@ -108,20 +110,25 @@ public class Ore : MonoBehaviour
     public void StartMining()
     {
         miningCoroutine = StartCoroutine(Mine(playerScript.miningSpeed));
+        ableToStopMining = false;
+        StartCoroutine(StopMiningDelay());
     }
 
     public void StopMining()
     {
-        if (miningCoroutine != null)
+        if (ableToStopMining)
         {
-            StopCoroutine(miningCoroutine);
-        }
-  
-        if (mining)
-        {
-            mining = false;
-            StopCoroutine(MiningDelay());
-            StartCoroutine(MiningDelay());
+            if (miningCoroutine != null)
+            {
+                StopCoroutine(miningCoroutine);
+            }
+
+            if (mining)
+            {
+                mining = false;
+                StopCoroutine(MiningDelay());
+                StartCoroutine(MiningDelay());
+            }
         }
     }
 
@@ -129,6 +136,12 @@ public class Ore : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         ableToMine = true;
+    }
+
+    IEnumerator StopMiningDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ableToStopMining = true;
     }
 
     void OnTriggerEnter(Collider other)
