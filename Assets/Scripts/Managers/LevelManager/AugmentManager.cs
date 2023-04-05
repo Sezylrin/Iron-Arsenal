@@ -7,15 +7,16 @@ public class AugmentManager
 {
     public List<AugmentData> allAugments;
     public List<AugmentData> augmentChoices;
+    public AugmentData currentAugment;
     public bool selectingAugment { get; private set; } = false;
 
     public AugmentManager()
     {
         allAugments = new List<AugmentData>();
-        string augmentPath = "Assets/ScriptableObjects/Augments/";
+        string augmentPath = "Augments/";
         foreach (AugmentName augmentName in Enum.GetValues(typeof(AugmentName)))
         {
-            AugmentData augment = AssetDatabase.LoadAssetAtPath<AugmentData>(augmentPath + augmentName + ".asset");
+            AugmentData augment = Resources.Load<AugmentData>(augmentPath + augmentName );
             if (augment != null)
             {
                 allAugments.Add(augment);
@@ -57,6 +58,8 @@ public class AugmentManager
     public void SelectAugment(AugmentData augmentSelected)
     {
         selectingAugment = false;
-        allAugments.Remove(augmentSelected);
+        currentAugment = augmentSelected;
+       // allAugments.Remove(augmentSelected);
     }
+
 }

@@ -2,20 +2,28 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MT_Basic_Turret_A
   m_Shader: {fileID: 4800000, guid: 0a073cb92d4913b488ad0024891e5c32, type: 3}
-  m_ShaderKeywords: _DESATURATIONAFFECTSEMISSION_ON _EMISSION _METALLICGLOSSMAP _NORMALMAP
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _DESATURATIONAFFECTSEMISSION_ON
+  - _EMISSION
+  - _METALLICGLOSSMAP
+  - _NORMALMAP
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -195,6 +203,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - Vector1_84D6889A: 1
     - Vector1_E111C4D0: 0
@@ -249,7 +258,8 @@ Material:
     - _EmissionColor: {r: 9.537255, g: 0.3137255, b: 0, a: 1}
     - _Emissivecolor: {r: 2.1185474, g: 0.03327561, b: 0, a: 0}
     - _Fresnelcolor: {r: 4, g: 0, b: 0.36654472, a: 0}
-    - _Paintedcolor: {r: 0.9245283, g: 0.5229825, b: 0.17880027, a: 1}
+    - _Paintedcolor: {r: 0.6981132, g: 0.47245237, b: 0.09549664, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tint: {r: 0.6981132, g: 0.5566645, b: 0.4511392, a: 0}
     - _Tintcoloroverlaymode: {r: 0.6981132, g: 0.5566645, b: 0.4511392, a: 0}
+  m_BuildTextureStacks: []

@@ -10,6 +10,7 @@ public class Cannon : MonoBehaviour
     private GameObject newCannonProjectile;
     private Transform cannonProjectileSpawnPoint;
     public Transform projectilesParent;
+    public LayerMask groundMask;
     private bool ableToShoot;
 
     public int activeCannonProjectile;                  // Determines which projectile  
@@ -48,13 +49,16 @@ public class Cannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (LevelManager.Instance.currentState == State.Building)
+            return;
+        //Change this in the future
+        activeCannonProjectile = LevelManager.Instance.GetMode();
         mouseLocation = Input.mousePosition;
         mouseLocation.z += 1000000;
 
-        worldPosition = MousePosition.MouseToWorld3D(Camera.main, -1);
-        worldPosition.y = transform.position.y;
-
-        rotatePoint.LookAt(worldPosition);
+        worldPosition = MousePosition.MouseToWorld3D(Camera.main, groundMask);
+        worldPosition.y = rotatePoint.transform.position.y;
+        rotatePoint.LookAt(worldPosition,Vector3.down);
 
         if (Input.GetKey(KeyCode.Mouse0) && ableToShoot)
         {

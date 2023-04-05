@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour, ICannonProjectile
 {
     public Cannon Owner { get; set; }
     public Vector3 Direction { get; set; }
-    public float Damage { get; set; } = 10f;
+    public float Damage { get; set; } = 25f;
     public float ProjectileSpeed { get; set; } = 0.1f;
     public float FireDelay { get; set; } = 0.5f;
 

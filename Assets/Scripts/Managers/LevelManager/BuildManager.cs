@@ -14,11 +14,11 @@ public class BuildManager
     public BuildManager()
     {
         buildableSentries = new List<SentryData>();
-        string sentryPath = "Assets/ScriptableObjects/Sentries/";
+        string sentryPath = "Sentries/";
 
         foreach (SentryName sentryName in Enum.GetValues(typeof(SentryName)))
         {
-            SentryData sentryData = AssetDatabase.LoadAssetAtPath<SentryData>(sentryPath + sentryName + ".asset");
+            SentryData sentryData = Resources.Load<SentryData>(sentryPath + sentryName );
             if (sentryData != null)
             {
                 buildableSentries.Add(sentryData);
@@ -33,7 +33,7 @@ public class BuildManager
     public bool CanBuildSentry(SentryName sentryName)
     {
         SentryData sentry = GetSentryData(sentryName);
-        return iron >= sentry.ironCost && copper >= sentry.copperCost;
+        return iron >= sentry.ironCost && copper >= sentry.copperCost && gold >= sentry.goldCost;
     }
 
     public void BuildSentry(SentryName sentryName)
@@ -41,6 +41,7 @@ public class BuildManager
         SentryData sentry = GetSentryData(sentryName);
         iron -= sentry.ironCost;
         copper -= sentry.copperCost;
+        gold -= sentry.goldCost;
     }
 
     private SentryData GetSentryData(SentryName sentryName)

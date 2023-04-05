@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+public enum State
+{
+    Normal,
+    Building
+}
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
@@ -8,7 +12,11 @@ public class LevelManager : MonoBehaviour
     private GameManager gameManager;
     private BuildManager buildManager;
     private AugmentManager augmentManager;
-    private LevelUIManager levelUIManager;
+    public LevelCanvasManager levelCanvasManager;
+    public TurretBuildMenu BuildUi;
+    public SentryData[] possibleSentries;
+    public TempEnemyManager EnemyManager;
+    public State currentState = State.Normal;
 
     private void Awake()
     {
@@ -20,16 +28,30 @@ public class LevelManager : MonoBehaviour
         {
             Instance = this;
         }
-
+        BuildUi = GameObject.FindWithTag("UISelection").GetComponent<TurretBuildMenu>();
         gameManager = GameManager.Instance;
         buildManager = new BuildManager();
         augmentManager = new AugmentManager();
-        levelUIManager = GetComponent<LevelUIManager>();
+    }
+
+    public void Start()
+    {
+        levelCanvasManager = LevelCanvasManager.Instance;
+        if (BuildUi)
+            BuildUi.AddToMenu(possibleSentries[0]);
     }
 
     //Temp for now. Eventually these will be called by other classes
     public void Update()
     {
+        if (currentState == State.Normal && Input.GetKeyDown(KeyCode.B))
+        {
+            currentState = State.Building;
+        }
+        else if (Input.GetKeyDown(KeyCode.B))
+        {
+            currentState = State.Normal;
+        }
         //This will be done by mouseclick when we have menu functionality
         if (augmentManager.selectingAugment)
         {
@@ -57,7 +79,6 @@ public class LevelManager : MonoBehaviour
             SpawnAugmentChoice();
         }
     }
-
     public bool CanBuildSentry(SentryName sentryName)
     {
         return buildManager.CanBuildSentry(sentryName);
@@ -66,26 +87,27 @@ public class LevelManager : MonoBehaviour
     public void BuildSentry(SentryName sentryName)
     {
         buildManager.BuildSentry(sentryName);
-        levelUIManager.SetIronAmount(buildManager.iron);
-        levelUIManager.SetCopperAmount(buildManager.copper);
+        levelCanvasManager.SetIronAmount(buildManager.iron);
+        levelCanvasManager.SetCopperAmount(buildManager.copper);
+        levelCanvasManager.SetGoldAmount(buildManager.gold);
     }
 
     public void GainIron(int ironToAdd)
     {
         buildManager.GainIron(ironToAdd);
-        levelUIManager.SetIronAmount(buildManager.iron);
+        levelCanvasManager.SetIronAmount(buildManager.iron);
     }
 
     public void GainCopper(int copperToAdd)
     {
         buildManager.GainCopper(copperToAdd);
-        levelUIManager.SetCopperAmount(buildManager.copper);
+        levelCanvasManager.SetCopperAmount(buildManager.copper);
     }
 
     public void GainGold(int goldToAdd)
     {
         buildManager.GainGold(goldToAdd);
-        levelUIManager.SetGoldAmount(buildManager.gold);
+        levelCanvasManager.SetGoldAmount(buildManager.gold);
     }
 
     public void SpawnAugmentChoice(int numAugments = 3)
@@ -93,7 +115,7 @@ public class LevelManager : MonoBehaviour
         augmentManager.CreateAugmentChoices(numAugments);
         if (augmentManager.augmentChoices.Count > 0)
         {
-            levelUIManager.ShowAugmentChoices(augmentManager.augmentChoices);
+            levelCanvasManager.ShowAugmentChoices(augmentManager.augmentChoices);
         }
     }
 
@@ -103,6 +125,14 @@ public class LevelManager : MonoBehaviour
         //TODO: Apply this to turrets
         Debug.Log(augmentSelected.augName);
         augmentManager.SelectAugment(augmentSelected);
-        levelUIManager.RemoveAugmentChoices();
+        levelCanvasManager.RemoveAugmentChoices();
+    }
+
+    public int GetMode()
+    {
+        if (augmentManager.currentAugment)
+            return augmentManager.currentAugment.mode;
+        else
+            return 0;
     }
 }

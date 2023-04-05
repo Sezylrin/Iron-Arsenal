@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        _rb = GetComponentInChildren<Rigidbody>();
     }
 
     // Start is called before the first frame update
@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (LevelManager.Instance.currentState == State.Building)
+            return;
         Friction(playerData.frictionAmount);
         // MovePlayer(1);
         NewMovePlayer(1);

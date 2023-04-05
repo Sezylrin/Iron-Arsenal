@@ -46,7 +46,7 @@ public class TurretSocket : MonoBehaviour
     void Update()
     {
         //add build state check condition
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && LevelManager.Instance.currentState == State.Building)
         {
             Vector3 MousePos = MousePosition.MouseToWorld3D(Camera.main, -1);
             MousePos.y = transform.position.y;
@@ -69,11 +69,15 @@ public class TurretSocket : MonoBehaviour
                 }
                 menuTemp.transform.Rotate(new Vector3(90, 0, 0));
             }
-            else if (Vector3.Distance(MousePos, transform.position) >= (menuTemp != null && turret == null? 3.5f : 1.5f))
+            else if (Vector3.Distance(MousePos, transform.position) >= (menuTemp != null && turret == null? 4.5f * buildMenuScript.scale : 1.5f))
             {
                 RemoveMenu();
                //deletionMenu.transform.Translate(Vector3.up * 100);
             }
+        }
+        if (LevelManager.Instance.currentState == State.Normal && menuTemp)
+        {
+            RemoveMenu();
         }
     }
 

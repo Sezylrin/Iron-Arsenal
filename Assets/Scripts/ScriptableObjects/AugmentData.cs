@@ -15,4 +15,6 @@ public class AugmentData : ScriptableObject
 {
     public string augName;
     public string description;
+
+    public int mode;
 }

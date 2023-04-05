@@ -24,13 +24,14 @@ public class TurretBuildMenu : MonoBehaviour
 
     public int unlockedTurrets = 0;
 
+    public float scale;
+
     private bool initArrow = true;
     void Start()
     {
         //Debug.Log("AvailableTurrets:" + availableTurrets.Count + " buttonMenus:" + buttonMenus.Count + " navigationButton:" + navigationButton.Count + " buttonGroup:" + buttonGroup.Count);
         /*if (SentryPF)
             availableTurrets.Add(SentryPF);*/
-        Debug.Log(unlockedTurrets);
         allButtons = GetComponentsInChildren<Button>();
         AddListeners();
     }
@@ -38,17 +39,18 @@ public class TurretBuildMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             UpdateMenu();
-        }
+        }*/
     }
     public void UpdateMenu()
     {
-        GameObject tempButton = Instantiate(turretButton, transform.position + (Vector3.forward * 3), Quaternion.identity);
+        GameObject tempButton = Instantiate(turretButton, transform.position + (Vector3.forward * 3 * scale), Quaternion.identity);
         //tempButton.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.01f;
         tempButton.transform.RotateAround(transform.position, Vector3.up, 90 * unlockedTurrets);
         tempButton.transform.Rotate(new Vector3(90, 0, 0));
+        tempButton.transform.localScale = tempButton.transform.localScale * scale;
         GroupButton(tempButton);
 
         //Vector3 TempRot = tempButton.transform.eulerAngles;
@@ -59,6 +61,7 @@ public class TurretBuildMenu : MonoBehaviour
     }
     private void AddListeners()
     {
+        Debug.Log("added listeners");
         for (int i = 0; i < allButtons.Length; i++)
         {
             int cpy = i;
@@ -69,8 +72,15 @@ public class TurretBuildMenu : MonoBehaviour
     public void SpawnButton(int assignedTurret)
     {
         //add check condition
+            
         if(availableTurrets.Count > assignedTurret)
-            SetTurret(availableTurrets[assignedTurret]);
+        {
+            if (LevelManager.Instance.CanBuildSentry(availableTurrets[assignedTurret].Sentry))
+            {
+                LevelManager.Instance.BuildSentry(availableTurrets[assignedTurret].Sentry);
+                SetTurret(availableTurrets[assignedTurret]);
+            }
+        }
     }
 
     private void GroupButton(GameObject newButton)
