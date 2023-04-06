@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour, ICannonProjectile
+public class EnemyBullet : MonoBehaviour
 {
-    public Cannon Owner { get; set; }
+    public EnemyCannon Owner { get; set; }
     public Vector3 Direction { get; set; }
-    public float Damage { get; set; } = 25f;
-    public float ProjectileSpeed { get; set; } = 20f;
+    public float Damage { get; set; } = 10f;
+    public float ProjectileSpeed { get; set; } = 10f;
     public float FireDelay { get; set; } = 0.5f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -31,14 +31,14 @@ public class Bullet : MonoBehaviour, ICannonProjectile
     public IEnumerator Delete(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Owner.PoolBullet(gameObject);
+        Owner.enemyScript.Manager.PoolEnemyBullet(gameObject);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<IEnemy>().TakeDamage(Damage);
+            other.gameObject.GetComponent<tempPlayer>().TakeDamage(Damage);
             StartCoroutine(Delete(0f));
         }
     }

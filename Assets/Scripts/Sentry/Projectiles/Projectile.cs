@@ -70,7 +70,7 @@ public class Projectile : MonoBehaviour
         Debug.Log("running");
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<Enemy>().takeDamage(baseDamage);
+            other.gameObject.GetComponent<IEnemy>().TakeDamage(baseDamage);
 
             owner.PoolBullet(gameObject);
             gameObject.SetActive(false);

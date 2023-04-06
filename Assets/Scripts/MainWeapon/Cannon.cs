@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    private Transform rotatePoint;
     private Vector3 mouseLocation;
     private Vector3 worldPosition;
+
     private GameObject newCannonProjectile;
-    private Transform cannonProjectileSpawnPoint;
-    public Transform projectilesParent;
-    public LayerMask groundMask;
     private bool ableToShoot;
+    private Transform projectilesParent;
+
+    public Transform rotatePoint;
+    public Transform cannonProjectileSpawnPoint;
+    public LayerMask groundMask;
+    
 
     public int activeCannonProjectile;                  // Determines which projectile  
     public GameObject[] cannonProjectileArray;          // to fire using following list
@@ -26,9 +29,7 @@ public class Cannon : MonoBehaviour
 
     void Awake()
     {
-        rotatePoint = GameObject.Find("Cannon Rotation Point").transform;
-        cannonProjectileSpawnPoint = GameObject.Find("Cannon Projectile Spawn Point").transform;
-        projectilesParent = GameObject.Find("Projectiles").transform;
+        projectilesParent = GameObject.Find("Projectiles Parent").transform;
     }
 
     // Start is called before the first frame update
@@ -58,7 +59,7 @@ public class Cannon : MonoBehaviour
 
         worldPosition = MousePosition.MouseToWorld3D(Camera.main, groundMask);
         worldPosition.y = rotatePoint.transform.position.y;
-        rotatePoint.LookAt(worldPosition,Vector3.down);
+        rotatePoint.LookAt(worldPosition, Vector3.down);
 
         if (Input.GetKey(KeyCode.Mouse0) && ableToShoot)
         {

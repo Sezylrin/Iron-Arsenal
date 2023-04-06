@@ -12,6 +12,7 @@ TagManager:
   - CenterPoint
   - BulletSpawnPoint
   - TurretButton
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX
