@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5440523406789250479}
   - component: {fileID: 1867277695232874509}
   m_Layer: 0
-  m_Name: Iron
+  m_Name: Xenorium
   m_TagString: Ore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

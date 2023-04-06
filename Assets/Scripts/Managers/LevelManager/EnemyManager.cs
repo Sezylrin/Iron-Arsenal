@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempEnemyManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
     public GameObject enemies;
     public Transform player;

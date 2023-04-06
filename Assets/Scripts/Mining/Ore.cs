@@ -6,9 +6,9 @@ public class Ore : MonoBehaviour
 {
     public enum OreType
     {
-        Iron,
-        Copper,
-        Gold
+        Xenorium,
+        Novacite,
+        Voidstone
     };
 
     public OreType type;
@@ -42,6 +42,7 @@ public class Ore : MonoBehaviour
         mining = false;
         ableToStopMining = true;
         levelManager = LevelManager.Instance;
+        transform.localScale = new Vector3(5 + totalResourcesInDeposit/100, 0.1f, 5 + totalResourcesInDeposit/100);
     }
 
     // Update is called once per frame
@@ -70,7 +71,7 @@ public class Ore : MonoBehaviour
             yield return new WaitForSeconds(delay);
             audioClip.Play();
 
-            if (type == OreType.Iron)
+            if (type == OreType.Xenorium)
             {
                 if (currentResourcesInDeposit - miningScript.miningOutput <= 0)
                 {
@@ -83,7 +84,7 @@ public class Ore : MonoBehaviour
                     levelManager.GainIron(miningScript.miningOutput);
                 }
             }
-            else if (type == OreType.Copper)
+            else if (type == OreType.Novacite)
             {
                 if (currentResourcesInDeposit - miningScript.miningOutput <= 0)
                 {
@@ -96,7 +97,7 @@ public class Ore : MonoBehaviour
                     levelManager.GainCopper(miningScript.miningOutput);
                 }
             }
-            else if (type == OreType.Gold)
+            else if (type == OreType.Voidstone)
             {
                 if (currentResourcesInDeposit - miningScript.miningOutput <= 0)
                 {
