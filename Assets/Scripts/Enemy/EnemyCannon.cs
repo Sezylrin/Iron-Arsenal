@@ -16,6 +16,8 @@ public class EnemyCannon : MonoBehaviour
     private bool ableToShoot;
     private Transform projectilesParent;
 
+    private Pooling pooledEnemyBullets = new Pooling();
+
     private void Awake()
     {
         player = GameObject.Find("Player");
@@ -41,11 +43,11 @@ public class EnemyCannon : MonoBehaviour
         {
             ableToShoot = false;
 
-            if (enemyScript.Manager.pools[0].ListCount() > 0)
+            if (pooledEnemyBullets.ListCount() > 0)
             {
-                newEnemyProjectile = enemyScript.Manager.pools[0].FirstObj();
+                newEnemyProjectile = pooledEnemyBullets.FirstObj();
                 newEnemyProjectile.SetActive(true);
-                enemyScript.Manager.pools[0].RemoveObj(newEnemyProjectile);
+                pooledEnemyBullets.RemoveObj(newEnemyProjectile);
             }
             else
             {
@@ -67,5 +69,11 @@ public class EnemyCannon : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         ableToShoot = true;
+    }
+
+    public void PoolEnemyBullet(GameObject obj)
+    {
+        obj.SetActive(false);
+        pooledEnemyBullets.AddObj(obj);
     }
 }

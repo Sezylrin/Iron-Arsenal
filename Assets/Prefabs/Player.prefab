@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2021412381409304332}
   - component: {fileID: 2021412381409304334}
   - component: {fileID: 2021412381409304333}
-  - component: {fileID: 3422932685576251321}
   - component: {fileID: 4454595705638859222}
   - component: {fileID: 3021966184241043583}
+  - component: {fileID: 7384111677371232713}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -44,7 +44,7 @@ Transform:
   - {fileID: 267016227666008207}
   - {fileID: 267016228295868576}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2021412381409304334
 MonoBehaviour:
@@ -109,21 +109,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: 0
   m_Camera: {fileID: 2021412381529492977}
---- !u!114 &3422932685576251321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021412381409304326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ba68a6632b91c46982e9aafb5a046f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  miningOutput: 20
-  miningSpeed: 1
-  playerRB: {fileID: 0}
 --- !u!65 &4454595705638859222
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -172,6 +157,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &7384111677371232713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021412381409304326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1152eef78072f074199ccec3cdc8b102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miningOutput: 0
+  miningSpeed: 0
+  playerRB: {fileID: 0}
 --- !u!1 &2021412381529492983
 GameObject:
   m_ObjectHideFlags: 0

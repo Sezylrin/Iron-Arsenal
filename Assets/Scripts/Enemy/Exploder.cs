@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemy : MonoBehaviour, IEnemy
+public class Exploder : MonoBehaviour, IEnemy
 {
     public EnemyManager Manager { get; set; }
     public GameObject Player { get; set; }
@@ -13,6 +13,8 @@ public class BasicEnemy : MonoBehaviour, IEnemy
     public float Speed { get; set; }
 
     public EnemyData data;
+
+    public GameObject explosion;
 
     void Awake()
     {
@@ -51,7 +53,9 @@ public class BasicEnemy : MonoBehaviour, IEnemy
 
     public void OnDeath()
     {
-        Manager.PoolBasicEnemy(gameObject);
+        Instantiate(explosion, transform.position, Quaternion.identity);
+
+        Manager.PoolExploderEnemy(gameObject);
     }
 
     void OnCollisionEnter(Collision col)
@@ -59,7 +63,7 @@ public class BasicEnemy : MonoBehaviour, IEnemy
         if (col.gameObject.tag == "Player")
         {
             TakeDamage(col.gameObject.GetComponent<tempPlayer>().ramDamage);
-            EnemyRB.AddForce((transform.position - col.transform.position).normalized * 750);
+            OnDeath();
         }
     }
 }

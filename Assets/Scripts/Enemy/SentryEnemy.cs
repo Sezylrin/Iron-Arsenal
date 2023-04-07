@@ -34,9 +34,11 @@ public class SentryEnemy : MonoBehaviour, IEnemy
     // Update is called once per frame
     void Update()
     {
+        transform.LookAt(new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z));
+
         if (Vector3.Distance(Player.transform.position, transform.position) > 10)
         {
-            Vector3 direction = (Player.transform.position - transform.position).normalized;
+            Vector3 direction = Vector3.forward;
             transform.Translate(direction.x * Speed * Time.deltaTime, 0, direction.z * Speed * Time.deltaTime);
         }
     }

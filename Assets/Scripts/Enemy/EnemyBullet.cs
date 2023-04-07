@@ -34,13 +34,13 @@ public class EnemyBullet : MonoBehaviour
     public void Shoot()
     {
         StopCoroutine(Delete(0f));
-        StartCoroutine(Delete(2f));
+        StartCoroutine(Delete(10f));
     }
 
     public IEnumerator Delete(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Owner.enemyScript.Manager.PoolEnemyBullet(gameObject);
+        Owner.PoolEnemyBullet(gameObject);
     }
 
     void OnTriggerEnter(Collider other)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemy : MonoBehaviour, IEnemy
+public class Tank : MonoBehaviour, IEnemy
 {
     public EnemyManager Manager { get; set; }
     public GameObject Player { get; set; }
@@ -51,7 +51,7 @@ public class BasicEnemy : MonoBehaviour, IEnemy
 
     public void OnDeath()
     {
-        Manager.PoolBasicEnemy(gameObject);
+        Manager.PoolTankEnemy(gameObject);
     }
 
     void OnCollisionEnter(Collision col)
@@ -59,7 +59,7 @@ public class BasicEnemy : MonoBehaviour, IEnemy
         if (col.gameObject.tag == "Player")
         {
             TakeDamage(col.gameObject.GetComponent<tempPlayer>().ramDamage);
-            EnemyRB.AddForce((transform.position - col.transform.position).normalized * 750);
+            EnemyRB.AddForce((transform.position - col.transform.position).normalized * 500);
         }
     }
 }
