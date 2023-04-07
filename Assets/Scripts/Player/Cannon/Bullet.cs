@@ -10,10 +10,19 @@ public class Bullet : MonoBehaviour, ICannonProjectile
     public float ProjectileSpeed { get; set; } = 20f;
     public float FireDelay { get; set; } = 0.5f;
 
+    public CannonProjectileData data;
+
+    void Awake()
+    {
+        Damage = data.damage;
+        ProjectileSpeed = data.projectileSpeed;
+        FireDelay = data.fireDelay;
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame

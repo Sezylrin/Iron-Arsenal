@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8011481222941720729}
   m_Layer: 0
   m_Name: EnemyBullet
-  m_TagString: FriendlyProjectile
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3670078471125790378
 MeshFilter:
@@ -146,3 +146,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc040de2cb79ee4ca24d6527c42aa4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 3a1c2921786aedc4483ab3bc02d83e1e, type: 2}

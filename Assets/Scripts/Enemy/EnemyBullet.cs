@@ -6,14 +6,23 @@ public class EnemyBullet : MonoBehaviour
 {
     public EnemyCannon Owner { get; set; }
     public Vector3 Direction { get; set; }
-    public float Damage { get; set; } = 10f;
-    public float ProjectileSpeed { get; set; } = 10f;
-    public float FireDelay { get; set; } = 0.5f;
+    public float Damage { get; set; }
+    public float ProjectileSpeed { get; set; }
+    public float FireDelay { get; set; }
+
+    public EnemyBulletData data;
+
+    private void Awake()
+    {
+        Damage = data.damage;
+        ProjectileSpeed = data.projectileSpeed;
+        FireDelay = data.fireDelay;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame

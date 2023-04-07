@@ -10,6 +10,8 @@ public class Shotgun : MonoBehaviour, ICannonProjectile
     public float ProjectileSpeed { get; set; } = 0f;
     public float FireDelay { get; set; } = 0.8f;
 
+    public CannonProjectileData data;
+
     public GameObject bullet;
     private GameObject newBullet;
     private Bullet bulletScript;
@@ -19,6 +21,10 @@ public class Shotgun : MonoBehaviour, ICannonProjectile
     void Awake()
     {
         projectilesParent = GameObject.Find("Projectiles").transform;
+
+        Damage = data.damage;
+        ProjectileSpeed = data.projectileSpeed;
+        FireDelay = data.fireDelay;
     }
 
     // Start is called before the first frame update

@@ -6,9 +6,11 @@ public class RapidFire : MonoBehaviour, ICannonProjectile
 {
     public Cannon Owner { get; set; }
     public Vector3 Direction { get; set; }
-    public float Damage { get; set; } = 15f;
-    public float ProjectileSpeed { get; set; } = 0f;
-    public float FireDelay { get; set; } = 0.2f;
+    public float Damage { get; set; }
+    public float ProjectileSpeed { get; set; }
+    public float FireDelay { get; set; }
+
+    public CannonProjectileData data;
 
     public GameObject bullet;
     private GameObject newBullet;
@@ -18,6 +20,10 @@ public class RapidFire : MonoBehaviour, ICannonProjectile
     void Awake()
     {
         projectilesParent = GameObject.Find("Projectiles").transform;
+
+        Damage = data.damage;
+        ProjectileSpeed = data.projectileSpeed;
+        FireDelay = data.fireDelay;
     }
 
     // Start is called before the first frame update

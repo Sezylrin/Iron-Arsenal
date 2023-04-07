@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1123763005487040607
 MeshFilter:
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37742b98caacc3745b2140eeb9d2921d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: ddc175ce988dc1844aaacb6f00f13909, type: 2}
 --- !u!54 &-4745296270603101602
 Rigidbody:
   m_ObjectHideFlags: 0

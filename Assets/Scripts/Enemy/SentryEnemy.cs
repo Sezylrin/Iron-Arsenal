@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemy : MonoBehaviour, IEnemy
+public class SentryEnemy : MonoBehaviour, IEnemy
 {
     public EnemyManager Manager { get; set; }
     public GameObject Player { get; set; }
     public Rigidbody EnemyRB { get; set; }
-    public float MaxHealth { get; set; } = 100;
+    public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
-    public float DamageOnCollide { get; set; } = 20;
-    public float Speed { get; set; } = 10f;
+    public float DamageOnCollide { get; set; }
+    public float Speed { get; set; }
 
     public EnemyData data;
-
+    
     void Awake()
     {
         Player = GameObject.Find("Player");
@@ -34,14 +34,17 @@ public class BasicEnemy : MonoBehaviour, IEnemy
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = (Player.transform.position - transform.position).normalized;
-        transform.Translate(direction.x * Speed * Time.deltaTime, 0, direction.z * Speed * Time.deltaTime);
+        if (Vector3.Distance(Player.transform.position, transform.position) > 10)
+        {
+            Vector3 direction = (Player.transform.position - transform.position).normalized;
+            transform.Translate(direction.x * Speed * Time.deltaTime, 0, direction.z * Speed * Time.deltaTime);
+        }
     }
 
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
-        if (CurrentHealth <= 0)
+        if (CurrentHealth <= 0 ) 
         {
             OnDeath();
         }
@@ -49,7 +52,7 @@ public class BasicEnemy : MonoBehaviour, IEnemy
 
     public void OnDeath()
     {
-        Manager.PoolBasicEnemy(gameObject);
+        Manager.PoolSentryEnemy(gameObject);
     }
 
     void OnCollisionEnter(Collision col)
