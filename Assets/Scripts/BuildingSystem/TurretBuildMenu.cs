@@ -61,7 +61,6 @@ public class TurretBuildMenu : MonoBehaviour
     }
     private void AddListeners()
     {
-        Debug.Log("added listeners");
         for (int i = 0; i < allButtons.Length; i++)
         {
             int cpy = i;
