@@ -20,9 +20,7 @@ public class BasicEnemy : MonoBehaviour, IEnemy
         Manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
         EnemyRB = GetComponent<Rigidbody>();
 
-        MaxHealth = data.maxHealth;
-        DamageOnCollide = data.damageOnCollide;
-        Speed = data.speed;
+        SetStats(Manager.wave);
     }
 
     // Start is called before the first frame update
@@ -51,7 +49,7 @@ public class BasicEnemy : MonoBehaviour, IEnemy
 
     public void OnDeath()
     {
-        Manager.PoolBasicEnemy(gameObject);
+        Manager.PoolEnemy(gameObject, 0);
     }
 
     void OnCollisionEnter(Collision col)
@@ -61,5 +59,12 @@ public class BasicEnemy : MonoBehaviour, IEnemy
             TakeDamage(col.gameObject.GetComponent<tempPlayer>().ramDamage);
             EnemyRB.AddForce((transform.position - col.transform.position).normalized * 750);
         }
+    }
+
+    public void SetStats(int wave)
+    {
+        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave);
+        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave);
+        Speed = data.speed * Mathf.Pow(1.005f, wave);
     }
 }

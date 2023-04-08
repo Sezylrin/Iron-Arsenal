@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour, ICannonProjectile
     public IEnumerator Delete(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Owner.PoolBullet(gameObject);
+        Owner.PoolProjectile(gameObject, 0);
     }
 
     void OnTriggerEnter(Collider other)
@@ -48,6 +48,7 @@ public class Bullet : MonoBehaviour, ICannonProjectile
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<IEnemy>().TakeDamage(Damage);
+            StopCoroutine(Delete(0f));
             StartCoroutine(Delete(0f));
         }
     }

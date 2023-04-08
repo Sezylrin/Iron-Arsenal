@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public EnemyCannon Owner { get; set; }
+    public IEnemy Owner { get; set; }
     public Vector3 Direction { get; set; }
     public float Damage { get; set; }
     public float ProjectileSpeed { get; set; }
@@ -40,7 +40,7 @@ public class EnemyBullet : MonoBehaviour
     public IEnumerator Delete(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Owner.PoolEnemyBullet(gameObject);
+        Owner.Manager.PoolEnemyBullet(gameObject);
     }
 
     void OnTriggerEnter(Collider other)

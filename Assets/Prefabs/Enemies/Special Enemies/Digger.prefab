@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 5969074972219944497}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2335685694809016203
 Rigidbody:
@@ -57,11 +57,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &2335685694809016202
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -96,8 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: dedec25265d14244aa357ea96c04abba, type: 2}
-  enemyBC: {fileID: 0}
-  digging: 0
 --- !u!1 &5317006578503283564
 GameObject:
   m_ObjectHideFlags: 0

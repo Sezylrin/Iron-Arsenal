@@ -23,9 +23,7 @@ public class Charger : MonoBehaviour, IEnemy
         Manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
         EnemyRB = GetComponent<Rigidbody>();
 
-        MaxHealth = data.maxHealth;
-        DamageOnCollide = data.damageOnCollide;
-        Speed = data.speed;
+        SetStats(Manager.wave);
     }
 
     // Start is called before the first frame update
@@ -71,7 +69,7 @@ public class Charger : MonoBehaviour, IEnemy
 
     public void OnDeath()
     {
-        Manager.PoolChargerEnemy(gameObject);
+        Manager.PoolEnemy(gameObject, 4);
     }
 
     void OnCollisionEnter(Collision col)
@@ -95,5 +93,12 @@ public class Charger : MonoBehaviour, IEnemy
         EnemyRB.AddForce(chargeDirection * 1000);
         yield return new WaitForSeconds(3);
         ableToCharge = true;
+    }
+
+    public void SetStats(int wave)
+    {
+        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave);
+        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave);
+        Speed = data.speed * Mathf.Pow(1.005f, wave);
     }
 }

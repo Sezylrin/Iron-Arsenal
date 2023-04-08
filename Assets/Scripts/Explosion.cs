@@ -33,7 +33,7 @@ public class Explosion : MonoBehaviour
 
     private IEnumerator Delete()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
 }

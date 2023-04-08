@@ -66,6 +66,6 @@ public class RapidFire : MonoBehaviour, ICannonProjectile
     public IEnumerator Delete(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Owner.PoolRapidFire(gameObject);
+        Owner.PoolProjectile(gameObject, 2);
     }
 }

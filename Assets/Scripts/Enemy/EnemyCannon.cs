@@ -5,23 +5,19 @@ using UnityEngine;
 public class EnemyCannon : MonoBehaviour
 {
     private GameObject player;
-    public GameObject enemy;
-    public IEnemy enemyScript;
+    public StaticSentryEnemy enemy;
 
     public Transform rotatePoint;
-    public Transform enemyProjectileSpawnPoint;
+    public Transform enemyBulletSpawnPoint;
     public GameObject enemyBullet;
 
-    private GameObject newEnemyProjectile;
+    private GameObject newEnemyBullet;
     private bool ableToShoot;
     private Transform projectilesParent;
 
-    private Pooling pooledEnemyBullets = new Pooling();
-
     private void Awake()
     {
-        player = GameObject.Find("Player");
-        enemyScript = enemy.GetComponent<IEnemy>();
+        player = GameObject.Find("Player"); 
         projectilesParent = GameObject.Find("Projectiles Parent").transform;
     }
 
@@ -37,28 +33,28 @@ public class EnemyCannon : MonoBehaviour
         Vector3 target = player.transform.position;
         target.z += 1000000;
         
-        rotatePoint.LookAt(new Vector3(player.transform.position.x, enemyProjectileSpawnPoint.transform.position.y, player.transform.position.z), Vector3.down);
+        rotatePoint.LookAt(new Vector3(player.transform.position.x, enemyBulletSpawnPoint.transform.position.y, player.transform.position.z), Vector3.down);
 
         if (Vector3.Distance(player.transform.position, transform.position) < 12 && ableToShoot)
         {
             ableToShoot = false;
 
-            if (pooledEnemyBullets.ListCount() > 0)
+            if (enemy.Manager.pooledEnemyBullets.ListCount() > 0)
             {
-                newEnemyProjectile = pooledEnemyBullets.FirstObj();
-                newEnemyProjectile.SetActive(true);
-                pooledEnemyBullets.RemoveObj(newEnemyProjectile);
+                newEnemyBullet = enemy.Manager.pooledEnemyBullets.FirstObj();
+                newEnemyBullet.SetActive(true);
+                enemy.Manager.pooledEnemyBullets.RemoveObj(newEnemyBullet);
             }
             else
             {
-                newEnemyProjectile = Instantiate(enemyBullet, projectilesParent);
+                newEnemyBullet = Instantiate(enemyBullet, projectilesParent);
             }
-            newEnemyProjectile.transform.rotation = transform.rotation;
-            newEnemyProjectile.transform.position = enemyProjectileSpawnPoint.position;
+            newEnemyBullet.transform.rotation = transform.rotation;
+            newEnemyBullet.transform.position = enemyBulletSpawnPoint.position;
 
-            EnemyBullet enemyProjectileScript = newEnemyProjectile.GetComponent<EnemyBullet>();
-            enemyProjectileScript.Direction = (target - enemyProjectileSpawnPoint.position).normalized;
-            enemyProjectileScript.Owner = this;
+            EnemyBullet enemyProjectileScript = newEnemyBullet.GetComponent<EnemyBullet>();
+            enemyProjectileScript.Direction = (target - enemyBulletSpawnPoint.position).normalized;
+            enemyProjectileScript.Owner = enemy;
             enemyProjectileScript.Shoot();
 
             StartCoroutine(DelayFiring(enemyProjectileScript.FireDelay));
@@ -69,11 +65,5 @@ public class EnemyCannon : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         ableToShoot = true;
-    }
-
-    public void PoolEnemyBullet(GameObject obj)
-    {
-        obj.SetActive(false);
-        pooledEnemyBullets.AddObj(obj);
     }
 }

@@ -77,6 +77,6 @@ public class Shotgun : MonoBehaviour, ICannonProjectile
     public IEnumerator Delete(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Owner.PoolShotgun(gameObject);
+        Owner.PoolProjectile(gameObject, 1);
     }
 }

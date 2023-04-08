@@ -20,9 +20,7 @@ public class Tank : MonoBehaviour, IEnemy
         Manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
         EnemyRB = GetComponent<Rigidbody>();
 
-        MaxHealth = data.maxHealth;
-        DamageOnCollide = data.damageOnCollide;
-        Speed = data.speed;
+        SetStats(Manager.wave);
     }
 
     // Start is called before the first frame update
@@ -51,7 +49,7 @@ public class Tank : MonoBehaviour, IEnemy
 
     public void OnDeath()
     {
-        Manager.PoolTankEnemy(gameObject);
+        Manager.PoolEnemy(gameObject, 1);
     }
 
     void OnCollisionEnter(Collision col)
@@ -62,4 +60,11 @@ public class Tank : MonoBehaviour, IEnemy
             EnemyRB.AddForce((transform.position - col.transform.position).normalized * 500);
         }
     }
+
+    public void SetStats(int wave)
+    {
+        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave);
+        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave);
+        Speed = data.speed * Mathf.Pow(1.005f, wave);
+    }       
 }

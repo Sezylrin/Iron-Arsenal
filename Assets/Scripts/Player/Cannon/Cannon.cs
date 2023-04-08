@@ -52,8 +52,7 @@ public class Cannon : MonoBehaviour
     {
         if (LevelManager.Instance.currentState == State.Building)
             return;
-        //Change this in the future
-        activeCannonProjectile = LevelManager.Instance.GetMode();
+        //activeCannonProjectile = LevelManager.Instance.GetMode(); //Change this in the future
         mouseLocation = Input.mousePosition;
         mouseLocation.z += 1000000;
 
@@ -93,45 +92,9 @@ public class Cannon : MonoBehaviour
         ableToShoot = true;
     }
 
-    public void PoolBullet(GameObject obj)
+    public void PoolProjectile(GameObject obj, int projectileType)
     {
         obj.SetActive(false);
-        pooledBullets.AddObj(obj);
-    }
-
-    public void PoolShotgun(GameObject obj)
-    {
-        obj.SetActive(false);
-        pooledShotguns.AddObj(obj);
-    }
-
-    public void PoolRapidFire(GameObject obj)
-    {
-        obj.SetActive(false);
-        pooledRapidFires.AddObj(obj);
-    }
-
-    public void PoolSlowShot(GameObject obj)
-    {
-        obj.SetActive(false);
-        pooledSlowShots.AddObj(obj);
-    }
-    
-    public void PoolPoisonShot(GameObject obj)
-    {
-        obj.SetActive(false);
-        pooledPoisonShots.AddObj(obj);
-    }
-    
-    public void PoolRocket(GameObject obj)
-    {
-        obj.SetActive(false);
-        pooledRockets.AddObj(obj);
-    }
-    
-    public void PoolFlame(GameObject obj)
-    {
-        obj.SetActive(false);
-        pooledFlames.AddObj(obj);
+        pools[projectileType].AddObj(obj);
     }
 }

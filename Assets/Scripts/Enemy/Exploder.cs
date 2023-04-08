@@ -22,9 +22,7 @@ public class Exploder : MonoBehaviour, IEnemy
         Manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
         EnemyRB = GetComponent<Rigidbody>();
 
-        MaxHealth = data.maxHealth;
-        DamageOnCollide = data.damageOnCollide;
-        Speed = data.speed;
+        SetStats(Manager.wave);
     }
 
     // Start is called before the first frame update
@@ -53,9 +51,9 @@ public class Exploder : MonoBehaviour, IEnemy
 
     public void OnDeath()
     {
-        Instantiate(explosion, transform.position, Quaternion.identity);
+        Instantiate(explosion, transform.position, transform.rotation);
 
-        Manager.PoolExploderEnemy(gameObject);
+        Manager.PoolEnemy(gameObject, 2);
     }
 
     void OnCollisionEnter(Collision col)
@@ -65,5 +63,12 @@ public class Exploder : MonoBehaviour, IEnemy
             TakeDamage(col.gameObject.GetComponent<tempPlayer>().ramDamage);
             OnDeath();
         }
+    }
+
+    public void SetStats(int wave)
+    {
+        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave);
+        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave);
+        Speed = data.speed * Mathf.Pow(1.005f, wave);
     }
 }

@@ -13,4 +13,5 @@ public interface IEnemy
     float Speed { get; set; }
     void TakeDamage(float damage);
     void OnDeath();
+    void SetStats(int wave);
 }

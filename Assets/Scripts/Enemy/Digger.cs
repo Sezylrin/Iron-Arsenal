@@ -13,8 +13,9 @@ public class Digger : MonoBehaviour, IEnemy
     public float Speed { get; set; }
 
     public EnemyData data;
-    public BoxCollider enemyBC;
-    public bool digging;
+
+    private BoxCollider enemyBC;
+    private bool digging;
 
     void Awake()
     {
@@ -23,9 +24,7 @@ public class Digger : MonoBehaviour, IEnemy
         EnemyRB = GetComponent<Rigidbody>();
         enemyBC = GetComponent<BoxCollider>();
 
-        MaxHealth = data.maxHealth;
-        DamageOnCollide = data.damageOnCollide;
-        Speed = data.speed;
+        SetStats(Manager.wave);
     }
 
     // Start is called before the first frame update
@@ -43,13 +42,15 @@ public class Digger : MonoBehaviour, IEnemy
         Vector3 direction = Vector3.forward;
         transform.Translate(direction.x * Speed * Time.deltaTime, 0, direction.z * Speed * Time.deltaTime);
 
-        if (Vector3.Distance(Player.transform.position, transform.position) > 10)
+        if (Vector3.Distance(Player.transform.position, transform.position) > 15 && !digging)
         {
+            digging = true;
             StartCoroutine(DigDown());
         }
 
-        if (Vector3.Distance(Player.transform.position, transform.position) < 10)
+        if (Vector3.Distance(Player.transform.position, transform.position) < 10 && digging)
         {
+            digging = false;
             StartCoroutine(DigUp());
         }
     }
@@ -65,7 +66,7 @@ public class Digger : MonoBehaviour, IEnemy
 
     public void OnDeath()
     {
-        Manager.PoolDiggerEnemy(gameObject);
+        Manager.PoolEnemy(gameObject, 3);
     }
 
     void OnCollisionEnter(Collision col)
@@ -80,24 +81,29 @@ public class Digger : MonoBehaviour, IEnemy
     IEnumerator DigDown()
     {
         StopCoroutine(DigUp());
-        digging = true;
-        //enemyBC.enabled = false;
-        while (transform.localScale.y >= 1f)
+        enemyBC.enabled = false;
+        while (transform.position.y >= -0.5) 
         {
-            yield return new WaitForSeconds(0.1f);
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y - 0.01f, transform.localScale.z);
+            yield return new WaitForSeconds(0.01f);
+            transform.Translate(0, -0.02f, 0);
         }
     }
 
     IEnumerator DigUp()
     {
         StopCoroutine(DigDown());
-        while (transform.localScale.y <= 4)
+        while (transform.position.y <= 1)
         {
-            yield return new WaitForSeconds(0.1f);
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y + 0.01f, transform.localScale.z);
+            yield return new WaitForSeconds(0.01f);
+            transform.Translate(0, 0.02f, 0);
         }
-        //enemyBC.enabled = true;
-        digging = false;
+        enemyBC.enabled = true;
+    }
+
+    public void SetStats(int wave)
+    {
+        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave);
+        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave);
+        Speed = data.speed * Mathf.Pow(1.005f, wave);
     }
 }

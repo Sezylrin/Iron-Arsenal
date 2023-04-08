@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SentryEnemy : MonoBehaviour, IEnemy
+public class StaticSentryEnemy : MonoBehaviour, IEnemy
 {
     public EnemyManager Manager { get; set; }
     public GameObject Player { get; set; }
@@ -13,7 +13,11 @@ public class SentryEnemy : MonoBehaviour, IEnemy
     public float Speed { get; set; }
 
     public EnemyData data;
-    
+
+    private EnemyCannon enemyCannonScript;
+
+    public GameObject explosion;
+
     void Awake()
     {
         Player = GameObject.Find("Player");
@@ -34,19 +38,13 @@ public class SentryEnemy : MonoBehaviour, IEnemy
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z));
 
-        if (Vector3.Distance(Player.transform.position, transform.position) > 10)
-        {
-            Vector3 direction = Vector3.forward;
-            transform.Translate(direction.x * Speed * Time.deltaTime, 0, direction.z * Speed * Time.deltaTime);
-        }
     }
 
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
-        if (CurrentHealth <= 0 ) 
+        if (CurrentHealth <= 0)
         {
             OnDeath();
         }
@@ -54,7 +52,8 @@ public class SentryEnemy : MonoBehaviour, IEnemy
 
     public void OnDeath()
     {
-        Manager.PoolSentryEnemy(gameObject);
+        Instantiate(explosion, new Vector3(transform.position.x, -2, transform.position.z), transform.rotation);
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision col)
@@ -62,7 +61,14 @@ public class SentryEnemy : MonoBehaviour, IEnemy
         if (col.gameObject.tag == "Player")
         {
             TakeDamage(col.gameObject.GetComponent<tempPlayer>().ramDamage);
-            EnemyRB.AddForce((transform.position - col.transform.position).normalized * 750);
         }
     }
+
+    public void SetStats(int wave)
+    {
+        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave);
+        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave);
+        Speed = data.speed * Mathf.Pow(1.005f, wave);
+    }
 }
+
