@@ -15,3 +15,4 @@ MonoBehaviour:
   maxHealth: 50
   damageOnCollide: 10
   speed: 3
+  ramLaunchMultiplier: 750

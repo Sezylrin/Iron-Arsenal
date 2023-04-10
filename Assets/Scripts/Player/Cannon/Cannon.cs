@@ -14,8 +14,10 @@ public class Cannon : MonoBehaviour
     public Transform rotatePoint;
     public Transform cannonProjectileSpawnPoint;
     public LayerMask groundMask;
-    
 
+    private ParticleSystem flamethrower;
+    public CannonProjectileData data;
+    
     public int activeCannonProjectile;                  // Determines which projectile  
     public GameObject[] cannonProjectileArray;          // to fire using following list
     private Pooling pooledBullets = new Pooling();      // 0 - Default (Bullets)
@@ -25,11 +27,12 @@ public class Cannon : MonoBehaviour
     private Pooling pooledPoisonShots = new Pooling();  // 4 - Poison (DoT) Gun
     private Pooling pooledRockets = new Pooling();      // 5 - Rocket Launcher
     private Pooling pooledFlames = new Pooling();       // 6 - Flamethrower
-    public List<Pooling> pools = new List<Pooling>();
+    public List<Pooling> pools = new List<Pooling>();   
 
     void Awake()
     {
         projectilesParent = GameObject.Find("Projectiles Parent").transform;
+        flamethrower = gameObject.GetComponent<ParticleSystem>();
     }
 
     // Start is called before the first frame update
@@ -60,6 +63,19 @@ public class Cannon : MonoBehaviour
         worldPosition.y = rotatePoint.transform.position.y;
         rotatePoint.LookAt(worldPosition, Vector3.down);
 
+        var main = flamethrower.main;
+        main.startSpeed = 9.5f + (data.projectileSpeed * data.level / 2);
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && activeCannonProjectile == 6) 
+        {
+            flamethrower.Play();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0) && activeCannonProjectile == 6)
+        {
+            flamethrower.Stop();
+        }
+
         if (Input.GetKey(KeyCode.Mouse0) && ableToShoot)
         {
             ableToShoot = false;
@@ -77,12 +93,18 @@ public class Cannon : MonoBehaviour
             newCannonProjectile.transform.rotation = transform.rotation;
             newCannonProjectile.transform.position = cannonProjectileSpawnPoint.position;
 
-            ICannonProjectile cannonProjectileScript = newCannonProjectile.GetComponent<ICannonProjectile>();
+            CannonProjectile cannonProjectileScript = newCannonProjectile.GetComponent<CannonProjectile>();
             cannonProjectileScript.Direction = (mouseLocation - cannonProjectileSpawnPoint.position).normalized;
             cannonProjectileScript.Owner = this;
+            cannonProjectileScript.SetStats();
             cannonProjectileScript.Shoot();
 
             StartCoroutine(DelayFiring(cannonProjectileScript.FireDelay));
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            data.level += 1;
         }
     }
 

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374d6c14f8e01d148b8e7c928e8819bc, type: 3}
   m_Name: RapidFireProjectileData
   m_EditorClassIdentifier: 
+  level: 1
   damage: 15
-  projectileSpeed: 0
+  projectileSpeed: 20
   fireDelay: 0.2
+  projectileLifetime: 3

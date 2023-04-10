@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374d6c14f8e01d148b8e7c928e8819bc, type: 3}
   m_Name: BulletProjectileData
   m_EditorClassIdentifier: 
+  level: 1
   damage: 25
   projectileSpeed: 20
   fireDelay: 0.5
+  projectileLifetime: 3

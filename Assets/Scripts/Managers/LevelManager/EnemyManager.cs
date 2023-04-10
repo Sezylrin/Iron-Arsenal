@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -26,16 +27,17 @@ public class EnemyManager : MonoBehaviour
     public float basicEnemyChance;
     private float specialEnemyChance;
 
-    public bool spawnInstantly;
-
     private GameObject newEnemy = null;
 
     public int wave;
+    public int waveDelay;
+
+    public bool spawnInstantly; // Testing Variable
 
     private void Awake()
     {
         player = GameObject.Find("Player");
-        wave = 1;
+        
     }
 
     // Start is called before the first frame update
@@ -51,10 +53,9 @@ public class EnemyManager : MonoBehaviour
         pools.Add(pooledSplitterEnemies);
         pools.Add(pooledCloakerEnemies);
 
-        basicEnemyChance = 50;
         specialEnemyChance = (100 - basicEnemyChance) / (pools.Count - 1);
 
-        StartCoroutine(SpawnEnemies(24 + wave));
+        StartCoroutine(DelayWave(waveDelay));
     }
 
     // Update is called once per frame
@@ -63,105 +64,89 @@ public class EnemyManager : MonoBehaviour
         playerPosition = player.transform.position;
     }
 
-    public IEnumerator SpawnEnemies(int numberOfSpawns)
+    IEnumerator DelayWave(int delay)
     {
-        if (!spawnInstantly)
+        if (wave == 0)
         {
-            yield return new WaitForSeconds(30);
+            wave = 1;
         }
 
         while (true)
         {
-            int numberToSpawn = numberOfSpawns;
-
-            while (numberToSpawn != 0)
+            if (!spawnInstantly)
             {
-                Vector3 Top = new Vector3(playerPosition.x, 0, playerPosition.z + 30);
-                Vector3 Bottom = new Vector3(playerPosition.x, 0, playerPosition.z - 30);
-                Vector3 Right = new Vector3(playerPosition.x + 30, 0, playerPosition.z);
-                Vector3 Left = new Vector3(playerPosition.x - 30, 0, playerPosition.z);
-
-                float x = 0;
-                float z = 0;
-
-                if (numberToSpawn % 4 == 0) // Top
-                {
-                    x = Random.Range(Left.x, Right.x);
-                    z = Random.Range(Top.z, Top.z + 10);
-                }
-                else if (numberToSpawn % 4 == 1) // Right
-                {
-                    z = Random.Range(Top.z, Bottom.z);
-                    x = Random.Range(Right.x, Right.x + 10);
-                }
-                else if (numberToSpawn % 4 == 2) // Bottom
-                {
-                    x = Random.Range(Left.x, Right.x);
-                    z = Random.Range(Bottom.z, Bottom.z - 10);
-                }
-                else if (numberToSpawn % 4 == 3) // Left
-                {
-                    z = Random.Range(Top.z, Bottom.z);
-                    x = Random.Range(Left.x, Left.x - 10);
-                }
-
-                Vector3 spawnPosition = new Vector3(x, 1, z);
-
-                
-                float random = Random.Range(1f, 100f);
-
-                if (random <= basicEnemyChance) //Spawn Basic Enemy (0)
-                {
-                    SpawnEnemy(0, spawnPosition);
-                }
-                else if (CheckIfSpawn(random, 1)) //Spawn Tank Enemy (1)
-                {
-                    SpawnEnemy(1, spawnPosition);
-                }
-                else if (CheckIfSpawn(random, 2)) //Spawn Exploder Enemy (2)
-                {
-                    SpawnEnemy(2, spawnPosition);
-                }
-                else if (CheckIfSpawn(random, 3)) //Spawn Digger Enemy (3)
-                {
-                    SpawnEnemy(3, spawnPosition);
-                } 
-                else if (CheckIfSpawn(random, 4)) //Spawn Charger Enemy (4)
-                {
-                    SpawnEnemy(4, spawnPosition);
-                }
-                else if (CheckIfSpawn(random, 5)) //Spawn Sentry Enemy (5)
-                {
-                    SpawnEnemy(5, spawnPosition);
-                }
-                else if (CheckIfSpawn(random, 6)) //Spawn Dodger Enemy (6)
-                {   
-                    SpawnEnemy(6, spawnPosition);
-                }
-                else if (CheckIfSpawn(random, 7)) //Spawn Splitter Enemy (7)
-                {
-                    SpawnEnemy(7, spawnPosition);
-                }
-                else if (CheckIfSpawn(random, 8)) //Spawn Cloaker Enemy (8)
-                {
-                    SpawnEnemy(8, spawnPosition);
-                }
-                numberToSpawn--;
+                yield return new WaitForSeconds(delay);
             }
+            StartCoroutine(SpawnEnemies(10 + wave));
             if (spawnInstantly)
             {
-                yield return new WaitForSeconds(30);
+                yield return new WaitForSeconds(delay);
             }
+            wave++;
         }
     }
 
-    public bool CheckIfSpawn(float randomValue, int enemyNumber)
+    public IEnumerator SpawnEnemies(int numberOfSpawns)
     {
-        return (basicEnemyChance + (specialEnemyChance * (enemyNumber - 1))) < randomValue && randomValue <= (basicEnemyChance + (specialEnemyChance * enemyNumber));
+        int numberToSpawn = numberOfSpawns;
+
+        while (numberToSpawn != 0)
+        {
+            yield return new WaitForSeconds(0.3f);
+
+            Vector3 Top = new Vector3(playerPosition.x, 0, playerPosition.z + 30);
+            Vector3 Bottom = new Vector3(playerPosition.x, 0, playerPosition.z - 30);
+            Vector3 Right = new Vector3(playerPosition.x + 30, 0, playerPosition.z);
+            Vector3 Left = new Vector3(playerPosition.x - 30, 0, playerPosition.z);
+
+            float x = 0;
+            float z = 0;
+
+            if (numberToSpawn % 4 == 0) // Top
+            {
+                x = Random.Range(Left.x, Right.x);
+                z = Random.Range(Top.z, Top.z + 20);
+            }
+            else if (numberToSpawn % 4 == 1) // Right
+            {
+                z = Random.Range(Top.z, Bottom.z);
+                x = Random.Range(Right.x, Right.x + 20);
+            }
+            else if (numberToSpawn % 4 == 2) // Bottom
+            {
+                x = Random.Range(Left.x, Right.x);
+                z = Random.Range(Bottom.z, Bottom.z - 20);
+            }
+            else if (numberToSpawn % 4 == 3) // Left
+            {
+                z = Random.Range(Top.z, Bottom.z);
+                x = Random.Range(Left.x, Left.x - 20);
+            }
+            Vector3 spawnPosition = new Vector3(x, 1, z);
+                
+            float random = Random.Range(1f, 100f);
+
+            SpawnEnemy(SelectEnemyToSpawn(random), spawnPosition);
+            
+            numberToSpawn--;
+        }
+        yield return null;
+    }
+
+    public int SelectEnemyToSpawn(float randomValue)
+    {
+        for (int i = 1; i < pools.Count; i++)
+        {
+            if ((basicEnemyChance + (specialEnemyChance * (i - 1))) < randomValue && randomValue <= (basicEnemyChance + (specialEnemyChance * i)))
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 
     public void SpawnEnemy(int enemyType, Vector3 spawnPosition)
-    {
+    { 
         if (pools[enemyType].ListCount() > 0)
         {
             newEnemy = pools[enemyType].FirstObj();
@@ -174,7 +159,7 @@ public class EnemyManager : MonoBehaviour
         }
 
         newEnemy.transform.position = spawnPosition;
-        IEnemy enemyScript = newEnemy.GetComponent<IEnemy>();
+        Enemy enemyScript = newEnemy.GetComponent<Enemy>();
         enemyScript.CurrentHealth = enemyScript.MaxHealth;
         enemyScript.SetStats(wave);
 

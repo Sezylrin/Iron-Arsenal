@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public IEnemy Owner { get; set; }
+    public Enemy Owner { get; set; }
     public Vector3 Direction { get; set; }
     public float Damage { get; set; }
     public float ProjectileSpeed { get; set; }
     public float FireDelay { get; set; }
 
-    public EnemyBulletData data;
-
     private void Awake()
     {
-        Damage = data.damage;
-        ProjectileSpeed = data.projectileSpeed;
-        FireDelay = data.fireDelay;
+        
     }
 
     // Start is called before the first frame update
@@ -50,5 +46,12 @@ public class EnemyBullet : MonoBehaviour
             other.gameObject.GetComponent<tempPlayer>().TakeDamage(Damage);
             StartCoroutine(Delete(0f));
         }
+    }
+
+    public void SetStats(float damage, float projectileSpeed, float fireDelay)
+    {
+        Damage = damage;
+        ProjectileSpeed = projectileSpeed;
+        FireDelay = fireDelay;
     }
 }

@@ -27,7 +27,7 @@ public class Explosion : MonoBehaviour
 
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<IEnemy>().TakeDamage(damage);
+            other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
         }
     }
 

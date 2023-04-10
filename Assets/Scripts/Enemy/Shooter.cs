@@ -1,19 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class Shooter : MonoBehaviour, IEnemy
+public class Shooter : Enemy
 {
-    public EnemyManager Manager { get; set; }
-    public GameObject Player { get; set; }
-    public Rigidbody EnemyRB { get; set; }
-    public float MaxHealth { get; set; }
-    public float CurrentHealth { get; set; }
-    public float DamageOnCollide { get; set; }
-    public float Speed { get; set; }
+    public float BulletDamage { get; set; }
+    public float BulletSpeed { get; set; }
+    public float BulletFireDelay { get; set; }
 
-    public EnemyData data;
+    public EnemyBulletData bulletData;
 
     public Transform enemyBulletSpawnPoint;
     public GameObject enemyBullet;
@@ -24,29 +19,24 @@ public class Shooter : MonoBehaviour, IEnemy
 
     void Awake()
     {
-        Player = GameObject.Find("Player");
-        Manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
-        EnemyRB = GetComponent<Rigidbody>();
-
-        SetStats(Manager.wave);
+        Init();
+        projectilesParent = projectilesParent = GameObject.Find("Projectiles Parent").transform;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        CurrentHealth = MaxHealth;
         ableToShoot = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z));
+        SetRotation();
 
         if (Vector3.Distance(Player.transform.position, transform.position) > 10)
         {
-            Vector3 direction = Vector3.forward;
-            transform.Translate(direction.x * Speed * Time.deltaTime, 0, direction.z * Speed * Time.deltaTime);
+            Move();
         }
 
         if (Vector3.Distance(Player.transform.position, transform.position) < 12 && ableToShoot)
@@ -69,6 +59,7 @@ public class Shooter : MonoBehaviour, IEnemy
             EnemyBullet enemyBulletScript = newEnemyBullet.GetComponent<EnemyBullet>();
             enemyBulletScript.Direction = Vector3.forward;
             enemyBulletScript.Owner = this;
+            enemyBulletScript.SetStats(BulletDamage, BulletSpeed, BulletFireDelay);
             enemyBulletScript.Shoot();
 
             StartCoroutine(DelayFiring(enemyBulletScript.FireDelay));
@@ -81,35 +72,19 @@ public class Shooter : MonoBehaviour, IEnemy
         ableToShoot = true;
     }
 
-    public void TakeDamage(float damage)
-    {
-        CurrentHealth -= damage;
-        if (CurrentHealth <= 0)
-        {
-            OnDeath();
-        }
-    }
-
-    public void OnDeath()
+    protected override void OnDeath()
     {
         StopCoroutine(DelayFiring(0f));
         ableToShoot = true;
-        Manager.PoolEnemy(gameObject, 5);
+        base.OnDeath();
     }
 
-    void OnCollisionEnter(Collision col)
+    public override void SetStats(int wave)
     {
-        if (col.gameObject.tag == "Player")
-        {
-            TakeDamage(col.gameObject.GetComponent<tempPlayer>().ramDamage);
-            EnemyRB.AddForce((transform.position - col.transform.position).normalized * 750);
-        }
-    }
+        base.SetStats(wave);
 
-    public void SetStats(int wave)
-    {
-        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave);
-        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave);
-        Speed = data.speed * Mathf.Pow(1.005f, wave);
+        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, wave);
+        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, wave);
+        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -wave);
     }
 }

@@ -2,61 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Exploder : MonoBehaviour, IEnemy
+public class Exploder : Enemy
 {
-    public EnemyManager Manager { get; set; }
-    public GameObject Player { get; set; }
-    public Rigidbody EnemyRB { get; set; }
-    public float MaxHealth { get; set; }
-    public float CurrentHealth { get; set; }
-    public float DamageOnCollide { get; set; }
-    public float Speed { get; set; }
-
-    public EnemyData data;
-
     public GameObject explosion;
 
     void Awake()
     {
-        Player = GameObject.Find("Player");
-        Manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
-        EnemyRB = GetComponent<Rigidbody>();
-
-        SetStats(Manager.wave);
+        Init();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        CurrentHealth = MaxHealth;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z));
-
-        Vector3 direction = Vector3.forward;
-        transform.Translate(direction.x * Speed * Time.deltaTime, 0, direction.z * Speed * Time.deltaTime);
+        SetRotation();
+        Move();
     }
 
-    public void TakeDamage(float damage)
-    {
-        CurrentHealth -= damage;
-        if (CurrentHealth <= 0)
-        {
-            OnDeath();
-        }
-    }
-
-    public void OnDeath()
-    {
-        Instantiate(explosion, transform.position, transform.rotation);
-
-        Manager.PoolEnemy(gameObject, 2);
-    }
-
-    void OnCollisionEnter(Collision col)
+    protected override void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Player")
         {
@@ -65,10 +33,10 @@ public class Exploder : MonoBehaviour, IEnemy
         }
     }
 
-    public void SetStats(int wave)
+    protected override void OnDeath()
     {
-        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave);
-        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave);
-        Speed = data.speed * Mathf.Pow(1.005f, wave);
+        Instantiate(explosion, transform.position, transform.rotation);
+
+        base.OnDeath();
     }
 }

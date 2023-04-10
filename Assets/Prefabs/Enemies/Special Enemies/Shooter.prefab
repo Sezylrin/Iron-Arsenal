@@ -77,7 +77,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -97,7 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f8d08c7d296fa44ba48f3d16889cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 5
   data: {fileID: 11400000, guid: d6b0c039483e6f043a4d6687f8738c23, type: 2}
+  bulletData: {fileID: 11400000, guid: 3a1c2921786aedc4483ab3bc02d83e1e, type: 2}
   enemyBulletSpawnPoint: {fileID: 6388519645255094936}
   enemyBullet: {fileID: 3670078471125790382, guid: 0fbacc1077e8a354e909f314967413f1, type: 3}
 --- !u!1 &6388519645255094935

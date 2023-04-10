@@ -6,4 +6,5 @@ public class EnemyData : ScriptableObject
     public float maxHealth;
     public float damageOnCollide;
     public float speed;
+    public int ramLaunchMultiplier;
 }

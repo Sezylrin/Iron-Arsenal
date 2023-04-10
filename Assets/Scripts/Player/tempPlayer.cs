@@ -41,7 +41,7 @@ public class tempPlayer : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy")
         {
-            TakeDamage(col.gameObject.GetComponent<IEnemy>().DamageOnCollide);
+            TakeDamage(col.gameObject.GetComponent<Enemy>().DamageOnCollide);
         }
     }
 }
