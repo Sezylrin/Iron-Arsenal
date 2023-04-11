@@ -17,7 +17,9 @@ public class Cannon : MonoBehaviour
 
     private ParticleSystem flamethrower;
     public CannonProjectileData data;
-    
+    private bool mouseHeldDown = false;
+    private bool firing = false;
+
     public int activeCannonProjectile;                  // Determines which projectile  
     public GameObject[] cannonProjectileArray;          // to fire using following list
     private Pooling pooledBullets = new Pooling();      // 0 - Default (Bullets)
@@ -66,13 +68,25 @@ public class Cannon : MonoBehaviour
         var main = flamethrower.main;
         main.startSpeed = 9.5f + (data.projectileSpeed * data.level / 2);
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && activeCannonProjectile == 6) 
+        if (Input.GetKeyDown(KeyCode.Mouse0)) 
         {
+            mouseHeldDown = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            mouseHeldDown = false;
+        }
+
+        if (activeCannonProjectile == 6 && mouseHeldDown && !firing) 
+        {
+            firing = true;
             flamethrower.Play();
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0) && activeCannonProjectile == 6)
+        if ((activeCannonProjectile == 6 && !mouseHeldDown && firing) || activeCannonProjectile != 6)
         {
+            firing = false;
             flamethrower.Stop();
         }
 
@@ -102,9 +116,44 @@ public class Cannon : MonoBehaviour
             StartCoroutine(DelayFiring(cannonProjectileScript.FireDelay));
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            activeCannonProjectile = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            activeCannonProjectile = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            activeCannonProjectile = 2;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            activeCannonProjectile = 3;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            activeCannonProjectile = 4;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            activeCannonProjectile = 5;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            activeCannonProjectile = 6;
+        }
+
         if (Input.GetKeyDown(KeyCode.U))
         {
-            data.level += 1;
+            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.Bullet);
+            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.Shotgun);
+            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.RapidFire);
+            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.SlowShot);
+            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.PoisonShot);
+            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.Rocket);
+            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.Flame);
         }
     }
 

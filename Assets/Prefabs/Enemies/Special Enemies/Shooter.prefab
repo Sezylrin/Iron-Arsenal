@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 290230669632234951}
   - component: {fileID: 290230669632234950}
   - component: {fileID: 3601272918170804927}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shooter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 511
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 512
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6388519645255094936}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy Bullet Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 6388519646243997103}
   - component: {fileID: 6388519646243997102}
   - component: {fileID: 6388519646243997101}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 8555560069827120253}
   - component: {fileID: 8604346651528171042}
   - component: {fileID: 7569451520581099450}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1403462821539998161}
   - component: {fileID: 1344792042894306190}
   - component: {fileID: 922523792168909334}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7045448187905982571}
   - component: {fileID: 7045448187905982570}
   - component: {fileID: 2325381597406740631}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Exploder
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 511
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 512

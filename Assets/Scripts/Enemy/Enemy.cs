@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType
+{
+    Basic,
+    Tank,
+    Exploder,
+    Digger,
+    Charger,
+    Shooter,
+    Dodger,
+    Splitter,
+    Cloaker,
+    Enemy9,
+    Enemy10,
+    StaticSentry
+};
+
 public abstract class Enemy : MonoBehaviour
 {
-    public enum EnemyType
-    {
-        Basic,
-        Tank,
-        Exploder,
-        Digger,
-        Charger,
-        Shooter,
-        Dodger,
-        Splitter,
-        Cloaker,
-        Enemy9,
-        Enemy10,
-        StaticSentry
-    };
-
     public EnemyType type;
 
     public EnemyManager Manager { get; set; }
@@ -45,9 +45,9 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void SetStats(int wave)
     {
-        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave);
-        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave);
-        Speed = data.speed * Mathf.Pow(1.005f, wave);
+        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave - 1);
+        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave - 1);
+        Speed = data.speed * Mathf.Pow(1.005f, wave - 1);
         RamLaunchMultiplier = data.ramLaunchMultiplier;
     }
 
@@ -68,7 +68,6 @@ public abstract class Enemy : MonoBehaviour
         {
             TakeDamage(col.gameObject.GetComponent<tempPlayer>().ramDamage);
             EnemyRB.AddForce(Vector3.Normalize(new Vector3(transform.position.x - col.transform.position.x, 0, transform.position.z - col.transform.position.z)) * RamLaunchMultiplier, ForceMode.Impulse);
-            Debug.Log("hit");
         }
     }
 
@@ -137,14 +136,17 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void StartSlow(float slowStrength)
     {
-        StopCoroutine(SlowEnemy(slowStrength));
-        StartCoroutine(SlowEnemy(slowStrength));
+        if (gameObject.activeSelf)
+        {
+            StopCoroutine(SlowEnemy(slowStrength));
+            StartCoroutine(SlowEnemy(slowStrength));
+        }
     }
+            
     public virtual IEnumerator SlowEnemy(float slowStrength)
     {
-        float tempSpeed = Speed;
-        Speed = Speed * slowStrength;
+        Speed = (data.speed * Mathf.Pow(1.005f, data.wave - 1)) * slowStrength;
         yield return new WaitForSeconds(5f);
-        Speed = tempSpeed;
+        Speed = data.speed * Mathf.Pow(1.005f, data.wave - 1);
     }
 }

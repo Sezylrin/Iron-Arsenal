@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 877812076658807144}
   - component: {fileID: 877812076658807145}
   - component: {fileID: 877812076658807151}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dodger
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -51,10 +51,10 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 383
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 640
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -72,10 +72,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 823
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 9120618975898532050}
   - component: {fileID: 9169682464610269837}
   - component: {fileID: 7000175068614978325}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}

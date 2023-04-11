@@ -23,19 +23,9 @@ public class Rocket : CannonProjectile
         Move();
     }
 
-    public override IEnumerator OnDelete(float delay)
+    public override void OnDelete()
     {
-        yield return new WaitForSeconds(delay);
         Instantiate(explosion, new Vector3(transform.position.x, -2, transform.position.z), transform.rotation);
-        base.DeleteNow();
-    }
-
-    protected override void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            other.gameObject.GetComponent<Enemy>().TakeDamage(Damage);
-            DeleteNow();
-        }
+        base.OnDelete();
     }
 }

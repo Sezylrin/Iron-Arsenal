@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2401250443493197345}
   - component: {fileID: 2342232113942496382}
   - component: {fileID: 4532195786206762470}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6047942058113298331}
   - component: {fileID: 6047942058113298330}
   - component: {fileID: 7355445405899335915}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloaker
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 511
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 512

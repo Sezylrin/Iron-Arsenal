@@ -385,6 +385,68 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca667ca4187569e4181f5004bbd96457, type: 3}
+--- !u!1 &549104158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 549104160}
+  - component: {fileID: 549104159}
+  m_Layer: 0
+  m_Name: DataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &549104159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549104158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50cc95e17fd54e7429f981da0945a9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cannonProjectileData:
+  - {fileID: 11400000, guid: ddc175ce988dc1844aaacb6f00f13909, type: 2}
+  - {fileID: 11400000, guid: 160c44fe5b8fdbd43bd6f4621822d912, type: 2}
+  - {fileID: 11400000, guid: 6a276c07b45ecb44b9943c88a6324db7, type: 2}
+  - {fileID: 11400000, guid: cfd91f8dc05b5dd43a44dae1e390bc5f, type: 2}
+  - {fileID: 11400000, guid: 019587eb4d4d2fe48b1b6a3a2dccff1e, type: 2}
+  - {fileID: 11400000, guid: 2c0c7f8133e032a4a92cefab074a291c, type: 2}
+  - {fileID: 11400000, guid: 0b9ae8363162bc948af86b25f303290e, type: 2}
+  enemyData:
+  - {fileID: 11400000, guid: 038baae34581db54e803a6e503ed461e, type: 2}
+  - {fileID: 11400000, guid: db92693f9e88a36499dca11bcbd79d95, type: 2}
+  - {fileID: 11400000, guid: 584b433b65c050647afcacfee9363b39, type: 2}
+  - {fileID: 11400000, guid: dedec25265d14244aa357ea96c04abba, type: 2}
+  - {fileID: 11400000, guid: 2bf05871c596b8840adba3b3c7ef687e, type: 2}
+  - {fileID: 11400000, guid: d6b0c039483e6f043a4d6687f8738c23, type: 2}
+  - {fileID: 11400000, guid: 9692b436406a3514f9e858be5655ec69, type: 2}
+  - {fileID: 11400000, guid: 6151e8ef78556ae4bbade45c3d221b09, type: 2}
+  - {fileID: 11400000, guid: f95d91b86c4d7be45a778f9471823715, type: 2}
+--- !u!4 &549104160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549104158}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.3080034, y: -50.943195, z: 47.479755}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &613231047 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 794359213266280966, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
@@ -554,7 +616,7 @@ MonoBehaviour:
   - {fileID: 7355445405899335906, guid: df4c41f053c529c49ad612740ab78d8e, type: 3}
   enemyList: []
   basicEnemyChance: 50
-  wave: 100
+  wave: 1
   waveDelay: 60
   spawnInstantly: 1
 --- !u!4 &810969884

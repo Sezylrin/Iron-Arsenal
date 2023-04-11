@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CannonProjectileType
+{
+    Bullet,
+    Shotgun,
+    RapidFire,
+    SlowShot,
+    PoisonShot,
+    Rocket,
+    Flame
+};
+
 public abstract class CannonProjectile : MonoBehaviour
 {
-    public enum CannonProjectileType
-    {
-        Bullet,
-        Shotgun,
-        RapidFire,
-        SlowShot,
-        PoisonShot,
-        Rocket,
-        Flame
-    };
-
     public CannonProjectileType type;
 
     public Cannon Owner { get; set; }
@@ -56,8 +56,8 @@ public abstract class CannonProjectile : MonoBehaviour
 
     public virtual void Shoot()
     {
-        StopCoroutine(OnDelete(ProjectileLifetime));
-        StartCoroutine(OnDelete(ProjectileLifetime));
+        StopCoroutine(StartDeletion(ProjectileLifetime));
+        StartCoroutine(StartDeletion(ProjectileLifetime));
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -68,10 +68,15 @@ public abstract class CannonProjectile : MonoBehaviour
             DeleteNow();
         }
     }
-    
-    public virtual IEnumerator OnDelete(float delay)
+
+    public virtual IEnumerator StartDeletion(float delay)
     {
         yield return new WaitForSeconds(delay);
+        OnDelete();
+    }
+
+    public virtual void OnDelete()
+    {
         switch (type)
         {
             case CannonProjectileType.Bullet:
@@ -100,7 +105,6 @@ public abstract class CannonProjectile : MonoBehaviour
 
     public virtual void DeleteNow()
     {
-        StopCoroutine(OnDelete(0f));
-        StartCoroutine(OnDelete(0f));
+        OnDelete();
     }
 }

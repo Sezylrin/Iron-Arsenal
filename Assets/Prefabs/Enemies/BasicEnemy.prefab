@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2270784134745447563}
   - component: {fileID: 2270784134745447562}
   - component: {fileID: 2270784134745447561}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BasicEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 7872043589487686961}
   - component: {fileID: 7848840472799393646}
   - component: {fileID: 8252971041052485366}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}

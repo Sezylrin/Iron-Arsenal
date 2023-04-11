@@ -37,7 +37,6 @@ public class EnemyManager : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("Player");
-        
     }
 
     // Start is called before the first frame update
@@ -77,6 +76,7 @@ public class EnemyManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(delay);
             }
+            DataManager.instance.UpdateEnemyWaves(wave);
             StartCoroutine(SpawnEnemies(10 + wave));
             if (spawnInstantly)
             {

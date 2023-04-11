@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7689516852213475516}
   - component: {fileID: 7689516852213475517}
   - component: {fileID: 7689516852213475514}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Splitter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 511
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 512
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 7689516853382071050}
   - component: {fileID: 7689516853382071052}
   - component: {fileID: 7689516853382071053}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
