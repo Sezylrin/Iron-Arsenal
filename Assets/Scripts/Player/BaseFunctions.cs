@@ -6,6 +6,11 @@ public class BaseFunctions : MonoBehaviour
 {
     public bool debug = false;
     public float simulateDamage;
+    public bool upgradeBase = false;
+    public bool testingAdd = false;
+    public bool removeTesting = false;
+
+    public int currentLevel;
 
     public float baseHealth;
     private float currentHealth;
@@ -16,6 +21,18 @@ public class BaseFunctions : MonoBehaviour
     private float currentShield;
 
     private float timeSinceDamage;
+
+    [System.Serializable]
+    public class SocketSpawns
+    {
+        public Vector3[] pos;
+    }
+    public SocketSpawns[] relativeSpawnPos;
+    public GameObject turretSocketPF;
+
+    private int baseLevel = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,11 +51,23 @@ public class BaseFunctions : MonoBehaviour
         //debug functions
         if (debug)
         {
-            Debug.Log("Current Health: " + currentHealth + "\n" + "Current Shield: " + currentShield + "\n" + "Shield Regen Delay: " + timeSinceDamage);
+            //Debug.Log("Current Health: " + currentHealth + "\n" + "Current Shield: " + currentShield + "\n" + "Shield Regen Delay: " + timeSinceDamage);
             if (simulateDamage != 0)
             {
                 TakeDamage(simulateDamage);
                 simulateDamage = 0;
+            }
+            if (upgradeBase)
+            {
+                UpgradeBase();
+                upgradeBase = false;
+            }
+            if (testingAdd)
+            {
+                testingAdd = false;
+            }
+            if (removeTesting)
+            {
             }
         }
     }
@@ -89,4 +118,16 @@ public class BaseFunctions : MonoBehaviour
         else
             currentHealth += amount;
     }
+
+    public void UpgradeBase()
+    {
+        foreach (Vector3 spawnPos in relativeSpawnPos[baseLevel].pos)
+        {
+            Instantiate(turretSocketPF, transform.position + spawnPos, Quaternion.identity, transform);
+        }
+        baseLevel++;
+    }
+
+
+
 }
