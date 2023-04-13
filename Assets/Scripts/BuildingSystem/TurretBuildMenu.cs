@@ -61,7 +61,6 @@ public class TurretBuildMenu : MonoBehaviour
     }
     private void AddListeners()
     {
-        Debug.Log("added listeners");
         for (int i = 0; i < allButtons.Length; i++)
         {
             int cpy = i;
@@ -72,7 +71,7 @@ public class TurretBuildMenu : MonoBehaviour
     public void SpawnButton(int assignedTurret)
     {
         //add check condition
-        Debug.Log("Running" + assignedTurret);    
+            
         if(availableTurrets.Count > assignedTurret)
         {
             if (LevelManager.Instance.CanBuildSentry(availableTurrets[assignedTurret].Sentry))

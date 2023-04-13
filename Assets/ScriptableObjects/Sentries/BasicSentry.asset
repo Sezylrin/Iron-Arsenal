@@ -18,7 +18,7 @@ MonoBehaviour:
   losAngle: 120
   fireRate: 10
   projectileData: {fileID: 11400000, guid: 31ffcd5d79228794dab4f5a64e232f7e, type: 2}
-  ironCost: 0
-  copperCost: 0
-  goldCost: 0
+  ironCost: 50
+  copperCost: 50
+  goldCost: 10
   buildable: 1
