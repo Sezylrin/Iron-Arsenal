@@ -9,19 +9,15 @@ public class Projectile : MonoBehaviour
     
     public Vector3 dir;
 
-    public float modifiedDamage;
+    public float baseDamage;
 
-    public float modifiedSpeed;
+    public float speed;
 
-    public int modifiedPierce;
+    public int pierce;
 
     private float timer = 0;
 
     private Sentry owner;
-
-    public List<Augments> activeAugments;
-
-    public bool respawned;
     void Start()
     {
         timer = 3;
@@ -44,13 +40,13 @@ public class Projectile : MonoBehaviour
 
     public void TranslateDir()
     {
-        transform.Translate(dir * modifiedSpeed * Time.deltaTime);
+        transform.Translate(dir * speed * Time.deltaTime);
     }
     public void SetProjectileStat()
     {
-        modifiedDamage = data.baseDamage;
-        modifiedSpeed = data.bulletSpeed;
-        modifiedPierce = data.pierce;
+        baseDamage = data.baseDamage;
+        speed = data.bulletSpeed;
+        pierce = data.pierce;
     }
 
     public void SetDirection(Vector3 dir)
@@ -64,28 +60,20 @@ public class Projectile : MonoBehaviour
     }
     public void SetProjectileData(ProjectileData data, Sentry owner)
     {
-        if (!this.data)
-            this.data = data;
-        if (!this.owner)
-            this.owner = owner;
+        this.data = data;
+        this.owner = owner;
         SetProjectileStat();
     }
-
-    
 
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("running");
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<Enemy>().TakeDamage(modifiedDamage);
-            if (modifiedPierce <= 0)
-            {
-                owner.PoolBullet(gameObject);
-                gameObject.SetActive(false);
-            }
-            else
-                modifiedPierce--;
+            other.gameObject.GetComponent<Enemy>().TakeDamage(baseDamage);
+
+            owner.PoolBullet(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

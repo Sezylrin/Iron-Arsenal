@@ -12,15 +12,16 @@ TagManager:
   - CenterPoint
   - BulletSpawnPoint
   - TurretButton
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Ground
-  - 
+  - Enemy
   - Build
   - Socket
   - 

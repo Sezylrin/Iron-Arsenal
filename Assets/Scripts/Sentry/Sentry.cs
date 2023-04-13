@@ -32,13 +32,8 @@ public class Sentry : MonoBehaviour
     public Transform sentryHead;
 
     public SentryData data;
-
-    public GameObject bulletPool;
-
-    private List<Augments> activeAugments;
     void Start()
     {
-        bulletPool = new GameObject();
         tempList.Add(testTransform);
         if (!centerPoint)
             centerPoint = GameObject.FindWithTag("CenterPoint").transform;
@@ -49,10 +44,6 @@ public class Sentry : MonoBehaviour
         }
         if (data)
             SetValue();
-        if (AugmentManager.Instance)
-        {
-            AugmentManager.Instance.activeSentries.Add(this);
-        }
     }
 
     // Update is called once per frame
@@ -63,14 +54,14 @@ public class Sentry : MonoBehaviour
         SetForward();
         if (!target)
         {
-            LocateTarget(LevelManager.Instance.EnemyManager.enemyList);
+            LocateTarget(LevelManager.Instance.enemyManager.enemyList);
         }
         else
         {
             if (timer <= 0)
             {
                 ShootTarget();
-                timer = 1 / fireRate;
+                timer = 1/fireRate;
             }
             TargetCheck(target);
         }
@@ -110,22 +101,11 @@ public class Sentry : MonoBehaviour
         else
         {
             //Debug.Log("Spawned new");
-            bullet = Instantiate(projectilePF, Vector3.zero, Quaternion.identity,bulletPool.transform);
+            bullet = Instantiate(projectilePF, Vector3.zero, Quaternion.identity);
         }
         Projectile bulletProj = bullet.GetComponent<Projectile>();
-        if (activeAugments.Count - bulletProj.activeAugments.Count == 1)
-        {
-            Augments augmentToAdd = activeAugments[activeAugments.Count - 1];
-            AugmentManager.Instance.AddAugmentToProjectile(augmentToAdd , bullet, bulletProj);
-            bulletProj.activeAugments.Add(augmentToAdd);
-        }
-        else if (bulletProj.activeAugments.Count == 0 && activeAugments.Count != 0)
-        {
-            AddActiveAugment(bullet, bulletProj);
-        }
         bulletProj.SetProjectileData(data.projectileData, this);
         bulletProj.setSpawn(bulletSpawnpoint.position);
-        bulletProj.respawned = true;
         Vector3 targetDir = target.position - bulletSpawnpoint.position;
         targetDir.y = 0;
         bulletProj.SetDirection(targetDir);
@@ -171,7 +151,6 @@ public class Sentry : MonoBehaviour
         range = data.range;
         fireRate = data.fireRate;
         timer = 1 / fireRate;
-        activeAugments = new List<Augments>(AugmentManager.Instance.activeAugments);
     }
 
     public void SetData(SentryData data)
@@ -179,27 +158,5 @@ public class Sentry : MonoBehaviour
         this.data = data;
         if (data)
             SetValue();
-    }
-
-    public void AddNewAugment(Augments augmentToAdd)
-    {
-        
-    }
-
-    public void AddActiveAugment(GameObject bullet, Projectile proj)
-    {
-        foreach (Augments augmentToAdd in AugmentManager.Instance.activeAugments)
-        {
-            AugmentManager.Instance.AddAugmentToProjectile(augmentToAdd, bullet, proj);
-            proj.activeAugments.Add(augmentToAdd);
-        }
-    }
-
-    public void AddAugmentToList(Augments augmentToAdd)
-    {
-        if (!activeAugments.Contains(augmentToAdd) && !augmentToAdd.Equals(Augments.None))
-        {
-            activeAugments.Add(augmentToAdd);
-        }
     }
 }
