@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     public LevelCanvasManager levelCanvasManager;
     public TurretBuildMenu BuildUi;
     public SentryData[] possibleSentries;
-    public TempEnemyManager EnemyManager;
+    public EnemyManager enemyManager;
     public State currentState = State.Normal;
 
     private void Awake()
