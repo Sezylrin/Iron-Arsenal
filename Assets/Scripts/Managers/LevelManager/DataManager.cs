@@ -11,8 +11,11 @@ public class DataManager : MonoBehaviour
 
     void Awake()
     {
+        if (!instance)
+        {
+            instance = this;
+        }
         SetCannonProjectilesToLevel1();
-        instance = this;
     }
 
     // Start is called before the first frame update

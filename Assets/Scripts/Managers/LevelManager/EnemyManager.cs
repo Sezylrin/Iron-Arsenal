@@ -65,7 +65,7 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator DelayWave(int delay)
     {
-        if (wave == 0)
+        if (wave <= 0)
         {
             wave = 1;
         }

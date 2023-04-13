@@ -213,10 +213,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 794359213266280966, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 757700367}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 794359213266280960, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 613231051}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
 --- !u!1001 &207548154
 PrefabInstance:
@@ -279,11 +276,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 953d56150040ebc4bb2469312b3bb9ad, type: 3}
---- !u!1 &403412790 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 794359213266280960, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
-  m_PrefabInstance: {fileID: 123295384}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &507761482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -432,6 +424,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9692b436406a3514f9e858be5655ec69, type: 2}
   - {fileID: 11400000, guid: 6151e8ef78556ae4bbade45c3d221b09, type: 2}
   - {fileID: 11400000, guid: f95d91b86c4d7be45a778f9471823715, type: 2}
+  staticSentryData: {fileID: 11400000, guid: 172124733d166574eb20b954b4be95bd, type: 2}
 --- !u!4 &549104160
 Transform:
   m_ObjectHideFlags: 0
@@ -445,25 +438,13 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &613231047 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 794359213266280966, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
   m_PrefabInstance: {fileID: 123295384}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &613231051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 403412790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0ecc506b3cf1f14d900d7db9d2171c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &685149123
 GameObject:
   m_ObjectHideFlags: 0
@@ -5829,7 +5810,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1933672578
 PrefabInstance:
