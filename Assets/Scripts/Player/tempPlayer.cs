@@ -4,44 +4,72 @@ using UnityEngine;
 
 public class tempPlayer : MonoBehaviour
 {
-    public float maxHealth;
-    public float currentHealth;
-    public float ramDamage;
+    public float speed;
+    public GameObject ore;
 
+    public float miningSpeed;
+    public int miningOutput;
 
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = 250;
-        currentHealth = maxHealth;
-        ramDamage = 10;
+        speed = 0.05f;
 
+        miningSpeed = 1f; 
+        miningOutput = 20;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth < 0)
+        if (Input.GetKey(KeyCode.W))
         {
-            OnDeath();
+            transform.Translate(Vector3.forward * speed);
+            if (ore)
+            {
+                ore.GetComponent<Ore>().StopMining();
+            } 
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector3.back * speed);
+            if (ore)
+            {
+                ore.GetComponent<Ore>().StopMining();
+            }
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(Vector3.left * speed);
+            if (ore)
+            {
+                ore.GetComponent<Ore>().StopMining();
+            }
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Vector3.right * speed);
+            if (ore)
+            {
+                ore.GetComponent<Ore>().StopMining();
+            }
         }
     }
 
-    void OnDeath()
+    void OnTriggerEnter(Collider other)
     {
-
-    }
-    private void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Ore")
         {
-            TakeDamage(col.gameObject.GetComponent<Enemy>().DamageOnCollide);
+            ore = other.gameObject;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Ore")
+        {
+            ore.GetComponent<Ore>().StopMining();
+            ore = null;
         }
     }
 }

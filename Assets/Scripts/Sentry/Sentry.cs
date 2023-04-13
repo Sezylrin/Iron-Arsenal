@@ -63,7 +63,7 @@ public class Sentry : MonoBehaviour
         SetForward();
         if (!target)
         {
-            LocateTarget(LevelManager.Instance.enemyManager.enemyList);
+            LocateTarget(LevelManager.Instance.EnemyManager.enemyList);
         }
         else
         {

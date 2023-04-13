@@ -71,7 +71,7 @@ public class TurretBuildMenu : MonoBehaviour
     public void SpawnButton(int assignedTurret)
     {
         //add check condition
-        Debug.Log("Running" + assignedTurret);    
+            
         if(availableTurrets.Count > assignedTurret)
         {
             if (LevelManager.Instance.CanBuildSentry(availableTurrets[assignedTurret].Sentry))
