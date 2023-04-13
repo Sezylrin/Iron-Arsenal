@@ -78,7 +78,7 @@ public class Projectile : MonoBehaviour
         Debug.Log("running");
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<Enemy>().TakeDamage(modifiedDamage);
+            //other.gameObject.GetComponent<Enemy>().TakeDamage(modifiedDamage);
             if (modifiedPierce <= 0)
             {
                 owner.PoolBullet(gameObject);
