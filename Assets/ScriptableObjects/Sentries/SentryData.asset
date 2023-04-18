@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d418b8a1155f54c8dde7db693ca303, type: 3}
   m_Name: SentryData
   m_EditorClassIdentifier: 
-  SentryBase: {fileID: 0}
-  SentryTurret: {fileID: 0}
+  Sentry: 0
+  Colour: {fileID: 0}
   range: 0
   losAngle: 0
   fireRate: 0
   projectileData: {fileID: 0}
+  xenoriumCost: 1
+  novaciteCost: 1
+  voidStoneCost: 1
+  buildable: 0

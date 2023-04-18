@@ -20,8 +20,8 @@ public class SentryData : ScriptableObject
 
     public ProjectileData projectileData;
 
-    public int ironCost;
-    public int copperCost;
-    public int goldCost;
+    public int xenoriumCost;
+    public int novaciteCost;
+    public int voidStoneCost;
     public bool buildable;
 }

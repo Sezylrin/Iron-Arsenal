@@ -87,27 +87,27 @@ public class LevelManager : MonoBehaviour
     public void BuildSentry(SentryName sentryName)
     {
         buildManager.BuildSentry(sentryName);
-        levelCanvasManager.SetIronAmount(buildManager.iron);
-        levelCanvasManager.SetCopperAmount(buildManager.copper);
-        levelCanvasManager.SetGoldAmount(buildManager.gold);
+        levelCanvasManager.SetXenoriumAmount(buildManager.xenorium);
+        levelCanvasManager.SetNovaciteAmount(buildManager.novacite);
+        levelCanvasManager.SetVoidStoneAmount(buildManager.voidStone);
     }
 
-    public void GainIron(int ironToAdd)
+    public void GainXenorium(int xenoriumToAdd)
     {
-        buildManager.GainIron(ironToAdd);
-        levelCanvasManager.SetIronAmount(buildManager.iron);
+        buildManager.GainXenorium(xenoriumToAdd);
+        levelCanvasManager.SetXenoriumAmount(buildManager.xenorium);
     }
 
-    public void GainCopper(int copperToAdd)
+    public void GainNovacite(int novaciteToAdd)
     {
-        buildManager.GainCopper(copperToAdd);
-        levelCanvasManager.SetCopperAmount(buildManager.copper);
+        buildManager.GainNovacite(novaciteToAdd);
+        levelCanvasManager.SetNovaciteAmount(buildManager.novacite);
     }
 
-    public void GainGold(int goldToAdd)
+    public void GainVoidStone(int voidStoneToAdd)
     {
-        buildManager.GainGold(goldToAdd);
-        levelCanvasManager.SetGoldAmount(buildManager.gold);
+        buildManager.GainVoidStone(voidStoneToAdd);
+        levelCanvasManager.SetVoidStoneAmount(buildManager.voidStone);
     }
 
     public void SpawnAugmentChoice(int numAugments = 3)

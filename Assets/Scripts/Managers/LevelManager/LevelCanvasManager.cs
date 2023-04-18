@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public class LevelCanvasManager : MonoBehaviour
 {
     [Header("Ore Labels")]
-    [SerializeField] private TMP_Text ironLabel;
-    [SerializeField] private TMP_Text copperLabel;
-    [SerializeField] private TMP_Text goldLabel;
+    [SerializeField] private TMP_Text xenoriumLabel;
+    [SerializeField] private TMP_Text novaciteLabel;
+    [SerializeField] private TMP_Text voidStoneLabel;
 
     [Header("Augments")]
     [SerializeField] private TMP_Text firstAugName;
@@ -34,19 +34,19 @@ public class LevelCanvasManager : MonoBehaviour
         }
     }
 
-    public void SetIronAmount(int ironAmount)
+    public void SetXenoriumAmount(int xenoriumAmount)
     {
-        ironLabel.text = ironAmount.ToString();
+        xenoriumLabel.text = xenoriumAmount.ToString();
     }
 
-    public void SetCopperAmount(int copperAmount)
+    public void SetNovaciteAmount(int novaciteAmount)
     {
-        copperLabel.text = copperAmount.ToString();
+        novaciteLabel.text = novaciteAmount.ToString();
     }
 
-    public void SetGoldAmount(int goldAmount)
+    public void SetVoidStoneAmount(int voidStoneAmount)
     {
-        goldLabel.text = goldAmount.ToString();
+        voidStoneLabel.text = voidStoneAmount.ToString();
     }
 
     public void ShowAugmentChoices(List<AugmentData> augments)
