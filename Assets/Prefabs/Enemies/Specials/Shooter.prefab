@@ -46,7 +46,7 @@ Rigidbody:
   m_GameObject: {fileID: 3601272918170804926}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -59,7 +59,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 5
+  <CurrentHealth>k__BackingField: 0
   data: {fileID: 11400000, guid: d6b0c039483e6f043a4d6687f8738c23, type: 2}
   bulletData: {fileID: 11400000, guid: 3a1c2921786aedc4483ab3bc02d83e1e, type: 2}
   enemyBulletSpawnPoint: {fileID: 6388519645255094936}

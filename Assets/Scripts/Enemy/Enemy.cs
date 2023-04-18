@@ -15,21 +15,24 @@ public enum EnemyType
     Cloaker,
     Enemy9,
     Enemy10,
-    StaticSentry
+    StaticSentry,
+    Boss
 };
 
 public abstract class Enemy : MonoBehaviour
 {
     public EnemyType type;
-
     public EnemyManager Manager { get; set; }
     public GameObject Player { get; set; }
     public Rigidbody EnemyRB { get; set; }
     public float MaxHealth { get; set; }
+    [field: SerializeField]
     public float CurrentHealth { get; set; }
     public float DamageOnCollide { get; set; }
     public float Speed { get; set; }
     public int RamLaunchMultiplier { get; set; }
+    public int Wave { get; set; }
+
 
     public EnemyData data;
 
@@ -39,16 +42,17 @@ public abstract class Enemy : MonoBehaviour
         Manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
         EnemyRB = GetComponent<Rigidbody>();
 
-        SetStats(Manager.wave);
-        CurrentHealth = MaxHealth;
+        Wave = Manager.wave;
+        SetStats();
     }
 
-    public virtual void SetStats(int wave)
+    public virtual void SetStats()
     {
-        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave - 1);
-        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave - 1);
-        Speed = data.speed * Mathf.Pow(1.005f, wave - 1);
+        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, Wave - 1);
+        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, Wave - 1);
+        Speed = data.speed * Mathf.Pow(1.005f, Wave - 1);
         RamLaunchMultiplier = data.ramLaunchMultiplier;
+        CurrentHealth = MaxHealth;
     }
 
     protected virtual void SetRotation()
@@ -131,6 +135,9 @@ public abstract class Enemy : MonoBehaviour
             case EnemyType.Cloaker:
                 Manager.PoolEnemy(gameObject, 8);
                 break;
+            default:
+                Destroy(gameObject);
+                break;
         }
     }
 
@@ -145,8 +152,8 @@ public abstract class Enemy : MonoBehaviour
             
     public virtual IEnumerator SlowEnemy(float slowStrength)
     {
-        Speed = (data.speed * Mathf.Pow(1.005f, data.wave - 1)) * slowStrength;
+        Speed = (data.speed * Mathf.Pow(1.005f, Wave - 1)) * slowStrength;
         yield return new WaitForSeconds(5f);
-        Speed = data.speed * Mathf.Pow(1.005f, data.wave - 1);
+        Speed = data.speed * Mathf.Pow(1.005f, Wave - 1);
     }
 }
