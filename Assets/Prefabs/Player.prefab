@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4454595705638859222}
   - component: {fileID: 3021966184241043583}
   - component: {fileID: 7384111677371232713}
+  - component: {fileID: 7541467474176116685}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -172,6 +173,30 @@ MonoBehaviour:
   miningOutput: 0
   miningSpeed: 0
   playerRB: {fileID: 0}
+--- !u!114 &7541467474176116685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021412381409304326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a7cb3c5c544804495a16a77309efb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  simulateDamage: 0
+  upgradeBase: 0
+  testingAdd: 0
+  removeTesting: 0
+  currentLevel: 0
+  baseHealth: 1000
+  maxShieldHealth: 500
+  shieldRecoverRate: 50
+  shieldRecoverDelay: 3
+  relativeSpawnPos: []
+  turretSocketPF: {fileID: 3185191710328647185, guid: 2033a21ff5c17344499d7b8575cb3e8e, type: 3}
 --- !u!1 &2021412381529492983
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +208,7 @@ GameObject:
   - component: {fileID: 2021412381529492978}
   - component: {fileID: 2021412381529492977}
   - component: {fileID: 2021412381529492976}
-  - component: {fileID: 3422932684061999648}
+  - component: {fileID: 4689191534421847384}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -265,7 +290,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2021412381529492983}
   m_Enabled: 1
---- !u!114 &3422932684061999648
+--- !u!114 &4689191534421847384
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,7 +299,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2021412381529492983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19d814f16f4a0ce428cd2fde3c5037b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 504b9bea34697564fb3ac6d157baa0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3422932684636907431
@@ -659,6 +684,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  data: {fileID: 0}
   activeCannonProjectile: 2
   cannonProjectileArray:
   - {fileID: 1123763005487040603, guid: c4a3e8f0491194748ada7e901664ded6, type: 3}

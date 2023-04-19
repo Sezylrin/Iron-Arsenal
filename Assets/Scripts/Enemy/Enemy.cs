@@ -33,6 +33,10 @@ public abstract class Enemy : MonoBehaviour
 
     public EnemyData data;
 
+    public EnemyEffects enemyEffects;
+
+    public float damageFactor = 1;
+
     protected virtual void Init()
     {
         Player = GameObject.Find("Player");
@@ -42,6 +46,7 @@ public abstract class Enemy : MonoBehaviour
         SetStats(Manager.wave);
         CurrentHealth = MaxHealth;
     }
+
 
     public virtual void SetStats(int wave)
     {
@@ -73,10 +78,15 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
-        CurrentHealth -= damage;
+        CurrentHealth -= damage * damageFactor;
         if (CurrentHealth <= 0)
         {
             StopCoroutine(TakeDamageOverTime(0f));
+            if (enemyEffects.isExplode && !type.Equals(EnemyType.Exploder))
+            {
+                Explosion tempExplosion = Instantiate(enemyEffects.augmentPFList[0],transform.position,Quaternion.identity).GetComponent<Explosion>();
+                tempExplosion.SetDamage(MaxHealth * 0.3f);
+            }            
             OnDeath();
         }
     }
@@ -132,6 +142,7 @@ public abstract class Enemy : MonoBehaviour
                 Manager.PoolEnemy(gameObject, 8);
                 break;
         }
+        enemyEffects.fireTick = 0;
     }
 
     public virtual void StartSlow(float slowStrength)
@@ -148,5 +159,17 @@ public abstract class Enemy : MonoBehaviour
         Speed = (data.speed * Mathf.Pow(1.005f, data.wave - 1)) * slowStrength;
         yield return new WaitForSeconds(5f);
         Speed = data.speed * Mathf.Pow(1.005f, data.wave - 1);
+    }
+
+    public void InitEnemyEffects(GameObject[] augmentPF)
+    {
+        if (!enemyEffects)
+        {
+            enemyEffects = gameObject.AddComponent<EnemyEffects>();
+            enemyEffects.hostenemy = this;
+        }
+        enemyEffects.SetAugmentState();
+        enemyEffects.augmentPFList = augmentPF;
+        
     }
 }

@@ -5,6 +5,17 @@ using UnityEngine;
 public enum Augments : int
 {
     ExplosiveProjectile,
+    Pierce,
+    ExplosiveSize,
+    KnockBack,
+    ExplosiveEnemy,
+    FireProjectile,
+    FireTrail,
+    FireSpread,
+    DecreaseResistence,
+    PoisonProjectile,
+    PoisonMaxHealth,
+    InstantDeath,
     None
 }
 public class AugmentManager : MonoBehaviour
@@ -13,9 +24,11 @@ public class AugmentManager : MonoBehaviour
     public bool debug;
     public Augments debugAugment;
     public bool addAugmentToActive = false;
+    public float baseDamage;
 
     public List<Augments> activeAugments = new List<Augments>();
     public List<Sentry> activeSentries = new List<Sentry>();
+    public List<GameObject> augmentPrefabs = new List<GameObject>();
     // Start is called before the first frame update
     void Awake()
     {
@@ -43,25 +56,43 @@ public class AugmentManager : MonoBehaviour
     }
     public void AddAugment(Augments augmentToAdd)
     {
-        if (!augmentToAdd.Equals(Augments.None))
+        if (!augmentToAdd.Equals(Augments.None) && !activeAugments.Contains(augmentToAdd))
             activeAugments.Add(augmentToAdd);
         foreach (Sentry sentry in activeSentries)
             sentry.AddAugmentToList(augmentToAdd);
     }
 
-    public void AddAugmentToProjectile(Augments AugmentToInstall, GameObject Target, Projectile projData = null)
+    public AugmentBase AddAugmentToProjectile(Augments AugmentToInstall, GameObject Target, Projectile projData = null)
     {
         switch ((int)AugmentToInstall)
         {
-            case 0:
-                Target.AddComponent<AExplosvie>().baseProjectile = projData;
-                break;
+            case (int)Augments.ExplosiveProjectile:
+                AExplosive tempExplosive = Target.AddComponent<AExplosive>();
+                tempExplosive.baseProjectile = projData;
+                tempExplosive.explosionPF = augmentPrefabs[0];
+                return tempExplosive;
+            case (int)Augments.Pierce:
+                APierce tempPierce = Target.AddComponent<APierce>();
+                tempPierce.baseProjectile = projData;
+                return tempPierce;
+            case (int)Augments.ExplosiveSize:
+                AExplosionScale tempScale = Target.AddComponent<AExplosionScale>();
+                tempScale.baseProjectile = projData;
+                return tempScale;
+            case (int)Augments.KnockBack:
+                AKnockBack tempKB = Target.AddComponent<AKnockBack>();
+                tempKB.baseProjectile = projData;
+                return tempKB;
+            case (int)Augments.FireProjectile:
+                AFireProjectiles tempFP = Target.AddComponent<AFireProjectiles>();
+                tempFP.baseProjectile = projData;
+                return tempFP;
+            case (int)Augments.PoisonProjectile:
+                APoison tempP = Target.AddComponent<APoison>();
+                tempP.baseProjectile = projData;
+                return tempP;
             default:
-                Debug.Log("Wrong Value");
-                Debug.Break();
-                break;
-
-
+                return null;
         }
             
     }

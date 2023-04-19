@@ -6,6 +6,7 @@ public enum SentryName
 {
     [Description("BasicSentry")]
     BasicSentry,
+    FlameThrower
 }
 
 [CreateAssetMenu(fileName = "SentryData",menuName ="ScriptableObjects/SentryData")]

@@ -44,7 +44,7 @@ Rigidbody:
   m_GameObject: {fileID: 7689516852213475515}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -57,7 +57,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 7
   data: {fileID: 11400000, guid: 6151e8ef78556ae4bbade45c3d221b09, type: 2}
+  explosionPF: {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}
   basicEnemy: {fileID: 3061924111405816818, guid: 2fb6490e21c6eb447b04e176e2d6830a, type: 3}
 --- !u!1 &7689516853382071051
 GameObject:

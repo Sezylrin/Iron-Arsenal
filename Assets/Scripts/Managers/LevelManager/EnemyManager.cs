@@ -8,6 +8,7 @@ public class EnemyManager : MonoBehaviour
     private GameObject player;
     private Vector3 playerPosition;
     public GameObject[] enemyPrefabs;
+    public GameObject[] augmentPrefabs;
 
     public List<Transform> enemyList = new List<Transform>();
 
@@ -162,7 +163,7 @@ public class EnemyManager : MonoBehaviour
         Enemy enemyScript = newEnemy.GetComponent<Enemy>();
         enemyScript.CurrentHealth = enemyScript.MaxHealth;
         enemyScript.SetStats(wave);
-
+        enemyScript.InitEnemyEffects(augmentPrefabs);
         enemyList.Add(newEnemy.transform);
     }
 

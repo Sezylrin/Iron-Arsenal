@@ -15,7 +15,7 @@ public class Explosion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    
     }
 
     void OnTriggerEnter(Collider other)
@@ -29,6 +29,16 @@ public class Explosion : MonoBehaviour
         {
             other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
         }
+    }
+
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
+    }
+
+    public void SetScale(Vector3 newScale)
+    {
+        transform.localScale = newScale;
     }
 
     private IEnumerator Delete()

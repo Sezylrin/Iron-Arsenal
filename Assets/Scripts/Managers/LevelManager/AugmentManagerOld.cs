@@ -3,14 +3,14 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-public class AugmentManager
+public class AugmentManagerOld
 {
     public List<AugmentData> allAugments;
     public List<AugmentData> augmentChoices;
     public AugmentData currentAugment;
     public bool selectingAugment { get; private set; } = false;
 
-    public AugmentManager()
+    public AugmentManagerOld()
     {
         allAugments = new List<AugmentData>();
         string augmentPath = "Augments/";
