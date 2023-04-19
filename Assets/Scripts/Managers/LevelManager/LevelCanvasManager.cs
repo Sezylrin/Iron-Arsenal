@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using System;
 
 public class LevelCanvasManager : MonoBehaviour
 {
@@ -17,8 +19,14 @@ public class LevelCanvasManager : MonoBehaviour
     [SerializeField] private TMP_Text thirdAugName;
     [SerializeField] private TMP_Text thirdAugDesc;
 
-    [Header("AugmentContainer")]
+    [Header("BuildMenu")]
+    [SerializeField] private Button closeBtn;
+    [SerializeField] private GameObject sentryContainerPrefab;
+    [SerializeField] private GameObject sentriesContent;
+
+    [Header("Containers")]
     [SerializeField] private GameObject augmentContainer;
+    [SerializeField] private GameObject buildMenu;
 
     public static LevelCanvasManager Instance { get; private set; }
 
@@ -31,6 +39,20 @@ public class LevelCanvasManager : MonoBehaviour
         else
         {
             Instance = this;
+        }
+    }
+
+    private void Start()
+    {
+        closeBtn.onClick.AddListener(CloseBuildMenu);
+        LoadSentries();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseBuildMenu();
         }
     }
 
@@ -79,5 +101,37 @@ public class LevelCanvasManager : MonoBehaviour
     public void RemoveAugmentChoices()
     {
         augmentContainer.SetActive(false);
+    }
+
+    private void CloseBuildMenu()
+    {
+        buildMenu.SetActive(false);
+    }
+
+    public void OpenBuildMenu()
+    {
+        buildMenu.SetActive(true);
+    }
+
+    private void LoadSentries()
+    {
+        List<SentryData> sentries = new();
+        string sentryPath = "Sentries/";
+
+        foreach(SentryName sentryName in Enum.GetValues(typeof(SentryName)))
+        {
+            SentryData sentryData = Resources.Load<SentryData>(sentryPath + sentryName);
+            if (sentryData != null)
+            {
+                sentries.Add(sentryData);
+                GameObject sentryContainer = Instantiate(sentryContainerPrefab);
+                sentryContainer.transform.SetParent(sentriesContent.transform, false);
+                sentryContainer.GetComponent<SentryBuildInitialise>().InitialiseSentryContainer(sentryData);
+            }
+            else 
+            {
+                Debug.LogError("Unable to load SentryData asset: " + sentryName);
+            }
+        }
     }
 }

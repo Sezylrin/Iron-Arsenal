@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sentry: 0
   Colour: {fileID: 2100000, guid: 333f3a40f2b0f8b4197e43c308af8278, type: 2}
+  SentryIcon: {fileID: 21300000, guid: 0faccb5f1c66e4943b55050d11390614, type: 3}
   range: 15
   losAngle: 120
   fireRate: 10

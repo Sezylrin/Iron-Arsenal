@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sentry: 0
   Colour: {fileID: 2100000, guid: 333f3a40f2b0f8b4197e43c308af8278, type: 2}
+  SentryIcon: {fileID: 21300000, guid: 0faccb5f1c66e4943b55050d11390614, type: 3}
+  sentryName: Basic Sentry
+  description: The most basic sentry (Placeholder)
   range: 15
   losAngle: 120
   fireRate: 20
   projectileData: {fileID: 11400000, guid: 31ffcd5d79228794dab4f5a64e232f7e, type: 2}
-  ironCost: 0
-  copperCost: 0
-  goldCost: 0
+  xenoriumCost: 100
+  novaciteCost: 100
+  voidStoneCost: 100
   buildable: 1

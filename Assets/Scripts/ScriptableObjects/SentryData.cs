@@ -13,6 +13,9 @@ public class SentryData : ScriptableObject
 {
     public SentryName Sentry;
     public Material Colour;
+    public Sprite SentryIcon;
+    public string sentryName;
+    public string description;
 
     public float range;
     public float losAngle;
