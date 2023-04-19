@@ -6,6 +6,8 @@ public enum SentryName
 {
     [Description("BasicSentry")]
     BasicSentry,
+    [Description("AdvancedSentry")]
+    AdvancedSentry,
 }
 
 [CreateAssetMenu(fileName = "SentryData",menuName ="ScriptableObjects/SentryData")]
