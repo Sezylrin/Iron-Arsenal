@@ -2,19 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class EnemyBasicBullet : MonoBehaviour
 {
-    public Enemy Owner { get; set; }
+    public EnemyManager Manager { get; set; }
     public Vector3 Direction { get; set; }
     public float Damage { get; set; }
     public float ProjectileSpeed { get; set; }
     public float FireDelay { get; set; }
-
-    private void Awake()
-    {
-        
-    }
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,31 +22,40 @@ public class EnemyBullet : MonoBehaviour
         transform.Translate(Direction.x * ProjectileSpeed * Time.deltaTime, 0, Direction.z * ProjectileSpeed * Time.deltaTime);
     }
 
+    public virtual void SetStats(float damage, float projectileSpeed, float fireDelay)
+    {
+        Damage = damage;
+        ProjectileSpeed = projectileSpeed;
+        FireDelay = fireDelay;
+    }
+
+    public virtual void SetStats(EnemyManager manager, Vector3 direction, float damage, float projectileSpeed, float fireDelay)
+    {
+        Manager = manager;
+        Direction = direction;
+        Damage = damage;
+        ProjectileSpeed = projectileSpeed;
+        FireDelay = fireDelay;
+    }
+
     public void Shoot()
     {
         StopCoroutine(Delete(0f));
-        StartCoroutine(Delete(10f));
+        StartCoroutine(Delete(3f));
     }
 
-    public IEnumerator Delete(float delay)
+    protected IEnumerator Delete(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Owner.Manager.PoolEnemyBullet(gameObject);
+        Manager.PoolEnemyBullet(gameObject);
     }
 
-    void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<tempPlayer>().TakeDamage(Damage);
             StartCoroutine(Delete(0f));
         }
-    }
-
-    public void SetStats(float damage, float projectileSpeed, float fireDelay)
-    {
-        Damage = damage;
-        ProjectileSpeed = projectileSpeed;
-        FireDelay = fireDelay;
     }
 }

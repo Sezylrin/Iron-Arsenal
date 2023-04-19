@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyCannon : MonoBehaviour
 {
+    public float BulletDamage { get; set; }
+    public float BulletSpeed { get; set; }
+    public float BulletFireDelay { get; set; }
+    public float Wave { get; set; }
+
     private GameObject player;
     public StaticSentryEnemy enemy;
 
@@ -15,10 +20,17 @@ public class EnemyCannon : MonoBehaviour
     private bool ableToShoot;
     private Transform projectilesParent;
 
+    public EnemyBulletData data;
+    public EnemyManager manager;
+
     private void Awake()
     {
         player = GameObject.Find("Player"); 
+        manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
         projectilesParent = GameObject.Find("Projectiles Parent").transform;
+
+        Wave = manager.wave;
+        SetStats();
     }
 
     // Start is called before the first frame update
@@ -30,6 +42,7 @@ public class EnemyCannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Wave = manager.wave;
         Vector3 target = player.transform.position;
         target.z += 1000000;
         
@@ -52,9 +65,8 @@ public class EnemyCannon : MonoBehaviour
             newEnemyBullet.transform.rotation = transform.rotation;
             newEnemyBullet.transform.position = enemyBulletSpawnPoint.position;
 
-            EnemyBullet enemyProjectileScript = newEnemyBullet.GetComponent<EnemyBullet>();
-            enemyProjectileScript.Direction = (target - enemyBulletSpawnPoint.position).normalized;
-            enemyProjectileScript.Owner = enemy;
+            EnemyBasicBullet enemyProjectileScript = newEnemyBullet.GetComponent<EnemyBasicBullet>();
+            enemyProjectileScript.SetStats(manager, (target - enemyBulletSpawnPoint.position).normalized, BulletDamage, BulletSpeed, BulletFireDelay);
             enemyProjectileScript.Shoot();
 
             StartCoroutine(DelayFiring(enemyProjectileScript.FireDelay));
@@ -65,5 +77,12 @@ public class EnemyCannon : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         ableToShoot = true;
+    }
+
+    public void SetStats()
+    {
+        BulletDamage = data.damage * Mathf.Pow(1.1f, Wave);
+        BulletSpeed = data.projectileSpeed * Mathf.Pow(1.01f, Wave);
+        BulletFireDelay = data.fireDelay * Mathf.Pow(1.01f, -Wave);
     }
 }

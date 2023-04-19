@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -77,8 +76,9 @@ public class EnemyManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(delay);
             }
-            DataManager.instance.UpdateEnemyWaves(wave);
+
             StartCoroutine(SpawnEnemies(10 + wave));
+
             if (spawnInstantly)
             {
                 yield return new WaitForSeconds(delay);
@@ -123,7 +123,7 @@ public class EnemyManager : MonoBehaviour
                 z = Random.Range(Top.z, Bottom.z);
                 x = Random.Range(Left.x, Left.x - 20);
             }
-            Vector3 spawnPosition = new Vector3(x, 1, z);
+            Vector3 spawnPosition = new Vector3(x, 0, z);
                 
             float random = Random.Range(1f, 100f);
 
@@ -161,8 +161,7 @@ public class EnemyManager : MonoBehaviour
 
         newEnemy.transform.position = spawnPosition;
         Enemy enemyScript = newEnemy.GetComponent<Enemy>();
-        enemyScript.CurrentHealth = enemyScript.MaxHealth;
-        enemyScript.SetStats(wave);
+        enemyScript.SetStats();
         enemyScript.InitEnemyEffects(augmentPrefabs);
         enemyList.Add(newEnemy.transform);
     }

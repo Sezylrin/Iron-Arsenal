@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 7689516853382071050}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7689516852213475516
 Rigidbody:
@@ -81,8 +81,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.83790535, z: 1}
-  m_Center: {x: 0, y: 0.16895305, z: 0}
+  m_Size: {x: 1, y: 0.36580086, z: 1}
+  m_Center: {x: 0, y: 0.4050053, z: 0}
 --- !u!114 &7689516852213475514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 7
+  <CurrentHealth>k__BackingField: 0
   data: {fileID: 11400000, guid: 6151e8ef78556ae4bbade45c3d221b09, type: 2}
   explosionPF: {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}
   basicEnemy: {fileID: 3061924111405816818, guid: 2fb6490e21c6eb447b04e176e2d6830a, type: 3}
@@ -125,7 +126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7689516853382071051}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.475, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

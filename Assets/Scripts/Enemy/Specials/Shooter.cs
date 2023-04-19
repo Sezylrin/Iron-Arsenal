@@ -56,10 +56,8 @@ public class Shooter : Enemy
             newEnemyBullet.transform.rotation = transform.rotation;
             newEnemyBullet.transform.position = enemyBulletSpawnPoint.position;
 
-            EnemyBullet enemyBulletScript = newEnemyBullet.GetComponent<EnemyBullet>();
-            enemyBulletScript.Direction = Vector3.forward;
-            enemyBulletScript.Owner = this;
-            enemyBulletScript.SetStats(BulletDamage, BulletSpeed, BulletFireDelay);
+            EnemyBasicBullet enemyBulletScript = newEnemyBullet.GetComponent<EnemyBasicBullet>();
+            enemyBulletScript.SetStats(Manager, Vector3.forward, BulletDamage, BulletSpeed, BulletFireDelay);
             enemyBulletScript.Shoot();
 
             StartCoroutine(DelayFiring(enemyBulletScript.FireDelay));
@@ -79,12 +77,12 @@ public class Shooter : Enemy
         base.OnDeath();
     }
 
-    public override void SetStats(int wave)
+    public override void SetStats()
     {
-        base.SetStats(wave);
+        base.SetStats();
 
-        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, wave);
-        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, wave);
-        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -wave);
+        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Wave);
+        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Wave);
+        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Wave);
     }
 }

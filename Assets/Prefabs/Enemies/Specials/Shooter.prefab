@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 5
+  <CurrentHealth>k__BackingField: 0
   data: {fileID: 11400000, guid: d6b0c039483e6f043a4d6687f8738c23, type: 2}
   explosionPF: {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}
   bulletData: {fileID: 11400000, guid: 3a1c2921786aedc4483ab3bc02d83e1e, type: 2}
