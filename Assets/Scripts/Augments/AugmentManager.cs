@@ -16,6 +16,17 @@ public enum Augments : int
     PoisonProjectile,
     PoisonMaxHealth,
     InstantDeath,
+    FreezeProjectile,
+    FreezeDeath,
+    FreezeShards,
+    RangeDamage,
+    DoubleProjectiles,
+    FireRate,
+    RangeUp,
+    BossDamageIncrease,
+    Thorns,
+    FasterShieldRegen,
+    MoreShield,
     None
 }
 public class AugmentManager : MonoBehaviour
@@ -29,6 +40,7 @@ public class AugmentManager : MonoBehaviour
     public List<Augments> activeAugments = new List<Augments>();
     public List<Sentry> activeSentries = new List<Sentry>();
     public List<GameObject> augmentPrefabs = new List<GameObject>();
+    private BaseFunctions playerFunctions;
     // Start is called before the first frame update
     void Awake()
     {
@@ -40,6 +52,11 @@ public class AugmentManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    private void Start()
+    {
+        playerFunctions = GameObject.FindWithTag("Player").GetComponent<BaseFunctions>();
     }
 
     // Update is called once per frame
@@ -59,7 +76,10 @@ public class AugmentManager : MonoBehaviour
         if (!augmentToAdd.Equals(Augments.None) && !activeAugments.Contains(augmentToAdd))
             activeAugments.Add(augmentToAdd);
         foreach (Sentry sentry in activeSentries)
+        {
             sentry.AddAugmentToList(augmentToAdd);
+        }
+        playerFunctions.baseEffects.UpdateAugments();
     }
 
     public AugmentBase AddAugmentToProjectile(Augments AugmentToInstall, GameObject Target, Projectile projData = null)
@@ -91,6 +111,14 @@ public class AugmentManager : MonoBehaviour
                 APoison tempP = Target.AddComponent<APoison>();
                 tempP.baseProjectile = projData;
                 return tempP;
+            case (int)Augments.FreezeProjectile:
+                AFreezeProjectile tempFreeze = Target.AddComponent<AFreezeProjectile>();
+                tempFreeze.baseProjectile = projData;
+                return tempFreeze;
+            case (int)Augments.RangeDamage:
+                ARangeDamage tempRD = Target.AddComponent<ARangeDamage>();
+                tempRD.baseProjectile = projData;
+                return tempRD;
             default:
                 return null;
         }

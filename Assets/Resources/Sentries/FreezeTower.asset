@@ -9,10 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e0c1a37897c8fc488cc495512be05d3, type: 3}
-  m_Name: BasicBulletData
+  m_Script: {fileID: 11500000, guid: d3d418b8a1155f54c8dde7db693ca303, type: 3}
+  m_Name: FreezeTower
   m_EditorClassIdentifier: 
-  damageFactor: 0.1
-  bulletSpeed: 20
-  pierce: 0
-  projectileMesh: {fileID: 0}
+  Sentry: 2
+  Attribute: 0
+  Colour: {fileID: 0}
+  range: 0
+  losAngle: 0
+  fireRate: 0
+  projectileData: {fileID: 0}
+  ironCost: 0
+  copperCost: 0
+  goldCost: 0
+  buildable: 0

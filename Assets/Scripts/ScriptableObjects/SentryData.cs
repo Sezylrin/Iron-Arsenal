@@ -6,13 +6,15 @@ public enum SentryName
 {
     [Description("BasicSentry")]
     BasicSentry,
-    FlameThrower
+    FlameThrower,
+    FreezeTower
 }
 
 [CreateAssetMenu(fileName = "SentryData",menuName ="ScriptableObjects/SentryData")]
 public class SentryData : ScriptableObject
 {
     public SentryName Sentry;
+    public StatAttribute Attribute;
     public Material Colour;
 
     public float range;

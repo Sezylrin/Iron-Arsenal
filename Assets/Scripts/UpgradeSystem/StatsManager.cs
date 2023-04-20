@@ -15,6 +15,8 @@ public class StatsManager : MonoBehaviour
     public float physicalDamage;
     public float elementalDamage;
     public float healthFactor;
+
+    private BaseFunctions playerFunctions;
     void Awake()
     {
         if (Instance != null)
@@ -25,6 +27,11 @@ public class StatsManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    private void Start()
+    {
+        playerFunctions = GameObject.FindWithTag("Player").GetComponent<BaseFunctions>();
     }
     public void UpgradeDamage()
     {
@@ -48,10 +55,12 @@ public class StatsManager : MonoBehaviour
     public void UpgradeHealth()
     {
         healthFactor *= 1.1f;
+        playerFunctions.UpdateHealth();
     }
 
     public void UpgradeHealth(float health)
     {
         healthFactor += health;
+        playerFunctions.UpdateHealth();
     }
 }

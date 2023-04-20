@@ -40,6 +40,8 @@ public abstract class Enemy : MonoBehaviour
 
     public float damageFactor = 1;
 
+    public float speedFactor = 1;
+
     protected virtual void Init()
     {
         Player = GameObject.Find("Player");
@@ -65,32 +67,42 @@ public abstract class Enemy : MonoBehaviour
     }
 
     protected virtual void Move()
-    {
-        Vector3 direction = Vector3.forward;
-        transform.Translate(direction.x * Speed * Time.deltaTime, 0, direction.z * Speed * Time.deltaTime);
+    { 
+        transform.Translate(Vector3.forward * Speed * speedFactor * Time.deltaTime);
     }
 
     protected virtual void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Player")
         {
-            TakeDamage(col.gameObject.GetComponent<tempPlayer>().ramDamage);
+            BaseFunctions tempBase = col.gameObject.GetComponent<BaseFunctions>();
+            TakeDamage(StatsManager.Instance.healthFactor * tempBase.collisionFactor);
+            tempBase.TakeDamage(DamageOnCollide);
             EnemyRB.AddForce(Vector3.Normalize(new Vector3(transform.position.x - col.transform.position.x, 0, transform.position.z - col.transform.position.z)) * RamLaunchMultiplier, ForceMode.Impulse);
         }
     }
 
     public virtual void TakeDamage(float damage)
     {
+        if (CurrentHealth <= 0)
+            return;
+        if (type.Equals(EnemyType.Boss) && enemyEffects.isBossDamage)
+            damage *= 1.2f;
         CurrentHealth -= damage * damageFactor;
         if (CurrentHealth <= 0)
         {
             StopCoroutine(TakeDamageOverTime(0f));
+            
+            OnDeath();
             if (enemyEffects.isExplode && !type.Equals(EnemyType.Exploder))
             {
-                Explosion tempExplosion = Instantiate(enemyEffects.augmentPFList[0],transform.position,Quaternion.identity).GetComponent<Explosion>();
+                Explosion tempExplosion = Instantiate(enemyEffects.augmentPFList[0], transform.position, Quaternion.identity).GetComponent<Explosion>();
                 tempExplosion.SetDamage(MaxHealth * 0.3f);
-            }            
-            OnDeath();
+            }
+            if (enemyEffects.isFreezeShard)
+            {
+                enemyEffects.ReleaseShard();
+            }
         }
     }
 

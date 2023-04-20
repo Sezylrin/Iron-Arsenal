@@ -28,7 +28,7 @@ public class AKnockBack : AugmentBase
         if (other.gameObject.tag == "Enemy" && lastHit != other)
         {
             lastHit = other;            
-            other.GetComponent<Rigidbody>().AddForce(baseProjectile.dir * force * (baseProjectile.modifiedDamage / baseValue), ForceMode.Impulse);
+            other.GetComponent<Rigidbody>().AddForce(baseProjectile.dir * force * baseProjectile.data.damageFactor, ForceMode.Impulse);
         }
     }
 }

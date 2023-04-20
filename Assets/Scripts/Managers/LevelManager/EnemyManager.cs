@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public static EnemyManager Instance { get; private set; }
     private GameObject player;
+    private BaseFunctions playerFunction;
     private Vector3 playerPosition;
     public GameObject[] enemyPrefabs;
     public GameObject[] augmentPrefabs;
@@ -36,6 +38,14 @@ public class EnemyManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
         player = GameObject.Find("Player");
     }
 

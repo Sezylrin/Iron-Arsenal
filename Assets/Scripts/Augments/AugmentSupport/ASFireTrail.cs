@@ -35,7 +35,7 @@ public class ASFireTrail : MonoBehaviour
     public void Init(GameObject host)
     {
         this.host = host;
-        Invoke("DestroySelf", 3f);
+        Invoke("DestroySelf", 1f);
     }
 
     private void DestroySelf()

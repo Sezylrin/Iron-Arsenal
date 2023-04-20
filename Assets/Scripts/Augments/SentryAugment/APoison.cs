@@ -38,7 +38,7 @@ public class APoison : AugmentBase
             {
                 effect.poisonTick += 5;
             }
-            else if(Random.Range(0,100f) < (baseProjectile.modifiedDamage / baseValue) * 100)
+            else if(Random.Range(0,100f) < (baseProjectile.data.damageFactor) * 100)
             {
                 effect.poisonTick += 2;
             }

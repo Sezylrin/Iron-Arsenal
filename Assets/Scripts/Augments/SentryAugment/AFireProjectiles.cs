@@ -14,7 +14,6 @@ public class AFireProjectiles : AugmentBase
         }
 
         AugmentAttribute = isFlame? StatAttribute.Elemental : StatAttribute.Physical;
-        base.Init();
     }
 
     // Update is called once per frame
@@ -29,7 +28,7 @@ public class AFireProjectiles : AugmentBase
         {
             lastHit = other;
             //Debug.Log((int)(5 * (baseProjectile.modifiedDamage / baseValue)));
-            other.gameObject.GetComponent<EnemyEffects>().fireTick += isFlame? 5 : (int)(5 * (baseProjectile.modifiedDamage/baseValue));
+            other.gameObject.GetComponent<EnemyEffects>().fireTick += isFlame? 5 : (int)(5 * baseProjectile.data.damageFactor);
         }
     }
 }

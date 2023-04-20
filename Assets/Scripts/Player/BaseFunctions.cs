@@ -13,15 +13,21 @@ public class BaseFunctions : MonoBehaviour
     public int currentLevel;
 
     public float baseHealth;
+    public float baseHealthFactor;
     private float currentHealth;
 
     public float maxShieldHealth;
+    public float maxShieldFactor;
     public float shieldRecoverRate;
+    public float shieldRecoverFactor;
     public float shieldRecoverDelay;
     private float currentShield;
 
+    public float collisionFactor = 0.3f;
+
     private float timeSinceDamage;
 
+    public BaseEffects baseEffects;
     [System.Serializable]
     public class SocketSpawns
     {
@@ -32,10 +38,15 @@ public class BaseFunctions : MonoBehaviour
 
     private int baseLevel = 0;
 
-
+    private void Awake()
+    {
+        baseEffects = gameObject.AddComponent<BaseEffects>();
+        baseEffects.baseFunction = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        UpdateHealth();
         currentHealth = baseHealth;
         currentShield = maxShieldHealth;
     }
@@ -128,6 +139,11 @@ public class BaseFunctions : MonoBehaviour
         baseLevel++;
     }
 
-
+    public void UpdateHealth()
+    {
+        baseHealth = StatsManager.Instance.healthFactor * baseHealthFactor;
+        maxShieldHealth = StatsManager.Instance.healthFactor * maxShieldFactor;
+        shieldRecoverRate = maxShieldHealth * shieldRecoverFactor;
+    }
 
 }

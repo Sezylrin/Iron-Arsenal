@@ -12,6 +12,10 @@ public class EnemyEffects : MonoBehaviour
     public int fireTick = 0;
 
     public int poisonTick = 0;
+
+    public int frozenAmount = 0;
+
+    private int maxFreeze = 50;
     private float poisonFactor = 1;
 
     public bool callPoisonDamage = true;
@@ -22,7 +26,13 @@ public class EnemyEffects : MonoBehaviour
     public bool isResistance = false;
     public bool isPoisonHealth = false;
     public bool isInstantDeath = false;
+    public bool isFreezeDeath = false;
+    public bool isFreezeShard = false;
+    public bool isBossDamage = false;
+    public bool isShieldSteal = false;
+    public bool isLifeSteal = false;
     private bool isHealthDecrease = false;
+    private bool isFrozen = false;
     private Vector3 lastTrailPoint;
     private float lastTrailDist = float.MaxValue;
     void Start()
@@ -36,6 +46,7 @@ public class EnemyEffects : MonoBehaviour
         CheckOnFire();
         CheckPoisoned();
         SpawnFireTrail();
+        FreezeTarget();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -59,13 +70,54 @@ public class EnemyEffects : MonoBehaviour
             isPoisonHealth = AugmentManager.Instance.activeAugments.Contains(Augments.PoisonMaxHealth);
         if (!isInstantDeath)
             isInstantDeath = AugmentManager.Instance.activeAugments.Contains(Augments.InstantDeath);
+        if (!isFreezeDeath)
+            isFreezeDeath = AugmentManager.Instance.activeAugments.Contains(Augments.FreezeDeath);
+        if (!isFreezeShard)
+            isFreezeShard = AugmentManager.Instance.activeAugments.Contains(Augments.FreezeShards);
+        if (!isBossDamage)
+            isBossDamage = AugmentManager.Instance.activeAugments.Contains(Augments.BossDamageIncrease);
         callPoisonDamage = true;
         callFireDamage = true;
         isHealthDecrease = false;
         lastTrailDist = float.MaxValue;
         poisonFactor = 1;
+        ResetFreeze();
     }
 
+    public void FreezeTarget()
+    {
+        float freezeRate = frozenAmount / maxFreeze;
+        hostenemy.speedFactor = 1 - freezeRate;
+        if (freezeRate > 0.5f && isFreezeDeath)
+        {
+            if (hostenemy.CurrentHealth <= hostenemy.MaxHealth * 0.2)
+            {
+                hostenemy.TakeDamage(hostenemy.CurrentHealth);
+            }
+        }
+    }
+
+    public void IncreaseFreeze(int amount)
+    {
+        if (isFrozen)
+            return;
+        if (frozenAmount + amount < maxFreeze)
+        {
+            frozenAmount += amount;
+        }
+        else
+        {
+            frozenAmount = maxFreeze;
+            isFrozen = true;
+            Invoke("ResetFreeze", 3);
+        }
+    }
+    
+    public void ResetFreeze()
+    {
+        frozenAmount = 0;
+        isFrozen = false;
+    }
     public void CheckPoisoned()
     {
         if (poisonTick > 0 && callPoisonDamage)
@@ -75,20 +127,27 @@ public class EnemyEffects : MonoBehaviour
         }
     }
 
+    public void ReleaseShard()
+    {
+        Vector3 pos = transform.position;
+        pos.y = 0.5f;
+        Instantiate(augmentPFList[2], pos, Quaternion.identity).GetComponent<ASShardSpawner>().Init(frozenAmount/maxFreeze);
+    }
     public void TakePoisonDamage()
     {
         poisonTick--;
         if (isPoisonHealth && !isHealthDecrease)
         {
             isHealthDecrease = true;
-            hostenemy.TakeDamage(hostenemy.MaxHealth * 0.2f);
+            hostenemy.TakeDamage(hostenemy.type.Equals(EnemyType.Boss) ? hostenemy.MaxHealth * 0.1f : hostenemy.MaxHealth * 0.2f);
         }
-        if (isInstantDeath && Random.Range(1,101) <= 5)
+        if (isInstantDeath && Random.Range(1,101) <= 5 && !hostenemy.type.Equals(EnemyType.Boss))
         {
             hostenemy.TakeDamage(hostenemy.CurrentHealth);
         }
         hostenemy.TakeDamage(StatsManager.Instance.elementalDamage * 0.1f * poisonFactor);
-        poisonFactor *= 2;
+        if(poisonFactor < 32)
+            poisonFactor *= 2;
         if (poisonTick <= 0)
         {
             CancelInvoke("TakePoisonDamage");
@@ -124,9 +183,10 @@ public class EnemyEffects : MonoBehaviour
 
     public void SpreadFireTick(EnemyEffects other)
     {
-        if (other.fireTick < (int)(fireTick * 0.5f))
+        int amount = Mathf.FloorToInt(fireTick * 0.5f);
+        if (other.fireTick < amount)
         {
-            other.fireTick = (int)(fireTick * 0.5f);
+            other.fireTick = amount;
         }
     }
 
