@@ -30,8 +30,8 @@ public enum AugmentName
     FrozenBullets,
     [Description("Freeze")]
     Freeze,
-    [Description("Frozensplosion")]
-    Frozensplosion,
+    [Description("FrozenExplosion")]
+    FrozenExplosion,
     [Description("RangeUp")]
     RangeUp,
     [Description("BossDamage")]
