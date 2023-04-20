@@ -65,13 +65,4 @@ public class DataManager : MonoBehaviour
                 break;
         }
     }
-
-    public void UpdateEnemyWaves(int wave)
-    {
-        for (int i = 0; enemyData.Count > i; i++)
-        {
-            enemyData[i].wave = wave;
-        }
-        staticSentryData.wave = wave;
-    }
 }

@@ -8,12 +8,15 @@ public enum SentryName
     BasicSentry,
     [Description("AdvancedSentry")]
     AdvancedSentry,
+    FlameThrower,
+    FreezeTower
 }
 
 [CreateAssetMenu(fileName = "SentryData",menuName ="ScriptableObjects/SentryData")]
 public class SentryData : ScriptableObject
 {
     public SentryName Sentry;
+    public StatAttribute Attribute;
     public Material Colour;
     public Sprite SentryIcon;
     public string sentryName;
