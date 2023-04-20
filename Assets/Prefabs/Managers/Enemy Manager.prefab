@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2603464692456488525
 MonoBehaviour:
@@ -54,6 +54,10 @@ MonoBehaviour:
   - {fileID: 4166898985344144913, guid: ec03c72217377734f9a2eb36d1f16031, type: 3}
   - {fileID: 7689516852213475515, guid: f0a5d3def0990c040a1c6579a7a266d8, type: 3}
   - {fileID: 7355445405899335906, guid: df4c41f053c529c49ad612740ab78d8e, type: 3}
+  augmentPrefabs:
+  - {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}
+  - {fileID: 6429212493458960621, guid: f3e5e65cdc032f34eb99a592caa5f28f, type: 3}
+  - {fileID: 9219771921458476205, guid: 466368d544c8c9c4d8b430077cddea69, type: 3}
   enemyList: []
   basicEnemyChance: 50
   wave: 1

@@ -736,6 +736,14 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.77872443
       objectReference: {fileID: 0}
+    - target: {fileID: 7384111677371232713, guid: d982d76a9603e85499fa4429e4705203, type: 3}
+      propertyPath: miningSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7384111677371232713, guid: d982d76a9603e85499fa4429e4705203, type: 3}
+      propertyPath: miningOutput
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3422932685576251321, guid: d982d76a9603e85499fa4429e4705203, type: 3}
     m_RemovedGameObjects: []

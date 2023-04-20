@@ -45,14 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d8ce8a74c40ee4baf6d9ec9f215bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   debugAugment: 4
   addAugmentToActive: 0
   baseDamage: 0
   activeAugments: 05000000
   activeSentries: []
-  augmentPrefabs:
-  - {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}
+  augmentPrefabs: []
 --- !u!114 &2118062612
 MonoBehaviour:
   m_ObjectHideFlags: 0
