@@ -9,11 +9,11 @@ public class Projectile : MonoBehaviour
     
     public Vector3 dir;
 
-    public float modifiedDamage;
+    public float baseDamage;
 
-    public float modifiedSpeed;
+    public float speed;
 
-    public int modifiedPierce;
+    public int pierce;
 
     private Sentry owner;
 
@@ -54,7 +54,7 @@ public class Projectile : MonoBehaviour
 
     public void TranslateDir()
     {
-        transform.Translate(dir * modifiedSpeed * Time.deltaTime);
+        transform.Translate(dir * speed * Time.deltaTime);
     }
     public void SetProjectileStat()
     {

@@ -6,6 +6,8 @@ public enum SentryName
 {
     [Description("BasicSentry")]
     BasicSentry,
+    [Description("AdvancedSentry")]
+    AdvancedSentry,
     FlameThrower,
     FreezeTower
 }
@@ -16,6 +18,9 @@ public class SentryData : ScriptableObject
     public SentryName Sentry;
     public StatAttribute Attribute;
     public Material Colour;
+    public Sprite SentryIcon;
+    public string sentryName;
+    public string description;
 
     public float range;
     public float losAngle;
@@ -23,8 +28,8 @@ public class SentryData : ScriptableObject
 
     public ProjectileData projectileData;
 
-    public int ironCost;
-    public int copperCost;
-    public int goldCost;
+    public int xenoriumCost;
+    public int novaciteCost;
+    public int voidStoneCost;
     public bool buildable;
 }

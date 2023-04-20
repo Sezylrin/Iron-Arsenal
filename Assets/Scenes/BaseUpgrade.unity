@@ -299,9 +299,14 @@ MonoBehaviour:
   removeTesting: 0
   currentLevel: 1000
   baseHealth: 1000
+  baseHealthFactor: 0
   maxShieldHealth: 500
+  maxShieldFactor: 0
   shieldRecoverRate: 50
+  shieldRecoverFactor: 0
   shieldRecoverDelay: 3
+  collisionFactor: 0.3
+  baseEffects: {fileID: 0}
   relativeSpawnPos: []
   turretSocketPF: {fileID: 0}
 --- !u!1 &463157867
@@ -1059,6 +1064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs: []
+  augmentPrefabs: []
   enemyList: []
   basicEnemyChance: 0
   wave: 0
@@ -1624,6 +1630,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 613231047}
     m_Modifications:
+    - target: {fileID: 2086419297541358416, guid: 09a8136fc487db24c998c902f1650d77, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086419297541358416, guid: 09a8136fc487db24c998c902f1650d77, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469098065650121823, guid: 09a8136fc487db24c998c902f1650d77, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469098065650121823, guid: 09a8136fc487db24c998c902f1650d77, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6800591896943399290, guid: 09a8136fc487db24c998c902f1650d77, type: 3}
       propertyPath: m_Name
       value: LevelCanvas

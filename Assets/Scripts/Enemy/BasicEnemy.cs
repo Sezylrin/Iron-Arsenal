@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BasicEnemy : Enemy
 {
-    public float currentHealth;
     void Awake()
     {
         Init();
@@ -19,7 +18,6 @@ public class BasicEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        currentHealth = CurrentHealth;
         SetRotation();
         Move();
     }

@@ -1038,6 +1038,8 @@ MonoBehaviour:
   isFreezeDeath: 1
   isFreezeShard: 1
   isBossDamage: 0
+  isShieldSteal: 0
+  isLifeSteal: 0
 --- !u!114 &1300468336 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2270784134745447561, guid: 2fb6490e21c6eb447b04e176e2d6830a, type: 3}
@@ -6236,7 +6238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2603464692456488525, guid: a4e81cbaef6a72a439258c60f4f5c769, type: 3}
       propertyPath: spawnInstantly
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2603464692456488525, guid: a4e81cbaef6a72a439258c60f4f5c769, type: 3}
       propertyPath: enemyList.Array.size
@@ -6275,6 +6277,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 613231047}
     m_Modifications:
+    - target: {fileID: 2086419297541358416, guid: 09a8136fc487db24c998c902f1650d77, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086419297541358416, guid: 09a8136fc487db24c998c902f1650d77, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469098065650121823, guid: 09a8136fc487db24c998c902f1650d77, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469098065650121823, guid: 09a8136fc487db24c998c902f1650d77, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6800591896943399290, guid: 09a8136fc487db24c998c902f1650d77, type: 3}
       propertyPath: m_Name
       value: LevelCanvas

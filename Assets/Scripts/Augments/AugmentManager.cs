@@ -27,6 +27,8 @@ public enum Augments : int
     Thorns,
     FasterShieldRegen,
     MoreShield,
+    ShieldSteal,
+    LifeSteal,
     None
 }
 public class AugmentManager : MonoBehaviour
