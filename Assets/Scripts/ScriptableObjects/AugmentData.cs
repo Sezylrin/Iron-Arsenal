@@ -13,6 +13,7 @@ public enum AugmentName
 [CreateAssetMenu(fileName = "AugmentData", menuName = "ScriptableObjects/AugmentData")]
 public class AugmentData : ScriptableObject
 {
+    public Sprite icon;
     public string augName;
     public string description;
 

@@ -11,21 +11,13 @@ public class LevelCanvasManager : MonoBehaviour
     [SerializeField] private TMP_Text novaciteLabel;
     [SerializeField] private TMP_Text voidStoneLabel;
 
-    [Header("Augments")]
-    [SerializeField] private TMP_Text firstAugName;
-    [SerializeField] private TMP_Text firstAugDesc;
-    [SerializeField] private TMP_Text secondAugName;
-    [SerializeField] private TMP_Text secondAugDesc;
-    [SerializeField] private TMP_Text thirdAugName;
-    [SerializeField] private TMP_Text thirdAugDesc;
-
     [Header("BuildMenu")]
     [SerializeField] private Button closeBtn;
     [SerializeField] private GameObject sentryContainerPrefab;
     [SerializeField] private GameObject sentriesContent;
 
-    [Header("Containers")]
-    [SerializeField] private GameObject augmentContainer;
+    [Header("Menus")]
+    [SerializeField] private GameObject augmentMenu;
     [SerializeField] private GameObject buildMenu;
 
     public static LevelCanvasManager Instance { get; private set; }
@@ -73,34 +65,13 @@ public class LevelCanvasManager : MonoBehaviour
 
     public void ShowAugmentChoices(List<AugmentData> augments)
     {
-        firstAugName.text = augments[0].augName + ": Press 1";
-        firstAugDesc.text = augments[0].description;
-        if (augments.Count >= 2)
-        {
-            secondAugName.text = augments[1].augName + ": Press 2";
-            secondAugDesc.text = augments[1].description;
-        }
-        else
-        {
-            secondAugName.text = "Empty Augment";
-            secondAugDesc.text = "To be fixed. We ran out of augments to show :(";
-        }
-        if (augments.Count >= 3)
-        {
-            thirdAugName.text = augments[2].augName + ": Press 3";
-            thirdAugDesc.text = augments[2].description;
-        }
-        else
-        {
-            thirdAugName.text = "Empty Augment";
-            thirdAugDesc.text = "To be fixed. We ran out of augments to show :(";
-        }
-        augmentContainer.SetActive(true);
+        augmentMenu.GetComponent<AugmentMenu>().CreateAugmentChoices(augments);
+        augmentMenu.SetActive(true);
     }
 
     public void RemoveAugmentChoices()
     {
-        augmentContainer.SetActive(false);
+        augmentMenu.SetActive(false);
     }
 
     private void CloseBuildMenu()
