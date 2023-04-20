@@ -42,9 +42,12 @@ public abstract class Enemy : MonoBehaviour
 
     public float speedFactor = 1;
 
+    private BaseFunctions baseFunctions;
+
     protected virtual void Init()
     {
         Player = GameObject.Find("Player");
+        baseFunctions = Player.GetComponent<BaseFunctions>();
         Manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
         EnemyRB = GetComponent<Rigidbody>();
 
@@ -88,7 +91,12 @@ public abstract class Enemy : MonoBehaviour
             return;
         if (type.Equals(EnemyType.Boss) && enemyEffects.isBossDamage)
             damage *= 1.2f;
-        CurrentHealth -= damage * damageFactor;
+        float finalDamage = damage * damageFactor;
+        CurrentHealth -= finalDamage;
+        if (enemyEffects.isLifeSteal)
+        {
+            baseFunctions.RecoverHealth(finalDamage * 0.05f);
+        }
         if (CurrentHealth <= 0)
         {
             StopCoroutine(TakeDamageOverTime(0f));
@@ -102,6 +110,10 @@ public abstract class Enemy : MonoBehaviour
             if (enemyEffects.isFreezeShard)
             {
                 enemyEffects.ReleaseShard();
+            }
+            if (enemyEffects.isShieldSteal)
+            {
+                baseFunctions.DecreaseRecovery();
             }
         }
     }
@@ -190,4 +202,6 @@ public abstract class Enemy : MonoBehaviour
         enemyEffects.augmentPFList = augmentPF;
         
     }
+
+
 }

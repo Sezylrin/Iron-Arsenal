@@ -76,6 +76,10 @@ public class EnemyEffects : MonoBehaviour
             isFreezeShard = AugmentManager.Instance.activeAugments.Contains(Augments.FreezeShards);
         if (!isBossDamage)
             isBossDamage = AugmentManager.Instance.activeAugments.Contains(Augments.BossDamageIncrease);
+         if (!isShieldSteal)
+            isShieldSteal = AugmentManager.Instance.activeAugments.Contains(Augments.ShieldSteal);
+         if (!isLifeSteal)
+            isLifeSteal = AugmentManager.Instance.activeAugments.Contains(Augments.LifeSteal);
         callPoisonDamage = true;
         callFireDamage = true;
         isHealthDecrease = false;

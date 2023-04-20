@@ -146,4 +146,11 @@ public class BaseFunctions : MonoBehaviour
         shieldRecoverRate = maxShieldHealth * shieldRecoverFactor;
     }
 
+    public void DecreaseRecovery()
+    {
+        if (timeSinceDamage > 0)
+        {
+            timeSinceDamage -= 0.25f;
+        }
+    }
 }
