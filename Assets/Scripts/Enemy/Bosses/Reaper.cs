@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Reaper : Boss
 {
-    public float BulletDamage { get; set; }
-    public float BulletSpeed { get; set; }
-    public float BulletFireDelay { get; set; }
+    [field: Header("Projectile Stats")]
+    [field: SerializeField] public float BulletDamage { get; set; }
+    [field: SerializeField] public float BulletSpeed { get; set; }
+    [field: SerializeField] public float BulletFireDelay { get; set; }
 
+    [field: Header("Projectile Other")]
     public EnemyBulletData bulletData;
-
     public Transform reaperBulletSpawnPoint;
-    public GameObject reaperBullet;
+    public GameObject reaperBulletPrefab;
+    public bool ableToShoot;
 
-    private GameObject newReaperBullet;
-    private bool ableToShoot;
-    private Transform projectilesParent;
-
+    [field: Header("Phazing")]
     public BoxCollider enemyBC;
-
     public MeshRenderer[] renderers;
     public Material opaqueMaterial;
     public Material transparentMaterial;
+    [field: SerializeField] private bool phazing;
 
-    private bool phazing;
+    private GameObject newReaperBullet;
+    private Transform projectilesParent;
 
     void Awake()
     {
@@ -91,7 +91,7 @@ public class Reaper : Boss
         {
             ableToShoot = false;
 
-            newReaperBullet = Instantiate(reaperBullet, projectilesParent);
+            newReaperBullet = Instantiate(reaperBulletPrefab, projectilesParent);
 
             int random = Random.Range(-10, 11);
             if ( -1 <= random && random <= 1)

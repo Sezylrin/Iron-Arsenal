@@ -44,6 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5925db204414241ad1a39e00ffb1c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Wave>k__BackingField: 1
+  <WaveDelay>k__BackingField: 60
+  <SecondsUntilNextWave>k__BackingField: 0
+  <BasicEnemyChance>k__BackingField: 50
+  <SpecialEnemyChance>k__BackingField: 0
+  <IsBossAlive>k__BackingField: 0
+  <SpawningWave>k__BackingField: 0
+  startWaveNow: 0
   enemyPrefabs:
   - {fileID: 3061924111405816818, guid: 2fb6490e21c6eb447b04e176e2d6830a, type: 3}
   - {fileID: 1854458944056088684, guid: d1dcde8f2e7bc7e46923b263d4f3fb02, type: 3}
@@ -58,8 +66,7 @@ MonoBehaviour:
   - {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}
   - {fileID: 6429212493458960621, guid: f3e5e65cdc032f34eb99a592caa5f28f, type: 3}
   - {fileID: 9219771921458476205, guid: 466368d544c8c9c4d8b430077cddea69, type: 3}
+  bossPrefabs:
+  - {fileID: 6689270825627925305, guid: c4edd487ee5ec4b42a80d4e0d284a254, type: 3}
+  - {fileID: 6315162635932650869, guid: 5d949ff6ac78ae843866d967746520e0, type: 3}
   enemyList: []
-  basicEnemyChance: 50
-  wave: 1
-  waveDelay: 60
-  spawnInstantly: 1

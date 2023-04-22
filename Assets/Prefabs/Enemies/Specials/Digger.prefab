@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
+  <EnemyRB>k__BackingField: {fileID: 2335685694809016203}
   <CurrentHealth>k__BackingField: 0
   data: {fileID: 11400000, guid: dedec25265d14244aa357ea96c04abba, type: 2}
   explosionPF: {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}
