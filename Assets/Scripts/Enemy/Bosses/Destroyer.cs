@@ -90,7 +90,7 @@ public class Destroyer : Boss
         Move();
     }
 
-    private void Pattern3() 
+    private void Pattern3() //Heal
     { 
         StartCoroutine(PatternLength(3));
 
