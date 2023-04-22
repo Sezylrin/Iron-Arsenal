@@ -67,6 +67,11 @@ public abstract class CannonProjectile : MonoBehaviour
             other.gameObject.GetComponent<Enemy>().TakeDamage(Damage);
             DeleteNow();
         }
+
+        if (other.gameObject.tag == "Wall")
+        {
+            DeleteNow();
+        }
     }
 
     public virtual IEnumerator StartDeletion(float delay)

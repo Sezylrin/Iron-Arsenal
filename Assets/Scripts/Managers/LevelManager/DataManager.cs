@@ -7,7 +7,6 @@ public class DataManager : MonoBehaviour
     public static DataManager instance;
     public List<CannonProjectileData> cannonProjectileData = new List<CannonProjectileData>();
     public List<EnemyData> enemyData = new List<EnemyData>();
-    public EnemyData staticSentryData;
 
     void Awake()
     {
