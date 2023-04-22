@@ -49,7 +49,7 @@ public abstract class Enemy : MonoBehaviour
     {
         Player = GameObject.Find("Player");
         baseFunctions = Player.GetComponent<BaseFunctions>();
-        Manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
+        Manager = EnemyManager.Instance;
 
         Wave = Manager.Wave;
         SetStats();

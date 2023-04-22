@@ -36,6 +36,7 @@ public class EnemyManager : MonoBehaviour
     private Pooling pooledDodgerEnemies = new Pooling();    //6 - Dodger Enemies
     private Pooling pooledSplitterEnemies = new Pooling();  //7 - Splitter Enemies
     private Pooling pooledCloakerEnemies = new Pooling();   //8 - Cloaker Enemies
+    private Pooling pooledBursterEnemies = new Pooling();   //9 - Burster Enemies
     public List<Pooling> pools = new List<Pooling>();
 
     public Pooling pooledEnemyBullets = new Pooling();
@@ -65,8 +66,9 @@ public class EnemyManager : MonoBehaviour
         pools.Add(pooledDodgerEnemies);
         pools.Add(pooledSplitterEnemies);
         pools.Add(pooledCloakerEnemies);
+        pools.Add(pooledBursterEnemies);
 
-        SpecialEnemyChance = (100 - BasicEnemyChance) / (pools.Count - 1);
+        SpecialEnemyChance = (100 - BasicEnemyChance) / (enemyPrefabs.Length - 1);
 
         IsBossAlive = false;
         SpawningWave = false;
@@ -173,7 +175,7 @@ public class EnemyManager : MonoBehaviour
         {
             float random = Random.Range(1f, 100f);
 
-            for (int i = 1; i < pools.Count; i++)
+            for (int i = 1; i < enemyPrefabs.Length; i++)
             {
                 if ((BasicEnemyChance + (SpecialEnemyChance * (i - 1))) < random && random <= (BasicEnemyChance + (SpecialEnemyChance * i)))
                 {

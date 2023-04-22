@@ -92,8 +92,9 @@ public class Destroyer : Boss
 
     private void Pattern3() 
     { 
-        StartCoroutine(PatternLength(10));
+        StartCoroutine(PatternLength(3));
 
+        Heal(MaxHealth / 10);
     }
 
     private void Pattern4()

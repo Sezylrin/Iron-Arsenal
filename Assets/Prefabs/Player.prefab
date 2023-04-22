@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 4454595705638859222}
   - component: {fileID: 3021966184241043583}
   - component: {fileID: 7384111677371232713}
-  - component: {fileID: 7541467474176116685}
-  - component: {fileID: 1895840324289323541}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -658,11 +656,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c69eb3c5eeb924c80f1d6a5521f38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotatePoint: {fileID: 3200989005183425721}
-  cannonProjectileSpawnPoint: {fileID: 3200989004822059626}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
   activeCannonProjectile: 2
   cannonProjectileArray:
   - {fileID: 1123763005487040603, guid: c4a3e8f0491194748ada7e901664ded6, type: 3}
@@ -672,6 +665,12 @@ MonoBehaviour:
   - {fileID: 2249231546997448497, guid: 0fc632a1a603a46468af0357e9feff52, type: 3}
   - {fileID: 8023966000231024633, guid: f972a0e6e0d053144a0228be981a4d62, type: 3}
   - {fileID: 5559120483111056479, guid: b1f783c1f494cdd488db28ac74a374a0, type: 3}
+  flameData: {fileID: 11400000, guid: 0b9ae8363162bc948af86b25f303290e, type: 2}
+  rotatePoint: {fileID: 3200989005183425721}
+  cannonProjectileSpawnPoint: {fileID: 3200989004822059626}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!198 &5934426470442762871
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5495,8 +5494,9 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &7283558286183469550
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3185191710328647186, guid: 2033a21ff5c17344499d7b8575cb3e8e, type: 3}
-  m_PrefabInstance: {fileID: 3422932685010133536}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7283558286183469551}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
