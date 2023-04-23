@@ -17,7 +17,7 @@ public class AugmentMenu : MonoBehaviour
     {
         for (int i = 0; i < augmentButtons.Length; i++)
         {
-            int augmentIndex = i; // To capture the current value of 'i' for the lambda expression
+            int augmentIndex = i;
             augmentButtons[i].onClick.AddListener(() => SelectAugment(augmentIndex));
         }
     }
