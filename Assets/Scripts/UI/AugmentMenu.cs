@@ -6,75 +6,63 @@ using System.Collections.Generic;
 public class AugmentMenu : MonoBehaviour
 {
     [Header("Buttons")]
-    [SerializeField] private Button firstAugBtn;
-    [SerializeField] private Button secondAugBtn;
-    [SerializeField] private Button thirdAugBtn;
+    [SerializeField] private Button[] augmentButtons;
 
     [Header("Augment Info")]
-    [SerializeField] private Image firstAugImage;
-    [SerializeField] private TMP_Text firstAugName;
-    [SerializeField] private TMP_Text firstAugDesc;
-    [SerializeField] private Image secondAugImage;
-    [SerializeField] private TMP_Text secondAugName;
-    [SerializeField] private TMP_Text secondAugDesc;
-    [SerializeField] private Image thirdAugImage;
-    [SerializeField] private TMP_Text thirdAugName;
-    [SerializeField] private TMP_Text thirdAugDesc;
+    [SerializeField] private AugmentSlot[] augmentSlots;
 
     private List<AugmentData> currentAugments;
 
     private void Start()
     {
-        firstAugBtn.onClick.AddListener(SelectFirstAug);
-        secondAugBtn.onClick.AddListener(SelectSecondAug);
-        thirdAugBtn.onClick.AddListener(SelectThirdAug);
+        for (int i = 0; i < augmentButtons.Length; i++)
+        {
+            int augmentIndex = i; // To capture the current value of 'i' for the lambda expression
+            augmentButtons[i].onClick.AddListener(() => SelectAugment(augmentIndex));
+        }
     }
 
     public void CreateAugmentChoices(List<AugmentData> augments)
     {
         currentAugments = augments;
-        firstAugImage.sprite = augments[0].icon;
-        firstAugName.text = augments[0].augName;
-        firstAugDesc.text = augments[0].description;
-        if (augments.Count >= 2)
+
+        for (int i = 0; i < augmentSlots.Length; i++)
         {
-            secondAugImage.sprite = augments[1].icon;
-            secondAugName.text = augments[1].augName;
-            secondAugDesc.text = augments[1].description;
-        }
-        else
-        {
-            secondAugName.text = "Empty Augment";
-            secondAugDesc.text = "To be fixed. We ran out of augments to show :(";
-        }
-        if (augments.Count >= 3)
-        {
-            thirdAugImage.sprite = augments[2].icon;
-            thirdAugName.text = augments[2].augName;
-            thirdAugDesc.text = augments[2].description;
-        }
-        else
-        {
-            thirdAugName.text = "Empty Augment";
-            thirdAugDesc.text = "To be fixed. We ran out of augments to show :(";
+            if (i < augments.Count)
+            {
+                augmentSlots[i].SetAugmentData(augments[i]);
+            }
+            else
+            {
+                augmentSlots[i].SetEmptyAugment();
+            }
         }
     }
 
-    public void SelectFirstAug()
+    public void SelectAugment(int augmentIndex)
     {
-        AugmentManager.Instance.AddAugment(currentAugments[0].augmentType);
+        AugmentManager.Instance.AddAugment(currentAugments[augmentIndex].augmentType);
         LevelManager.Instance.RemoveAugmentMenu();
     }
+}
 
-    public void SelectSecondAug()
+[System.Serializable]
+public class AugmentSlot
+{
+    [SerializeField] private Image augmentImage;
+    [SerializeField] private TMP_Text augmentName;
+    [SerializeField] private TMP_Text augmentDesc;
+
+    public void SetAugmentData(AugmentData augmentData)
     {
-        AugmentManager.Instance.AddAugment(currentAugments[1].augmentType);
-        LevelManager.Instance.RemoveAugmentMenu();
+        augmentImage.sprite = augmentData.icon;
+        augmentName.text = augmentData.augName;
+        augmentDesc.text = augmentData.description;
     }
 
-    public void SelectThirdAug()
+    public void SetEmptyAugment()
     {
-        AugmentManager.Instance.AddAugment(currentAugments[2].augmentType);
-        LevelManager.Instance.RemoveAugmentMenu();
+        augmentName.text = "Empty Augment";
+        augmentDesc.text = "To be fixed. We ran out of augments to show :(";
     }
 }
