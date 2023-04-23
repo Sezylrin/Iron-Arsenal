@@ -102,4 +102,14 @@ public class LevelManager : MonoBehaviour
     {
         levelCanvasManager.RemoveAugmentChoices();
     }
+
+    public void OpenShopMenu()
+    {
+        levelCanvasManager.OpenShopMenu();
+    }
+
+    public void CloseShopMenu()
+    {
+        levelCanvasManager.CloseShopMenu();
+    }
 }
