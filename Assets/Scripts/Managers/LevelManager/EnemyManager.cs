@@ -1,17 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance { get; private set; }
-    private GameObject player;
-    private BaseFunctions playerFunction;
-    private Vector3 playerPosition;
-    public GameObject[] enemyPrefabs;
-    public GameObject[] augmentPrefabs;
 
+    [field: Header("Wave Management")]
+    [field: SerializeField] public int Wave { get; private set; }
+    [field: SerializeField] private int WaveDelay { get; set; }
+    [field: SerializeField] public int SecondsUntilNextWave { get; private set; }
+    [field: SerializeField] private float BasicEnemyChance { get; set; }
+    [field: SerializeField] private float SpecialEnemyChance { get; set; }
+    [field: SerializeField] public bool IsBossAlive { get; private set; }
+    [field: SerializeField] private bool SpawningWave { get; set; }
+    public bool debugStartWaveNow; // Testing Variable
+
+    [field: Header("Lists")]
+    public GameObject[] enemyPrefabs;
+    public GameObject[] bossPrefabs;
+    public GameObject[] augmentPrefabs;
     public List<Transform> enemyList = new List<Transform>();
+
+    private GameObject Player { get; set; }
+    private Vector3 PlayerPosition { get; set; }
+    private BaseFunctions playerFunction;
 
     private Pooling pooledBasicEnemies = new Pooling();     //0 - Basic Enemies
     private Pooling pooledTankEnemies = new Pooling();      //1 - Tank Enemies
@@ -22,19 +36,10 @@ public class EnemyManager : MonoBehaviour
     private Pooling pooledDodgerEnemies = new Pooling();    //6 - Dodger Enemies
     private Pooling pooledSplitterEnemies = new Pooling();  //7 - Splitter Enemies
     private Pooling pooledCloakerEnemies = new Pooling();   //8 - Cloaker Enemies
+    private Pooling pooledBursterEnemies = new Pooling();   //9 - Burster Enemies
     public List<Pooling> pools = new List<Pooling>();
 
     public Pooling pooledEnemyBullets = new Pooling();
-
-    public float basicEnemyChance;
-    private float specialEnemyChance;
-
-    private GameObject newEnemy = null;
-
-    public int wave;
-    public int waveDelay;
-
-    public bool spawnInstantly; // Testing Variable
 
     private void Awake()
     {
@@ -46,7 +51,7 @@ public class EnemyManager : MonoBehaviour
         {
             Instance = this;
         }
-        player = GameObject.Find("Player");
+        Player = GameObject.Find("Player");
     }
 
     // Start is called before the first frame update
@@ -61,119 +66,197 @@ public class EnemyManager : MonoBehaviour
         pools.Add(pooledDodgerEnemies);
         pools.Add(pooledSplitterEnemies);
         pools.Add(pooledCloakerEnemies);
+        pools.Add(pooledBursterEnemies);
 
-        specialEnemyChance = (100 - basicEnemyChance) / (pools.Count - 1);
+        SpecialEnemyChance = (100 - BasicEnemyChance) / (enemyPrefabs.Length - 1);
 
-        StartCoroutine(DelayWave(waveDelay));
+        IsBossAlive = false;
+        SpawningWave = false;
+
+        Wave -= 1;
+        SecondsUntilNextWave = 0;
+
+        StartCoroutine(DelayWave());
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerPosition = player.transform.position;
-    }
+        PlayerPosition = Player.transform.position;
 
-    IEnumerator DelayWave(int delay)
-    {
-        if (wave <= 0)
+        if (debugStartWaveNow)
         {
-            wave = 1;
-        }
-
-        while (true)
-        {
-            if (!spawnInstantly)
-            {
-                yield return new WaitForSeconds(delay);
-            }
-
-            StartCoroutine(SpawnEnemies(10 + wave));
-
-            if (spawnInstantly)
-            {
-                yield return new WaitForSeconds(delay);
-            }
-            wave++;
+            debugStartWaveNow = false;
+            StartWaveEarly();
         }
     }
 
-    public IEnumerator SpawnEnemies(int numberOfSpawns)
+    private void SelectWave()
     {
-        int numberToSpawn = numberOfSpawns;
+        Wave++;
+
+        if (Wave <= 0)
+        {
+            Wave = 1;
+        }
+
+        if (Wave % 10 == 0)
+        {
+            StartCoroutine(SpawnBossWave());
+        }
+        else StartCoroutine(SpawnWave());
+    }
+
+    private IEnumerator DelayWave()
+    {
+        SecondsUntilNextWave = WaveDelay;
+        
+        while (SecondsUntilNextWave > 0)
+        {
+            yield return new WaitForSeconds(1);
+            SecondsUntilNextWave--;
+        }
+        
+        SecondsUntilNextWave = 0;
+        SelectWave();
+    }
+
+    public void StartWaveEarly()
+    {
+        if (!SpawningWave)
+        {
+            SecondsUntilNextWave = 0;
+        }
+    }
+
+    private IEnumerator SpawnWave()
+    {
+        SpawningWave = true;
+        int numberToSpawn = 10 + Wave;
 
         while (numberToSpawn != 0)
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.25f);
 
-            Vector3 Top = new Vector3(playerPosition.x, 0, playerPosition.z + 30);
-            Vector3 Bottom = new Vector3(playerPosition.x, 0, playerPosition.z - 30);
-            Vector3 Right = new Vector3(playerPosition.x + 30, 0, playerPosition.z);
-            Vector3 Left = new Vector3(playerPosition.x - 30, 0, playerPosition.z);
+            SpawnEnemy(false);
 
-            float x = 0;
-            float z = 0;
-
-            if (numberToSpawn % 4 == 0) // Top
-            {
-                x = Random.Range(Left.x, Right.x);
-                z = Random.Range(Top.z, Top.z + 20);
-            }
-            else if (numberToSpawn % 4 == 1) // Right
-            {
-                z = Random.Range(Top.z, Bottom.z);
-                x = Random.Range(Right.x, Right.x + 20);
-            }
-            else if (numberToSpawn % 4 == 2) // Bottom
-            {
-                x = Random.Range(Left.x, Right.x);
-                z = Random.Range(Bottom.z, Bottom.z - 20);
-            }
-            else if (numberToSpawn % 4 == 3) // Left
-            {
-                z = Random.Range(Top.z, Bottom.z);
-                x = Random.Range(Left.x, Left.x - 20);
-            }
-            Vector3 spawnPosition = new Vector3(x, 0, z);
-                
-            float random = Random.Range(1f, 100f);
-
-            SpawnEnemy(SelectEnemyToSpawn(random), spawnPosition);
-            
             numberToSpawn--;
         }
-        yield return null;
+
+        SpawningWave = false;
+        StartCoroutine(DelayWave());
     }
 
-    public int SelectEnemyToSpawn(float randomValue)
+    private IEnumerator SpawnBossWave()
     {
-        for (int i = 1; i < pools.Count; i++)
+        SpawnEnemy(true);
+        IsBossAlive = true;
+
+        while (IsBossAlive)
         {
-            if ((basicEnemyChance + (specialEnemyChance * (i - 1))) < randomValue && randomValue <= (basicEnemyChance + (specialEnemyChance * i)))
+            yield return new WaitForSeconds(2f);
+            SpawnEnemy(false);
+        }
+        StartCoroutine(DelayWave());
+    }
+
+    public void BossDeath()
+    {
+        IsBossAlive = false;
+    }
+
+    private int SelectEnemyToSpawn(bool isBoss)
+    {
+        if (isBoss)
+        {
+            return Random.Range(0, bossPrefabs.Length);
+        }
+        else
+        {
+            float random = Random.Range(1f, 100f);
+
+            for (int i = 1; i < enemyPrefabs.Length; i++)
             {
-                return i;
+                if ((BasicEnemyChance + (SpecialEnemyChance * (i - 1))) < random && random <= (BasicEnemyChance + (SpecialEnemyChance * i)))
+                {
+                    return i;
+                }
             }
         }
         return 0;
     }
 
-    public void SpawnEnemy(int enemyType, Vector3 spawnPosition)
-    { 
-        if (pools[enemyType].ListCount() > 0)
+    private void SpawnEnemy(bool isBoss)
+    {
+        int enemyType;
+        GameObject newEnemy = null;
+
+        if (isBoss)
         {
-            newEnemy = pools[enemyType].FirstObj();
-            newEnemy.SetActive(true);
-            pools[enemyType].RemoveObj(newEnemy);
+            enemyType = SelectEnemyToSpawn(true);
+            newEnemy = Instantiate(bossPrefabs[enemyType], gameObject.transform);
         }
         else
         {
-            newEnemy = Instantiate(enemyPrefabs[enemyType], gameObject.transform);
+            enemyType = SelectEnemyToSpawn(false);
+
+            if (pools[enemyType].ListCount() > 0)
+            {
+                newEnemy = pools[enemyType].FirstObj();
+                newEnemy.SetActive(true);
+                pools[enemyType].RemoveObj(newEnemy);
+            }
+            else
+            {
+                newEnemy = Instantiate(enemyPrefabs[enemyType], gameObject.transform);
+            }
         }
 
-        newEnemy.transform.position = spawnPosition;
-        Enemy enemyScript = newEnemy.GetComponent<Enemy>();
+        SetValues(newEnemy);
+    }
+
+    private void SetValues(GameObject enemy)
+    {
+        enemy.transform.position = GetRandomPosition();
+        Enemy enemyScript = enemy.GetComponent<Enemy>();
         enemyScript.SetStats();
         enemyScript.InitEnemyEffects(augmentPrefabs);
-        enemyList.Add(newEnemy.transform);
+        enemyList.Add(enemy.transform);
+    }
+
+    private Vector3 GetRandomPosition()
+    {
+        Vector3 Top = new Vector3(PlayerPosition.x, 0, PlayerPosition.z + 30);
+        Vector3 Bottom = new Vector3(PlayerPosition.x, 0, PlayerPosition.z - 30);
+        Vector3 Right = new Vector3(PlayerPosition.x + 30, 0, PlayerPosition.z);
+        Vector3 Left = new Vector3(PlayerPosition.x - 30, 0, PlayerPosition.z);
+
+        float x = 0;
+        float z = 0;
+
+        int randomEdge = Random.Range(1, 5);
+
+        if (randomEdge == 1) // Top
+        {
+            x = Random.Range(Left.x, Right.x);
+            z = Random.Range(Top.z, Top.z + 20);
+        }
+        else if (randomEdge == 2) // Right
+        {
+            z = Random.Range(Top.z, Bottom.z);
+            x = Random.Range(Right.x, Right.x + 20);
+        }
+        else if (randomEdge == 3) // Bottom
+        {
+            x = Random.Range(Left.x, Right.x);
+            z = Random.Range(Bottom.z, Bottom.z - 20);
+        }
+        else if (randomEdge == 4) // Left
+        {
+            z = Random.Range(Top.z, Bottom.z);
+            x = Random.Range(Left.x, Left.x - 20);
+        }
+        return new Vector3(x, 0, z);
     }
 
     public void PoolEnemy(GameObject obj, int enemyType)

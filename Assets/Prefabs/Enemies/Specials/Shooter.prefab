@@ -35,7 +35,7 @@ Transform:
   - {fileID: 6388519645255094936}
   - {fileID: 6388519646243997100}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &290230669632234951
 Rigidbody:
@@ -83,8 +83,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.5105025, z: 1}
-  m_Center: {x: 0, y: 0.5008617, z: 0}
+  m_Size: {x: 1, y: 1.1863183, z: 1}
+  m_Center: {x: 0, y: 0.33877042, z: 0}
 --- !u!114 &3601272918170804927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 5
+  <EnemyRB>k__BackingField: {fileID: 290230669632234951}
   <CurrentHealth>k__BackingField: 0
   data: {fileID: 11400000, guid: d6b0c039483e6f043a4d6687f8738c23, type: 2}
   explosionPF: {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}

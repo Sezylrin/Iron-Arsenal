@@ -21,20 +21,21 @@ public enum EnemyType
 
 public abstract class Enemy : MonoBehaviour
 {
+    [field: Header("Stats")]
+    [field: SerializeField] public float CurrentHealth { get; set; }
+    [field: SerializeField] public float MaxHealth { get; set; }
+    [field: SerializeField] public float DamageOnCollide { get; set; }
+    [field: SerializeField] public float Speed { get; set; }
+    [field: SerializeField] public int RamLaunchMultiplier { get; set; }
+
+    [field: Header("Enemy Other")]
     public EnemyType type;
+    [field: SerializeField] public Rigidbody EnemyRB { get; set; }
+    public EnemyData data;
+    [field: SerializeField] public int Wave { get; set; }
+
     public EnemyManager Manager { get; set; }
     public GameObject Player { get; set; }
-    public Rigidbody EnemyRB { get; set; }
-    public float MaxHealth { get; set; }
-    [field: SerializeField]
-    public float CurrentHealth { get; set; }
-    public float DamageOnCollide { get; set; }
-    public float Speed { get; set; }
-    public int RamLaunchMultiplier { get; set; }
-    public int Wave { get; set; }
-
-
-    public EnemyData data;
 
     public EnemyEffects enemyEffects;
 
@@ -48,10 +49,9 @@ public abstract class Enemy : MonoBehaviour
     {
         Player = GameObject.Find("Player");
         baseFunctions = Player.GetComponent<BaseFunctions>();
-        Manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
-        EnemyRB = GetComponent<Rigidbody>();
+        Manager = EnemyManager.Instance;
 
-        Wave = Manager.wave;
+        Wave = Manager.Wave;
         SetStats();
     }
 

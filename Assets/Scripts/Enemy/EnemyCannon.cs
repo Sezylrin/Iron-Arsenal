@@ -29,7 +29,7 @@ public class EnemyCannon : MonoBehaviour
         manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
         projectilesParent = GameObject.Find("Projectiles Parent").transform;
 
-        Wave = manager.wave;
+        Wave = manager.Wave;
         SetStats();
     }
 
@@ -42,7 +42,7 @@ public class EnemyCannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Wave = manager.wave;
+        Wave = manager.Wave;
         Vector3 target = player.transform.position;
         target.z += 1000000;
         

@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
 
     private GameManager gameManager;
     private BuildManager buildManager;
-    private AugmentManagerOld augmentManager;
+    private AugmentManager augmentManager;
     public LevelCanvasManager levelCanvasManager;
     public TurretBuildMenu BuildUi;
     public SentryData[] possibleSentries;
@@ -30,8 +30,8 @@ public class LevelManager : MonoBehaviour
         }
         BuildUi = GameObject.FindWithTag("UISelection").GetComponent<TurretBuildMenu>();
         gameManager = GameManager.Instance;
+        augmentManager = AugmentManager.Instance;
         buildManager = new BuildManager();
-        augmentManager = new AugmentManagerOld();
     }
 
     public void Start()
@@ -52,30 +52,8 @@ public class LevelManager : MonoBehaviour
         {
             currentState = State.Normal;
         }
-        //This will be done by mouseclick when we have menu functionality
-        if (augmentManager.selectingAugment)
-        {
-            switch (Input.inputString)
-            {
-                case "1":
-                    SelectAugment(0);
-                    break;
-                case "2":
-                    if (augmentManager.augmentChoices.Count >= 2)
-                    {
-                        SelectAugment(1);
-                    } 
-                    break;
-                case "3":
-                    if (augmentManager.augmentChoices.Count >= 3)
-                    {
-                        SelectAugment(2);
-                    }
-                    break;
-            }
-        }
 
-        if (!augmentManager.selectingAugment && Input.GetKeyDown(KeyCode.P)) {
+        if (!AugmentManager.Instance.selectingAugment && Input.GetKeyDown(KeyCode.P)) {
             SpawnAugmentChoice();
         }
     }
@@ -110,29 +88,17 @@ public class LevelManager : MonoBehaviour
         levelCanvasManager.SetVoidStoneAmount(buildManager.voidStone);
     }
 
-    public void SpawnAugmentChoice(int numAugments = 3)
+    public void SpawnAugmentChoice()
     {
-        augmentManager.CreateAugmentChoices(numAugments);
+        augmentManager.CreateAugmentChoices();
         if (augmentManager.augmentChoices.Count > 0)
         {
             levelCanvasManager.ShowAugmentChoices(augmentManager.augmentChoices);
         }
     }
 
-    public void SelectAugment(int augmentNumSelected)
+    public void RemoveAugmentMenu()
     {
-        AugmentData augmentSelected = augmentManager.augmentChoices[augmentNumSelected];
-        //TODO: Apply this to turrets
-        Debug.Log(augmentSelected.augName);
-        augmentManager.SelectAugment(augmentSelected);
         levelCanvasManager.RemoveAugmentChoices();
-    }
-
-    public int GetMode()
-    {
-        if (augmentManager.currentAugment)
-            return augmentManager.currentAugment.mode;
-        else
-            return 0;
     }
 }

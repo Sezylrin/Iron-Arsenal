@@ -15,6 +15,7 @@ TagManager:
   - EnemyProjectile
   - Socket
   - NotSocket
+  - Wall
   layers:
   - Default
   - TransparentFX

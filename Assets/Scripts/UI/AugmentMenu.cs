@@ -62,16 +62,19 @@ public class AugmentMenu : MonoBehaviour
 
     public void SelectFirstAug()
     {
-
+        AugmentManager.Instance.AddAugment(currentAugments[0].augmentType);
+        LevelManager.Instance.RemoveAugmentMenu();
     }
 
     public void SelectSecondAug()
     {
-
+        AugmentManager.Instance.AddAugment(currentAugments[1].augmentType);
+        LevelManager.Instance.RemoveAugmentMenu();
     }
 
     public void SelectThirdAug()
     {
-
+        AugmentManager.Instance.AddAugment(currentAugments[2].augmentType);
+        LevelManager.Instance.RemoveAugmentMenu();
     }
 }

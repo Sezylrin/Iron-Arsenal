@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum Augments : int
 {
@@ -46,6 +46,12 @@ public class AugmentManager : MonoBehaviour
     public List<Sentry> activeSentries = new List<Sentry>();
     public List<GameObject> augmentPrefabs = new List<GameObject>();
     private BaseFunctions playerFunctions;
+
+    public List<AugmentData> allAugments;
+    public List<AugmentData> augmentChoices;
+    public AugmentData currentAugment;
+    public bool selectingAugment { get; private set; } = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -62,6 +68,21 @@ public class AugmentManager : MonoBehaviour
     private void Start()
     {
         playerFunctions = GameObject.FindWithTag("Player").GetComponent<BaseFunctions>();
+
+        allAugments = new List<AugmentData>();
+        string augmentPath = "Augments/";
+        foreach (AugmentName augmentName in Enum.GetValues(typeof(AugmentName)))
+        {
+            AugmentData augment = Resources.Load<AugmentData>(augmentPath + augmentName);
+            if (augment != null)
+            {
+                allAugments.Add(augment);
+            }
+            else
+            {
+                Debug.LogError("Unable to load SentryData asset: " + augmentName);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -78,6 +99,7 @@ public class AugmentManager : MonoBehaviour
     }
     public void AddAugment(Augments augmentToAdd)
     {
+        selectingAugment = false;
         if (!augmentToAdd.Equals(Augments.None) && !activeAugments.Contains(augmentToAdd))
             activeAugments.Add(augmentToAdd);
         foreach (Sentry sentry in activeSentries)
@@ -126,7 +148,33 @@ public class AugmentManager : MonoBehaviour
                 return tempRD;
             default:
                 return null;
+        }  
+    }
+
+    public void CreateAugmentChoices()
+    {
+        List<AugmentData> allAugmentsCopy = new(allAugments); // Create a copy of the original list
+        List<AugmentData> randomAugments = new();
+        int timesToLoop = 3;
+        int index;
+        System.Random random = new();
+
+        if (timesToLoop > allAugments.Count)
+        {
+            timesToLoop = allAugments.Count;
         }
-            
+
+        for (int i = 0; i < timesToLoop; i++)
+        {
+            // Generate a random index
+            index = random.Next(allAugmentsCopy.Count);
+
+            // Add the augment to the list and remove it from the allAugmentsCopy list to avoid duplicates
+            randomAugments.Add(allAugmentsCopy[index]);
+            allAugmentsCopy.RemoveAt(index);
+        }
+
+        selectingAugment = true;
+        augmentChoices = randomAugments;
     }
 }
