@@ -5,7 +5,7 @@ using UnityEngine;
 public class TurretDeletion : MonoBehaviour
 {
     // Start is called before the first frame update
-    private TurretSocket socket;
+    private SentrySocket socket;
     void Start()
     {
         
@@ -22,7 +22,7 @@ public class TurretDeletion : MonoBehaviour
         socket.DeleteTurret();
     }
 
-    public void SetSocket(TurretSocket socket)
+    public void SetSocket(SentrySocket socket)
     {
         this.socket = socket;
     }

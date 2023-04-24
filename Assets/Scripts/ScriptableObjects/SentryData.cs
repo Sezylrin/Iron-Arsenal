@@ -6,7 +6,6 @@ public enum SentryName
 {
     [Description("BasicSentry")]
     BasicSentry,
-    [Description("AdvancedSentry")]
     AdvancedSentry,
     FlameThrower,
     FreezeTower

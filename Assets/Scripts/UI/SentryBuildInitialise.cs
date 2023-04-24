@@ -17,6 +17,7 @@ public class SentryBuildInitialise : MonoBehaviour, IPointerEnterHandler, IPoint
 
     private GameObject instantiatedToolTip;
     private SentryData sentry;
+    private SentrySocket currentSocket;
 
     public void InitialiseSentryContainer(SentryData sentry)
     {
@@ -50,5 +51,21 @@ public class SentryBuildInitialise : MonoBehaviour, IPointerEnterHandler, IPoint
     public void OnPointerExit(PointerEventData eventData)
     {
         Destroy(instantiatedToolTip);
+    }
+
+    public void SpawnSentry()
+    {
+        if (LevelManager.Instance.CanBuildSentry(sentry.Sentry))
+        {
+            LevelManager.Instance.BuildSentry(sentry.Sentry);
+            Destroy(instantiatedToolTip);
+            currentSocket.SetSentry(sentry);
+        }
+        
+    }
+
+    public void SetSocket(SentrySocket socket)
+    {
+        currentSocket = socket;
     }
 }

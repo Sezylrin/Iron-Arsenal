@@ -27,6 +27,11 @@ public class BaseFunctions : MonoBehaviour
 
     private float timeSinceDamage;
 
+    private bool isRaged = false;
+    private bool isRageTriggered = false;
+
+    public GameObject ShieldWave;
+
     public BaseEffects baseEffects;
     [System.Serializable]
     public class SocketSpawns
@@ -81,6 +86,23 @@ public class BaseFunctions : MonoBehaviour
             {
             }
         }
+        if (isRaged && !isRageTriggered)
+        {
+            isRageTriggered = true;
+            foreach (Sentry sentry in AugmentManager.Instance.activeSentries)
+            {
+                sentry.fireRate *= 1.2f;
+            }
+        }
+
+        if (!isRaged && isRageTriggered)
+        {
+            isRageTriggered = false;
+            foreach (Sentry sentry in AugmentManager.Instance.activeSentries)
+            {
+                sentry.fireRate /= 1.2f;
+            }
+        }
     }
 
     public void TakeDamage(float amount)
@@ -93,10 +115,28 @@ public class BaseFunctions : MonoBehaviour
 
     private void TakeShieldDamage(float amount)
     {
-        if (currentShield - amount < 0f)
-            currentShield = 0f;
+        if (!baseEffects.isSegmentShield)
+        {
+            if (currentShield - amount < 0f)
+            {
+                currentShield = 0f;
+                Instantiate(ShieldWave, transform.position, Quaternion.identity);
+            }
+            else
+                currentShield -= amount;
+        }
         else
-            currentShield -= amount;
+        {
+            float shieldSegment = currentShield % (maxShieldHealth * 0.25f);
+            float overflow = shieldSegment - amount;
+            if (overflow < 0)
+            {
+                currentShield -= (amount + overflow);
+                Instantiate(ShieldWave, transform.position, Quaternion.identity);
+            }
+            else
+                currentShield -= amount;
+        }
         timeSinceDamage = shieldRecoverDelay;
 
     }
@@ -109,7 +149,7 @@ public class BaseFunctions : MonoBehaviour
             currentShield += amount;
     }
     private void TakeHealthDamage(float amount)
-    {
+    {        
         if (currentHealth - amount <= 0)
         {
             currentHealth = 0;
@@ -120,6 +160,10 @@ public class BaseFunctions : MonoBehaviour
         }
         else
             currentHealth -= amount;
+        if (baseEffects.isRage && currentHealth <= baseHealth * 0.3)
+        {
+            isRaged = true;
+        }
     }
 
     public void RecoverHealth(float amount)
@@ -128,6 +172,10 @@ public class BaseFunctions : MonoBehaviour
             currentHealth = baseHealth;
         else
             currentHealth += amount;
+        if (baseEffects.isRage && currentHealth > baseHealth * 0.3)
+        {
+            isRaged = false;
+        }
     }
 
     public void UpgradeBase()

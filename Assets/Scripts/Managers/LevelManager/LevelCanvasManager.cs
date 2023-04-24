@@ -15,11 +15,14 @@ public class LevelCanvasManager : MonoBehaviour
     [SerializeField] private Button closeBtn;
     [SerializeField] private GameObject sentryContainerPrefab;
     [SerializeField] private GameObject sentriesContent;
+    [SerializeField] private LayerMask layer;
 
     [Header("Menus")]
     [SerializeField] private GameObject augmentMenu;
     [SerializeField] private GameObject buildMenu;
+    private List<SentryBuildInitialise> allButtons = new List<SentryBuildInitialise>();
 
+    public bool overMenu = false;
     public static LevelCanvasManager Instance { get; private set; }
 
     private void Awake()
@@ -37,7 +40,7 @@ public class LevelCanvasManager : MonoBehaviour
     private void Start()
     {
         closeBtn.onClick.AddListener(CloseBuildMenu);
-        LoadSentries();
+        //LoadSentries();
     }
 
     private void Update()
@@ -45,6 +48,29 @@ public class LevelCanvasManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             CloseBuildMenu();
+        }
+        if (Input.GetMouseButtonDown(0) && LevelManager.Instance.currentState == State.Building)
+        {
+            Vector3 MousePos = MousePosition.MouseToWorld3D(Camera.main, -1);
+            MousePos.y = transform.position.y;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, layer))
+            {
+                if (hit.collider.CompareTag("Socket"))
+                {
+                    SentrySocket socket = hit.collider.GetComponent<SentrySocket>();
+                    if (!socket.HasSentry())
+                    {
+                        AssignSocket(socket);
+                        OpenBuildMenu();
+                    }
+                }
+            }
+            else if (!overMenu)
+            {
+                AssignSocket(null);
+                CloseBuildMenu();
+            }
         }
     }
 
@@ -74,7 +100,7 @@ public class LevelCanvasManager : MonoBehaviour
         augmentMenu.SetActive(false);
     }
 
-    private void CloseBuildMenu()
+    public void CloseBuildMenu()
     {
         buildMenu.SetActive(false);
     }
@@ -103,6 +129,23 @@ public class LevelCanvasManager : MonoBehaviour
             {
                 Debug.LogError("Unable to load SentryData asset: " + sentryName);
             }
+        }
+    }
+
+    public void AddSentryUI(SentryData sentryToAdd)
+    {
+        GameObject sentryContainer = Instantiate(sentryContainerPrefab);
+        sentryContainer.transform.SetParent(sentriesContent.transform, false);
+        SentryBuildInitialise initUI = sentryContainer.GetComponent<SentryBuildInitialise>();
+        initUI.InitialiseSentryContainer(sentryToAdd);
+        allButtons.Add(initUI);
+    }
+
+    public void AssignSocket(SentrySocket socket)
+    {
+        foreach (SentryBuildInitialise init in allButtons)
+        {
+            init.SetSocket(socket);
         }
     }
 }

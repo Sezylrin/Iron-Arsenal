@@ -235,4 +235,9 @@ public class Sentry : MonoBehaviour
     {
         sentryEffects.UpdateAugments();
     }
+
+    public void DestroyPool()
+    {
+        Destroy(poolObject);
+    }
 }

@@ -11,6 +11,9 @@ public class BaseEffects : MonoBehaviour
     public bool isThorn = false;
     public bool isShieldRegenUp = false;
     public bool isMoreShield = false;
+    public bool isRage = false;
+    public bool isSegmentShield = false;
+    public bool isShieldExplosion = false;
     private bool isShieldIncreased = true;
     private bool isRegenChanged = true;
     private bool isThornApplied = true;
@@ -33,6 +36,12 @@ public class BaseEffects : MonoBehaviour
             isShieldRegenUp = AugmentManager.Instance.activeAugments.Contains(Augments.FasterShieldRegen);
         if (!isMoreShield)
             isMoreShield = AugmentManager.Instance.activeAugments.Contains(Augments.FasterShieldRegen);
+        if (!isRage)
+            isRage = AugmentManager.Instance.activeAugments.Contains(Augments.Rage);
+        if (!isSegmentShield)
+            isSegmentShield = AugmentManager.Instance.activeAugments.Contains(Augments.SegmentShield);
+        if (!isShieldExplosion)
+            isShieldExplosion = AugmentManager.Instance.activeAugments.Contains(Augments.ShieldExplosion);
 
         UpdateValues();
     }

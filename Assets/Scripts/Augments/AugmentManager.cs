@@ -29,6 +29,9 @@ public enum Augments : int
     MoreShield,
     ShieldSteal,
     LifeSteal,
+    Rage,
+    SegmentShield,
+    ShieldExplosion,
     None
 }
 public class AugmentManager : MonoBehaviour

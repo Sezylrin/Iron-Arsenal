@@ -8,7 +8,7 @@ public class TurretBuildMenu : MonoBehaviour
     // Start is called before the first frame update
     public GameObject turretButton;
 
-    private TurretSocket currentSocket;
+    private SentrySocket currentSocket;
 
     public GameObject SentryPF;
 
@@ -61,7 +61,6 @@ public class TurretBuildMenu : MonoBehaviour
     }
     private void AddListeners()
     {
-        Debug.Log("added listeners");
         for (int i = 0; i < allButtons.Length; i++)
         {
             int cpy = i;
@@ -129,14 +128,14 @@ public class TurretBuildMenu : MonoBehaviour
         }
         switchMenu[1].gameObject.SetActive(true);
     }
-    public void SetSocket(TurretSocket Socket)
+    public void SetSocket(SentrySocket Socket)
     {
         currentSocket = Socket;
     }
 
     public void SetTurret(SentryData data)
     {
-        currentSocket.SetTurret(data);
+        currentSocket.SetSentry(data);
     }
 
     public void AddToMenu(SentryData data)

@@ -47,7 +47,6 @@ public class LevelManager : MonoBehaviour
         if (currentState == State.Normal && Input.GetKeyDown(KeyCode.B))
         {
             currentState = State.Building;
-            levelCanvasManager.OpenBuildMenu();
         }
         else if (Input.GetKeyDown(KeyCode.B))
         {
