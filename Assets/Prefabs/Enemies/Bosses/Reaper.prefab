@@ -232,7 +232,7 @@ Transform:
   - {fileID: 4562072642991280167}
   - {fileID: 1250976695633235650}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7577378657274690624
 Rigidbody:
@@ -303,6 +303,9 @@ MonoBehaviour:
   <EnemyRB>k__BackingField: {fileID: 7577378657274690624}
   data: {fileID: 11400000, guid: ad25a64d04bc2cb4f9eb123e84a85b89, type: 2}
   <Wave>k__BackingField: 0
+  enemyEffects: {fileID: 0}
+  damageFactor: 1
+  speedFactor: 1
   <ActivePattern>k__BackingField: 0
   <LastPattern>k__BackingField: 0
   <NumberOfPatterns>k__BackingField: 0
@@ -311,14 +314,17 @@ MonoBehaviour:
   <BulletDamage>k__BackingField: 0
   <BulletSpeed>k__BackingField: 0
   <BulletFireDelay>k__BackingField: 0
+  ableToShoot: 0
   bulletData: {fileID: 11400000, guid: 782859db1d1ba834d994c1149b7e0dee, type: 2}
   reaperBulletSpawnPoint: {fileID: 1250976695633235650}
   reaperBulletPrefab: {fileID: 5998107488687086630, guid: 5c1604353f6d1014d9ec938acb99c91f, type: 3}
-  ableToShoot: 0
+  phazing: 0
   enemyBC: {fileID: 7577378657274690625}
   renderers:
   - {fileID: 298155606444295741}
   - {fileID: 2375877938220155872}
   opaqueMaterial: {fileID: 2100000, guid: 8abf8ab0f6ede5249a36afa59edefdd2, type: 2}
   transparentMaterial: {fileID: 2100000, guid: 93ff3a849dfe28c4bbf0a0bce58d982a, type: 2}
-  phazing: 0
+  canDash: 0
+  teleporting: 0
+  invisibleMaterial: {fileID: 2100000, guid: 5359b67752a5f2449b77d5b1f50de7b0, type: 2}

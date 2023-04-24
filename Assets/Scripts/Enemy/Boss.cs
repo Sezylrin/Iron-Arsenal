@@ -126,4 +126,57 @@ public abstract class Boss : Enemy
     {
         return CurrentHealth / MaxHealth;
     }
+
+    protected virtual void PatternActivate(int ActivePattern)
+    {
+        switch (ActivePattern)
+        {
+            case 1:
+                Pattern1();
+                break; 
+            case 2: 
+                Pattern2(); 
+                break;
+            case 3: 
+                Pattern3();
+                break;
+            case 4:
+                Pattern4();
+                break;
+            case 5:
+                Pattern5();
+                break;
+            case 6:
+                Pattern6();
+                break;
+            case 7:
+                Pattern7();
+                break;
+            case 8:
+                Pattern8();
+                break;
+        }
+    }
+
+    protected virtual void Pattern1() //Common Move and Attack 
+    {
+        StartCoroutine(PatternLength(10));
+
+        Move();
+    }
+
+    protected virtual void Pattern2() //Common Heal
+    {
+        StartCoroutine(PatternLength(3));
+
+        Heal(MaxHealth / 20);
+    }
+
+    protected virtual void Pattern3() {} //Override
+    protected virtual void Pattern4() {} //Override
+    protected virtual void Pattern5() {} //Override
+    protected virtual void Pattern6() {} //Override
+    protected virtual void Pattern7() {} //Override
+    protected virtual void Pattern8() {} //Override
+
 }

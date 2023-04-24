@@ -34,8 +34,13 @@ public abstract class CannonProjectile : MonoBehaviour
     public virtual void SetStats()
     {
         Damage = data.damage * data.level;
-        ProjectileSpeed = data.projectileSpeed + data.level;
-        FireDelay = data.fireDelay - (0.05f * data.level);
+        ProjectileSpeed = data.projectileSpeed + (0.5f * data.level - 1);
+        FireDelay = data.fireDelay - (0.01f * data.level);
+        if (FireDelay < 0.1f)
+        {
+            FireDelay = 0.1f;
+        }
+        
         ProjectileLifetime = data.projectileLifetime;
     }
 

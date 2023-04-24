@@ -43,5 +43,10 @@ public class PoisonShot : CannonProjectile
             other.gameObject.GetComponent<Enemy>().StartDamageOverTime(damageOverTime);
             DeleteNow();
         }
+
+        if (other.gameObject.tag == "Wall")
+        {
+            DeleteNow();
+        }
     } 
 }

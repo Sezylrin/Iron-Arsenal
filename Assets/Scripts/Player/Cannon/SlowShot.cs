@@ -43,5 +43,10 @@ public class SlowShot : CannonProjectile
             other.gameObject.GetComponent<Enemy>().StartSlow(slowStrength);
             DeleteNow();
         }
+
+        if (other.gameObject.tag == "Wall")
+        {
+            DeleteNow();
+        }
     }
 }

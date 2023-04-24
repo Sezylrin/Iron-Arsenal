@@ -20,8 +20,9 @@ public class Destroyer : Boss
 
     void Awake()
     {
+        NumberOfPatterns = 3;
+
         Init();
-        NumberOfPatterns = 2;
         projectilesParent = projectilesParent = GameObject.Find("Projectiles Parent").transform;
 
         StartCoroutine(DelayChoosingPattern(1));
@@ -43,25 +44,20 @@ public class Destroyer : Boss
             Move();
         }
 
-        else if (ActivePattern == 1)
+        if (ActivePattern == 0)
         {
-            Pattern1();
+            
         }
-        else if (ActivePattern == 2)
-        {
-            Pattern2();
-        }
-        else if (ActivePattern == 3)
-        {
-            Pattern3();
-        }
-        else if (ActivePattern == 4)
-        {
-            Pattern4();
-        }
+        else PatternActivate(ActivePattern);
     }
 
-    private void Pattern1() //Mega Bomb
+    protected override void Pattern2() //Heal Override
+    {
+        Heal(MaxHealth / 20);
+        base.Pattern2(); 
+    }
+
+    protected override void Pattern3() //Mega Bomb
     {
         StartCoroutine(PatternLength(1));
 
@@ -80,26 +76,11 @@ public class Destroyer : Boss
 
             StartCoroutine(DelayFiring(destroyerBombScript.FireDelay));
         }
-
     }
 
-    private void Pattern2() //Bash
+    protected override void Pattern4() 
     {
-        StartCoroutine(PatternLength(10));
-
-        Move();
-    }
-
-    private void Pattern3() //Heal
-    { 
-        StartCoroutine(PatternLength(3));
-
-        Heal(MaxHealth / 10);
-    }
-
-    private void Pattern4()
-    {
-        StartCoroutine(PatternLength(10));
+        StartCoroutine(PatternLength(1));
 
     }
 

@@ -13,7 +13,9 @@ public class EnemyManager : MonoBehaviour
     [field: SerializeField] public int SecondsUntilNextWave { get; private set; }
     [field: SerializeField] private float BasicEnemyChance { get; set; }
     [field: SerializeField] private float SpecialEnemyChance { get; set; }
+    [field: SerializeField] public int SafeSpawnArea { get; private set; }
     [field: SerializeField] public bool IsBossAlive { get; private set; }
+    [field: SerializeField] private int PreviousBoss { get; set; }
     [field: SerializeField] private bool SpawningWave { get; set; }
     public bool debugStartWaveNow; // Testing Variable
 
@@ -72,6 +74,7 @@ public class EnemyManager : MonoBehaviour
 
         IsBossAlive = false;
         SpawningWave = false;
+        SafeSpawnArea = 20;
 
         Wave -= 1;
         SecondsUntilNextWave = 0;
@@ -169,7 +172,15 @@ public class EnemyManager : MonoBehaviour
     {
         if (isBoss)
         {
-            return Random.Range(0, bossPrefabs.Length);
+            while (true)
+            {
+                int random = Random.Range(0, bossPrefabs.Length);
+                if (random != PreviousBoss)
+                {
+                    PreviousBoss = random;
+                    return PreviousBoss;
+                }
+            }
         }
         else
         {
@@ -217,19 +228,19 @@ public class EnemyManager : MonoBehaviour
 
     private void SetValues(GameObject enemy)
     {
-        enemy.transform.position = GetRandomPosition();
+        enemy.transform.position = GetRandomPosition(SafeSpawnArea);
         Enemy enemyScript = enemy.GetComponent<Enemy>();
         enemyScript.SetStats();
         enemyScript.InitEnemyEffects(augmentPrefabs);
         enemyList.Add(enemy.transform);
     }
 
-    private Vector3 GetRandomPosition()
+    public Vector3 GetRandomPosition(int distanceFromPlayer)
     {
-        Vector3 Top = new Vector3(PlayerPosition.x, 0, PlayerPosition.z + 30);
-        Vector3 Bottom = new Vector3(PlayerPosition.x, 0, PlayerPosition.z - 30);
-        Vector3 Right = new Vector3(PlayerPosition.x + 30, 0, PlayerPosition.z);
-        Vector3 Left = new Vector3(PlayerPosition.x - 30, 0, PlayerPosition.z);
+        Vector3 Top = new Vector3(PlayerPosition.x, 0, PlayerPosition.z + distanceFromPlayer);
+        Vector3 Bottom = new Vector3(PlayerPosition.x, 0, PlayerPosition.z - distanceFromPlayer);
+        Vector3 Right = new Vector3(PlayerPosition.x + distanceFromPlayer, 0, PlayerPosition.z);
+        Vector3 Left = new Vector3(PlayerPosition.x - distanceFromPlayer, 0, PlayerPosition.z);
 
         float x = 0;
         float z = 0;
