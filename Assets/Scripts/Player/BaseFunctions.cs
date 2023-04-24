@@ -32,6 +32,8 @@ public class BaseFunctions : MonoBehaviour
 
     public GameObject ShieldWave;
 
+    public Cannon cannon;
+
     public BaseEffects baseEffects;
     [System.Serializable]
     public class SocketSpawns

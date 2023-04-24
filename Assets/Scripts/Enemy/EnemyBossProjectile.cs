@@ -51,7 +51,7 @@ public abstract class EnemyBossProjectile : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<tempPlayer>().TakeDamage(Damage);
+            other.gameObject.GetComponent<BaseFunctions>().TakeDamage(Damage);
             DeleteNow();
         }
     }
