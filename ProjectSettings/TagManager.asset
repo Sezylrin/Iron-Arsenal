@@ -13,6 +13,9 @@ TagManager:
   - BulletSpawnPoint
   - TurretButton
   - EnemyProjectile
+  - Socket
+  - NotSocket
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -23,8 +26,8 @@ TagManager:
   - Ground
   - Enemy
   - Build
+  - BuildUI
   - Socket
-  - 
   - 
   - 
   - 

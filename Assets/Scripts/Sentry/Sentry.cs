@@ -17,10 +17,6 @@ public class Sentry : MonoBehaviour
 
     public Transform target;
 
-    private List<Transform> tempList = new List<Transform>();
-
-    public Transform testTransform;
-
     public GameObject projectilePF;
 
     private float timer;
@@ -32,9 +28,19 @@ public class Sentry : MonoBehaviour
     public Transform sentryHead;
 
     public SentryData data;
+
+    private GameObject poolObject;
+
+    public List<Augments> activeAugments;
+
+    private StatAttribute attributeType;
+
+    private SentryEffects sentryEffects;
+
+    public bool isDouble = false;
     void Start()
     {
-        tempList.Add(testTransform);
+        
         if (!centerPoint)
             centerPoint = GameObject.FindWithTag("CenterPoint").transform;
         if (!centerPoint)
@@ -44,6 +50,17 @@ public class Sentry : MonoBehaviour
         }
         if (data)
             SetValue();
+        sentryEffects = gameObject.AddComponent<SentryEffects>();
+        sentryEffects.hostSentry = this;
+        if (AugmentManager.Instance)
+        {
+            activeAugments = new List<Augments>(AugmentManager.Instance.activeAugments);
+            UpdateAugments();
+            AugmentManager.Instance.activeSentries.Add(this);
+        }
+        poolObject = new GameObject("Projectile Storage");
+
+        
     }
 
     // Update is called once per frame
@@ -54,13 +71,19 @@ public class Sentry : MonoBehaviour
         SetForward();
         if (!target)
         {
-            LocateTarget(LevelManager.Instance.enemyManager.enemyList);
+            LocateTarget(EnemyManager.Instance.enemyList);
         }
         else
         {
             if (timer <= 0)
             {
-                ShootTarget();
+                if(!isDouble)
+                    ShootTarget(Vector3.zero);
+                else
+                {
+                    ShootTarget(Vector3.right * 0.25f);
+                    ShootTarget(Vector3.left * 0.25f);
+                }
                 timer = 1/fireRate;
             }
             TargetCheck(target);
@@ -88,9 +111,10 @@ public class Sentry : MonoBehaviour
         }
     }
 
-    private void ShootTarget()
+    private void ShootTarget(Vector3 offSet)
     {
         GameObject bullet;
+        Projectile bulletProj;
         if (pooledBullets.ListCount() > 0)
         {
             //Debug.Log("Grabbed from pool");
@@ -101,14 +125,34 @@ public class Sentry : MonoBehaviour
         else
         {
             //Debug.Log("Spawned new");
-            bullet = Instantiate(projectilePF, Vector3.zero, Quaternion.identity);
+            bullet = Instantiate(projectilePF, Vector3.zero, Quaternion.identity,poolObject.transform);
+
         }
-        Projectile bulletProj = bullet.GetComponent<Projectile>();
-        bulletProj.SetProjectileData(data.projectileData, this);
+        bulletProj = bullet.GetComponent<Projectile>();
+        bulletProj.SetProjectileData(data.projectileData, this, attributeType);
+        if (activeAugments.Count - bulletProj.activeAugments.Count == 1)
+        {
+            Augments augmentToAdd = activeAugments[activeAugments.Count - 1];
+            bulletProj.activeAugments.Add(augmentToAdd);
+            AugmentBase temp = AugmentManager.Instance.AddAugmentToProjectile(augmentToAdd, bullet, bulletProj);
+            if (temp)
+            {
+                bulletProj.augmentBases.Add(temp);
+                temp.Init();
+            }
+        }
+        else if (activeAugments.Count - bulletProj.activeAugments.Count > 1 )
+        {
+            AddAllAugments(bullet, bulletProj);
+        }
+        foreach (AugmentBase augmentBase in bulletProj.augmentBases)
+        {
+            augmentBase.Respawn();
+        }
         bulletProj.setSpawn(bulletSpawnpoint.position);
         Vector3 targetDir = target.position - bulletSpawnpoint.position;
         targetDir.y = 0;
-        bulletProj.SetDirection(targetDir);
+        bulletProj.SetRotation(targetDir, offSet);
         Vector3 lookAt = target.position;
         lookAt.y = sentryHead.position.y;
         sentryHead.LookAt(lookAt, Vector3.up);
@@ -147,6 +191,7 @@ public class Sentry : MonoBehaviour
 
     private void SetValue()
     {
+        attributeType = data.Attribute;
         losAngle = data.losAngle;
         range = data.range;
         fireRate = data.fireRate;
@@ -158,5 +203,41 @@ public class Sentry : MonoBehaviour
         this.data = data;
         if (data)
             SetValue();
+    }
+
+    public void AddAugmentToList(Augments augmentToAdd)
+    {
+        if (!activeAugments.Contains(augmentToAdd) && !augmentToAdd.Equals(Augments.None))
+        {
+            activeAugments.Add(augmentToAdd);
+        }
+        sentryEffects.UpdateAugments();
+    }
+
+    public void AddAllAugments(GameObject bullet, Projectile projData)
+    {
+        foreach (Augments augmentToAdd in activeAugments)
+        {
+            if (!projData.activeAugments.Contains(augmentToAdd))
+            {
+                AugmentBase temp = AugmentManager.Instance.AddAugmentToProjectile(augmentToAdd, bullet, projData);
+                if (temp)
+                {
+                    projData.augmentBases.Add(temp);
+                    temp.Init();
+                }
+                    projData.activeAugments.Add(augmentToAdd);
+            }
+        }
+    }
+
+    public void UpdateAugments()
+    {
+        sentryEffects.UpdateAugments();
+    }
+
+    public void DestroyPool()
+    {
+        Destroy(poolObject);
     }
 }

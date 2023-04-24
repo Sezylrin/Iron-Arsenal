@@ -8,9 +8,9 @@ public class BuildManager
     public List<SentryData> buildableSentries;
 
     //Resources
-    public int iron { get; private set; }
-    public int copper { get; private set; }
-    public int gold { get; private set; }
+    public int xenorium { get; private set; }
+    public int novacite { get; private set; }
+    public int voidStone { get; private set; }
     public BuildManager()
     {
         buildableSentries = new List<SentryData>();
@@ -33,15 +33,15 @@ public class BuildManager
     public bool CanBuildSentry(SentryName sentryName)
     {
         SentryData sentry = GetSentryData(sentryName);
-        return iron >= sentry.ironCost && copper >= sentry.copperCost && gold >= sentry.goldCost;
+        return xenorium >= sentry.xenoriumCost && novacite >= sentry.novaciteCost && voidStone >= sentry.voidStoneCost;
     }
 
     public void BuildSentry(SentryName sentryName)
     {
         SentryData sentry = GetSentryData(sentryName);
-        iron -= sentry.ironCost;
-        copper -= sentry.copperCost;
-        gold -= sentry.goldCost;
+        xenorium -= sentry.xenoriumCost;
+        novacite -= sentry.novaciteCost;
+        voidStone -= sentry.voidStoneCost;
     }
 
     private SentryData GetSentryData(SentryName sentryName)
@@ -57,17 +57,17 @@ public class BuildManager
         return null;
     }
 
-    public void GainIron(int ironToAdd)
+    public void GainXenorium(int xenoriumToAdd)
     {
-        iron += ironToAdd;
+        xenorium += xenoriumToAdd;
     }
 
-    public void GainCopper(int copperToAdd)
+    public void GainNovacite(int novaciteToAdd)
     {
-        copper += copperToAdd;
+        novacite += novaciteToAdd;
     }
 
-    public void GainGold(int goldToAdd) {
-        gold += goldToAdd;
+    public void GainVoidStone(int voidStoneToAdd) {
+        voidStone += voidStoneToAdd;
     }
 }

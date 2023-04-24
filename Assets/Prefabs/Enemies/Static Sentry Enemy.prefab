@@ -348,6 +348,7 @@ MonoBehaviour:
   rotatePoint: {fileID: 690029518279754750}
   enemyBulletSpawnPoint: {fileID: 690029518053917997}
   enemyBullet: {fileID: 3670078471125790382, guid: 0fbacc1077e8a354e909f314967413f1, type: 3}
+  data: {fileID: 11400000, guid: 3a1c2921786aedc4483ab3bc02d83e1e, type: 2}
 --- !u!1 &4677882190513262248
 GameObject:
   m_ObjectHideFlags: 0

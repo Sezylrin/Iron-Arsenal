@@ -15,40 +15,53 @@ public enum EnemyType
     Cloaker,
     Enemy9,
     Enemy10,
-    StaticSentry
+    StaticSentry,
+    Boss
 };
 
 public abstract class Enemy : MonoBehaviour
 {
+    [field: Header("Stats")]
+    [field: SerializeField] public float CurrentHealth { get; set; }
+    [field: SerializeField] public float MaxHealth { get; set; }
+    [field: SerializeField] public float DamageOnCollide { get; set; }
+    [field: SerializeField] public float Speed { get; set; }
+    [field: SerializeField] public int RamLaunchMultiplier { get; set; }
+
+    [field: Header("Enemy Other")]
     public EnemyType type;
+    [field: SerializeField] public Rigidbody EnemyRB { get; set; }
+    public EnemyData data;
+    [field: SerializeField] public int Wave { get; set; }
 
     public EnemyManager Manager { get; set; }
     public GameObject Player { get; set; }
-    public Rigidbody EnemyRB { get; set; }
-    public float MaxHealth { get; set; }
-    public float CurrentHealth { get; set; }
-    public float DamageOnCollide { get; set; }
-    public float Speed { get; set; }
-    public int RamLaunchMultiplier { get; set; }
 
-    public EnemyData data;
+    public EnemyEffects enemyEffects;
+
+    public float damageFactor = 1;
+
+    public float speedFactor = 1;
+
+    private BaseFunctions baseFunctions;
 
     protected virtual void Init()
     {
         Player = GameObject.Find("Player");
-        Manager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
-        EnemyRB = GetComponent<Rigidbody>();
+        baseFunctions = Player.GetComponent<BaseFunctions>();
+        Manager = EnemyManager.Instance;
 
-        SetStats(Manager.wave);
-        CurrentHealth = MaxHealth;
+        Wave = Manager.Wave;
+        SetStats();
     }
 
-    public virtual void SetStats(int wave)
+    public virtual void SetStats()
     {
-        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, wave - 1);
-        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, wave - 1);
-        Speed = data.speed * Mathf.Pow(1.005f, wave - 1);
+        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, Wave - 1);
+        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, Wave - 1);
+        Speed = data.speed * Mathf.Pow(1.005f, Wave - 1);
         RamLaunchMultiplier = data.ramLaunchMultiplier;
+        CurrentHealth = MaxHealth;
     }
 
     protected virtual void SetRotation()
@@ -57,27 +70,51 @@ public abstract class Enemy : MonoBehaviour
     }
 
     protected virtual void Move()
-    {
-        Vector3 direction = Vector3.forward;
-        transform.Translate(direction.x * Speed * Time.deltaTime, 0, direction.z * Speed * Time.deltaTime);
+    { 
+        transform.Translate(Vector3.forward * Speed * speedFactor * Time.deltaTime);
     }
 
     protected virtual void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Player")
         {
-            TakeDamage(col.gameObject.GetComponent<tempPlayer>().ramDamage);
+            BaseFunctions tempBase = col.gameObject.GetComponent<BaseFunctions>();
+            TakeDamage(StatsManager.Instance.healthFactor * tempBase.collisionFactor);
+            tempBase.TakeDamage(DamageOnCollide);
             EnemyRB.AddForce(Vector3.Normalize(new Vector3(transform.position.x - col.transform.position.x, 0, transform.position.z - col.transform.position.z)) * RamLaunchMultiplier, ForceMode.Impulse);
         }
     }
 
     public virtual void TakeDamage(float damage)
     {
-        CurrentHealth -= damage;
+        if (CurrentHealth <= 0)
+            return;
+        if (type.Equals(EnemyType.Boss) && enemyEffects.isBossDamage)
+            damage *= 1.2f;
+        float finalDamage = damage * damageFactor;
+        CurrentHealth -= finalDamage;
+        if (enemyEffects.isLifeSteal)
+        {
+            baseFunctions.RecoverHealth(finalDamage * 0.05f);
+        }
         if (CurrentHealth <= 0)
         {
             StopCoroutine(TakeDamageOverTime(0f));
+            
             OnDeath();
+            if (enemyEffects.isExplode && !type.Equals(EnemyType.Exploder))
+            {
+                Explosion tempExplosion = Instantiate(enemyEffects.augmentPFList[0], transform.position, Quaternion.identity).GetComponent<Explosion>();
+                tempExplosion.SetDamage(MaxHealth * 0.3f);
+            }
+            if (enemyEffects.isFreezeShard)
+            {
+                enemyEffects.ReleaseShard();
+            }
+            if (enemyEffects.isShieldSteal)
+            {
+                baseFunctions.DecreaseRecovery();
+            }
         }
     }
 
@@ -131,7 +168,11 @@ public abstract class Enemy : MonoBehaviour
             case EnemyType.Cloaker:
                 Manager.PoolEnemy(gameObject, 8);
                 break;
+            default:
+                Destroy(gameObject);
+                break;
         }
+        enemyEffects.fireTick = 0;
     }
 
     public virtual void StartSlow(float slowStrength)
@@ -145,8 +186,22 @@ public abstract class Enemy : MonoBehaviour
             
     public virtual IEnumerator SlowEnemy(float slowStrength)
     {
-        Speed = (data.speed * Mathf.Pow(1.005f, data.wave - 1)) * slowStrength;
+        Speed = (data.speed * Mathf.Pow(1.005f, Wave - 1)) * slowStrength;
         yield return new WaitForSeconds(5f);
-        Speed = data.speed * Mathf.Pow(1.005f, data.wave - 1);
+        Speed = data.speed * Mathf.Pow(1.005f, Wave - 1);
     }
+
+    public void InitEnemyEffects(GameObject[] augmentPF)
+    {
+        if (!enemyEffects)
+        {
+            enemyEffects = gameObject.AddComponent<EnemyEffects>();
+            enemyEffects.hostenemy = this;
+        }
+        enemyEffects.SetAugmentState();
+        enemyEffects.augmentPFList = augmentPF;
+        
+    }
+
+
 }

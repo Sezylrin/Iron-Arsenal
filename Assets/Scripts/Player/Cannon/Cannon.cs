@@ -7,21 +7,25 @@ public class Cannon : MonoBehaviour
     private Vector3 mouseLocation;
     private Vector3 worldPosition;
 
-    private GameObject newCannonProjectile;
-    private bool ableToShoot;
-    private Transform projectilesParent;
+    [field: Header("Cannon")]
+    public int activeCannonProjectile;
+    public GameObject[] cannonProjectileArray;
 
+    [field: Header("Flamethrower")]
+    public CannonProjectileData flameData;
+
+    [field: Header("Other")]
     public Transform rotatePoint;
     public Transform cannonProjectileSpawnPoint;
     public LayerMask groundMask;
 
+    private GameObject newCannonProjectile;
     private ParticleSystem flamethrower;
-    public CannonProjectileData data;
+    private bool ableToShoot;
+    private Transform projectilesParent;
     private bool mouseHeldDown = false;
     private bool firing = false;
-
-    public int activeCannonProjectile;                  // Determines which projectile  
-    public GameObject[] cannonProjectileArray;          // to fire using following list
+        
     private Pooling pooledBullets = new Pooling();      // 0 - Default (Bullets)
     private Pooling pooledShotguns = new Pooling();     // 1 - Shotgun
     private Pooling pooledRapidFires = new Pooling();   // 2 - Rapid Fire
@@ -66,7 +70,7 @@ public class Cannon : MonoBehaviour
         rotatePoint.LookAt(worldPosition, Vector3.down);
 
         var main = flamethrower.main;
-        main.startSpeed = 9.5f + (data.projectileSpeed * data.level / 2);
+        main.startSpeed = 9.5f + (flameData.projectileSpeed * flameData.level / 2);
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) 
         {

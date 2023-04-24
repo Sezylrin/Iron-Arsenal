@@ -75,39 +75,39 @@ public class Ore : MonoBehaviour
             {
                 if (currentResourcesInDeposit - miningScript.miningOutput <= 0)
                 {
-                    levelManager.GainIron(currentResourcesInDeposit);
+                    levelManager.GainXenorium(currentResourcesInDeposit);
                     Destroy(gameObject);
                 }
                 else
                 {
                     currentResourcesInDeposit -= miningScript.miningOutput;
-                    levelManager.GainIron(miningScript.miningOutput);
+                    levelManager.GainXenorium(miningScript.miningOutput);
                 }
             }
             else if (type == OreType.Novacite)
             {
                 if (currentResourcesInDeposit - miningScript.miningOutput <= 0)
                 {
-                    levelManager.GainCopper(currentResourcesInDeposit);
+                    levelManager.GainNovacite(currentResourcesInDeposit);
                     Destroy(gameObject);
                 }
                 else
                 {
                     currentResourcesInDeposit -= miningScript.miningOutput;
-                    levelManager.GainCopper(miningScript.miningOutput);
+                    levelManager.GainNovacite(miningScript.miningOutput);
                 }
             }
             else if (type == OreType.Voidstone)
             {
                 if (currentResourcesInDeposit - miningScript.miningOutput <= 0)
                 {
-                    levelManager.GainGold(currentResourcesInDeposit);
+                    levelManager.GainVoidStone(currentResourcesInDeposit);
                     Destroy(gameObject);
                 }
                 else
                 {
                     currentResourcesInDeposit -= miningScript.miningOutput;
-                    levelManager.GainGold(miningScript.miningOutput);
+                    levelManager.GainVoidStone(miningScript.miningOutput);
                 }
             }
         }

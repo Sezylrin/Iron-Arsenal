@@ -7,7 +7,6 @@ public class DataManager : MonoBehaviour
     public static DataManager instance;
     public List<CannonProjectileData> cannonProjectileData = new List<CannonProjectileData>();
     public List<EnemyData> enemyData = new List<EnemyData>();
-    public EnemyData staticSentryData;
 
     void Awake()
     {
@@ -64,14 +63,5 @@ public class DataManager : MonoBehaviour
                 cannonProjectileData[6].level += 1;
                 break;
         }
-    }
-
-    public void UpdateEnemyWaves(int wave)
-    {
-        for (int i = 0; enemyData.Count > i; i++)
-        {
-            enemyData[i].wave = wave;
-        }
-        staticSentryData.wave = wave;
     }
 }
