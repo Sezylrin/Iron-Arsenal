@@ -5,6 +5,21 @@ public enum State
     Normal,
     Building
 }
+
+public struct ResourcesAmount
+{
+    public ResourcesAmount(int xenorium, int novacite, int voidStone)
+    {
+        this.xenorium = xenorium;
+        this.novacite = novacite;
+        this.voidStone = voidStone;
+    }
+
+    public int xenorium { get; }
+    public int novacite { get; }
+    public int voidStone { get; }
+
+}
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
@@ -37,8 +52,9 @@ public class LevelManager : MonoBehaviour
     public void Start()
     {
         levelCanvasManager = LevelCanvasManager.Instance;
-        if (BuildUi)
+        if (BuildUi) {
             BuildUi.AddToMenu(possibleSentries[0]);
+        }
     }
 
     //Temp for now. Eventually these will be called by other classes
@@ -88,6 +104,11 @@ public class LevelManager : MonoBehaviour
         levelCanvasManager.SetVoidStoneAmount(buildManager.voidStone);
     }
 
+    public bool PurchaseItemIfPossible(int xenoriumCost, int novaciteCost, int voidStoneCost)
+    {
+        return buildManager.PurchaseItemIfPossible(xenoriumCost, novaciteCost, voidStoneCost);
+    }
+
     public void SpawnAugmentChoice()
     {
         augmentManager.CreateAugmentChoices();
@@ -97,18 +118,8 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void RemoveAugmentMenu()
+    public ResourcesAmount GetResources()
     {
-        levelCanvasManager.RemoveAugmentChoices();
-    }
-
-    public void OpenShopMenu()
-    {
-        levelCanvasManager.OpenShopMenu();
-    }
-
-    public void CloseShopMenu()
-    {
-        levelCanvasManager.CloseShopMenu();
+        return new ResourcesAmount(buildManager.xenorium, buildManager.novacite, buildManager.voidStone);
     }
 }

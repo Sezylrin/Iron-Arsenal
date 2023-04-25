@@ -42,7 +42,7 @@ public class AugmentMenu : MonoBehaviour
     public void SelectAugment(int augmentIndex)
     {
         AugmentManager.Instance.AddAugment(currentAugments[augmentIndex].augmentType);
-        LevelManager.Instance.RemoveAugmentMenu();
+        LevelCanvasManager.Instance.RemoveAugmentChoices();
     }
 }
 

@@ -112,38 +112,17 @@ public class LevelCanvasManager : MonoBehaviour
         buildMenu.SetActive(true);
     }
 
-    public void OpenShopMenu()
+    public void OpenShopMenu(ShopManager shopManager)
     {
         shopMenu.SetActive(true);
         resourceContainer.SetActive(false);
+        shopMenu.GetComponent<ShopMenu>().OpenMenu(shopManager);
     }
 
     public void CloseShopMenu()
     {
         shopMenu.SetActive(false);
         resourceContainer.SetActive(true);
-    }
-
-    private void LoadSentries()
-    {
-        List<SentryData> sentries = new();
-        string sentryPath = "Sentries/";
-
-        foreach(SentryName sentryName in Enum.GetValues(typeof(SentryName)))
-        {
-            SentryData sentryData = Resources.Load<SentryData>(sentryPath + sentryName);
-            if (sentryData != null)
-            {
-                sentries.Add(sentryData);
-                GameObject sentryContainer = Instantiate(sentryContainerPrefab);
-                sentryContainer.transform.SetParent(sentriesContent.transform, false);
-                sentryContainer.GetComponent<SentryBuildInitialise>().InitialiseSentryContainer(sentryData);
-            }
-            else 
-            {
-                Debug.LogError("Unable to load SentryData asset: " + sentryName);
-            }
-        }
     }
 
     public void AddSentryUI(SentryData sentryToAdd)

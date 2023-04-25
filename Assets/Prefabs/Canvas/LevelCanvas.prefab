@@ -1665,18 +1665,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873c559af79ef0c488814f8befa829f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstAugBtn: {fileID: 2030244728}
-  secondAugBtn: {fileID: 60471448}
-  thirdAugBtn: {fileID: 1473802280}
-  firstAugImage: {fileID: 1837263470}
-  firstAugName: {fileID: 198807261}
-  firstAugDesc: {fileID: 291601507}
-  secondAugImage: {fileID: 422601302}
-  secondAugName: {fileID: 356574507}
-  secondAugDesc: {fileID: 1181290503}
-  thirdAugImage: {fileID: 1514219384}
-  thirdAugName: {fileID: 938793620}
-  thirdAugDesc: {fileID: 1942265677}
+  augmentButtons:
+  - {fileID: 2030244728}
+  - {fileID: 60471448}
+  - {fileID: 1473802280}
+  augmentSlots:
+  - augmentImage: {fileID: 1837263470}
+    augmentName: {fileID: 198807261}
+    augmentDesc: {fileID: 291601507}
+  - augmentImage: {fileID: 422601302}
+    augmentName: {fileID: 356574507}
+    augmentDesc: {fileID: 1181290503}
+  - augmentImage: {fileID: 1514219384}
+    augmentName: {fileID: 938793620}
+    augmentDesc: {fileID: 1942265677}
 --- !u!1 &576339619
 GameObject:
   m_ObjectHideFlags: 0
@@ -4097,7 +4099,7 @@ RectTransform:
   - {fileID: 1621372990}
   - {fileID: 554881079}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4178,6 +4180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735633563824fdc43a92f30b7ee28bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceContainer: {fileID: 1481472459}
   xenoriumLabel: {fileID: 164064922}
   novaciteLabel: {fileID: 1114237562}
   voidStoneLabel: {fileID: 1695111115}
@@ -4189,6 +4192,7 @@ MonoBehaviour:
     m_Bits: 1536
   augmentMenu: {fileID: 554881078}
   buildMenu: {fileID: 1621372989}
+  shopMenu: {fileID: 0}
   overMenu: 0
 --- !u!114 &1943641776
 MonoBehaviour:

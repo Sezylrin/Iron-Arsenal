@@ -70,4 +70,16 @@ public class BuildManager
     public void GainVoidStone(int voidStoneToAdd) {
         voidStone += voidStoneToAdd;
     }
+
+    public bool PurchaseItemIfPossible(int xenoriumCost, int novaciteCost, int voidStoneCost)
+    {
+        if (xenorium >= xenoriumCost && novacite >= novaciteCost && voidStone >= voidStoneCost)
+        {
+            xenorium -= xenoriumCost;
+            novacite -= novaciteCost;
+            voidStone -= voidStoneCost;
+            return true;
+        }
+        return false;
+    }
 }
