@@ -102,6 +102,7 @@ public class ShopMenu : MonoBehaviour
     public void PurchaseSentry(SentryData sentry)
     {
         shopManager.PurchaseSentry(sentry);
+        UpdateResources();
 
         if (shopManager.purchasableSentries.Count == 0)
         {
@@ -110,6 +111,13 @@ public class ShopMenu : MonoBehaviour
         }
 
         DisplayItems(FindCurrentTab());
+    }
+
+    public void UpdateResources()
+    {
+        xenorium.text = LevelManager.Instance.GetXenorium().ToString();
+        novacite.text = LevelManager.Instance.GetNovacite().ToString();
+        voidStone.text = LevelManager.Instance.GetVoidStone().ToString();
     }
 
     private void DisplaySentryPurchases()

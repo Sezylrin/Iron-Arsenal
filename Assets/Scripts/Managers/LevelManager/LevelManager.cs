@@ -87,6 +87,21 @@ public class LevelManager : MonoBehaviour
         levelCanvasManager.SetXenoriumAmount(buildManager.xenorium);
     }
 
+    public int GetXenorium()
+    {
+        return buildManager.xenorium;
+    }
+
+    public int GetNovacite()
+    {
+        return buildManager.novacite;
+    }
+
+    public int GetVoidStone()
+    {
+        return buildManager.voidStone;
+    }
+
     public void GainNovacite(int novaciteToAdd)
     {
         buildManager.GainNovacite(novaciteToAdd);
@@ -101,7 +116,11 @@ public class LevelManager : MonoBehaviour
 
     public bool PurchaseItemIfPossible(int xenoriumCost, int novaciteCost, int voidStoneCost)
     {
-        return buildManager.PurchaseItemIfPossible(xenoriumCost, novaciteCost, voidStoneCost);
+        bool didSucceed = buildManager.PurchaseItemIfPossible(xenoriumCost, novaciteCost, voidStoneCost);
+        levelCanvasManager.SetXenoriumAmount(buildManager.xenorium);
+        levelCanvasManager.SetNovaciteAmount(buildManager.novacite);
+        levelCanvasManager.SetVoidStoneAmount(buildManager.voidStone);
+        return didSucceed;
     }
 
     public void SpawnAugmentChoice()

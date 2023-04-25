@@ -67,9 +67,11 @@ public class PurchaseItem : MonoBehaviour
                 if (LevelManager.Instance.PurchaseItemIfPossible(mechUpgradeData.xenoriumCost, mechUpgradeData.novaciteCost, mechUpgradeData.voidStoneCost))
                 {
                     //TODO: Handle purchasing mechUpgrades
+                    shopMenu.UpdateResources();
                 }
                 break;
             case TabType.attributeUpgrades:
+                shopMenu.UpdateResources();
                 break;
             case TabType.sentryPurchases:
                 if (LevelManager.Instance.PurchaseItemIfPossible(sentryData.unlockXenoriumCost, sentryData.unlockNovaciteCost, sentryData.unlockVoidStoneCost))
