@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1533879619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1533879620}
+  m_Layer: 0
+  m_Name: EmptyTile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1533879620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533879619}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5099565300877849572}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5099565300703248957
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5099565300703248956}
   m_Layer: 0
-  m_Name: GeneratedTilesContainer
+  m_Name: ObjectTilesContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +91,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5099565301087661871}
+  - {fileID: 2368341417593235572}
   - {fileID: 5099565300703248956}
+  - {fileID: 1533879620}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -108,11 +141,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e6c58680bd3d5b4fb8913524856e0e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiles:
-    grass: {fileID: 1862945125839783886, guid: 4f0315fc60c7a9d43aaafca9f34e907f, type: 3}
-    water: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
-    dirt: {fileID: 4257981420888131409, guid: f91408b1ec929a34e86a3930cc15098b, type: 3}
+  groundTile: {fileID: 8052467169487736447, guid: f7de2f10e535c3d44b02236c4bfac47f, type: 3}
+  emptyTile: {fileID: 1533879619}
+  objectTiles:
+    novacite: {fileID: 8554378202571416629, guid: 953d56150040ebc4bb2469312b3bb9ad, type: 3}
+    voidstone: {fileID: 3437153877345992295, guid: cf4089a08027b4b4dabc645cac347277, type: 3}
+    xenorium: {fileID: 5440523406789250478, guid: e6424028bb726e446ae3a8f91e531eb2, type: 3}
   player: {fileID: 0}
-  container: {fileID: 5099565300703248956}
-  chanceOfWater: 0.4
-  chanceOfDirt: 0.6
+  groundTilesContainer: {fileID: 2368341417593235572}
+  objectTilesContainer: {fileID: 5099565300703248956}
+  chanceOfNovacite: 1
+  chanceOfVoidstone: 2
+  chanceOfXenorium: 3
+  radius: 10
+  tileOffset: 9
+--- !u!1 &7482120574608116646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2368341417593235572}
+  m_Layer: 0
+  m_Name: GroundTilesContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2368341417593235572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7482120574608116646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5099565300877849572}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

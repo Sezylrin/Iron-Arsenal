@@ -476,6 +476,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1190677623}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: chanceOfNovacite
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: chanceOfXenorium
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: chanceOfVoidstone
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

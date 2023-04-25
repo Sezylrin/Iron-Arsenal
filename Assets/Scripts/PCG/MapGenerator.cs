@@ -7,19 +7,23 @@ using Random = UnityEngine.Random;
 public class MapGenerator : MonoBehaviour
 {
     [Serializable]
-    public struct Tiles
+    public struct ObjectTiles
     {
-        public GameObject grass;
-        public GameObject water;
-        public GameObject dirt;
+        public GameObject novacite;
+        public GameObject voidstone;
+        public GameObject xenorium;
     }
 
-    public Tiles tiles;
+    public GameObject groundTile;
+    public GameObject emptyTile;
+    public ObjectTiles objectTiles;
     public GameObject player;
-    public Transform container;
+    public Transform groundTilesContainer;
+    public Transform objectTilesContainer;
 
-    [Range(0, 50)] public float chanceOfWater;
-    [Range(0, 50)] public float chanceOfDirt;
+    [Range(0, 50)] public float chanceOfNovacite;
+    [Range(0, 50)] public float chanceOfVoidstone;
+    [Range(0, 50)] public float chanceOfXenorium;
 
     [Header("Values for Tiles to not overlap")]
     public int radius = 10;
@@ -33,8 +37,10 @@ public class MapGenerator : MonoBehaviour
     private int XPlayerLocation => (int)Mathf.Floor(player.transform.position.x / tileOffset) * tileOffset;
     private int ZPlayerLocation => (int)Mathf.Floor(player.transform.position.z / tileOffset) * tileOffset;
 
-    private Dictionary<Vector3, Tile> allTiles = new Dictionary<Vector3, Tile>();
-    private Dictionary<Vector3, Tile> activeTiles = new Dictionary<Vector3, Tile>();
+    private Dictionary<Vector3, Tile> allGroundTiles = new Dictionary<Vector3, Tile>();
+    private Dictionary<Vector3, Tile> activeGroundTiles = new Dictionary<Vector3, Tile>();
+    private Dictionary<Vector3, Tile> allObjectTiles = new Dictionary<Vector3, Tile>();
+    private Dictionary<Vector3, Tile> activeObjectTiles = new Dictionary<Vector3, Tile>();
 
     private void Start()
     {
@@ -49,7 +55,8 @@ public class MapGenerator : MonoBehaviour
 
     private void GenerateTiles()
     {
-        var newActiveTiles = new Dictionary<Vector3, Tile>();
+        var newActiveGroundTiles = new Dictionary<Vector3, Tile>();
+        var newActiveObjectTiles = new Dictionary<Vector3, Tile>();
         float cTime = Time.realtimeSinceStartup;
 
         for (int x = -radius; x <= radius; x++)
@@ -58,41 +65,38 @@ public class MapGenerator : MonoBehaviour
             {
                 Vector3 pos = new Vector3(x * tileOffset + XPlayerLocation, 0, z * tileOffset + ZPlayerLocation);
 
-                // If a tile hasn't spawned in that position yet
-                if (!allTiles.ContainsKey(pos))
+                // If a ground tile hasn't spawned in that position yet
+                if (!allGroundTiles.ContainsKey(pos))
                 {
-                    var random = Random.Range(0.0f, 100.0f);
-                    GameObject plane = tiles.grass;
-                    if (random > 0 && random <= chanceOfDirt)
-                    {
-                        plane = tiles.dirt;
-                    }
-                    if (random > chanceOfDirt && random <= chanceOfDirt + chanceOfWater)
-                    {
-                        plane = tiles.water;
-                    }
-                    GameObject tileInstance = Instantiate(plane, pos, Quaternion.identity, container);
-                    Tile tile = new Tile(cTime, tileInstance);
-                    activeTiles.Add(pos, tile);
-                    allTiles.Add(pos, tile);
+                    SpawnNewTile(pos, cTime);
                 }
-                // If a tile has occupies that position
+                // If a tile occupies that position
                 else
                 {
                     // Update the timestamp to be the current time
-                    allTiles[pos].cTimestamp = cTime;
+                    allGroundTiles[pos].cTimestamp = cTime;
+                    allObjectTiles[pos].cTimestamp = cTime;
                     // If the tile is not active
-                    if (!activeTiles.ContainsKey(pos))
+                    if (!activeGroundTiles.ContainsKey(pos))
                     {
-                        allTiles[pos].tileObject.SetActive(true);
-                        activeTiles.Add(pos, allTiles[pos]);
+                        // Activate that tile
+                        allGroundTiles[pos].tileObject.SetActive(true);
+                        activeGroundTiles.Add(pos, allGroundTiles[pos]);
+                    }
+                    if (!activeObjectTiles.ContainsKey(pos))
+                    {
+                        if (allObjectTiles[pos].tileObject && allObjectTiles[pos].tileObject != emptyTile)
+                        {
+                            allObjectTiles[pos].tileObject.SetActive(true);
+                            activeObjectTiles.Add(pos, allObjectTiles[pos]);
+                        }
                     }
                 }
             }
         }
 
         // Loop through all active tiles
-        foreach (var tile in activeTiles)
+        foreach (var tile in activeGroundTiles)
         {
             // If they aren't in bounds of current time
             if (!tile.Value.cTimestamp.Equals(cTime))
@@ -102,12 +106,83 @@ public class MapGenerator : MonoBehaviour
             }
             else
             {
-                newActiveTiles.Add(tile.Key, tile.Value);
+                newActiveGroundTiles.Add(tile.Key, tile.Value);
             }
         }
 
-        activeTiles = newActiveTiles;
+        foreach (var tile in activeObjectTiles)
+        {
+            // If they aren't in bounds of current time
+            if (!tile.Value.cTimestamp.Equals(cTime))
+            {
+                if (tile.Value.tileObject && tile.Value.tileObject != emptyTile)
+                {
+                    // Disable object
+                    tile.Value.tileObject.SetActive(false);
+                }
+            }
+            else
+            {
+                newActiveObjectTiles.Add(tile.Key, tile.Value);
+            }
+        }
+
+        activeGroundTiles = newActiveGroundTiles;
+        activeObjectTiles = newActiveObjectTiles;
         startPos = player.transform.position;
+    }
+
+    private void SpawnNewTile(Vector3 pos, float cTime)
+    {
+        SpawnNewGroundTile(pos, cTime);
+
+        SpawnNewObjectTile(pos, cTime);
+    }
+
+    private void SpawnNewGroundTile(Vector3 pos, float cTime)
+    {
+        GameObject tileInstance = Instantiate(groundTile, pos, Quaternion.identity, groundTilesContainer);
+        Tile tile = new Tile(cTime, tileInstance);
+        activeGroundTiles.Add(pos, tile);
+        allGroundTiles.Add(pos, tile);
+    }
+
+    private void SpawnNewObjectTile(Vector3 pos, float cTime)
+    {
+        GameObject tileType = RandomTile();
+        GameObject tileInstance;
+        if (!tileType)
+        {
+            tileInstance = emptyTile;
+        }
+        else
+        {
+            tileInstance = Instantiate(tileType, pos + new Vector3(0.0f,0.01f,0.0f), Quaternion.identity, objectTilesContainer);
+        }
+        Tile tile = new Tile(cTime, tileInstance);
+        activeObjectTiles.Add(pos, tile);
+        allObjectTiles.Add(pos, tile);
+    }
+
+    private GameObject RandomTile()
+    {
+        int random = Random.Range(0, 100);
+        GameObject tileType = null;
+
+        if (0 < random && random <= chanceOfNovacite)
+        {
+            tileType = objectTiles.novacite;
+        }
+        if (chanceOfNovacite < random && random <= chanceOfVoidstone + chanceOfNovacite)
+        {
+            tileType = objectTiles.voidstone;
+        }
+        if (chanceOfVoidstone + chanceOfNovacite < random && random <= chanceOfNovacite + chanceOfVoidstone + chanceOfXenorium)
+        {
+            tileType = objectTiles.xenorium;
+        }
+
+        return tileType;
     }
 
     private class Tile
