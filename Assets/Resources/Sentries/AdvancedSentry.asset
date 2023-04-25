@@ -26,3 +26,7 @@ MonoBehaviour:
   novaciteCost: 200
   voidStoneCost: 200
   buildable: 1
+  defaultAugment: 
+  unlockXenoriumCost: 10
+  unlockNovaciteCost: 10
+  unlockVoidStoneCost: 10
