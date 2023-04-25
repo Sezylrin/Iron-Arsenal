@@ -12,8 +12,8 @@ public class BaseFunctions : MonoBehaviour
 
     public int currentLevel;
 
-    public float baseHealth;
-    public float baseHealthFactor;
+    public float maxHealth;
+    public float maxHealthFactor;
     private float currentHealth;
 
     public float maxShieldHealth;
@@ -54,7 +54,7 @@ public class BaseFunctions : MonoBehaviour
     void Start()
     {
         UpdateHealth();
-        currentHealth = baseHealth;
+        currentHealth = maxHealth;
         currentShield = maxShieldHealth;
     }
 
@@ -164,7 +164,7 @@ public class BaseFunctions : MonoBehaviour
         }
         else
             currentHealth -= amount;
-        if (baseEffects.isRage && currentHealth <= baseHealth * 0.3)
+        if (baseEffects.isRage && currentHealth <= maxHealth * 0.3)
         {
             isRaged = true;
         }
@@ -172,11 +172,11 @@ public class BaseFunctions : MonoBehaviour
 
     public void RecoverHealth(float amount)
     {
-        if (currentHealth + amount > baseHealth)
-            currentHealth = baseHealth;
+        if (currentHealth + amount > maxHealth)
+            currentHealth = maxHealth;
         else
             currentHealth += amount;
-        if (baseEffects.isRage && currentHealth > baseHealth * 0.3)
+        if (baseEffects.isRage && currentHealth > maxHealth * 0.3)
         {
             isRaged = false;
         }
@@ -193,7 +193,10 @@ public class BaseFunctions : MonoBehaviour
 
     public void UpdateHealth()
     {
-        baseHealth = StatsManager.Instance.healthFactor * baseHealthFactor;
+        float newHealth = StatsManager.Instance.healthFactor * maxHealthFactor;
+        float healthDifference = newHealth - maxHealth;
+        maxHealth = StatsManager.Instance.healthFactor * maxHealthFactor;
+        RecoverHealth(healthDifference);
         maxShieldHealth = StatsManager.Instance.healthFactor * maxShieldFactor;
         shieldRecoverRate = maxShieldHealth * shieldRecoverFactor;
     }

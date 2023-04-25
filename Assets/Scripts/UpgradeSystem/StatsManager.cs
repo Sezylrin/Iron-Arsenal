@@ -16,6 +16,17 @@ public class StatsManager : MonoBehaviour
     public float elementalDamage;
     public float healthFactor;
 
+    public float basePhysical;
+    public float baseElemental;
+    public float baseHealth;
+
+    private int physicalLevel = 0;
+    private int elementalLevel = 0;
+    private int healthLevel = 0;
+
+    public float initialBoost;
+    public float diminishingValue;
+
     private BaseFunctions playerFunctions;
     void Awake()
     {
@@ -35,32 +46,40 @@ public class StatsManager : MonoBehaviour
     }
     public void UpgradeDamage()
     {
-        physicalDamage *= 1.1f;
+        float dimishingAmount = diminishingValue * physicalLevel;
+        physicalDamage = basePhysical * (1f + initialBoost - (initialBoost - dimishingAmount) <= (initialBoost * 0.1f)? initialBoost * 0.9f : dimishingAmount);
+        physicalLevel++;
     }
-    public void UpgradeDamage(float damage)
+
+    public float PhysicalUpgradeAmount()
     {
-        physicalDamage += damage;
+        float dimishingAmount = diminishingValue * physicalLevel;
+        return (initialBoost - dimishingAmount) <= (initialBoost * 0.1) ? initialBoost * 0.1f : initialBoost - dimishingAmount;
     }
 
     public void UpgradeElemental()
     {
-        elementalDamage *= 1.1f;
+        float dimishingAmount = diminishingValue * elementalLevel;
+        elementalDamage *= baseElemental * (1f + initialBoost - (initialBoost - dimishingAmount) <= (initialBoost * 0.1f) ? initialBoost * 0.9f : dimishingAmount);
+        elementalLevel++;
     }
-
-    public void UpgradeElemental(float damage)
+    public float ElementalUpgradeAmount()
     {
-        elementalDamage += damage;
+        float dimishingAmount = diminishingValue * elementalLevel;
+        return (initialBoost - dimishingAmount) <= (initialBoost * 0.1) ? initialBoost * 0.1f : initialBoost - dimishingAmount;
     }
 
     public void UpgradeHealth()
     {
-        healthFactor *= 1.1f;
+        float dimishingAmount = diminishingValue * healthLevel;
+        healthFactor *= baseHealth * (1f + initialBoost - (initialBoost - dimishingAmount) <= (initialBoost * 0.1f) ? initialBoost * 0.9f : dimishingAmount);
+        healthLevel++;
         playerFunctions.UpdateHealth();
+    }
+    public float HealthUpgradeAmount()
+    {
+        float dimishingAmount = diminishingValue * healthLevel;
+        return (initialBoost - dimishingAmount) <= (initialBoost * 0.1) ? initialBoost * 0.1f : initialBoost - dimishingAmount;
     }
 
-    public void UpgradeHealth(float health)
-    {
-        healthFactor += health;
-        playerFunctions.UpdateHealth();
-    }
 }

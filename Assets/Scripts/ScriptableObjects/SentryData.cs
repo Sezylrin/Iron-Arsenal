@@ -31,4 +31,6 @@ public class SentryData : ScriptableObject
     public int novaciteCost;
     public int voidStoneCost;
     public bool buildable;
+
+    public Augments[] defaultAugment;
 }
