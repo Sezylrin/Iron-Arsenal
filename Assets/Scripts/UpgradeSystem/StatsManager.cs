@@ -20,6 +20,10 @@ public class StatsManager : MonoBehaviour
     public float baseElemental;
     public float baseHealth;
 
+    private float physicalScale = 0;
+    private float elementalScale = 0;
+    private float healthScale = 0;
+
     private int physicalLevel = 0;
     private int elementalLevel = 0;
     private int healthLevel = 0;
@@ -46,8 +50,8 @@ public class StatsManager : MonoBehaviour
     }
     public void UpgradeDamage()
     {
-        float dimishingAmount = diminishingValue * physicalLevel;
-        physicalDamage = basePhysical * (1f + initialBoost - (initialBoost - dimishingAmount) <= (initialBoost * 0.1f)? initialBoost * 0.9f : dimishingAmount);
+        physicalScale += PhysicalUpgradeAmount();
+        physicalDamage = basePhysical * (1f + physicalScale);
         physicalLevel++;
     }
 
@@ -59,8 +63,8 @@ public class StatsManager : MonoBehaviour
 
     public void UpgradeElemental()
     {
-        float dimishingAmount = diminishingValue * elementalLevel;
-        elementalDamage *= baseElemental * (1f + initialBoost - (initialBoost - dimishingAmount) <= (initialBoost * 0.1f) ? initialBoost * 0.9f : dimishingAmount);
+        elementalScale += ElementalUpgradeAmount();
+        elementalDamage *= baseElemental * (1f + elementalScale);
         elementalLevel++;
     }
     public float ElementalUpgradeAmount()
@@ -71,8 +75,8 @@ public class StatsManager : MonoBehaviour
 
     public void UpgradeHealth()
     {
-        float dimishingAmount = diminishingValue * healthLevel;
-        healthFactor *= baseHealth * (1f + initialBoost - (initialBoost - dimishingAmount) <= (initialBoost * 0.1f) ? initialBoost * 0.9f : dimishingAmount);
+        healthScale += HealthUpgradeAmount();
+        healthFactor *= baseHealth * (1f + healthScale);
         healthLevel++;
         playerFunctions.UpdateHealth();
     }
