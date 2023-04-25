@@ -122,7 +122,8 @@ public class BaseFunctions : MonoBehaviour
             if (currentShield - amount < 0f)
             {
                 currentShield = 0f;
-                Instantiate(ShieldWave, transform.position, Quaternion.identity);
+                if (baseEffects.isShieldExplosion)
+                    Instantiate(ShieldWave, transform.position, Quaternion.identity);
             }
             else
                 currentShield -= amount;
@@ -134,7 +135,8 @@ public class BaseFunctions : MonoBehaviour
             if (overflow < 0)
             {
                 currentShield -= (amount + overflow);
-                Instantiate(ShieldWave, transform.position, Quaternion.identity);
+                if (baseEffects.isShieldExplosion)
+                    Instantiate(ShieldWave, transform.position, Quaternion.identity);
             }
             else
                 currentShield -= amount;

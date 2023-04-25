@@ -13,7 +13,6 @@ public class LevelManager : MonoBehaviour
     private BuildManager buildManager;
     private AugmentManager augmentManager;
     public LevelCanvasManager levelCanvasManager;
-    public TurretBuildMenu BuildUi;
     public SentryData[] possibleSentries;
     public EnemyManager enemyManager;
     public State currentState = State.Normal;
@@ -28,7 +27,6 @@ public class LevelManager : MonoBehaviour
         {
             Instance = this;
         }
-        BuildUi = GameObject.FindWithTag("UISelection").GetComponent<TurretBuildMenu>();
         gameManager = GameManager.Instance;
         augmentManager = AugmentManager.Instance;
         buildManager = new BuildManager();
@@ -37,8 +35,6 @@ public class LevelManager : MonoBehaviour
     public void Start()
     {
         levelCanvasManager = LevelCanvasManager.Instance;
-        if (BuildUi)
-            BuildUi.AddToMenu(possibleSentries[0]);
     }
 
     //Temp for now. Eventually these will be called by other classes
