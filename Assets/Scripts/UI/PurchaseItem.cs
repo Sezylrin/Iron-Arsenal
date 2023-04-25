@@ -38,7 +38,22 @@ public class PurchaseItem : MonoBehaviour
     {
         icon.sprite = attributeUpgradeData.icon;
         title.text = attributeUpgradeData.upgradeName;
-        description.text = attributeUpgradeData.description;
+
+        string descTxt = attributeUpgradeData.description;
+        if (attributeUpgradeData.attribute == Attribute.Physical)
+        {
+            descTxt += " " + StatsManager.Instance.PhysicalUpgradeAmount();
+        }
+        else if (attributeUpgradeData.attribute == Attribute.Health)
+        {
+            descTxt += " " + StatsManager.Instance.HealthUpgradeAmount();
+        }
+        else if (attributeUpgradeData.attribute == Attribute.Elemental)
+        {
+            descTxt += " " + StatsManager.Instance.ElementalUpgradeAmount();
+        }
+
+        description.text = descTxt;
         xenoriumCost.text = attributeUpgradeData.xenoriumCost.ToString();
         novaciteCost.text = attributeUpgradeData.novaciteCost.ToString();
         voidStoneCost.text = attributeUpgradeData.voidStoneCost.ToString();
@@ -67,11 +82,25 @@ public class PurchaseItem : MonoBehaviour
                 if (LevelManager.Instance.PurchaseItemIfPossible(mechUpgradeData.xenoriumCost, mechUpgradeData.novaciteCost, mechUpgradeData.voidStoneCost))
                 {
                     //TODO: Handle purchasing mechUpgrades
-                    shopMenu.UpdateResources();
+                    shopMenu.PurchaseItem();
                 }
                 break;
             case TabType.attributeUpgrades:
-                shopMenu.UpdateResources();
+                if (LevelManager.Instance.PurchaseItemIfPossible(attributeUpgradeData.xenoriumCost, attributeUpgradeData.novaciteCost, attributeUpgradeData.voidStoneCost))
+                {
+                    switch (attributeUpgradeData.attribute) {
+                        case Attribute.Physical:
+                            StatsManager.Instance.UpgradeDamage();
+                            break;
+                        case Attribute.Health:
+                            StatsManager.Instance.UpgradeHealth();
+                            break;
+                        case Attribute.Elemental:
+                            StatsManager.Instance.UpgradeElemental();
+                            break;
+                    }
+                    shopMenu.PurchaseItem();
+                }
                 break;
             case TabType.sentryPurchases:
                 if (LevelManager.Instance.PurchaseItemIfPossible(sentryData.unlockXenoriumCost, sentryData.unlockNovaciteCost, sentryData.unlockVoidStoneCost))

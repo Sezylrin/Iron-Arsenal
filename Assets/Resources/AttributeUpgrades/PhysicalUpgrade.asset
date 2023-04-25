@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148abb27d8c706f43a15ef95ff1bf3e1, type: 3}
   m_Name: PhysicalUpgrade
   m_EditorClassIdentifier: 
+  attribute: 1
   icon: {fileID: 21300000, guid: 9d16b65615f7a5a4091172b928edd8e7, type: 3}
   upgradeName: Physical
-  description: Increase physical damage
+  description: Increase physical damage by
   xenoriumCost: 50
   novaciteCost: 50
   voidStoneCost: 50

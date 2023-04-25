@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148abb27d8c706f43a15ef95ff1bf3e1, type: 3}
   m_Name: ElementalUpgrade
   m_EditorClassIdentifier: 
+  attribute: 2
   icon: {fileID: 21300000, guid: 4944d0ab2a6af034cb7c02002b0dccbe, type: 3}
   upgradeName: Elemental
-  description: Increases elemental damage
+  description: 'Increases elemental damage by '
   xenoriumCost: 50
   novaciteCost: 50
   voidStoneCost: 50

@@ -113,6 +113,12 @@ public class ShopMenu : MonoBehaviour
         DisplayItems(FindCurrentTab());
     }
 
+    public void PurchaseItem()
+    {
+        UpdateResources();
+        DisplayItems(FindCurrentTab());
+    }
+
     public void UpdateResources()
     {
         xenorium.text = LevelManager.Instance.GetXenorium().ToString();
