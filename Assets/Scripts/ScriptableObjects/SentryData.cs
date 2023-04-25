@@ -33,4 +33,8 @@ public class SentryData : ScriptableObject
     public bool buildable;
 
     public Augments[] defaultAugment;
+
+    public int unlockXenoriumCost;
+    public int unlockNovaciteCost;
+    public int unlockVoidStoneCost;
 }

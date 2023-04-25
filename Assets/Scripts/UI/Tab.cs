@@ -1,10 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum TabType
+{
+    mechUpgrades,
+    attributeUpgrades,
+    sentryPurchases
+}
+
 public class Tab : MonoBehaviour
 {
     [SerializeField] private Sprite activeImg;
     [SerializeField] private Sprite inactiveImg;
+
+    public TabType tabType;
 
     public void ClickTab()
     {
