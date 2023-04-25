@@ -7,6 +7,7 @@ using System;
 public class LevelCanvasManager : MonoBehaviour
 {
     [Header("Ore Labels")]
+    [SerializeField] private GameObject resourceContainer;
     [SerializeField] private TMP_Text xenoriumLabel;
     [SerializeField] private TMP_Text novaciteLabel;
     [SerializeField] private TMP_Text voidStoneLabel;
@@ -20,6 +21,7 @@ public class LevelCanvasManager : MonoBehaviour
     [Header("Menus")]
     [SerializeField] private GameObject augmentMenu;
     [SerializeField] private GameObject buildMenu;
+    [SerializeField] private GameObject shopMenu;
     private List<SentryBuildInitialise> allButtons = new List<SentryBuildInitialise>();
 
     public bool overMenu = false;
@@ -108,6 +110,18 @@ public class LevelCanvasManager : MonoBehaviour
     public void OpenBuildMenu()
     {
         buildMenu.SetActive(true);
+    }
+
+    public void OpenShopMenu()
+    {
+        shopMenu.SetActive(true);
+        resourceContainer.SetActive(false);
+    }
+
+    public void CloseShopMenu()
+    {
+        shopMenu.SetActive(false);
+        resourceContainer.SetActive(true);
     }
 
     private void LoadSentries()
