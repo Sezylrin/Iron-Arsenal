@@ -33,8 +33,9 @@ public class MapGenerator : MonoBehaviour
     // [Range(0, 50)] public float chanceOfVoidstone;
     // [Range(0, 50)] public float chanceOfXenorium;
 
-    [Header("Values for Tiles to not overlap")]
+    [Header("Radius is how many tiles should spawn around the player")]
     public int radius = 10;
+    [Header("Tile Offset is how big the tiles are so they don't overlap")]
     public int tileOffset = 1;
 
     private Vector3 startPos = Vector3.zero;
@@ -177,6 +178,7 @@ public class MapGenerator : MonoBehaviour
         int random = Random.Range(0, 100);
         GameObject tileType = null;
 
+        // Old code just in case
         // if (0 < random && random <= chanceOfNovacite)
         // {
         //     tileType = objectTiles.novacite;
