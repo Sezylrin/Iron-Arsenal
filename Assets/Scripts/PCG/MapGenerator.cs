@@ -6,24 +6,32 @@ using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour
 {
+    // [Serializable]
+    // public struct ObjectTiles
+    // {
+    //     public GameObject novacite;
+    //     public GameObject voidstone;
+    //     public GameObject xenorium;
+    // }
+
     [Serializable]
-    public struct ObjectTiles
+    public class ObjectTiles
     {
-        public GameObject novacite;
-        public GameObject voidstone;
-        public GameObject xenorium;
+        public GameObject objectToSpawn;
+        public float chanceToSpawn;
     }
+    public List<ObjectTiles> objectTilesList = new List<ObjectTiles>();
 
     public GameObject groundTile;
     public GameObject emptyTile;
-    public ObjectTiles objectTiles;
+    // public ObjectTiles objectTiles;
     public GameObject player;
     public Transform groundTilesContainer;
     public Transform objectTilesContainer;
 
-    [Range(0, 50)] public float chanceOfNovacite;
-    [Range(0, 50)] public float chanceOfVoidstone;
-    [Range(0, 50)] public float chanceOfXenorium;
+    // [Range(0, 50)] public float chanceOfNovacite;
+    // [Range(0, 50)] public float chanceOfVoidstone;
+    // [Range(0, 50)] public float chanceOfXenorium;
 
     [Header("Values for Tiles to not overlap")]
     public int radius = 10;
@@ -169,17 +177,32 @@ public class MapGenerator : MonoBehaviour
         int random = Random.Range(0, 100);
         GameObject tileType = null;
 
-        if (0 < random && random <= chanceOfNovacite)
+        // if (0 < random && random <= chanceOfNovacite)
+        // {
+        //     tileType = objectTiles.novacite;
+        // }
+        // if (chanceOfNovacite < random && random <= chanceOfVoidstone + chanceOfNovacite)
+        // {
+        //     tileType = objectTiles.voidstone;
+        // }
+        // if (chanceOfVoidstone + chanceOfNovacite < random && random <= chanceOfNovacite + chanceOfVoidstone + chanceOfXenorium)
+        // {
+        //     tileType = objectTiles.xenorium;
+        // }
+
+        for (int i = 0; i < objectTilesList.Count; i++)
         {
-            tileType = objectTiles.novacite;
-        }
-        if (chanceOfNovacite < random && random <= chanceOfVoidstone + chanceOfNovacite)
-        {
-            tileType = objectTiles.voidstone;
-        }
-        if (chanceOfVoidstone + chanceOfNovacite < random && random <= chanceOfNovacite + chanceOfVoidstone + chanceOfXenorium)
-        {
-            tileType = objectTiles.xenorium;
+            float lowerBound = 0;
+            float upperBound;
+            for (int j = 0; j < i; j++)
+            {
+                lowerBound += objectTilesList[j].chanceToSpawn;
+            }
+            upperBound = objectTilesList[i].chanceToSpawn + lowerBound;
+            if (lowerBound <= random && random < upperBound)
+            {
+                tileType = objectTilesList[i].objectToSpawn;
+            }
         }
 
         return tileType;

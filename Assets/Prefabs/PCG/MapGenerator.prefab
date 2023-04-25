@@ -141,18 +141,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e6c58680bd3d5b4fb8913524856e0e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectTilesList:
+  - objectToSpawn: {fileID: 8554378202571416629, guid: 953d56150040ebc4bb2469312b3bb9ad, type: 3}
+    chanceToSpawn: 1
+  - objectToSpawn: {fileID: 3437153877345992295, guid: cf4089a08027b4b4dabc645cac347277, type: 3}
+    chanceToSpawn: 2
+  - objectToSpawn: {fileID: 5440523406789250478, guid: e6424028bb726e446ae3a8f91e531eb2, type: 3}
+    chanceToSpawn: 3
   groundTile: {fileID: 8052467169487736447, guid: f7de2f10e535c3d44b02236c4bfac47f, type: 3}
   emptyTile: {fileID: 1533879619}
-  objectTiles:
-    novacite: {fileID: 8554378202571416629, guid: 953d56150040ebc4bb2469312b3bb9ad, type: 3}
-    voidstone: {fileID: 3437153877345992295, guid: cf4089a08027b4b4dabc645cac347277, type: 3}
-    xenorium: {fileID: 5440523406789250478, guid: e6424028bb726e446ae3a8f91e531eb2, type: 3}
   player: {fileID: 0}
   groundTilesContainer: {fileID: 2368341417593235572}
   objectTilesContainer: {fileID: 5099565300703248956}
-  chanceOfNovacite: 1
-  chanceOfVoidstone: 2
-  chanceOfXenorium: 3
   radius: 10
   tileOffset: 9
 --- !u!1 &7482120574608116646
