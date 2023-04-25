@@ -19,19 +19,23 @@ public class RocketPart : MonoBehaviour
     public float timeToCraft;
     // public Image image;
 
+    [SerializeField] private PlayerInput controls;
     private Canvas canvas;
     private Transform cameraTransform;
-
 
     private void Awake()
     {
         canvas = GetComponentInChildren<Canvas>();
         cameraTransform = FindObjectOfType<Camera>().transform;
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        var interactAction = controls.currentActionMap.FindAction("Interact");
+        interactAction.performed += OnInteractDown;
+        interactAction.canceled += OnInteractUp;
     }
 
     // Update is called once per frame
@@ -43,23 +47,27 @@ public class RocketPart : MonoBehaviour
                                                                                             cameraTransform.position.z));
     }
 
-    public void OnInteract(InputAction.CallbackContext context)
+    private void OnDestroy()
+    {
+        if (!controls) return;
+        var interactAction = controls.currentActionMap.FindAction("Interact");
+        interactAction.performed -= OnInteractDown;
+        interactAction.canceled -= OnInteractUp;
+    }
+
+    private void OnInteractDown(InputAction.CallbackContext context)
     {
         if (!canvas.enabled) return;
+        if (LevelManager.Instance.buildManager.xenorium < requiredMaterials.xenoriumAmount ||
+            LevelManager.Instance.buildManager.novacite < requiredMaterials.novaciteAmount ||
+            LevelManager.Instance.buildManager.voidStone < requiredMaterials.voidStoneAmount) return; //TODO: Add an error response
 
-        if (context.performed)
-        {
-            if (LevelManager.Instance.buildManager.xenorium < requiredMaterials.xenoriumAmount ||
-                LevelManager.Instance.buildManager.novacite < requiredMaterials.novaciteAmount ||
-                LevelManager.Instance.buildManager.voidStone < requiredMaterials.voidStoneAmount) return; //TODO: Add an error response
+        StartCoroutine(CraftPart());
+    }
 
-            StartCoroutine(CraftPart());
-        }
-        else if (context.canceled)
-        {
-            StopCoroutine(CraftPart());
-        }
-
+    private void OnInteractUp(InputAction.CallbackContext context)
+    {
+        StopCoroutine(CraftPart());
     }
 
     private void OnTriggerEnter(Collider col)
@@ -72,6 +80,7 @@ public class RocketPart : MonoBehaviour
     {
         if (!col.CompareTag("Player")) return;
         canvas.enabled = false;
+        StopCoroutine(CraftPart());
     }
 
     IEnumerator CraftPart()
