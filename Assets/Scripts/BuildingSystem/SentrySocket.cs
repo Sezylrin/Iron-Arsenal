@@ -9,16 +9,9 @@ public class SentrySocket : MonoBehaviour
 
     public GameObject sentryPF;
 
-    private GameObject buildMenu;
+    public MeshRenderer meshRender;
 
-    private GameObject deletionMenu;
-
-    private TurretBuildMenu buildMenuScript;
-
-    private TurretDeletion deletionScript;
-
-    private GameObject menuTemp;
-
+    public Material mat;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +30,10 @@ public class SentrySocket : MonoBehaviour
             Debug.Break();
             Debug.Log("Place a UIDeletion Prefab");
         }*/
+        LevelCanvasManager.Instance.allSockets.Add(this);
+        meshRender = GetComponentInChildren<MeshRenderer>();
+        mat = meshRender.material;
+        
     }
 
     // Update is called once per frame
