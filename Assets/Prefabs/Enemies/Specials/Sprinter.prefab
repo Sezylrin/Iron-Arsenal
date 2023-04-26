@@ -101,7 +101,7 @@ MonoBehaviour:
   <Speed>k__BackingField: 0
   <RamLaunchMultiplier>k__BackingField: 0
   type: 10
-  <EnemyRB>k__BackingField: {fileID: 0}
+  <EnemyRB>k__BackingField: {fileID: 3579151515724418386}
   data: {fileID: 11400000, guid: f0b39707d2e7a7749a993e906a038dd8, type: 2}
   <Wave>k__BackingField: 0
   enemyEffects: {fileID: 0}

@@ -30,6 +30,9 @@ public class LevelManager : MonoBehaviour
     public LevelCanvasManager levelCanvasManager;
     public SentryData[] possibleSentries;
     public EnemyManager enemyManager;
+    public GameObject player;
+    public BaseFunctions playerFunctions;
+    public Mining playerMining;
     public State currentState = State.Normal;
 
     private void Awake()
@@ -50,6 +53,9 @@ public class LevelManager : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         levelCanvasManager = LevelCanvasManager.Instance;
+        player = GameObject.FindWithTag("Player");
+        playerFunctions = player.GetComponent<BaseFunctions>();
+        playerMining = player.GetComponent<Mining>();
     }
 
     //Temp for now. Eventually these will be called by other classes

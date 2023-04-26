@@ -156,7 +156,7 @@ public class BaseFunctions : MonoBehaviour
             currentHealth = 0;
             if (GameManager.Instance)
             {
-                //run function for losing
+                GameManager.Instance.HandleDeath();
             }
         }
         else
