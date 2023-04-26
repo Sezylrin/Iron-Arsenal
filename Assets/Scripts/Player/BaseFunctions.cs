@@ -8,7 +8,6 @@ public class BaseFunctions : MonoBehaviour
     public float simulateDamage;
     public bool upgradeBase = false;
     public bool testingAdd = false;
-    public bool removeTesting = false;
 
     public int currentLevel;
 
@@ -84,9 +83,6 @@ public class BaseFunctions : MonoBehaviour
             {
                 testingAdd = false;
             }
-            if (removeTesting)
-            {
-            }
         }
         if (isRaged && !isRageTriggered)
         {
@@ -142,7 +138,7 @@ public class BaseFunctions : MonoBehaviour
                 currentShield -= amount;
         }
         timeSinceDamage = shieldRecoverDelay;
-
+        LevelCanvasManager.Instance.SetShield(ShieldPercentage());
     }
 
     private void RecoverShield(float amount)
@@ -151,6 +147,7 @@ public class BaseFunctions : MonoBehaviour
             currentShield = maxShieldHealth;
         else
             currentShield += amount;
+        LevelCanvasManager.Instance.SetShield(ShieldPercentage());
     }
     private void TakeHealthDamage(float amount)
     {        
@@ -168,6 +165,7 @@ public class BaseFunctions : MonoBehaviour
         {
             isRaged = true;
         }
+        LevelCanvasManager.Instance.SetHealth(HealthPercentage());
     }
 
     public void RecoverHealth(float amount)
@@ -180,6 +178,7 @@ public class BaseFunctions : MonoBehaviour
         {
             isRaged = false;
         }
+        LevelCanvasManager.Instance.SetHealth(HealthPercentage());
     }
 
     public void UpgradeBase()
@@ -201,6 +200,15 @@ public class BaseFunctions : MonoBehaviour
         shieldRecoverRate = maxShieldHealth * shieldRecoverFactor;
     }
 
+    public int HealthPercentage()
+    {
+        return Mathf.CeilToInt((currentHealth / maxHealth) * 100);
+    }
+
+    public int ShieldPercentage()
+    {
+        return Mathf.CeilToInt((currentShield / maxShieldHealth) * 100);
+    }
     public void DecreaseRecovery()
     {
         if (timeSinceDamage > 0)

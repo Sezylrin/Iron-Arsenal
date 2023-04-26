@@ -83,8 +83,7 @@ public class Cannon : MonoBehaviour
         worldPosition.y = rotatePoint.transform.position.y;
         rotatePoint.LookAt(worldPosition, Vector3.down);
 
-        var main = flamethrower.main;
-        main.startSpeed = 9.5f + (flameData.projectileSpeed * flameData.level / 2);
+        
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) 
         {
@@ -187,17 +186,6 @@ public class Cannon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
         {
             UnlockRandomCannon();
-        }
-
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.Bullet);
-            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.Shotgun);
-            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.RapidFire);
-            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.SlowShot);
-            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.PoisonShot);
-            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.Rocket);
-            DataManager.instance.UpgradeCannonProjectile(CannonProjectileType.Flame);
         }
     }
 
