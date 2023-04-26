@@ -20,10 +20,14 @@ public abstract class Boss : Enemy
     [field: Header("Boss Other")]
     public BossType bossType;
 
+    private bool canHeal;
+
     protected override void Init()
     {
         ActivePattern = 0;
         bPatternActive = false;
+        canHeal = true;
+        LevelCanvasManager.Instance.EnableBossHealthBar();
         base.Init();
     }
 
@@ -114,17 +118,25 @@ public abstract class Boss : Enemy
             CurrentHealth = MaxHealth;
         }
         else CurrentHealth += healthToHeal;
+        LevelCanvasManager.Instance.SetBossHealthBar(GetPercentageHealthRemaining());
     }
 
     protected override void OnDeath()
     {
         Manager.BossDeath();
+        LevelCanvasManager.Instance.DisableBossHealthBar();
         base.OnDeath();
     }
 
-    public virtual float GetPercentageHealthRemaining()
+    public virtual int GetPercentageHealthRemaining()
     {
-        return CurrentHealth / MaxHealth;
+        return Mathf.CeilToInt((CurrentHealth / MaxHealth) * 100);
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        LevelCanvasManager.Instance.SetBossHealthBar(GetPercentageHealthRemaining());
     }
 
     protected virtual void PatternActivate(int ActivePattern)
@@ -169,7 +181,11 @@ public abstract class Boss : Enemy
     {
         StartCoroutine(PatternLength(3));
 
-        Heal(MaxHealth / 20);
+        if (canHeal)
+        {
+            Heal(MaxHealth / 20);
+            canHeal = false;
+        }
     }
 
     protected virtual void Pattern3() {} //Override

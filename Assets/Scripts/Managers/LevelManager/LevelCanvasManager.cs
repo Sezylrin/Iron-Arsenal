@@ -6,6 +6,12 @@ using System;
 
 public class LevelCanvasManager : MonoBehaviour
 {
+    [Header("Sliders")]
+    [SerializeField] private FillBar healthBar;
+    [SerializeField] private FillBar shieldBar;
+    [SerializeField] private GameObject bossHealthObj;
+    [SerializeField] private FillBar bossHealthBar;
+
     [Header("Ore Labels")]
     [SerializeField] private GameObject resourceContainer;
     [SerializeField] private TMP_Text xenoriumLabel;
@@ -140,5 +146,31 @@ public class LevelCanvasManager : MonoBehaviour
         {
             init.SetSocket(socket);
         }
+    }
+
+    public void SetHealth(int newHealth)
+    {
+        healthBar.SetSliderAmount(newHealth);
+    }
+
+    public void SetShield(int newShield)
+    {
+        shieldBar.SetSliderAmount(newShield);
+    }
+
+    public void EnableBossHealthBar()
+    {
+        bossHealthObj.SetActive(true);
+        bossHealthBar.SetSliderAmount(100);
+    }
+
+    public void SetBossHealthBar(int newHealth)
+    {
+        bossHealthBar.SetSliderAmount(newHealth);
+    }
+
+    public void DisableBossHealthBar()
+    {
+        bossHealthObj.SetActive(false);
     }
 }
