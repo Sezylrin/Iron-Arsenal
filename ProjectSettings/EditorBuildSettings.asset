@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TechDemo.unity
     guid: 43062793252ff7647a01cb1450d89e82
+  - enabled: 1
+    path: Assets/Scenes/RocketScene.unity
+    guid: c4c522a2f5d018a4882475fc8308231c
+  - enabled: 1
+    path: Assets/Scenes/VictoryScene.unity
+    guid: d9372ee24da533148b595265a3283ce3
   m_configObjects: {}
