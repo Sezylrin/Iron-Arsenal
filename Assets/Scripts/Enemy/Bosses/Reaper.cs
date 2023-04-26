@@ -9,26 +9,37 @@ public class Reaper : Boss
     [field: SerializeField] public float BulletSpeed { get; set; }
     [field: SerializeField] public float BulletFireDelay { get; set; }
 
-    [field: Header("Projectile Other")]
+    [field: Header("Shooting Burst")]
+    [field: SerializeField] private bool ableToShoot;
     public EnemyBulletData bulletData;
     public Transform reaperBulletSpawnPoint;
     public GameObject reaperBulletPrefab;
-    public bool ableToShoot;
-
-    [field: Header("Phazing")]
-    public BoxCollider enemyBC;
-    public MeshRenderer[] renderers;
-    public Material opaqueMaterial;
-    public Material transparentMaterial;
-    [field: SerializeField] private bool phazing;
 
     private GameObject newReaperBullet;
     private Transform projectilesParent;
 
+    [field: Header("Phazing")]
+    [field: SerializeField] private bool phazing;
+    public BoxCollider enemyBC;
+    public MeshRenderer[] renderers;
+    public Material opaqueMaterial;
+    public Material transparentMaterial;
+    
+
+    [field: Header("Flying Burst")]
+    [field: SerializeField] private bool canDash;
+
+    [field: Header("Teleporting")]
+    [field: SerializeField] private bool teleporting;
+    public Material invisibleMaterial;
+
+
+
     void Awake()
     {
+        NumberOfPatterns = 6;
+
         Init();
-        NumberOfPatterns = 2;
         projectilesParent = projectilesParent = GameObject.Find("Projectiles Parent").transform;
         enemyBC = GetComponent<BoxCollider>();
 
@@ -39,6 +50,9 @@ public class Reaper : Boss
     void Start()
     {
         ableToShoot = true;
+        phazing = false;
+        canDash = true;
+        teleporting = false;
     }
 
     // Update is called once per frame
@@ -58,32 +72,18 @@ public class Reaper : Boss
                 phazing = false;
                 enemyBC.enabled = true;
 
-                for (int i = 0; i < renderers.Length; i++)
-                {
-                    renderers[i].material = opaqueMaterial;
-                }
+                ChangeMaterials(opaqueMaterial);
             }
-            return;
+
+            if (teleporting)
+            {
+                teleporting = false;
+            }
         }
-        else if (ActivePattern == 1)
-        {
-            Pattern1();
-        }
-        else if (ActivePattern == 2)
-        {
-            Pattern2();
-        }
-        else if (ActivePattern == 3)
-        {
-            Pattern3();
-        }
-        else if (ActivePattern == 4)
-        {
-            Pattern4();
-        }
+        else PatternActivate(ActivePattern);
     }
 
-    private void Pattern1() //Shooting Burst
+    protected override void Pattern3() //Shooting Burst
     {
         StartCoroutine(PatternLength(3));
 
@@ -109,7 +109,7 @@ public class Reaper : Boss
         }
     }
 
-    private void Pattern2() //Phazing
+    protected override void Pattern4() //Phazing
     {
         StartCoroutine(PatternLength(10));
 
@@ -118,24 +118,31 @@ public class Reaper : Boss
             phazing = true;
             enemyBC.enabled = false;
 
-            for (int i = 0; i < renderers.Length; i++)
-            {
-                renderers[i].material = transparentMaterial;
-            }
+            ChangeMaterials(transparentMaterial);
         }
-        
     }
 
-    private void Pattern3() //Rush
+    protected override void Pattern5() //Dash Burst -- May update to go through player
     {
-        StartCoroutine(PatternLength(10));
+        StartCoroutine(PatternLength(7));
 
+        if (canDash)
+        {
+            canDash = false;
+
+            EnemyRB.AddForce(Vector3.Normalize(new Vector3(Player.transform.position.x - transform.position.x, 0, Player.transform.position.z - transform.position.z)) * 20, ForceMode.Impulse);
+
+            StartCoroutine(DelayDashBurst(3f));
+        }
     }
-
-    private void Pattern4()
+    protected override void Pattern6() //Teleport
     {
-        StartCoroutine(PatternLength(10));
-
+        StartCoroutine(PatternLength(7));
+        if (!teleporting)
+        {
+            teleporting = true;
+            StartCoroutine(Teleport());
+        }  
     }
 
     public override void SetStats()
@@ -151,6 +158,35 @@ public class Reaper : Boss
     {
         yield return new WaitForSeconds(delay);
         ableToShoot = true;
+    }
+
+    IEnumerator DelayDashBurst(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canDash = true;
+    }
+
+    IEnumerator Teleport()
+    {
+        ChangeMaterials(transparentMaterial);
+        yield return new WaitForSeconds(2);
+
+        ChangeMaterials(invisibleMaterial);
+        yield return new WaitForSeconds(2);
+
+        transform.position = Manager.GetRandomPosition(15);
+        ChangeMaterials(transparentMaterial);
+        yield return new WaitForSeconds(2);
+
+        ChangeMaterials(opaqueMaterial);
+    }
+
+    private void ChangeMaterials(Material material)
+    {
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            renderers[i].material = material;
+        }
     }
 
     protected override void OnCollisionEnter(Collision col)

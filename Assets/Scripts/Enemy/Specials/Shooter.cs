@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Shooter : Enemy
 {
-    public float BulletDamage { get; set; }
-    public float BulletSpeed { get; set; }
-    public float BulletFireDelay { get; set; }
+    [field: Header("Bullet")]
+    [field: SerializeField] public float BulletDamage { get; set; }
+    [field: SerializeField] public float BulletSpeed { get; set; }
+    [field: SerializeField] public float BulletFireDelay { get; set; }
 
     public EnemyBulletData bulletData;
 
