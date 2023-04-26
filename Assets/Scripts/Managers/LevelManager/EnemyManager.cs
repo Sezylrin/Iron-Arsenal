@@ -148,6 +148,7 @@ public class EnemyManager : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             SecondsUntilNextWave--;
+            LevelCanvasManager.Instance.SetWaveTimerBar(((float)SecondsUntilNextWave / (float)WaveDelay) * 100);
         }
         
         SecondsUntilNextWave = 0;
