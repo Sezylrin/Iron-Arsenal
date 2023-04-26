@@ -130,6 +130,14 @@ public class Projectile : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+        else if (other.gameObject.tag == "Wall")
+        {
+            if (owner)
+                owner.PoolBullet(gameObject);
+            if (cannonOwner)
+                cannonOwner.PoolProj(gameObject);
+            gameObject.SetActive(false);
+        }
     }
     private void OnTriggerExit(Collider other)
     {

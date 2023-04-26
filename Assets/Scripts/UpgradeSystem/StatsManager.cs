@@ -42,14 +42,15 @@ public class StatsManager : MonoBehaviour
         {
             Instance = this;
         }
+        physicalDamage = basePhysical;
+        elementalDamage = baseElemental;
+        healthFactor = baseHealth;
     }
 
     private void Start()
     {
         playerFunctions = GameObject.FindWithTag("Player").GetComponent<BaseFunctions>();
-        physicalDamage = basePhysical;
-        elementalDamage = baseElemental;
-        healthFactor = baseHealth;
+        
     }
     public void UpgradeDamage()
     {

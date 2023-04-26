@@ -16,6 +16,7 @@ Material:
   - _CONTINUOUSFLICKERING_ON
   - _DESATURATIONAFFECTSEMISSION_ON
   - _FLICKERING_ON
+  - _FRESNEL_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -143,7 +144,7 @@ Material:
     - _DstBlend: 0
     - _Flickering: 1
     - _Flickeringintensity: 3.46
-    - _Fresnel: 0
+    - _Fresnel: 1
     - _Fresnelfalloff: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5

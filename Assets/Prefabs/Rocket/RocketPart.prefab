@@ -100,9 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Rocket Engine
   requiredMaterials:
-    novaciteAmount: 0
-    voidstoneAmount: 0
-    xenoriumAmount: 0
+    novaciteAmount: 400
+    voidstoneAmount: 400
+    xenoriumAmount: 400
   timeToCraft: 1
   text: {fileID: 1746448194166641636}
   controls: {fileID: 0}

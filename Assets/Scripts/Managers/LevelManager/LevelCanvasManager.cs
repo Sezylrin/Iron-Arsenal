@@ -82,10 +82,7 @@ public class LevelCanvasManager : MonoBehaviour
             changedMat = false;
             foreach (SentrySocket socket in allSockets)
             {
-                if (!socket.HasSentry())
-                {
-                    socket.meshRender.material = socket.mat;
-                }
+                socket.meshRender.material = socket.mat;
             }
         }
         if (Input.GetMouseButtonDown(0) && LevelManager.Instance.currentState == State.Building)
