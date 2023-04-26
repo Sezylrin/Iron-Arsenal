@@ -8,10 +8,13 @@ public class AFreezeProjectile : AugmentBase
     private bool isFreeze = false;
     void Start()
     {
-        if (baseProjectile.GetOwner().data.Sentry.Equals(SentryName.FreezeTower))
+        if (baseProjectile.GetOwner())
         {
-            isFreeze = true;
+            isFreeze = baseProjectile.GetOwner().data.Sentry.Equals(SentryName.FreezeTower);
+            isFreeze = baseProjectile.GetOwner().data.Sentry.Equals(SentryName.IceShardTower);
         }
+        if (baseProjectile.GetCannonOwner())
+            isFreeze = baseProjectile.GetCannonOwner().type.Equals(CannonProjectileType.SlowShot);
 
         AugmentAttribute = isFreeze ? StatAttribute.Elemental : StatAttribute.Physical;
     }

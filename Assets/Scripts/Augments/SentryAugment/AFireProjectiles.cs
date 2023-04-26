@@ -8,10 +8,13 @@ public class AFireProjectiles : AugmentBase
     private bool isFlame = false;
     public override void Init()
     {
-        if (baseProjectile.GetOwner().data.Sentry.Equals(SentryName.FlameThrower))
+        if (baseProjectile.GetOwner())
         {
-            isFlame = true;
+            isFlame = baseProjectile.GetOwner().data.Sentry.Equals(SentryName.FlameThrower);
+            isFlame = baseProjectile.GetOwner().data.Sentry.Equals(SentryName.IncendiaryTower);
         }
+        if (baseProjectile.GetCannonOwner())
+            isFlame = baseProjectile.GetCannonOwner().type.Equals(CannonProjectileType.Flame);
 
         AugmentAttribute = isFlame? StatAttribute.Elemental : StatAttribute.Physical;
     }

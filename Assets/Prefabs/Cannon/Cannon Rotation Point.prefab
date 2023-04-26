@@ -118,12 +118,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c69eb3c5eeb924c80f1d6a5521f38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilesParent: {fileID: 0}
   activeCannonProjectile: 2
   cannonProjectileArray:
   - {fileID: 1123763005487040603, guid: c4a3e8f0491194748ada7e901664ded6, type: 3}
   - {fileID: 4663311066730892123, guid: 54e2f9b17c786e6499f36944b60631d6, type: 3}
   - {fileID: 5890188561874082814, guid: dec36dda68332e847bf809d3fb62fe2b, type: 3}
+  flameData: {fileID: 0}
+  rotatePoint: {fileID: 0}
+  cannonProjectileSpawnPoint: {fileID: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  projectilePF: {fileID: 0}
 --- !u!1 &282743462219769480
 GameObject:
   m_ObjectHideFlags: 0

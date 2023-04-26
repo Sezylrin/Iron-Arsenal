@@ -153,6 +153,7 @@ public class Sentry : MonoBehaviour
         Vector3 targetDir = target.position - bulletSpawnpoint.position;
         targetDir.y = 0;
         bulletProj.SetRotation(targetDir, offSet);
+        bulletProj.dir = targetDir.normalized;
         Vector3 lookAt = target.position;
         lookAt.y = sentryHead.position.y;
         sentryHead.LookAt(lookAt, Vector3.up);
@@ -196,6 +197,13 @@ public class Sentry : MonoBehaviour
         range = data.range;
         fireRate = data.fireRate;
         timer = 1 / fireRate;
+        if (data.defaultAugment.Length > 0)
+        {
+            foreach (Augments augment in data.defaultAugment)
+            {
+                AddAugmentToList(augment);
+            }
+        }
     }
 
     public void SetData(SentryData data)
