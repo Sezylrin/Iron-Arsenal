@@ -47,13 +47,13 @@ public class LevelManager : MonoBehaviour
         }
         augmentManager = AugmentManager.Instance;
         buildManager = new BuildManager();
+        player = GameObject.FindWithTag("Player");
     }
 
     public void Start()
     {
         gameManager = GameManager.Instance;
         levelCanvasManager = LevelCanvasManager.Instance;
-        player = GameObject.FindWithTag("Player");
         playerFunctions = player.GetComponent<BaseFunctions>();
         playerMining = player.GetComponent<Mining>();
     }

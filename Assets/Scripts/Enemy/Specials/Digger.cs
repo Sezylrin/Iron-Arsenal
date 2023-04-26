@@ -25,13 +25,13 @@ public class Digger : Enemy
         SetRotation();
         Move();
 
-        if (Vector3.Distance(Player.transform.position, transform.position) > 15 && !digging)
+        if (Vector3.Distance(Player.transform.position, transform.position) > 20 && !digging)
         {
             digging = true;
             StartCoroutine(DigDown());
         }
 
-        if (Vector3.Distance(Player.transform.position, transform.position) < 10 && digging)
+        if (Vector3.Distance(Player.transform.position, transform.position) < 15 && digging)
         {
             digging = false;
             StartCoroutine(DigUp());

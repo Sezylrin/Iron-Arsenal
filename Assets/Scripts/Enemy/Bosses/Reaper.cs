@@ -67,20 +67,26 @@ public class Reaper : Boss
 
         if (ActivePattern == 0)
         {
-            if (phazing)
-            {
-                phazing = false;
-                enemyBC.enabled = true;
-
-                ChangeMaterials(opaqueMaterial);
-            }
-
-            if (teleporting)
-            {
-                teleporting = false;
-            }
+            WaitingForNextPattern();
         }
         else PatternActivate(ActivePattern);
+    }
+
+    protected override void WaitingForNextPattern()
+    {
+        if (phazing)
+        {
+            phazing = false;
+            enemyBC.enabled = true;
+
+            ChangeMaterials(opaqueMaterial);
+        }
+
+        if (teleporting)
+        {
+            teleporting = false;
+        }
+        base.WaitingForNextPattern();
     }
 
     protected override void Pattern3() //Shooting Burst
@@ -193,9 +199,11 @@ public class Reaper : Boss
     {
         if (col.gameObject.tag == "Player")
         {
-            TakeDamage(col.gameObject.GetComponent<tempPlayer>().ramDamage);
-            Heal(DamageOnCollide / 10);
+            BaseFunctions tempBase = col.gameObject.GetComponent<BaseFunctions>();
+            TakeDamage(StatsManager.Instance.healthFactor * tempBase.collisionFactor);
+            tempBase.TakeDamage(DamageOnCollide);
             EnemyRB.AddForce(Vector3.Normalize(new Vector3(transform.position.x - col.transform.position.x, 0, transform.position.z - col.transform.position.z)) * RamLaunchMultiplier, ForceMode.Impulse);
+            Heal(DamageOnCollide / 10);
         }
     }
 }

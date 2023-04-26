@@ -28,7 +28,9 @@ public class Exploder : Enemy
     {
         if (col.gameObject.tag == "Player")
         {
-            TakeDamage(col.gameObject.GetComponent<tempPlayer>().ramDamage);
+            BaseFunctions tempBase = col.gameObject.GetComponent<BaseFunctions>();
+            TakeDamage(StatsManager.Instance.healthFactor * tempBase.collisionFactor);
+            tempBase.TakeDamage(DamageOnCollide);
             OnDeath();
         }
     }

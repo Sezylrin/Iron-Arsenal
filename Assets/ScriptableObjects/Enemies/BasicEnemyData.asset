@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BasicEnemyData
   m_EditorClassIdentifier: 
   maxHealth: 100
-  damageOnCollide: 10
+  damageOnCollide: 40
   speed: 3
   ramLaunchMultiplier: 20

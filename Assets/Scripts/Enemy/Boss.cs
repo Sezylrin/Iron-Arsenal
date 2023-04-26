@@ -20,7 +20,7 @@ public abstract class Boss : Enemy
     [field: Header("Boss Other")]
     public BossType bossType;
 
-    private bool canHeal;
+    protected bool canHeal;
 
     protected override void Init()
     {
@@ -168,6 +168,11 @@ public abstract class Boss : Enemy
                 Pattern8();
                 break;
         }
+    }
+
+    protected virtual void WaitingForNextPattern()
+    {
+        canHeal = true;
     }
 
     protected virtual void Pattern1() //Common Move and Melee 

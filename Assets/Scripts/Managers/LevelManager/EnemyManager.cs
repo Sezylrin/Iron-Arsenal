@@ -10,10 +10,13 @@ public class EnemyManager : MonoBehaviour
     [field: Header("Wave Management")]
     [field: SerializeField] public int Wave { get; private set; }
     [field: SerializeField] private int WaveDelay { get; set; }
+    [field: SerializeField] private bool WaveActive { get; set; }
+    [field: SerializeField] private bool IsBossWave { get; set; }
     [field: SerializeField] public int SecondsUntilNextWave { get; private set; }
     [field: SerializeField] private float BasicEnemyChance { get; set; }
     [field: SerializeField] private float SpecialEnemyChance { get; set; }
     [field: SerializeField] public int SafeSpawnArea { get; private set; }
+    [field: SerializeField] public int BossWaveFrequency { get; private set; }
     [field: SerializeField] public bool IsBossAlive { get; private set; }
     [field: SerializeField] private int PreviousBoss { get; set; }
     [field: SerializeField] private bool SpawningWave { get; set; }
@@ -24,6 +27,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject[] bossPrefabs;
     public GameObject[] augmentPrefabs;
     public List<Transform> enemyList = new List<Transform>();
+    public List<GameObject> WaveList = new List<GameObject>();
 
     private GameObject Player { get; set; }
     private Vector3 PlayerPosition { get; set; }
@@ -54,12 +58,14 @@ public class EnemyManager : MonoBehaviour
         {
             Instance = this;
         }
-        Player = GameObject.Find("Player");
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        Player = LevelManager.Instance.player;
+
         pools.Add(pooledBasicEnemies);
         pools.Add(pooledTankEnemies);
         pools.Add(pooledExploderEnemies);
@@ -76,6 +82,9 @@ public class EnemyManager : MonoBehaviour
 
         IsBossAlive = false;
         SpawningWave = false;
+        WaveActive = false;
+        IsBossWave = false;
+
         SafeSpawnArea = 20;
 
         Wave -= 1;
@@ -94,6 +103,16 @@ public class EnemyManager : MonoBehaviour
             debugStartWaveNow = false;
             StartWaveEarly();
         }
+
+        if (WaveList.Count == 0 && WaveActive)
+        {
+            WaveActive = false;
+            if (IsBossWave)
+            {
+                LevelManager.Instance.SpawnAugmentChoice(); //Temp
+            }
+            
+        }
     }
 
     private void SelectWave()
@@ -107,8 +126,10 @@ public class EnemyManager : MonoBehaviour
             Wave = 1;
         }
 
-        if (Wave % 10 == 0)
+        IsBossWave = false;
+        if (Wave % BossWaveFrequency == 0)
         {
+            IsBossWave = true;
             StartCoroutine(SpawnBossWave());
         }
         else StartCoroutine(SpawnWave());
@@ -139,7 +160,7 @@ public class EnemyManager : MonoBehaviour
     private IEnumerator SpawnWave()
     {
         SpawningWave = true;
-        int numberToSpawn = 10 + Wave;
+        int numberToSpawn = 20 + (Wave * 2);
 
         while (numberToSpawn != 0)
         {
@@ -276,6 +297,12 @@ public class EnemyManager : MonoBehaviour
         enemyScript.SetStats();
         enemyScript.InitEnemyEffects(augmentPrefabs);
         enemyList.Add(newEnemy.transform);
+        WaveList.Add(newEnemy);
+
+        if (!WaveActive)
+        {
+            WaveActive = true;
+        }
     }
 
     public Vector3 GetRandomPosition(int distanceFromPlayer)
@@ -324,5 +351,10 @@ public class EnemyManager : MonoBehaviour
     {
         obj.SetActive(false);
         pooledEnemyBullets.AddObj(obj);
+    }
+
+    public void RemoveFromWaveList(GameObject enemy)
+    {
+        WaveList.Remove(enemy);
     }
 }
