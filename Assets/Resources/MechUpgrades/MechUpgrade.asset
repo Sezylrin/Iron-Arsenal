@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dda3446bd6409a4e9b7da053173481d, type: 3}
   m_Name: MechUpgrade
   m_EditorClassIdentifier: 
+  upgradeType: 2
   icon: {fileID: 21300000, guid: 7f35d3d4cace9fe409ae2c613ae807f7, type: 3}
   upgradeName: Mech Upgrade
   description: Add another platform to your mech allowing you to place more sentries

@@ -81,7 +81,18 @@ public class PurchaseItem : MonoBehaviour
             case TabType.mechUpgrades:
                 if (LevelManager.Instance.PurchaseItemIfPossible(mechUpgradeData.xenoriumCost, mechUpgradeData.novaciteCost, mechUpgradeData.voidStoneCost))
                 {
-                    //TODO: Handle purchasing mechUpgrades
+                    switch(mechUpgradeData.upgradeType)
+                    {
+                        case UpgradeType.health:
+                            LevelManager.Instance.playerFunctions.ShopRecoverHealth();
+                            break;
+                        case UpgradeType.drill:
+                            LevelManager.Instance.playerMining.UpgradeMining();
+                            break;
+                        case UpgradeType.baseSize:
+                            LevelManager.Instance.playerFunctions.UpgradeBase();
+                            break;
+                    }
                     shopMenu.PurchaseItem();
                 }
                 break;
