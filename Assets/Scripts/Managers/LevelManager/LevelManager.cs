@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get; private set; }
 
     private GameManager gameManager;
-    private BuildManager buildManager;
+    public BuildManager buildManager;
     private AugmentManager augmentManager;
     public LevelCanvasManager levelCanvasManager;
     public SentryData[] possibleSentries;
