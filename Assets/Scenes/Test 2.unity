@@ -745,8 +745,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4430839069979140432, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: <SafeSpawnArea>k__BackingField
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430839069979140432, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: <EnemyBaseHealth>k__BackingField
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430839069979140432, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: <BossWaveFrequency>k__BackingField
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430839069979140432, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: <ExtraEnemyPerWave>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430839069979140432, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: <InitialWaveAmount>k__BackingField
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4797737709803221971, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: m_AnchorMax.x

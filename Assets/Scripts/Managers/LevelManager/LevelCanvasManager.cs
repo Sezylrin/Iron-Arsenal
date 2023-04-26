@@ -11,6 +11,7 @@ public class LevelCanvasManager : MonoBehaviour
     [SerializeField] private FillBar shieldBar;
     [SerializeField] private GameObject bossHealthObj;
     [SerializeField] private FillBar bossHealthBar;
+    [SerializeField] private FillBar waveBar;
 
     [Header("Ore Labels")]
     [SerializeField] private GameObject resourceContainer;
@@ -200,14 +201,19 @@ public class LevelCanvasManager : MonoBehaviour
         }
     }
 
-    public void SetHealth(int newHealth)
+    public void SetHealth(float newHealth)
     {
         healthBar.SetSliderAmount(newHealth);
     }
 
-    public void SetShield(int newShield)
+    public void SetShield(float newShield)
     {
         shieldBar.SetSliderAmount(newShield);
+    }
+
+    public void SetWaveTimerBar(float newWaveTimer)
+    {
+        waveBar.SetSliderAmount(newWaveTimer);
     }
 
     public void EnableBossHealthBar()
