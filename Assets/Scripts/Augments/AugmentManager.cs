@@ -105,6 +105,15 @@ public class AugmentManager : MonoBehaviour
         {
             sentry.AddAugmentToList(augmentToAdd);
         }
+
+        for (int i = allAugments.Count - 1; i >= 0; i--)
+        {
+            if (allAugments[i].augmentType == augmentToAdd)
+            {
+                allAugments.RemoveAt(i);
+            }
+        }
+
         playerFunctions.baseEffects.UpdateAugments();
     }
 

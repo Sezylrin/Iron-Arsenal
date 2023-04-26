@@ -41,6 +41,7 @@ public class AugmentMenu : MonoBehaviour
 
     public void SelectAugment(int augmentIndex)
     {
+        if (!(augmentIndex < currentAugments.Count)) return;
         AugmentManager.Instance.AddAugment(currentAugments[augmentIndex].augmentType);
         LevelCanvasManager.Instance.RemoveAugmentChoices();
     }
