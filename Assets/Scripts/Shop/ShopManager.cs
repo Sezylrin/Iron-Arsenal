@@ -6,14 +6,14 @@ public class ShopManager : MonoBehaviour
 {
     public MechUpgradeData[] mechUpgrades = new MechUpgradeData[3];
     public AttributeUpgradeData[] attributeUpgrades = new AttributeUpgradeData[3];
-    public List<SentryData> purchasableSentries { get; private set; } = new();
+    private List<SentryData> purchasableSentries = new();
 
     private bool collidingWithPlayer = false;
     public TabType currTab = TabType.mechUpgrades;
 
     private void Start()
     {
-        List<SentryData> lockedSentries = SentryManager.Instance.LockedSentries;
+        List<SentryData> lockedSentries = new List<SentryData>(SentryManager.Instance.LockedSentries);
         int numSentriesToChoose = 3;
 
         if (numSentriesToChoose > lockedSentries.Count)
@@ -32,20 +32,45 @@ public class ShopManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && collidingWithPlayer)
         {
-            LevelCanvasManager.Instance.OpenShopMenu(this);
+            OpenShop();
         }
+    }
+
+    private void OpenShop()
+    {
+        for (int i = purchasableSentries.Count - 1; i >= 0; i--)
+        {
+            if (!SentryManager.Instance.LockedSentries.Contains(purchasableSentries[i]))
+            {
+                purchasableSentries.RemoveAt(i);
+            }
+        }
+        LevelCanvasManager.Instance.OpenShopMenu(this);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !collidingWithPlayer)
         {
             collidingWithPlayer = true;   
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && collidingWithPlayer)
+        {
+            collidingWithPlayer = false;
         }
     }
 
     public void PurchaseSentry(SentryData sentryData)
     {
         purchasableSentries.Remove(sentryData);
+    }
+
+    public List<SentryData> GetPurchasableSentries()
+    {
+        return purchasableSentries;
     }
 }

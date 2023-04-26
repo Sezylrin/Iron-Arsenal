@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 using TMPro;
 
 public class ShopMenu : MonoBehaviour
@@ -28,7 +29,7 @@ public class ShopMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            LevelCanvasManager.Instance.CloseShopMenu();
+            CloseMenu();
         }
     }
 
@@ -46,7 +47,7 @@ public class ShopMenu : MonoBehaviour
         sentryPurchaseTab.GetComponent<Button>().onClick.AddListener(() => HandleClickTab(sentryTab));
         sentryTab.tabType = TabType.sentryPurchases;
 
-        closeBtn.onClick.AddListener(() => LevelCanvasManager.Instance.CloseShopMenu());
+        closeBtn.onClick.AddListener(CloseMenu);
     }
 
     public void OpenMenu(ShopManager shopManager)
@@ -56,11 +57,27 @@ public class ShopMenu : MonoBehaviour
         novacite.text = resources.novacite.ToString();
         voidStone.text = resources.voidStone.ToString();
         this.shopManager = shopManager;
-        if (shopManager.purchasableSentries.Count == 0)
+
+        if (shopManager.GetPurchasableSentries().Count == 0)
         {
             sentryPurchaseTab.SetActive(false);
         }
+        else
+        {
+            sentryPurchaseTab.SetActive(true);
+        }
         DisplayItems(FindCurrentTab());
+    }
+
+    private void CloseMenu()
+    {
+        Tab mechUpgradesTabComponent = mechUpgradesTab.GetComponent<Tab>();
+        Tab sentryPurchaseTabComponent = sentryPurchaseTab.GetComponent<Tab>();
+        shopManager.currTab = TabType.mechUpgrades;
+        HandleClickTab(mechUpgradesTab.GetComponent<Tab>());
+        LevelCanvasManager.Instance.CloseShopMenu();
+        sentryPurchaseTabComponent.DeactivateTab();
+        mechUpgradesTabComponent.ClickTab();
     }
 
     private void HandleClickTab(Tab clickedTab)
@@ -104,7 +121,7 @@ public class ShopMenu : MonoBehaviour
         shopManager.PurchaseSentry(sentry);
         UpdateResources();
 
-        if (shopManager.purchasableSentries.Count == 0)
+        if (shopManager.GetPurchasableSentries().Count == 0)
         {
             HandleClickTab(mechUpgradesTab.GetComponent<Tab>());
             sentryPurchaseTab.SetActive(false);
@@ -128,22 +145,23 @@ public class ShopMenu : MonoBehaviour
 
     private void DisplaySentryPurchases()
     {
-        item1.GetComponent<PurchaseItem>().SetSentryPurchase(shopManager.purchasableSentries[0], TabType.sentryPurchases, this);
+        List<SentryData> purchasableSentries = shopManager.GetPurchasableSentries();
+        item1.GetComponent<PurchaseItem>().SetSentryPurchase(purchasableSentries[0], TabType.sentryPurchases, this);
         
-        if (shopManager.purchasableSentries.Count == 1)
+        if (purchasableSentries.Count == 1)
         {
             item2.SetActive(false);
             item3.SetActive(false);
         }
-        else if (shopManager.purchasableSentries.Count == 2)
+        else if (purchasableSentries.Count == 2)
         {
-            item2.GetComponent<PurchaseItem>().SetSentryPurchase(shopManager.purchasableSentries[1], TabType.sentryPurchases, this);
+            item2.GetComponent<PurchaseItem>().SetSentryPurchase(purchasableSentries[1], TabType.sentryPurchases, this);
             item3.SetActive(false);
         }
-        else if (shopManager.purchasableSentries.Count == 3)
+        else if (purchasableSentries.Count == 3)
         {
-            item2.GetComponent<PurchaseItem>().SetSentryPurchase(shopManager.purchasableSentries[1], TabType.sentryPurchases, this);
-            item3.GetComponent<PurchaseItem>().SetSentryPurchase(shopManager.purchasableSentries[2], TabType.sentryPurchases, this);
+            item2.GetComponent<PurchaseItem>().SetSentryPurchase(purchasableSentries[1], TabType.sentryPurchases, this);
+            item3.GetComponent<PurchaseItem>().SetSentryPurchase(purchasableSentries[2], TabType.sentryPurchases, this);
         }
     }
 
@@ -162,6 +180,28 @@ public class ShopMenu : MonoBehaviour
 
         Tab sentryPurchTab = sentryPurchaseTab.GetComponent<Tab>();
         if (shopManager.currTab == sentryPurchTab.tabType)
+        {
+            return sentryPurchTab;
+        }
+        return mechUpgTab;
+    }
+
+    private Tab FindTab(TabType tabType)
+    {
+        Tab mechUpgTab = mechUpgradesTab.GetComponent<Tab>();
+        if (tabType == mechUpgTab.tabType)
+        {
+            return mechUpgTab;
+        }
+
+        Tab attrUpgTab = attributeUpgradesTab.GetComponent<Tab>();
+        if (tabType == attrUpgTab.tabType)
+        {
+            return attrUpgTab;
+        }
+
+        Tab sentryPurchTab = sentryPurchaseTab.GetComponent<Tab>();
+        if (tabType == sentryPurchTab.tabType)
         {
             return sentryPurchTab;
         }
