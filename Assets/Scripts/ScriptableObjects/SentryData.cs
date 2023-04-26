@@ -8,7 +8,10 @@ public enum SentryName
     BasicSentry,
     AdvancedSentry,
     FlameThrower,
-    FreezeTower
+    FreezeTower,
+    PoisonTower,
+    IceShardTower,
+    IncendiaryTower
 }
 
 [CreateAssetMenu(fileName = "SentryData",menuName ="ScriptableObjects/SentryData")]

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Shotgun : CannonProjectile
 {
-    public GameObject bullet;
     private GameObject newBullet;
     private Bullet bulletScript;
     private Transform projectilesParent;
@@ -12,8 +11,6 @@ public class Shotgun : CannonProjectile
 
     void Awake()
     {
-        Init();
-        projectilesParent = GameObject.Find("Projectiles Parent").transform;
     }
 
     // Start is called before the first frame update
@@ -28,7 +25,7 @@ public class Shotgun : CannonProjectile
         
     }
 
-    public override void Shoot()
+    /*public override void Shoot()
     {
         angleAdjustment = 8f;
         for (int i = 0; i < 5; i++)
@@ -58,5 +55,29 @@ public class Shotgun : CannonProjectile
             angleAdjustment -= 4;
         }
         base.Shoot();
+    }*/
+
+    public override void Init()
+    {
+        angleAdjustment = 8f;
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 tempPos = transform.position;
+            tempPos.y = 0;
+            Vector3 tempMouse = mousePos;
+            tempMouse.y = 0;
+            Vector3 dir = tempMouse - tempPos;
+            dir = Quaternion.AngleAxis(angleAdjustment, Vector3.up) * dir;
+            Shoot(dir);
+            angleAdjustment -= 4;
+        }
+        base.Init();
+    }
+
+    public override void PoolProj(GameObject obj)
+    {
+        projectiles.AddObj(obj);
+        if (projectiles.ListCount() == 5)
+            OnDelete();
     }
 }

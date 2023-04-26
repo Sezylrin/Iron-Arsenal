@@ -9,8 +9,6 @@ public class AugmentBase : MonoBehaviour
 
     public Collider lastHit;
 
-    public float baseValue;
-
     public bool respawned;
 
     public StatAttribute AugmentAttribute = StatAttribute.Undefined;
@@ -18,18 +16,7 @@ public class AugmentBase : MonoBehaviour
     public void Respawn()
     {
         respawned = true;
-        switch ((int)AugmentAttribute)
-        {
-            case (int)StatAttribute.Physical:
-                baseValue = StatsManager.Instance.physicalDamage;
-                break;
-            case (int)StatAttribute.Elemental:
-                baseValue = StatsManager.Instance.elementalDamage;
-                break;
-            case (int)StatAttribute.Health:
-                baseValue = StatsManager.Instance.healthFactor;
-                break;
-        }
+        
         lastHit = null;
     }
 

@@ -12,10 +12,10 @@ public class APoison : AugmentBase
     }
     public override void Init()
     {
-        if (baseProjectile.GetOwner().data.Sentry.Equals(SentryName.FlameThrower))
-        {
-            isPoison = true;
-        }
+        if (baseProjectile.GetOwner())
+            isPoison = baseProjectile.GetOwner().data.Sentry.Equals(SentryName.PoisonTower);
+        if (baseProjectile.GetCannonOwner())
+            isPoison = baseProjectile.GetCannonOwner().type.Equals(CannonProjectileType.PoisonShot);
 
         AugmentAttribute = isPoison ? StatAttribute.Elemental : StatAttribute.Physical;
         base.Init();

@@ -6,7 +6,6 @@ public class Flame : CannonProjectile
 {
     void Awake()
     {
-        Init();
     }
 
     // Start is called before the first frame update
@@ -18,14 +17,15 @@ public class Flame : CannonProjectile
     // Update is called once per frame
     void Update()
     {
-        Move();
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    public override void Init()
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-            other.gameObject.GetComponent<Enemy>().TakeDamage(Damage);
-        }
+        Vector3 tempPos = transform.position;
+        tempPos.y = 0;
+        Vector3 tempMouse = mousePos;
+        tempMouse.y = 0;
+        Shoot(tempMouse - tempPos);
+        base.Init();
     }
 }
