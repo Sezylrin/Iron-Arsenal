@@ -58,12 +58,14 @@ public class EnemyManager : MonoBehaviour
         {
             Instance = this;
         }
-        Player = LevelManager.Instance.player;
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        Player = LevelManager.Instance.player;
+
         pools.Add(pooledBasicEnemies);
         pools.Add(pooledTankEnemies);
         pools.Add(pooledExploderEnemies);
