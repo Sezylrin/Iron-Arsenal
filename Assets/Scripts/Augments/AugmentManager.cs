@@ -49,7 +49,6 @@ public class AugmentManager : MonoBehaviour
 
     public List<AugmentData> allAugments;
     public List<AugmentData> augmentChoices;
-    public AugmentData currentAugment;
     public bool selectingAugment { get; private set; } = false;
 
     // Start is called before the first frame update
