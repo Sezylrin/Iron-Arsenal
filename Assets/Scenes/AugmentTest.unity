@@ -187,10 +187,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4430839069979140432, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
-      propertyPath: <BossWaveFrequency>k__BackingField
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4797737709803221971, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
