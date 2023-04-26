@@ -156,17 +156,17 @@ public class LevelCanvasManager : MonoBehaviour
         }
     }
 
-    public void SetHealth(int newHealth)
+    public void SetHealth(float newHealth)
     {
         healthBar.SetSliderAmount(newHealth);
     }
 
-    public void SetShield(int newShield)
+    public void SetShield(float newShield)
     {
         shieldBar.SetSliderAmount(newShield);
     }
 
-    public void SetWaveTimerBar(int newWaveTimer)
+    public void SetWaveTimerBar(float newWaveTimer)
     {
         waveBar.SetSliderAmount(newWaveTimer);
     }
