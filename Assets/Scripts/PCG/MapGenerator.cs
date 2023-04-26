@@ -19,6 +19,7 @@ public class MapGenerator : MonoBehaviour
     {
         public GameObject objectToSpawn;
         public float chanceToSpawn;
+        public int waveToStartSpawning;
     }
     public List<ObjectTiles> objectTilesList = new List<ObjectTiles>();
 
@@ -201,7 +202,7 @@ public class MapGenerator : MonoBehaviour
                 lowerBound += objectTilesList[j].chanceToSpawn;
             }
             upperBound = objectTilesList[i].chanceToSpawn + lowerBound;
-            if (lowerBound <= random && random < upperBound)
+            if (lowerBound <= random && random < upperBound && EnemyManager.Instance.Wave >= objectTilesList[i].waveToStartSpawning)
             {
                 tileType = objectTilesList[i].objectToSpawn;
             }
