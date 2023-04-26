@@ -216,4 +216,9 @@ public class BaseFunctions : MonoBehaviour
             timeSinceDamage -= 0.25f;
         }
     }
+
+    public void ShopRecoverHealth()
+    {
+        RecoverHealth(maxHealth * 0.2f);
+    }
 }
