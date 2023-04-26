@@ -49,15 +49,26 @@ public class Destroyer : Boss
 
         if (ActivePattern == 0)
         {
-            canCharge = true;
+            WaitingForNextPattern();
         }
         else PatternActivate(ActivePattern);
     }
 
+    protected override void WaitingForNextPattern()
+    {
+        canCharge = true;
+        base.WaitingForNextPattern();
+    }
+
     protected override void Pattern2() //Heal Override
     {
-        Heal(MaxHealth / 20);
-        base.Pattern2(); 
+        StartCoroutine(PatternLength(3));
+
+        if (canHeal)
+        {
+            Heal(MaxHealth / 10);
+            canHeal = false;
+        }
     }
 
     protected override void Pattern3() //Mega Bomb

@@ -33,7 +33,6 @@ public abstract class Enemy : MonoBehaviour
     [field: SerializeField] public Rigidbody EnemyRB { get; set; }
     public EnemyData data;
     [field: SerializeField] public int Wave { get; set; }
-
     public EnemyManager Manager { get; set; }
     public GameObject Player { get; set; }
 
@@ -50,7 +49,6 @@ public abstract class Enemy : MonoBehaviour
         Player = GameObject.Find("Player");
         baseFunctions = Player.GetComponent<BaseFunctions>();
         Manager = EnemyManager.Instance;
-
         Wave = Manager.Wave;
         SetStats();
     }
@@ -139,6 +137,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void OnDeath()
     {
+        Manager.RemoveFromWaveList(this.gameObject);
         switch (type)
         {
             case EnemyType.Basic:
@@ -202,6 +201,4 @@ public abstract class Enemy : MonoBehaviour
         enemyEffects.augmentPFList = augmentPF;
         
     }
-
-
 }

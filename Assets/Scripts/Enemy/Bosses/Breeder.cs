@@ -43,12 +43,12 @@ public class Breeder : Boss
         {
             canSpawnBasic = false;
             Manager.SpawnEnemy(false, 0, spawnPoint1.position);
-            StartCoroutine(DelayBasicSpawn(3));
+            StartCoroutine(DelayBasicSpawn(5));
         }
 
         if (ActivePattern == 0)
         {
-
+            WaitingForNextPattern();
         }
         else PatternActivate(ActivePattern);
     }
@@ -65,7 +65,7 @@ public class Breeder : Boss
 
     protected override void Pattern3() //Exploder Rush
     {
-        StartCoroutine(PatternLength(9));
+        StartCoroutine(PatternLength(10));
 
         if (canSpawnSpecial)
         {
@@ -74,13 +74,13 @@ public class Breeder : Boss
             Manager.SpawnEnemy(false, 2, spawnPoint2.position);
             Manager.SpawnEnemy(false, 2, spawnPoint3.position);
 
-            StartCoroutine(DelaySpecialSpawn(3));
+            StartCoroutine(DelaySpecialSpawn(5));
         }
     }
 
     protected override void Pattern4() //Splitter Rush
     {
-        StartCoroutine(PatternLength(9));
+        StartCoroutine(PatternLength(10));
 
         if (canSpawnSpecial)
         {
@@ -89,13 +89,13 @@ public class Breeder : Boss
             Manager.SpawnEnemy(false, 7, spawnPoint2.position);
             Manager.SpawnEnemy(false, 7, spawnPoint3.position);
 
-            StartCoroutine(DelaySpecialSpawn(3));
+            StartCoroutine(DelaySpecialSpawn(5));
         }
     }
 
     protected override void Pattern5() //Dodger Rush
     {
-        StartCoroutine(PatternLength(9));
+        StartCoroutine(PatternLength(10));
 
         if (canSpawnSpecial)
         {
@@ -104,13 +104,13 @@ public class Breeder : Boss
             Manager.SpawnEnemy(false, 6, spawnPoint2.position);
             Manager.SpawnEnemy(false, 6, spawnPoint3.position);
 
-            StartCoroutine(DelaySpecialSpawn(3));
+            StartCoroutine(DelaySpecialSpawn(5));
         }
     }
 
     protected override void Pattern6() //Random Rush
     {
-        StartCoroutine(PatternLength(9));
+        StartCoroutine(PatternLength(10));
 
         if (canSpawnSpecial)
         {
@@ -119,7 +119,7 @@ public class Breeder : Boss
             Manager.SpawnEnemy(false, spawnPoint2.position);
             Manager.SpawnEnemy(false, spawnPoint3.position);
             
-            StartCoroutine(DelaySpecialSpawn(3));
+            StartCoroutine(DelaySpecialSpawn(5));
         }
     }
 
