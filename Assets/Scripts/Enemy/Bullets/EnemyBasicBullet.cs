@@ -54,7 +54,7 @@ public class EnemyBasicBullet : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<tempPlayer>().TakeDamage(Damage);
+            LevelManager.Instance.playerFunctions.TakeDamage(Damage);
             StartCoroutine(Delete(0f));
         }
     }

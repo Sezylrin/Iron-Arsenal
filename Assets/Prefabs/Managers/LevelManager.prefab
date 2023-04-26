@@ -56,6 +56,9 @@ MonoBehaviour:
   possibleSentries:
   - {fileID: 11400000, guid: 66217e87865c0d64bbe23256ded81bd0, type: 2}
   enemyManager: {fileID: 0}
+  player: {fileID: 0}
+  playerFunctions: {fileID: 0}
+  playerMining: {fileID: 0}
   currentState: 0
 --- !u!114 &794359213266280967
 MonoBehaviour:
@@ -6972,6 +6975,10 @@ PrefabInstance:
     - target: {fileID: 2603464692456488524, guid: a4e81cbaef6a72a439258c60f4f5c769, type: 3}
       propertyPath: m_Name
       value: Enemy Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603464692456488525, guid: a4e81cbaef6a72a439258c60f4f5c769, type: 3}
+      propertyPath: <BossWaveFrequency>k__BackingField
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
