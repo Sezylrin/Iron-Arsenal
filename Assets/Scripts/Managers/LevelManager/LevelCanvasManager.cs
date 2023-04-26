@@ -53,7 +53,7 @@ public class LevelCanvasManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || LevelManager.Instance.currentState == State.Normal)
         {
             CloseBuildMenu();
         }
@@ -106,11 +106,13 @@ public class LevelCanvasManager : MonoBehaviour
     public void RemoveAugmentChoices()
     {
         augmentMenu.SetActive(false);
+        
     }
 
     public void CloseBuildMenu()
     {
         buildMenu.SetActive(false);
+        overMenu = false;
     }
 
     public void OpenBuildMenu()

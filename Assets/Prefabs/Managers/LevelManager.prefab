@@ -7397,6 +7397,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 794359213266280966}
     m_Modifications:
+    - target: {fileID: 2118062612, guid: 7175f0b60cf3f0a4fb013bf699645cab, type: 3}
+      propertyPath: baseHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118062612, guid: 7175f0b60cf3f0a4fb013bf699645cab, type: 3}
+      propertyPath: basePhysical
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118062612, guid: 7175f0b60cf3f0a4fb013bf699645cab, type: 3}
+      propertyPath: healthFactor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118062612, guid: 7175f0b60cf3f0a4fb013bf699645cab, type: 3}
+      propertyPath: initialBoost
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118062612, guid: 7175f0b60cf3f0a4fb013bf699645cab, type: 3}
+      propertyPath: baseElemental
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118062612, guid: 7175f0b60cf3f0a4fb013bf699645cab, type: 3}
+      propertyPath: physicalDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118062612, guid: 7175f0b60cf3f0a4fb013bf699645cab, type: 3}
+      propertyPath: elementalDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118062612, guid: 7175f0b60cf3f0a4fb013bf699645cab, type: 3}
+      propertyPath: diminishingValue
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880787765061913377, guid: 7175f0b60cf3f0a4fb013bf699645cab, type: 3}
+      propertyPath: activeAugments.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5849787887830842497, guid: 7175f0b60cf3f0a4fb013bf699645cab, type: 3}
       propertyPath: m_RootOrder
       value: 10
