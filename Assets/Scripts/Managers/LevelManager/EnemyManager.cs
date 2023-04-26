@@ -10,17 +10,24 @@ public class EnemyManager : MonoBehaviour
     [field: Header("Wave Management")]
     [field: SerializeField] public int Wave { get; private set; }
     [field: SerializeField] private int WaveDelay { get; set; }
+    [field: Header("Spawn Variable")]
+    [field: SerializeField] private float BasicEnemyChance { get; set; }
+    [field: SerializeField] private int InitialWaveAmount { get; set; }
+    [field: SerializeField] private int ExtraEnemyPerWave { get; set; }
+    [field: SerializeField] public int BossWaveFrequency { get; private set; }
+    [field: SerializeField] public int SafeSpawnArea { get; private set; }
+    [field: SerializeField] public int EnemyBaseHealth { get; private set; }
+
+
+    public bool debugStartWaveNow; // Testing Variable
+    [field: Header("No Touch")]
     [field: SerializeField] private bool WaveActive { get; set; }
     [field: SerializeField] private bool IsBossWave { get; set; }
     [field: SerializeField] public int SecondsUntilNextWave { get; private set; }
-    [field: SerializeField] private float BasicEnemyChance { get; set; }
     [field: SerializeField] private float SpecialEnemyChance { get; set; }
-    [field: SerializeField] public int SafeSpawnArea { get; private set; }
-    [field: SerializeField] public int BossWaveFrequency { get; private set; }
     [field: SerializeField] public bool IsBossAlive { get; private set; }
     [field: SerializeField] private int PreviousBoss { get; set; }
     [field: SerializeField] private bool SpawningWave { get; set; }
-    public bool debugStartWaveNow; // Testing Variable
 
     [field: Header("Lists")]
     public GameObject[] enemyPrefabs;
@@ -85,7 +92,6 @@ public class EnemyManager : MonoBehaviour
         WaveActive = false;
         IsBossWave = false;
 
-        SafeSpawnArea = 20;
 
         Wave -= 1;
         SecondsUntilNextWave = 0;
@@ -127,7 +133,7 @@ public class EnemyManager : MonoBehaviour
         }
 
         IsBossWave = false;
-        if (Wave % BossWaveFrequency == 0)
+        if (Wave % BossWaveFrequency == 0)  
         {
             IsBossWave = true;
             StartCoroutine(SpawnBossWave());
@@ -160,7 +166,7 @@ public class EnemyManager : MonoBehaviour
     private IEnumerator SpawnWave()
     {
         SpawningWave = true;
-        int numberToSpawn = 20 + (Wave * 2);
+        int numberToSpawn = InitialWaveAmount + (Wave * ExtraEnemyPerWave);
 
         while (numberToSpawn != 0)
         {
@@ -294,7 +300,7 @@ public class EnemyManager : MonoBehaviour
 
         newEnemy.transform.position = position;
         Enemy enemyScript = newEnemy.GetComponent<Enemy>();
-        enemyScript.SetStats();
+        enemyScript.SetStats(EnemyBaseHealth);
         enemyScript.InitEnemyEffects(augmentPrefabs);
         enemyList.Add(newEnemy.transform);
         WaveList.Add(newEnemy);

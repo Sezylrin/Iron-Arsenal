@@ -50,12 +50,12 @@ public abstract class Enemy : MonoBehaviour
         baseFunctions = Player.GetComponent<BaseFunctions>();
         Manager = EnemyManager.Instance;
         Wave = Manager.Wave;
-        SetStats();
+        SetStats(Manager.EnemyBaseHealth);
     }
 
-    public virtual void SetStats()
+    public virtual void SetStats(float baseHealth)
     {
-        MaxHealth = data.maxHealth * Mathf.Pow(1.15f, Wave - 1);
+        MaxHealth = data.HealthScale * baseHealth * Mathf.Pow(1.15f, Wave - 1);
         DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, Wave - 1);
         Speed = data.speed * Mathf.Pow(1.005f, Wave - 1);
         RamLaunchMultiplier = data.ramLaunchMultiplier;

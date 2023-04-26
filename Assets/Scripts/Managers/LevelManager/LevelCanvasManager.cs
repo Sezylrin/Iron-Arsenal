@@ -31,6 +31,8 @@ public class LevelCanvasManager : MonoBehaviour
     [SerializeField] private GameObject shopMenu;
     private List<SentryBuildInitialise> allButtons = new List<SentryBuildInitialise>();
 
+    public GameObject instantiatedToolTips;
+
     public bool overMenu = false;
     public static LevelCanvasManager Instance { get; private set; }
 
@@ -114,6 +116,9 @@ public class LevelCanvasManager : MonoBehaviour
     {
         buildMenu.SetActive(false);
         overMenu = false;
+        if (instantiatedToolTips)
+            Destroy(instantiatedToolTips);
+        instantiatedToolTips = null;
     }
 
     public void OpenBuildMenu()

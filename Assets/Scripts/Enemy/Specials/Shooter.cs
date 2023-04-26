@@ -78,9 +78,9 @@ public class Shooter : Enemy
         base.OnDeath();
     }
 
-    public override void SetStats()
+    public override void SetStats(float baseHealth)
     {
-        base.SetStats();
+        base.SetStats(baseHealth);
 
         BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Wave);
         BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Wave);

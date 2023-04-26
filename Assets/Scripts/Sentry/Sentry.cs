@@ -75,18 +75,22 @@ public class Sentry : MonoBehaviour
         }
         else
         {
-            if (timer <= 0)
-            {
-                if(!isDouble)
-                    ShootTarget(Vector3.zero);
-                else
-                {
-                    ShootTarget(Vector3.right * 0.25f);
-                    ShootTarget(Vector3.left * 0.25f);
-                }
-                timer = 1/fireRate;
-            }
             TargetCheck(target);
+            if (target)
+            {
+                if (timer <= 0)
+                {
+                    if (!isDouble)
+                        ShootTarget(Vector3.zero);
+                    else
+                    {
+                        ShootTarget(Vector3.right * 0.25f);
+                        ShootTarget(Vector3.left * 0.25f);
+                    }
+                    timer = 1 / fireRate;
+                }
+
+            }
         }
         timer -= Time.deltaTime;
     }
