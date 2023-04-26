@@ -6,12 +6,14 @@ public enum SentryName
 {
     [Description("BasicSentry")]
     BasicSentry,
-    AdvancedSentry,
+    Gattling,
+    Cannon,
     FlameThrower,
     FreezeTower,
     PoisonTower,
     IceShardTower,
-    IncendiaryTower
+    IncendiaryTower,
+    Plasma
 }
 
 [CreateAssetMenu(fileName = "SentryData",menuName ="ScriptableObjects/SentryData")]
