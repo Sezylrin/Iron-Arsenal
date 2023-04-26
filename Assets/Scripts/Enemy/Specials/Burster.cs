@@ -32,10 +32,7 @@ public class Burster : Enemy
     {
         SetRotation();
 
-        if (Vector3.Distance(Player.transform.position, transform.position) > 10)
-        {
-            Move();
-        }
+        Move();
     }
 
     protected override void OnDeath()
@@ -69,7 +66,6 @@ public class Burster : Enemy
             {
                 newEnemyBullet = Instantiate(enemyBullet, projectilesParent);
             }
-
 
             if (spreadAngle == 0)
             {

@@ -28,14 +28,13 @@ Transform:
   m_GameObject: {fileID: 3601272918170804926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.767919, y: 0.39, z: -10.232794}
-  m_LocalScale: {x: 1, y: 1.7, z: 1}
+  m_LocalScale: {x: 2.5, y: 5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8555560069827120253}
-  - {fileID: 6388519645255094936}
   - {fileID: 6388519646243997100}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &290230669632234951
 Rigidbody:
@@ -62,7 +61,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 1
 --- !u!65 &290230669632234950
 BoxCollider:
@@ -83,8 +82,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.1863183, z: 1}
-  m_Center: {x: 0, y: 0.33877042, z: 0}
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &3601272918170804927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,11 +96,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f8d08c7d296fa44ba48f3d16889cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CurrentHealth>k__BackingField: 0
+  <MaxHealth>k__BackingField: 0
+  <DamageOnCollide>k__BackingField: 0
+  <Speed>k__BackingField: 0
+  <RamLaunchMultiplier>k__BackingField: 0
   type: 5
   <EnemyRB>k__BackingField: {fileID: 290230669632234951}
-  <CurrentHealth>k__BackingField: 0
   data: {fileID: 11400000, guid: d6b0c039483e6f043a4d6687f8738c23, type: 2}
-  explosionPF: {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}
+  <Wave>k__BackingField: 0
+  enemyEffects: {fileID: 0}
+  damageFactor: 1
+  speedFactor: 1
+  <BulletDamage>k__BackingField: 0
+  <BulletSpeed>k__BackingField: 0
+  <BulletFireDelay>k__BackingField: 0
   bulletData: {fileID: 11400000, guid: 3a1c2921786aedc4483ab3bc02d83e1e, type: 2}
   enemyBulletSpawnPoint: {fileID: 6388519645255094936}
   enemyBullet: {fileID: 3670078471125790382, guid: 0fbacc1077e8a354e909f314967413f1, type: 3}
@@ -128,12 +137,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6388519645255094935}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.181, z: 0.946}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.04, z: 0.504}
+  m_LocalScale: {x: 5, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3601272918170804916}
+  m_Father: {fileID: 6388519646243997100}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6388519646243997099
@@ -149,7 +158,7 @@ GameObject:
   - component: {fileID: 6388519646243997102}
   - component: {fileID: 6388519646243997101}
   m_Layer: 7
-  m_Name: Cube
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,10 +172,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6388519646243997099}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.162, z: 0.437}
-  m_LocalScale: {x: 0.2, y: 0.1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.375, z: 0.65}
+  m_LocalScale: {x: 0.1, y: 0.05, z: 0.3}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6388519645255094936}
   m_Father: {fileID: 3601272918170804916}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -267,7 +277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7900672527231193376}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

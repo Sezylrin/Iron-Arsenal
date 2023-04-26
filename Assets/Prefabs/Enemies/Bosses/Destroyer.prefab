@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863969415557185259}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1349}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0.1349}
   m_LocalScale: {x: 1.5, y: 0.3, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1086614c22c5ea34e8e8d7b8c26dc415, type: 2}
+  - {fileID: 2100000, guid: b316755e33846044b8dd7d2ed8dec380, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 3885174311095952436}
   - component: {fileID: 3138506253869168044}
   - component: {fileID: 3138506253869168047}
+  - component: {fileID: 6411570759349439007}
   m_Layer: 7
   m_Name: Shield
   m_TagString: Wall
@@ -110,8 +111,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3397681210967587638}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.007999993, y: 0.05, z: 0.587}
-  m_LocalScale: {x: 0.7, y: 0.4, z: 0.2}
+  m_LocalPosition: {x: 0.007999993, y: 0.2, z: 0.561}
+  m_LocalScale: {x: 0.6, y: 0.4, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6315162635932650879}
@@ -145,7 +146,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8abf8ab0f6ede5249a36afa59edefdd2, type: 2}
+  - {fileID: 2100000, guid: b18b1bfcc9a433c45b3e71c219124030, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -188,6 +189,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.99999994, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6411570759349439007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3397681210967587638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a4a46a0916e83347952e42c01624741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DestroyerScript>k__BackingField: {fileID: 6315162635932650878}
 --- !u!1 &3901023876751444184
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3901023876751444184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.028, z: 0.712}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0.658}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -247,14 +261,14 @@ Transform:
   m_GameObject: {fileID: 6315162635932650869}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.6, y: 1.15, z: -34.315826}
-  m_LocalScale: {x: 4, y: 5, z: 5}
+  m_LocalScale: {x: 6, y: 9, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1216755693069280182}
   - {fileID: 3763138260998530667}
   - {fileID: 3901023876751444187}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7088286582112881164
 Rigidbody:
@@ -302,8 +316,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4997492, y: 0.30062857, z: 0.6997185}
-  m_Center: {x: 0.00046300888, y: 0.00014061928, z: 0.13490562}
+  m_Size: {x: 1.4997492, y: 0.3, z: 0.6997185}
+  m_Center: {x: 0.00046300888, y: 0.15, z: 0.13490562}
 --- !u!114 &6315162635932650878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,11 +339,14 @@ MonoBehaviour:
   <EnemyRB>k__BackingField: {fileID: 7088286582112881164}
   data: {fileID: 11400000, guid: fe27ef6fb1e22754b8f87e5e95afc169, type: 2}
   <Wave>k__BackingField: 0
+  enemyEffects: {fileID: 0}
+  damageFactor: 1
+  speedFactor: 1
   <ActivePattern>k__BackingField: 0
   <LastPattern>k__BackingField: 0
   <NumberOfPatterns>k__BackingField: 0
   <bPatternActive>k__BackingField: 0
-  bossType: 2
+  bossType: 1
   bulletData: {fileID: 11400000, guid: 76852367b079bf7488b4189f9a7a0645, type: 2}
   destroyerBombSpawnPoint: {fileID: 3901023876751444187}
   destroyerBomb: {fileID: 4335083759188863242, guid: 86e246f30e844d140b1931cb13ecec28, type: 3}

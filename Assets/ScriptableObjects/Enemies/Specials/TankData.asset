@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff7c47f2eaad4447b4788586da1922c, type: 3}
   m_Name: TankData
   m_EditorClassIdentifier: 
-  wave: 7
-  maxHealth: 300
+  maxHealth: 500
   damageOnCollide: 10
-  speed: 3
+  speed: 2
   ramLaunchMultiplier: 15

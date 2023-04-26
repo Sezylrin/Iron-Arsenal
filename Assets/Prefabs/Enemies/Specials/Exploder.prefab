@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605097808157586572}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -111,12 +111,12 @@ Transform:
   m_GameObject: {fileID: 6069484704797165330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.562243, y: 0, z: -37.749184}
-  m_LocalScale: {x: 0.8, y: 1.5, z: 0.8}
+  m_LocalScale: {x: 1.5, y: 5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1403462821539998161}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7045448187905982571
 Rigidbody:
@@ -143,7 +143,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 1
 --- !u!65 &7045448187905982570
 BoxCollider:
@@ -164,8 +164,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.3, z: 1}
-  m_Center: {x: 0, y: 0.4, z: 0}
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &2325381597406740631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,9 +178,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6aa47f18a46eed4cbc9582d4c65a81f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CurrentHealth>k__BackingField: 0
+  <MaxHealth>k__BackingField: 0
+  <DamageOnCollide>k__BackingField: 0
+  <Speed>k__BackingField: 0
+  <RamLaunchMultiplier>k__BackingField: 0
   type: 2
   <EnemyRB>k__BackingField: {fileID: 7045448187905982571}
-  <CurrentHealth>k__BackingField: 0
   data: {fileID: 11400000, guid: 584b433b65c050647afcacfee9363b39, type: 2}
-  explosionPF: {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}
+  <Wave>k__BackingField: 0
+  enemyEffects: {fileID: 0}
+  damageFactor: 1
+  speedFactor: 1
   explosion: {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}

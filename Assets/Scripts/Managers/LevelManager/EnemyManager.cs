@@ -13,7 +13,9 @@ public class EnemyManager : MonoBehaviour
     [field: SerializeField] public int SecondsUntilNextWave { get; private set; }
     [field: SerializeField] private float BasicEnemyChance { get; set; }
     [field: SerializeField] private float SpecialEnemyChance { get; set; }
+    [field: SerializeField] public int SafeSpawnArea { get; private set; }
     [field: SerializeField] public bool IsBossAlive { get; private set; }
+    [field: SerializeField] private int PreviousBoss { get; set; }
     [field: SerializeField] private bool SpawningWave { get; set; }
     public bool debugStartWaveNow; // Testing Variable
 
@@ -37,6 +39,7 @@ public class EnemyManager : MonoBehaviour
     private Pooling pooledSplitterEnemies = new Pooling();  //7 - Splitter Enemies
     private Pooling pooledCloakerEnemies = new Pooling();   //8 - Cloaker Enemies
     private Pooling pooledBursterEnemies = new Pooling();   //9 - Burster Enemies
+    private Pooling pooledSprinterEnemies = new Pooling();   //10 - Sprinter Enemies
     public List<Pooling> pools = new List<Pooling>();
 
     public Pooling pooledEnemyBullets = new Pooling();
@@ -57,8 +60,8 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pools.Add(pooledBasicEnemies);     
-        pools.Add(pooledTankEnemies);    
+        pools.Add(pooledBasicEnemies);
+        pools.Add(pooledTankEnemies);
         pools.Add(pooledExploderEnemies);
         pools.Add(pooledDiggerEnemies);
         pools.Add(pooledChargerEnemies);
@@ -67,11 +70,13 @@ public class EnemyManager : MonoBehaviour
         pools.Add(pooledSplitterEnemies);
         pools.Add(pooledCloakerEnemies);
         pools.Add(pooledBursterEnemies);
+        pools.Add(pooledSprinterEnemies);
 
         SpecialEnemyChance = (100 - BasicEnemyChance) / (enemyPrefabs.Length - 1);
 
         IsBossAlive = false;
         SpawningWave = false;
+        SafeSpawnArea = 20;
 
         Wave -= 1;
         SecondsUntilNextWave = 0;
@@ -94,6 +99,8 @@ public class EnemyManager : MonoBehaviour
     private void SelectWave()
     {
         Wave++;
+        BasicEnemyChance -= 2;
+        SpecialEnemyChance = (100 - BasicEnemyChance) / (enemyPrefabs.Length - 1);
 
         if (Wave <= 0)
         {
@@ -169,7 +176,15 @@ public class EnemyManager : MonoBehaviour
     {
         if (isBoss)
         {
-            return Random.Range(0, bossPrefabs.Length);
+            while (true)
+            {
+                int random = Random.Range(0, bossPrefabs.Length);
+                if (random != PreviousBoss)
+                {
+                    PreviousBoss = random;
+                    return PreviousBoss;
+                }
+            }
         }
         else
         {
@@ -186,20 +201,64 @@ public class EnemyManager : MonoBehaviour
         return 0;
     }
 
-    private void SpawnEnemy(bool isBoss)
+    public void SpawnEnemy(bool isBoss) //Spawns Random Enemy At Random Position
     {
-        int enemyType;
+        if (isBoss)
+        {
+            HandleSpawningEnemy(true, SelectEnemyToSpawn(true), GetRandomPosition(SafeSpawnArea));
+        }
+        else
+        {
+            HandleSpawningEnemy(false, SelectEnemyToSpawn(false), GetRandomPosition(SafeSpawnArea));
+        }
+    }
+
+    public void SpawnEnemy(bool isBoss, int enemyType) //Spawns Specific Enemy At Random Position
+    {
+        if (isBoss)
+        {
+            HandleSpawningEnemy(true, enemyType, GetRandomPosition(SafeSpawnArea));
+        }
+        else
+        {
+            HandleSpawningEnemy(false, enemyType, GetRandomPosition(SafeSpawnArea));
+        }
+    }
+
+    public void SpawnEnemy(bool isBoss, Vector3 position) //Spawns Random Enemy At Specific Position
+    {
+        if (isBoss)
+        {
+            HandleSpawningEnemy(true, SelectEnemyToSpawn(true), position);
+        }
+        else
+        {
+            HandleSpawningEnemy(false, SelectEnemyToSpawn(true), position);
+        }
+    }
+
+    public void SpawnEnemy(bool isBoss, int enemyType, Vector3 position) //Spawns Specific Enemy At Specific Position
+    {
+        if (isBoss)
+        {
+            HandleSpawningEnemy(true, enemyType, position);
+        }
+        else
+        {
+            HandleSpawningEnemy(false, enemyType, position);
+        }
+    }
+
+    private void HandleSpawningEnemy(bool isBoss, int enemyType, Vector3 position)
+    {
         GameObject newEnemy = null;
 
         if (isBoss)
         {
-            enemyType = SelectEnemyToSpawn(true);
             newEnemy = Instantiate(bossPrefabs[enemyType], gameObject.transform);
         }
         else
         {
-            enemyType = SelectEnemyToSpawn(false);
-
             if (pools[enemyType].ListCount() > 0)
             {
                 newEnemy = pools[enemyType].FirstObj();
@@ -212,24 +271,19 @@ public class EnemyManager : MonoBehaviour
             }
         }
 
-        SetValues(newEnemy);
-    }
-
-    private void SetValues(GameObject enemy)
-    {
-        enemy.transform.position = GetRandomPosition();
-        Enemy enemyScript = enemy.GetComponent<Enemy>();
+        newEnemy.transform.position = position;
+        Enemy enemyScript = newEnemy.GetComponent<Enemy>();
         enemyScript.SetStats();
         enemyScript.InitEnemyEffects(augmentPrefabs);
-        enemyList.Add(enemy.transform);
+        enemyList.Add(newEnemy.transform);
     }
 
-    private Vector3 GetRandomPosition()
+    public Vector3 GetRandomPosition(int distanceFromPlayer)
     {
-        Vector3 Top = new Vector3(PlayerPosition.x, 0, PlayerPosition.z + 30);
-        Vector3 Bottom = new Vector3(PlayerPosition.x, 0, PlayerPosition.z - 30);
-        Vector3 Right = new Vector3(PlayerPosition.x + 30, 0, PlayerPosition.z);
-        Vector3 Left = new Vector3(PlayerPosition.x - 30, 0, PlayerPosition.z);
+        Vector3 Top = new Vector3(PlayerPosition.x, 0, PlayerPosition.z + distanceFromPlayer);
+        Vector3 Bottom = new Vector3(PlayerPosition.x, 0, PlayerPosition.z - distanceFromPlayer);
+        Vector3 Right = new Vector3(PlayerPosition.x + distanceFromPlayer, 0, PlayerPosition.z);
+        Vector3 Left = new Vector3(PlayerPosition.x - distanceFromPlayer, 0, PlayerPosition.z);
 
         float x = 0;
         float z = 0;

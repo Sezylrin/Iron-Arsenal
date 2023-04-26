@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff7c47f2eaad4447b4788586da1922c, type: 3}
   m_Name: SplitterData
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   damageOnCollide: 10
   speed: 2
   ramLaunchMultiplier: 20

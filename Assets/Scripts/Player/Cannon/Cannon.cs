@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Cannon : MonoBehaviour
@@ -10,9 +11,12 @@ public class Cannon : MonoBehaviour
     [field: Header("Cannon")]
     public int activeCannonProjectile;
     public GameObject[] cannonProjectileArray;
+    public List<int> lockedCannonProjectiles;
+    public List<int> unlockedCannonProjectiles;
 
     [field: Header("Flamethrower")]
     public CannonProjectileData flameData;
+    public int flamethrowerIndex;
 
     [field: Header("Other")]
     public Transform rotatePoint;
@@ -45,6 +49,7 @@ public class Cannon : MonoBehaviour
     void Start()
     {
         activeCannonProjectile = 0;
+        flamethrowerIndex = -1;
         ableToShoot = true;
 
         pools.Add(pooledBullets);
@@ -54,6 +59,14 @@ public class Cannon : MonoBehaviour
         pools.Add(pooledPoisonShots);
         pools.Add(pooledRockets);
         pools.Add(pooledFlames);
+
+        unlockedCannonProjectiles.Add(0);
+        lockedCannonProjectiles.Add(1);
+        lockedCannonProjectiles.Add(2);
+        lockedCannonProjectiles.Add(3);
+        lockedCannonProjectiles.Add(4);
+        lockedCannonProjectiles.Add(5);
+        lockedCannonProjectiles.Add(6);
     }
 
     // Update is called once per frame
@@ -82,13 +95,13 @@ public class Cannon : MonoBehaviour
             mouseHeldDown = false;
         }
 
-        if (activeCannonProjectile == 6 && mouseHeldDown && !firing) 
+        if (activeCannonProjectile == flamethrowerIndex && mouseHeldDown && !firing) 
         {
             firing = true;
             flamethrower.Play();
         }
 
-        if ((activeCannonProjectile == 6 && !mouseHeldDown && firing) || activeCannonProjectile != 6)
+        if ((activeCannonProjectile == flamethrowerIndex && !mouseHeldDown && firing) || activeCannonProjectile != flamethrowerIndex)
         {
             firing = false;
             flamethrower.Stop();
@@ -98,15 +111,15 @@ public class Cannon : MonoBehaviour
         {
             ableToShoot = false;
 
-            if (pools[activeCannonProjectile].ListCount() > 0)
+            if (pools[unlockedCannonProjectiles[activeCannonProjectile]].ListCount() > 0)
             {
-                newCannonProjectile = pools[activeCannonProjectile].FirstObj();
+                newCannonProjectile = pools[unlockedCannonProjectiles[activeCannonProjectile]].FirstObj();
                 newCannonProjectile.SetActive(true);
-                pools[activeCannonProjectile].RemoveObj(newCannonProjectile);
+                pools[unlockedCannonProjectiles[activeCannonProjectile]].RemoveObj(newCannonProjectile);
             }
             else
             {
-                newCannonProjectile = Instantiate(cannonProjectileArray[activeCannonProjectile], projectilesParent);
+                newCannonProjectile = Instantiate(cannonProjectileArray[unlockedCannonProjectiles[activeCannonProjectile]], projectilesParent);
             }
             newCannonProjectile.transform.rotation = transform.rotation;
             newCannonProjectile.transform.position = cannonProjectileSpawnPoint.position;
@@ -126,27 +139,50 @@ public class Cannon : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            activeCannonProjectile = 1;
+            if (unlockedCannonProjectiles.Count >= 2)
+            {
+                activeCannonProjectile = 1;
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            activeCannonProjectile = 2;
+            if (unlockedCannonProjectiles.Count >= 3)
+            {
+                activeCannonProjectile = 2;
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            activeCannonProjectile = 3;
+            if (unlockedCannonProjectiles.Count >= 4)
+            {
+                activeCannonProjectile = 3;
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            activeCannonProjectile = 4;
+            if (unlockedCannonProjectiles.Count >= 5)
+            {
+                activeCannonProjectile = 4;
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            activeCannonProjectile = 5;
+            if (unlockedCannonProjectiles.Count >= 6)
+            {
+                activeCannonProjectile = 5;
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            activeCannonProjectile = 6;
+            if (unlockedCannonProjectiles.Count >= 7)
+            {
+                activeCannonProjectile = 6;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            UnlockRandomCannon();
         }
 
         if (Input.GetKeyDown(KeyCode.U))
@@ -171,5 +207,20 @@ public class Cannon : MonoBehaviour
     {
         obj.SetActive(false);
         pools[projectileType].AddObj(obj);
+    }
+    
+    public void UnlockRandomCannon()
+    {
+        if (lockedCannonProjectiles.Count > 0)
+        {
+            int random = Random.Range(0, lockedCannonProjectiles.Count);
+            unlockedCannonProjectiles.Add(lockedCannonProjectiles[random]);
+            lockedCannonProjectiles.RemoveAt(random);
+
+            if (unlockedCannonProjectiles[unlockedCannonProjectiles.Count - 1] == 6)
+            {
+                flamethrowerIndex = unlockedCannonProjectiles.Count - 1;
+            }
+        } 
     }
 }
