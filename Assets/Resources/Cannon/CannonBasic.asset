@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: CannonBasic
   m_EditorClassIdentifier: 
   damageFactor: 1
-  bulletSpeed: 10
+  bulletSpeed: 20
   pierce: 0
   maxDistance: 30
+  colliderSize: {x: 0, y: 0, z: 0}
+  invisible: 0
   projectileMesh: {fileID: 0}

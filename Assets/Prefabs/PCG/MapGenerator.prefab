@@ -95,7 +95,7 @@ Transform:
   - {fileID: 5099565300703248956}
   - {fileID: 1533879620}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5099565301087661868
 GameObject:
@@ -143,11 +143,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectTilesList:
   - objectToSpawn: {fileID: 8554378202571416629, guid: 953d56150040ebc4bb2469312b3bb9ad, type: 3}
-    chanceToSpawn: 1
+    chanceToSpawn: 20
+    waveToStartSpawning: 0
   - objectToSpawn: {fileID: 3437153877345992295, guid: cf4089a08027b4b4dabc645cac347277, type: 3}
-    chanceToSpawn: 2
+    chanceToSpawn: 20
+    waveToStartSpawning: 0
   - objectToSpawn: {fileID: 5440523406789250478, guid: e6424028bb726e446ae3a8f91e531eb2, type: 3}
-    chanceToSpawn: 3
+    chanceToSpawn: 30
+    waveToStartSpawning: 0
+  - objectToSpawn: {fileID: 6130155636924113708, guid: d1ea8e64b7f4ded409c44c9f68377653, type: 3}
+    chanceToSpawn: 10
+    waveToStartSpawning: 0
+  - objectToSpawn: {fileID: 3820854097166051922, guid: 85876b4cd1fdf9047996e2dcaa355e9a, type: 3}
+    chanceToSpawn: 5
+    waveToStartSpawning: 5
+  - objectToSpawn: {fileID: 3820854097166051922, guid: 85876b4cd1fdf9047996e2dcaa355e9a, type: 3}
+    chanceToSpawn: 1
+    waveToStartSpawning: 10
   groundTile: {fileID: 8052467169487736447, guid: f7de2f10e535c3d44b02236c4bfac47f, type: 3}
   emptyTile: {fileID: 1533879619}
   player: {fileID: 0}

@@ -28,17 +28,14 @@ public class Exploder : Enemy
     {
         if (col.gameObject.tag == "Player")
         {
-            BaseFunctions tempBase = col.gameObject.GetComponent<BaseFunctions>();
-            TakeDamage(StatsManager.Instance.healthFactor * tempBase.collisionFactor);
-            tempBase.TakeDamage(DamageOnCollide);
             OnDeath();
         }
     }
 
     protected override void OnDeath()
     {
-        Instantiate(explosion, transform.position, transform.rotation);
-
+        GameObject explosionObj = Instantiate(explosion, transform.position, transform.rotation);
+        explosionObj.GetComponent<Explosion>().SetDamage(DamageOnCollide);
         base.OnDeath();
     }
 }

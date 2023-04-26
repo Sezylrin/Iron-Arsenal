@@ -22,7 +22,7 @@ public class Explosion : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<tempPlayer>().TakeDamage(damage);
+            other.gameObject.GetComponent<BaseFunctions>().TakeDamage(damage);
         }
 
         if (other.gameObject.tag == "Enemy")

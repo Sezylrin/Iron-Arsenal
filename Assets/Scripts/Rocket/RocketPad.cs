@@ -23,6 +23,7 @@ public class RocketPad : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        controls = LevelManager.Instance.player.GetComponent<PlayerInput>();
         var interactAction = controls.currentActionMap.FindAction("Interact");
         interactAction.started += OnInteract;
         UpdateTextGUI();

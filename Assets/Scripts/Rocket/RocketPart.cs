@@ -34,6 +34,7 @@ public class RocketPart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        controls = LevelManager.Instance.player.GetComponent<PlayerInput>();
         var interactAction = controls.currentActionMap.FindAction("Interact");
         interactAction.performed += OnInteractDown;
         interactAction.canceled += OnInteractUp;

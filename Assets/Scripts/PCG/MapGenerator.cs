@@ -176,7 +176,7 @@ public class MapGenerator : MonoBehaviour
 
     private GameObject RandomTile()
     {
-        int random = Random.Range(0, 100);
+        int random = Random.Range(0, 1000);
         GameObject tileType = null;
 
         // Old code just in case
