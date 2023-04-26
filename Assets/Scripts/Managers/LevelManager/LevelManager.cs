@@ -42,13 +42,13 @@ public class LevelManager : MonoBehaviour
         {
             Instance = this;
         }
-        gameManager = GameManager.Instance;
         augmentManager = AugmentManager.Instance;
         buildManager = new BuildManager();
     }
 
     public void Start()
     {
+        gameManager = GameManager.Instance;
         levelCanvasManager = LevelCanvasManager.Instance;
     }
 

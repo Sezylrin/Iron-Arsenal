@@ -22,4 +22,14 @@ public class GameManager : MonoBehaviour
             levelManager = LevelManager.Instance;
         }
     }
+
+    public void HandleDeath()
+    {
+        Loader.Load(Scene.Defeat);
+    }
+
+    public void HandleVictory()
+    {
+        Loader.Load(Scene.Victory);
+    }
 }

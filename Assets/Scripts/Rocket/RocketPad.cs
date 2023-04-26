@@ -46,7 +46,7 @@ public class RocketPad : MonoBehaviour
         if (!readyToActivate) return;
         //TODO: Escape/Win/TriggerFinalSequence
         Debug.Log("Congrats!");
-        SceneManager.LoadScene("VictoryScene");
+        GameManager.Instance.HandleVictory();
     }
 
     private void OnTriggerEnter(Collider col)
