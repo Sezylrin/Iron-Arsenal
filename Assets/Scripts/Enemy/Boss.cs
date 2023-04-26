@@ -123,7 +123,7 @@ public abstract class Boss : Enemy
 
     protected override void OnDeath()
     {
-        Manager.BossDeath();
+        Manager.BossDeath(transform);
         LevelCanvasManager.Instance.DisableBossHealthBar();
         base.OnDeath();
     }
