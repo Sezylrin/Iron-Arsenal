@@ -13,8 +13,8 @@ public enum EnemyType
     Dodger,
     Splitter,
     Cloaker,
-    Enemy9,
-    Enemy10,
+    Burster,
+    Sprinter,
     StaticSentry,
     Boss
 };
@@ -57,7 +57,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void SetStats()
     {
-        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, Wave - 1);
+        MaxHealth = data.maxHealth * Mathf.Pow(1.15f, Wave - 1);
         DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, Wave - 1);
         Speed = data.speed * Mathf.Pow(1.005f, Wave - 1);
         RamLaunchMultiplier = data.ramLaunchMultiplier;

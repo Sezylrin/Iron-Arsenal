@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39275868352940199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -107,11 +107,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250976695633235661}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.007999993, y: 0.049740028, z: 0.656}
-  m_LocalScale: {x: 0.2, y: 0.34, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0.0299, z: 0.27500004}
+  m_LocalScale: {x: 0.5, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6689270825627925299}
+  m_Father: {fileID: 4562072642991280167}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2616621782975090042
@@ -140,10 +140,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2616621782975090042}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.007999993, y: -0.011799979, z: 0.601}
-  m_LocalScale: {x: 0.4, y: 0.17, z: 0.2}
+  m_LocalPosition: {x: 0.007999993, y: 0.25, z: 0.5749}
+  m_LocalScale: {x: 0.4, y: 0.17, z: 0.15}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1250976695633235650}
   m_Father: {fileID: 6689270825627925299}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -225,14 +226,13 @@ Transform:
   m_GameObject: {fileID: 6689270825627925305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.09, y: 1.43, z: -20.36}
-  m_LocalScale: {x: 4, y: 5, z: 5}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1987264400686208506}
   - {fileID: 4562072642991280167}
-  - {fileID: 1250976695633235650}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7577378657274690624
 Rigidbody:
@@ -280,8 +280,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.7515046, z: 1.1463364}
-  m_Center: {x: 0, y: 0.12575184, z: 0.07316818}
+  m_Size: {x: 1, y: 0.5, z: 1.1504043}
+  m_Center: {x: 0, y: 0.25, z: 0.075201035}
 --- !u!114 &7577378657274690639
 MonoBehaviour:
   m_ObjectHideFlags: 0

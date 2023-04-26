@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bff7c47f2eaad4447b4788586da1922c, type: 3}
-  m_Name: BursterData
+  m_Name: BreederData
   m_EditorClassIdentifier: 
-  maxHealth: 300
-  damageOnCollide: 10
-  speed: 2
+  maxHealth: 2000
+  damageOnCollide: 100
+  speed: 1
   ramLaunchMultiplier: 10

@@ -5,8 +5,8 @@ using UnityEngine;
 public enum BossType
 {
     Reaper,
-    Breeder,
-    Destroyer
+    Destroyer,
+    Breeder
 };
 
 public abstract class Boss : Enemy
@@ -158,7 +158,7 @@ public abstract class Boss : Enemy
         }
     }
 
-    protected virtual void Pattern1() //Common Move and Attack 
+    protected virtual void Pattern1() //Common Move and Melee 
     {
         StartCoroutine(PatternLength(10));
 
