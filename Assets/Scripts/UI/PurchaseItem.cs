@@ -114,11 +114,11 @@ public class PurchaseItem : MonoBehaviour
                 }
                 break;
             case TabType.sentryPurchases:
-                //if (LevelManager.Instance.PurchaseItemIfPossible(sentryData.unlockXenoriumCost, sentryData.unlockNovaciteCost, sentryData.unlockVoidStoneCost))
-                //{
+                if (LevelManager.Instance.PurchaseItemIfPossible(sentryData.unlockXenoriumCost, sentryData.unlockNovaciteCost, sentryData.unlockVoidStoneCost))
+                {
                     SentryManager.Instance.AddSentry(sentryData);
                     shopMenu.PurchaseSentry(sentryData);
-                //}
+                }
                 break;
         }
     }
