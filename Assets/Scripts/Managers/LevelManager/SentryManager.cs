@@ -19,11 +19,6 @@ public class SentryManager : MonoBehaviour
         {
             Instance = this;
         }
-        
-    }
-
-    void Start()
-    {
         string sentryPath = "Sentries/";
         foreach (SentryName sentryName in Enum.GetValues(typeof(SentryName)))
         {

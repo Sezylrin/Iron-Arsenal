@@ -16,6 +16,10 @@ public class ShopManager : MonoBehaviour
         List<SentryData> lockedSentries = SentryManager.Instance.LockedSentries;
         int numSentriesToChoose = 3;
 
+        if (numSentriesToChoose > lockedSentries.Count)
+        {
+            numSentriesToChoose = lockedSentries.Count;
+        }
         for (int i = 0; i < numSentriesToChoose; i++)
         {
             int randomIndex = Random.Range(0, lockedSentries.Count);
