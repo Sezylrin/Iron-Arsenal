@@ -183,6 +183,8 @@ public class BaseFunctions : MonoBehaviour
 
     public void UpgradeBase()
     {
+        if (baseLevel >= relativeSpawnPos.Length)
+            return;
         foreach (Vector3 spawnPos in relativeSpawnPos[baseLevel].pos)
         {
             Instantiate(turretSocketPF, transform.position + spawnPos, Quaternion.identity, transform);
