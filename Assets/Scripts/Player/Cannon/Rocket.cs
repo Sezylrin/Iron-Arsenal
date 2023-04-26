@@ -8,7 +8,6 @@ public class Rocket : CannonProjectile
 
     void Awake()
     {
-        Init();
     }
 
     // Start is called before the first frame update
@@ -20,12 +19,15 @@ public class Rocket : CannonProjectile
     // Update is called once per frame
     void Update()
     {
-        Move();
     }
 
-    public override void OnDelete()
+    public override void Init()
     {
-        Instantiate(explosion, new Vector3(transform.position.x, -2, transform.position.z), transform.rotation);
-        base.OnDelete();
+        Vector3 tempPos = transform.position;
+        tempPos.y = 0;
+        Vector3 tempMouse = mousePos;
+        tempMouse.y = 0;
+        Shoot(tempMouse - tempPos);
+        base.Init();
     }
 }

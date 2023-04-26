@@ -45,5 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  data: {fileID: 11400000, guid: 6a276c07b45ecb44b9943c88a6324db7, type: 2}
+  attribute: 0
+  ProjectilePF: {fileID: 305608694543129271, guid: dc14465a1f1f1174c8c8619b097526b4, type: 3}
+  mousePos: {x: 0, y: 0, z: 0}
+  data: {fileID: 11400000, guid: d7c49dd1181052d4b94110af35a29b88, type: 2}
+  delay: 0.1
+  activeAugments: 
   bullet: {fileID: 1123763005487040603, guid: c4a3e8f0491194748ada7e901664ded6, type: 3}

@@ -17,13 +17,15 @@ public class Projectile : MonoBehaviour
 
     private Sentry owner;
 
+    private CannonProjectile cannonOwner;
+
     public List<Augments> activeAugments = new List<Augments>();
 
     public List<AugmentBase> augmentBases = new List<AugmentBase>();
 
     private Collider lastHit = null;
 
-    public float maxDistance = 15;
+    public float maxDistance;
 
     private Vector3 spawnPos;
 
@@ -31,11 +33,18 @@ public class Projectile : MonoBehaviour
 
     public float damageScale = 1;
 
+    public MeshFilter projMesh;
+
+    public BoxCollider boxCollider;
+
     private StatAttribute attribute;
 
     private bool isDouble = false;
+
+    private Rigidbody rb;
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -43,19 +52,18 @@ public class Projectile : MonoBehaviour
     {
         if (!data)
             return;
-        transform.Translate(Vector3.forward * modifiedSpeed * Time.deltaTime);
+        rb.velocity = dir * modifiedSpeed;
         distanceTravelled = Vector3.Distance(transform.position, spawnPos);
         if (distanceTravelled >= maxDistance)
         {
-            owner.PoolBullet(gameObject);
+            if (owner)
+                owner.PoolBullet(gameObject);
+            if (cannonOwner)
+                cannonOwner.PoolProj(gameObject);
             gameObject.SetActive(false);
         }
     }
 
-    public void TranslateDir()
-    {
-        transform.Translate(dir * modifiedSpeed * Time.deltaTime);
-    }
     public void SetProjectileStat()
     {
         float damage = attribute.Equals(StatAttribute.Physical) ? StatsManager.Instance.physicalDamage : StatsManager.Instance.elementalDamage;
@@ -68,6 +76,11 @@ public class Projectile : MonoBehaviour
         }
         modifiedSpeed = data.bulletSpeed;
         modifiedPierce = data.pierce;
+        maxDistance = data.maxDistance;
+        if (!data.colliderSize.Equals(Vector3.zero))
+            boxCollider.size = data.colliderSize;
+        if (data.invisible)
+            projMesh.mesh = null;
         damageScale = 1;
     }
 
@@ -91,6 +104,15 @@ public class Projectile : MonoBehaviour
         this.attribute = attribute;
         SetProjectileStat();
     }
+    public void SetProjectileData(ProjectileData data, CannonProjectile owner, StatAttribute attribute)
+    {
+        if (!this.data)
+            this.data = data;
+        if (!this.cannonOwner)
+            cannonOwner = owner;
+        this.attribute = attribute;
+        SetProjectileStat();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -101,7 +123,10 @@ public class Projectile : MonoBehaviour
             if (modifiedPierce <= 0)
             {
                 lastHit = null;
-                owner.PoolBullet(gameObject);
+                if (owner)
+                    owner.PoolBullet(gameObject);
+                if (cannonOwner)
+                    cannonOwner.PoolProj(gameObject);
                 gameObject.SetActive(false);
             }
         }
@@ -115,5 +140,10 @@ public class Projectile : MonoBehaviour
     public Sentry GetOwner()
     {
         return owner;
+    }
+
+    public CannonProjectile GetCannonOwner()
+    {
+        return cannonOwner;
     }
 }

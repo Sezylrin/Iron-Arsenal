@@ -25,7 +25,7 @@ public class BuildManager
             }
             else
             {
-                Debug.LogError("Unable to load SentryData asset: " + sentryName);
+                Debug.Log("Unable to load SentryData asset: " + sentryName);
             }
         }
     }

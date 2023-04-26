@@ -19,6 +19,7 @@ public class Cannon : MonoBehaviour
     public Transform cannonProjectileSpawnPoint;
     public LayerMask groundMask;
 
+    public GameObject projectilePF;
     private GameObject newCannonProjectile;
     private ParticleSystem flamethrower;
     private bool ableToShoot;
@@ -112,12 +113,15 @@ public class Cannon : MonoBehaviour
             newCannonProjectile.transform.position = cannonProjectileSpawnPoint.position;
 
             CannonProjectile cannonProjectileScript = newCannonProjectile.GetComponent<CannonProjectile>();
-            cannonProjectileScript.Direction = (mouseLocation - cannonProjectileSpawnPoint.position).normalized;
-            cannonProjectileScript.Owner = this;
-            cannonProjectileScript.SetStats();
-            cannonProjectileScript.Shoot();
-
-            StartCoroutine(DelayFiring(cannonProjectileScript.FireDelay));
+            cannonProjectileScript.SetStats(this, worldPosition);
+            if (cannonProjectileScript.activeAugments.Count <= AugmentManager.Instance.activeAugments.Count)
+            {
+                foreach (Augments augment in AugmentManager.Instance.activeAugments)
+                {
+                    cannonProjectileScript.AddAugments(augment);
+                }
+            }
+            cannonProjectileScript.Init();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -161,11 +165,11 @@ public class Cannon : MonoBehaviour
         }
     }
 
-    IEnumerator DelayFiring(float delay)
+    public void DelayFiring()
     {
-        yield return new WaitForSeconds(delay);
         ableToShoot = true;
     }
+
 
     public void PoolProjectile(GameObject obj, int projectileType)
     {
