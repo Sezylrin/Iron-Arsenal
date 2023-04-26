@@ -30,6 +30,12 @@ public class LevelCanvasManager : MonoBehaviour
     [SerializeField] private GameObject shopMenu;
     private List<SentryBuildInitialise> allButtons = new List<SentryBuildInitialise>();
 
+    public List<SentrySocket> allSockets = new List<SentrySocket>();
+
+    public Material[] mats;
+
+    private bool changedMat = false;
+
     public GameObject instantiatedToolTips;
 
     public bool overMenu = false;
@@ -59,11 +65,34 @@ public class LevelCanvasManager : MonoBehaviour
         {
             CloseBuildMenu();
         }
+        if(LevelManager.Instance.currentState == State.Building && !changedMat)
+        {
+            changedMat = true;
+            foreach(SentrySocket socket in allSockets)
+            {
+                if (!socket.HasSentry())
+                {
+                    socket.meshRender.material = mats[0];
+                }
+            }
+        }
+        else if (LevelManager.Instance.currentState != State.Building && changedMat)
+        {
+            changedMat = false;
+            foreach (SentrySocket socket in allSockets)
+            {
+                if (!socket.HasSentry())
+                {
+                    socket.meshRender.material = socket.mat;
+                }
+            }
+        }
         if (Input.GetMouseButtonDown(0) && LevelManager.Instance.currentState == State.Building)
         {
             Vector3 MousePos = MousePosition.MouseToWorld3D(Camera.main, -1);
             MousePos.y = transform.position.y;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
             if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, layer))
             {
                 if (hit.collider.CompareTag("Socket"))
@@ -73,13 +102,29 @@ public class LevelCanvasManager : MonoBehaviour
                     {
                         AssignSocket(socket);
                         OpenBuildMenu();
+                        foreach (SentrySocket sockets in allSockets)
+                        {
+                            if (!sockets.HasSentry())
+                            {
+                                sockets.meshRender.material = mats[0];
+                            }
+                        }
+                        socket.meshRender.material = mats[1];
                     }
                 }
             }
             else if (!overMenu)
             {
+                foreach (SentrySocket socket in allSockets)
+                {
+                    if (!socket.HasSentry())
+                    {
+                        socket.meshRender.material = mats[0];
+                    }
+                }
                 AssignSocket(null);
                 CloseBuildMenu();
+
             }
         }
     }

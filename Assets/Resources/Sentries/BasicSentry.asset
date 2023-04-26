@@ -22,9 +22,9 @@ MonoBehaviour:
   losAngle: 180
   fireRate: 5
   projectileData: {fileID: 11400000, guid: 6c52d32082c5e194ba655e540ba523ca, type: 2}
-  xenoriumCost: 100
-  novaciteCost: 100
-  voidStoneCost: 100
+  xenoriumCost: 0
+  novaciteCost: 0
+  voidStoneCost: 0
   buildable: 1
   defaultAugment: 
   unlockXenoriumCost: 0
