@@ -117,7 +117,6 @@ public class EnemyManager : MonoBehaviour
             {
                 LevelManager.Instance.SpawnAugmentChoice(); //Temp
             }
-            
         }
     }
 
@@ -194,8 +193,9 @@ public class EnemyManager : MonoBehaviour
         StartCoroutine(DelayWave());
     }
 
-    public void BossDeath()
+    public void BossDeath(Transform bossTransform)
     {
+        enemyList.Remove(bossTransform);
         IsBossAlive = false;
     }
 

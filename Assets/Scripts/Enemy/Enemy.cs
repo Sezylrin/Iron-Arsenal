@@ -167,6 +167,12 @@ public abstract class Enemy : MonoBehaviour
             case EnemyType.Cloaker:
                 Manager.PoolEnemy(gameObject, 8);
                 break;
+            case EnemyType.Burster:
+                Manager.PoolEnemy(gameObject, 8);
+                break;
+            case EnemyType.Sprinter:
+                Manager.PoolEnemy(gameObject, 8);
+                break;
             default:
                 Destroy(gameObject);
                 break;
