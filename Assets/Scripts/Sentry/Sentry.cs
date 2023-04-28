@@ -41,6 +41,11 @@ public class Sentry : MonoBehaviour
     void Start()
     {
         
+        
+    }
+
+    public void init()
+    {
         if (!centerPoint)
             centerPoint = GameObject.FindWithTag("CenterPoint").transform;
         if (!centerPoint)
@@ -48,10 +53,12 @@ public class Sentry : MonoBehaviour
             Debug.Log("No centerPoint for turrets to reference, please create an emepty transform at the center of the base");
             Debug.Break();
         }
-        if (data)
-            SetValue();
-        sentryEffects = gameObject.AddComponent<SentryEffects>();
-        sentryEffects.hostSentry = this;
+        if (!sentryEffects)
+        {
+            sentryEffects = gameObject.AddComponent<SentryEffects>();
+            sentryEffects.hostSentry = this;
+
+        }
         if (AugmentManager.Instance)
         {
             activeAugments = new List<Augments>(AugmentManager.Instance.activeAugments);
@@ -60,7 +67,7 @@ public class Sentry : MonoBehaviour
         }
         poolObject = new GameObject("Projectile Storage");
 
-        
+
     }
 
     // Update is called once per frame
@@ -201,12 +208,17 @@ public class Sentry : MonoBehaviour
         range = data.range;
         fireRate = data.fireRate;
         timer = 1 / fireRate;
+        init();
         if (data.defaultAugment.Length > 0)
         {
             foreach (Augments augment in data.defaultAugment)
             {
                 AddAugmentToList(augment);
             }
+        }
+        foreach (MeshRenderer rend in GetComponentsInChildren<MeshRenderer>())
+        {
+            rend.material = data.mat;
         }
     }
 
@@ -223,7 +235,7 @@ public class Sentry : MonoBehaviour
         {
             activeAugments.Add(augmentToAdd);
         }
-        sentryEffects.UpdateAugments();
+        UpdateAugments();
     }
 
     public void AddAllAugments(GameObject bullet, Projectile projData)
@@ -245,6 +257,14 @@ public class Sentry : MonoBehaviour
 
     public void UpdateAugments()
     {
+        Debug.Log(sentryEffects);
+        if (!sentryEffects)
+        {
+            sentryEffects = gameObject.AddComponent<SentryEffects>();
+            sentryEffects.hostSentry = this;
+
+        }
+        Debug.Log(sentryEffects);
         sentryEffects.UpdateAugments();
     }
 

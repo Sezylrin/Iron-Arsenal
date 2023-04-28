@@ -16,6 +16,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: eec9ea1d6be059e4bbeb9c102b8fa766, type: 3}
   upgradeName: Health
   description: 'Increases max health of your mech by '
-  xenoriumCost: 50
-  novaciteCost: 50
-  voidStoneCost: 50
+  xenoriumCost: 200
+  novaciteCost: 200
+  voidStoneCost: 200

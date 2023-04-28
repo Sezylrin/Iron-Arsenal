@@ -16,6 +16,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 4944d0ab2a6af034cb7c02002b0dccbe, type: 3}
   upgradeName: Elemental
   description: 'Increases elemental damage by '
-  xenoriumCost: 50
-  novaciteCost: 50
-  voidStoneCost: 50
+  xenoriumCost: 200
+  novaciteCost: 200
+  voidStoneCost: 200

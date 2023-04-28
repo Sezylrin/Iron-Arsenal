@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
+//using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -116,6 +116,10 @@ public class EnemyManager : MonoBehaviour
             if (IsBossWave)
             {
                 LevelManager.Instance.SpawnAugmentChoice(); //Temp
+            }
+            else if (Wave % 2 == 0)
+            {
+                LevelManager.Instance.SpawnAugmentChoice();
             }
         }
     }

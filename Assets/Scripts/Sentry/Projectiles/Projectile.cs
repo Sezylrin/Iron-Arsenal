@@ -102,6 +102,10 @@ public class Projectile : MonoBehaviour
         if (!this.owner)
             this.owner = owner;
         this.attribute = attribute;
+        if (data.mat)
+        {
+            GetComponentInChildren<MeshRenderer>().material = data.mat;
+        }
         SetProjectileStat();
     }
     public void SetProjectileData(ProjectileData data, CannonProjectile owner, StatAttribute attribute)
@@ -111,6 +115,10 @@ public class Projectile : MonoBehaviour
         if (!this.cannonOwner)
             cannonOwner = owner;
         this.attribute = attribute;
+        if (data.mat)
+        {
+            GetComponentInChildren<MeshRenderer>().material = data.mat;
+        }
         SetProjectileStat();
     }
 

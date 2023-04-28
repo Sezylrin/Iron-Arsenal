@@ -5,15 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/TechDemo.unity
-    guid: 43062793252ff7647a01cb1450d89e82
-  - enabled: 0
-    path: Assets/Scenes/RocketScene.unity
-    guid: c4c522a2f5d018a4882475fc8308231c
   - enabled: 1
     path: Assets/Scenes/BuidlScenes/Game.unity
-    guid: f6b6157ca6c8a66469f4003b07fe069d
+    guid: 2a8a4d2aeb41f7140bf884f51643893d
   - enabled: 1
     path: Assets/Scenes/BuidlScenes/Victory.unity
     guid: f059aa8db68139342bb9db910009890b

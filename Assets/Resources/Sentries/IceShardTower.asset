@@ -17,16 +17,17 @@ MonoBehaviour:
   Colour: {fileID: 2100000, guid: 333f3a40f2b0f8b4197e43c308af8278, type: 2}
   SentryIcon: {fileID: 21300000, guid: 0faccb5f1c66e4943b55050d11390614, type: 3}
   sentryName: 'Icycle '
-  description: An Advanced Sentry (Placeholder)
+  description: Shoots out projectiles that slow enemies
   range: 15
   losAngle: 180
-  fireRate: 4
+  fireRate: 2
   projectileData: {fileID: 11400000, guid: 16ec91a5a04ac6f419c791d57eab14a3, type: 2}
-  xenoriumCost: 200
-  novaciteCost: 200
-  voidStoneCost: 200
+  mat: {fileID: 2100000, guid: d1c81a0c99a1d4140a408c916847de61, type: 2}
+  xenoriumCost: 100
+  novaciteCost: 100
+  voidStoneCost: 100
   buildable: 1
   defaultAugment: 0c000000
-  unlockXenoriumCost: 10
-  unlockNovaciteCost: 10
-  unlockVoidStoneCost: 10
+  unlockXenoriumCost: 150
+  unlockNovaciteCost: 150
+  unlockVoidStoneCost: 150

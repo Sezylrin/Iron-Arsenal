@@ -44,6 +44,8 @@ public class BaseFunctions : MonoBehaviour
 
     private int baseLevel = 0;
 
+    public Transform boxMesh;
+
     private void Awake()
     {
         baseEffects = gameObject.AddComponent<BaseEffects>();
@@ -185,9 +187,20 @@ public class BaseFunctions : MonoBehaviour
     {
         if (baseLevel >= relativeSpawnPos.Length)
             return;
+        if (baseLevel == 1)
+        {
+            Vector3 temp = boxMesh.localScale;
+            temp.z = 10;
+            boxMesh.localScale = temp;
+            BoxCollider collider = GetComponent<BoxCollider>();
+            Vector3 size = collider.size;
+            size.z *= 2;
+            collider.size = size;
+        }
         foreach (Vector3 spawnPos in relativeSpawnPos[baseLevel].pos)
         {
-            Instantiate(turretSocketPF, transform.position + spawnPos, Quaternion.identity, transform);
+            GameObject socket = Instantiate(turretSocketPF, transform.position + spawnPos, Quaternion.identity, transform);
+            socket.transform.RotateAround(transform.position, Vector3.up, Mathf.Ceil(transform.eulerAngles.y)); 
         }
         baseLevel++;
     }

@@ -7,6 +7,7 @@ public class ShopManager : MonoBehaviour
     public MechUpgradeData[] mechUpgrades = new MechUpgradeData[3];
     public AttributeUpgradeData[] attributeUpgrades = new AttributeUpgradeData[3];
     private List<SentryData> purchasableSentries = new();
+    public GameObject canvas;
 
     private bool collidingWithPlayer = false;
     public TabType currTab = TabType.mechUpgrades;
@@ -52,7 +53,8 @@ public class ShopManager : MonoBehaviour
     {
         if (other.CompareTag("Player") && !collidingWithPlayer)
         {
-            collidingWithPlayer = true;   
+            collidingWithPlayer = true;
+            canvas.SetActive(true);
         }
     }
 
@@ -61,6 +63,7 @@ public class ShopManager : MonoBehaviour
         if (other.CompareTag("Player") && collidingWithPlayer)
         {
             collidingWithPlayer = false;
+            canvas.SetActive(false);
         }
     }
 

@@ -62,12 +62,14 @@ public class Cannon : MonoBehaviour
         pools.Add(pooledFlames);
 
         unlockedCannonProjectiles.Add(0);
-        lockedCannonProjectiles.Add(1);
-        lockedCannonProjectiles.Add(2);
-        lockedCannonProjectiles.Add(3);
-        lockedCannonProjectiles.Add(4);
-        lockedCannonProjectiles.Add(5);
+        unlockedCannonProjectiles.Add(1);
+        unlockedCannonProjectiles.Add(2);
+        unlockedCannonProjectiles.Add(3);
+        unlockedCannonProjectiles.Add(4);
+        unlockedCannonProjectiles.Add(5);
         lockedCannonProjectiles.Add(6);
+        UnlockRandomCannon();
+        
     }
 
     // Update is called once per frame

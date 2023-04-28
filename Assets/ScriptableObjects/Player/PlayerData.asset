@@ -14,10 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 10
   moveAccel: 5
-  moveDecel: 5
+  moveDecel: 10
   accelPower: 1
   allowStopPower: 1
   stopPower: 0.1
-  allowTurnPower: 1
-  turnPower: 0.1
   frictionAmount: 0.2

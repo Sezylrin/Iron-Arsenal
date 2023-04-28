@@ -19,3 +19,4 @@ MonoBehaviour:
   colliderSize: {x: 0, y: 0, z: 0}
   invisible: 0
   projectileMesh: {fileID: 0}
+  mat: {fileID: 2100000, guid: 897e7ca60c1efac4db5e6881bd4ee803, type: 2}

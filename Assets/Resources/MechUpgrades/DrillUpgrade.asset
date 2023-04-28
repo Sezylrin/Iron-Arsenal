@@ -16,6 +16,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 7f35d3d4cace9fe409ae2c613ae807f7, type: 3}
   upgradeName: Drill Upgrade
   description: Increase the mining speed of your drill
-  xenoriumCost: 200
-  novaciteCost: 200
-  voidStoneCost: 200
+  xenoriumCost: 100
+  novaciteCost: 100
+  voidStoneCost: 100

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0c1a37897c8fc488cc495512be05d3, type: 3}
   m_Name: Cannon
   m_EditorClassIdentifier: 
-  damageFactor: 1
+  damageFactor: 0.7
   bulletSpeed: 30
   pierce: 0
   maxDistance: 18
   colliderSize: {x: 0, y: 0, z: 0}
   invisible: 0
   projectileMesh: {fileID: 0}
+  mat: {fileID: 0}

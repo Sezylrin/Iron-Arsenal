@@ -12,4 +12,6 @@ public class ProjectileData : ScriptableObject
     public bool invisible = false;
 
     public Mesh projectileMesh;
+
+    public Material mat;
 }

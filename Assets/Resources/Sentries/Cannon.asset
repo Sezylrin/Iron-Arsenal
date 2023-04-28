@@ -17,16 +17,17 @@ MonoBehaviour:
   Colour: {fileID: 2100000, guid: 333f3a40f2b0f8b4197e43c308af8278, type: 2}
   SentryIcon: {fileID: 21300000, guid: 0faccb5f1c66e4943b55050d11390614, type: 3}
   sentryName: Cannon
-  description: An Advanced Sentry (Placeholder)
+  description: Powerful sentry with slow fire rate
   range: 15
   losAngle: 180
-  fireRate: 2
+  fireRate: 1
   projectileData: {fileID: 11400000, guid: 952fb9986218fd743be19e35bfbc1d47, type: 2}
-  xenoriumCost: 200
-  novaciteCost: 200
-  voidStoneCost: 200
+  mat: {fileID: 2100000, guid: 983071111af17834095e509484eb92ad, type: 2}
+  xenoriumCost: 100
+  novaciteCost: 100
+  voidStoneCost: 100
   buildable: 1
   defaultAugment: 
-  unlockXenoriumCost: 10
-  unlockNovaciteCost: 10
-  unlockVoidStoneCost: 10
+  unlockXenoriumCost: 150
+  unlockNovaciteCost: 150
+  unlockVoidStoneCost: 150

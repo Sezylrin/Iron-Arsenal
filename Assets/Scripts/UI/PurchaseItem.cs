@@ -42,15 +42,15 @@ public class PurchaseItem : MonoBehaviour
         string descTxt = attributeUpgradeData.description;
         if (attributeUpgradeData.attribute == Attribute.Physical)
         {
-            descTxt += " " + StatsManager.Instance.PhysicalUpgradeAmount();
+            descTxt += " " + ((int)(StatsManager.Instance.PhysicalUpgradeAmount()*100)).ToString() + "%";
         }
         else if (attributeUpgradeData.attribute == Attribute.Health)
         {
-            descTxt += " " + StatsManager.Instance.HealthUpgradeAmount();
+            descTxt += " " + ((int)(StatsManager.Instance.HealthUpgradeAmount() * 100)).ToString() + "%";
         }
         else if (attributeUpgradeData.attribute == Attribute.Elemental)
         {
-            descTxt += " " + StatsManager.Instance.ElementalUpgradeAmount();
+            descTxt += " " + ((int)(StatsManager.Instance.ElementalUpgradeAmount() * 100)).ToString() + "%";
         }
 
         description.text = descTxt;

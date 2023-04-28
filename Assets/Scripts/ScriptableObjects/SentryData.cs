@@ -32,6 +32,8 @@ public class SentryData : ScriptableObject
 
     public ProjectileData projectileData;
 
+    public Material mat;
+
     public int xenoriumCost;
     public int novaciteCost;
     public int voidStoneCost;
