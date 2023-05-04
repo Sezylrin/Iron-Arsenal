@@ -20,9 +20,9 @@ public abstract class EnemyBossProjectile : MonoBehaviour
 
     public virtual void SetStats()
     {
-        Damage = data.damage * Mathf.Pow(1.1f, Owner.Wave);
-        ProjectileSpeed = data.projectileSpeed * Mathf.Pow(1.01f, Owner.Wave);
-        FireDelay = data.fireDelay * Mathf.Pow(1.01f, -Owner.Wave);
+        Damage = data.damage * Mathf.Pow(1.1f, Owner.Difficulty);
+        ProjectileSpeed = data.projectileSpeed * Mathf.Pow(1.01f, Owner.Difficulty);
+        FireDelay = data.fireDelay * Mathf.Pow(1.01f, -Owner.Difficulty);
         ProjectileLifetime = data.projectileLifetime;
     }
 

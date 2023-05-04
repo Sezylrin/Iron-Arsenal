@@ -155,9 +155,9 @@ public class Reaper : Boss
     {
         base.SetStats(baseHealth);
 
-        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Wave);
-        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Wave);
-        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Wave);
+        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Difficulty);
+        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Difficulty);
+        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Difficulty);
     }
 
     IEnumerator DelayFiring(float delay)
