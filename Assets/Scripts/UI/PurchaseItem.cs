@@ -13,6 +13,7 @@ public class PurchaseItem : MonoBehaviour
 
     private MechUpgradeData mechUpgradeData;
     private AttributeUpgradeData attributeUpgradeData;
+    private AugmentData augmentData;
     private SentryData sentryData;
     private ShopMenu shopMenu;
     public TabType currTab;
@@ -62,6 +63,19 @@ public class PurchaseItem : MonoBehaviour
         this.shopMenu = shopMenu;
     }
 
+    public void SetAugmentPurchase(AugmentData augmentData, TabType currTab, ShopMenu shopMenu )
+    {
+        icon.sprite = augmentData.icon;
+        title.text = augmentData.augName;
+        description.text = augmentData.description;
+        xenoriumCost.text = augmentData.xenoriumCost.ToString();
+        novaciteCost.text = augmentData.novaciteCost.ToString();
+        voidStoneCost.text = augmentData.voidStoneCost.ToString();
+        this.augmentData = augmentData;
+        this.currTab = currTab;
+        this.shopMenu = shopMenu;
+    }
+
     public void SetSentryPurchase(SentryData sentryData, TabType currTab, ShopMenu shopMenu) {
         icon.sprite = sentryData.SentryIcon;
         title.text = sentryData.sentryName;
@@ -76,6 +90,7 @@ public class PurchaseItem : MonoBehaviour
 
     private void HandlePurchase()
     {
+        Debug.Log("ttest");
         switch (currTab)
         {
             case TabType.mechUpgrades:
@@ -111,6 +126,13 @@ public class PurchaseItem : MonoBehaviour
                             break;
                     }
                     shopMenu.PurchaseItem();
+                }
+                break;
+            case TabType.augmentPurchases:
+                if (LevelManager.Instance.PurchaseItemIfPossible(augmentData.xenoriumCost, augmentData.novaciteCost, augmentData.voidStoneCost))
+                {
+                    AugmentManager.Instance.AddAugment(augmentData.augmentType);
+                    shopMenu.PurchaseAugment(augmentData);
                 }
                 break;
             case TabType.sentryPurchases:

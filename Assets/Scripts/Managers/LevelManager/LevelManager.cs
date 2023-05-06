@@ -35,6 +35,8 @@ public class LevelManager : MonoBehaviour
     public Mining playerMining;
     public State currentState = State.Normal;
 
+    [SerializeField] private bool unlimitedResources = false;
+
     private void Awake()
     {
         if (Instance != null)
@@ -76,6 +78,10 @@ public class LevelManager : MonoBehaviour
     }
     public bool CanBuildSentry(SentryName sentryName)
     {
+        if (unlimitedResources)
+        {
+            return true;
+        }
         return buildManager.CanBuildSentry(sentryName);
     }
 
@@ -122,6 +128,11 @@ public class LevelManager : MonoBehaviour
 
     public bool PurchaseItemIfPossible(int xenoriumCost, int novaciteCost, int voidStoneCost)
     {
+        if (unlimitedResources)
+        {
+            return true;
+        }
+
         bool didSucceed = buildManager.PurchaseItemIfPossible(xenoriumCost, novaciteCost, voidStoneCost);
         levelCanvasManager.SetXenoriumAmount(buildManager.xenorium);
         levelCanvasManager.SetNovaciteAmount(buildManager.novacite);
