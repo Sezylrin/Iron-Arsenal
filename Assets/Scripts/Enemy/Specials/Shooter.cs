@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Shooter : Enemy
 {
-    public float BulletDamage { get; set; }
-    public float BulletSpeed { get; set; }
-    public float BulletFireDelay { get; set; }
+    [field: Header("Bullet")]
+    [field: SerializeField] public float BulletDamage { get; set; }
+    [field: SerializeField] public float BulletSpeed { get; set; }
+    [field: SerializeField] public float BulletFireDelay { get; set; }
 
     public EnemyBulletData bulletData;
 
@@ -77,12 +78,12 @@ public class Shooter : Enemy
         base.OnDeath();
     }
 
-    public override void SetStats()
+    public override void SetStats(float baseHealth)
     {
-        base.SetStats();
+        base.SetStats(baseHealth);
 
-        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Wave);
-        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Wave);
-        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Wave);
+        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Difficulty);
+        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Difficulty);
+        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Difficulty);
     }
 }

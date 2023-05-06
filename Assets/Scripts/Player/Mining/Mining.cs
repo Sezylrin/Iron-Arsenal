@@ -19,4 +19,9 @@ public class Mining : MonoBehaviour
     {
 
     }
+
+    public void UpgradeMining()
+    {
+        miningOutput = Mathf.CeilToInt(miningOutput * 1.1f);
+    }
 }

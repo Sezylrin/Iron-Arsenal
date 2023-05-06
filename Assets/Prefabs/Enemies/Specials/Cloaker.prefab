@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4201106173344815996}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -111,12 +111,12 @@ Transform:
   m_GameObject: {fileID: 7355445405899335906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.1353245, y: 0.424, z: -16.44015}
-  m_LocalScale: {x: 0.7, y: 1.4, z: 0.7}
+  m_LocalScale: {x: 2, y: 5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2401250443493197345}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6047942058113298331
 Rigidbody:
@@ -143,7 +143,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 1
 --- !u!65 &6047942058113298330
 BoxCollider:
@@ -164,8 +164,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.5, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &7355445405899335915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,8 +178,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25926b5dfc4b8c144a3905b8192d1096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CurrentHealth>k__BackingField: 0
+  <MaxHealth>k__BackingField: 0
+  <DamageOnCollide>k__BackingField: 0
+  <Speed>k__BackingField: 0
+  <RamLaunchMultiplier>k__BackingField: 0
   type: 8
   <EnemyRB>k__BackingField: {fileID: 6047942058113298331}
-  <CurrentHealth>k__BackingField: 0
   data: {fileID: 11400000, guid: f95d91b86c4d7be45a778f9471823715, type: 2}
-  explosionPF: {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}
+  <Wave>k__BackingField: 0
+  enemyEffects: {fileID: 0}
+  damageFactor: 1
+  speedFactor: 1

@@ -43,5 +43,9 @@ public class tempPlayer : MonoBehaviour
         {
             TakeDamage(col.gameObject.GetComponent<Enemy>().DamageOnCollide);
         }
+        if (col.gameObject.tag == "Wall")
+        {
+            TakeDamage(col.gameObject.GetComponent<DestroyerShield>().DestroyerScript.DamageOnCollide);
+        }
     }
 }

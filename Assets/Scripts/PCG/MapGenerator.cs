@@ -176,7 +176,7 @@ public class MapGenerator : MonoBehaviour
 
     private GameObject RandomTile()
     {
-        int random = Random.Range(0, 100);
+        int random = Random.Range(0, 1000);
         GameObject tileType = null;
 
         // Old code just in case
@@ -202,7 +202,7 @@ public class MapGenerator : MonoBehaviour
                 lowerBound += objectTilesList[j].chanceToSpawn;
             }
             upperBound = objectTilesList[i].chanceToSpawn + lowerBound;
-            if (lowerBound <= random && random < upperBound && EnemyManager.Instance.Wave >= objectTilesList[i].waveToStartSpawning)
+            if (lowerBound <= random && random < upperBound && EnemyManager.Instance.Difficulty >= objectTilesList[i].waveToStartSpawning)
             {
                 tileType = objectTilesList[i].objectToSpawn;
             }

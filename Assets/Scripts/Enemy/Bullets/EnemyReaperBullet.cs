@@ -20,7 +20,7 @@ public class EnemyReaperBullet : EnemyBossProjectile
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<tempPlayer>().TakeDamage(Damage);
+            LevelManager.Instance.playerFunctions.TakeDamage(Damage);
             Owner.Heal(Damage / 10);
             DeleteNow();
         }

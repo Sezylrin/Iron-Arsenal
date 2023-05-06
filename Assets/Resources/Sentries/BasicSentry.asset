@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: BasicSentry
   m_EditorClassIdentifier: 
   Sentry: 0
+  Attribute: 0
   Colour: {fileID: 2100000, guid: 333f3a40f2b0f8b4197e43c308af8278, type: 2}
   SentryIcon: {fileID: 21300000, guid: 0faccb5f1c66e4943b55050d11390614, type: 3}
   sentryName: Basic Sentry
-  description: The most basic sentry (Placeholder)
+  description: Basic Sentry with average damage
   range: 15
-  losAngle: 120
-  fireRate: 20
-  projectileData: {fileID: 11400000, guid: 31ffcd5d79228794dab4f5a64e232f7e, type: 2}
-  xenoriumCost: 100
-  novaciteCost: 100
-  voidStoneCost: 100
+  losAngle: 180
+  fireRate: 2
+  projectileData: {fileID: 11400000, guid: 6c52d32082c5e194ba655e540ba523ca, type: 2}
+  mat: {fileID: 2100000, guid: aa66fb0b6f3db2840bb5d61eea4babde, type: 2}
+  xenoriumCost: 75
+  novaciteCost: 75
+  voidStoneCost: 75
   buildable: 1
+  defaultAugment: 
+  unlockXenoriumCost: 0
+  unlockNovaciteCost: 0
+  unlockVoidStoneCost: 0

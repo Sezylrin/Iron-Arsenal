@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3d418b8a1155f54c8dde7db693ca303, type: 3}
+  m_Name: Cannon
+  m_EditorClassIdentifier: 
+  Sentry: 2
+  Attribute: 0
+  Colour: {fileID: 2100000, guid: 333f3a40f2b0f8b4197e43c308af8278, type: 2}
+  SentryIcon: {fileID: 21300000, guid: 0faccb5f1c66e4943b55050d11390614, type: 3}
+  sentryName: Cannon
+  description: Powerful sentry with slow fire rate
+  range: 15
+  losAngle: 180
+  fireRate: 1
+  projectileData: {fileID: 11400000, guid: 952fb9986218fd743be19e35bfbc1d47, type: 2}
+  mat: {fileID: 2100000, guid: 983071111af17834095e509484eb92ad, type: 2}
+  xenoriumCost: 100
+  novaciteCost: 100
+  voidStoneCost: 100
+  buildable: 1
+  defaultAugment: 
+  unlockXenoriumCost: 150
+  unlockNovaciteCost: 150
+  unlockVoidStoneCost: 150

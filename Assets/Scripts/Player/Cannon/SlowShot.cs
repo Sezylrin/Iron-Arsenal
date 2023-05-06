@@ -8,7 +8,6 @@ public class SlowShot : CannonProjectile
 
     void Awake()
     {
-        Init();
     }
 
     // Start is called before the first frame update
@@ -20,10 +19,19 @@ public class SlowShot : CannonProjectile
     // Update is called once per frame
     void Update()
     {
-        Move();
     }
 
-    public override void SetStats()
+    public override void Init()
+    {
+        Vector3 tempPos = transform.position;
+        tempPos.y = 0;
+        Vector3 tempMouse = mousePos;
+        tempMouse.y = 0;
+        Shoot(tempMouse - tempPos);
+        base.Init();
+    }
+
+    /*public override void SetStats()
     {
         base.SetStats();
         slowStrength = 0.5f * Mathf.Pow(1.02f, 1 - data.level);
@@ -43,5 +51,5 @@ public class SlowShot : CannonProjectile
             other.gameObject.GetComponent<Enemy>().StartSlow(slowStrength);
             DeleteNow();
         }
-    }
+    }*/
 }

@@ -7,8 +7,7 @@ public class SentryManager : MonoBehaviour
 {
     public static SentryManager Instance { get; private set; }
 
-    public List<SentryData> lockedSentry = new List<SentryData>();
-
+    public List<SentryData> LockedSentries = new List<SentryData>();
 
     private void Awake()
     {
@@ -20,12 +19,6 @@ public class SentryManager : MonoBehaviour
         {
             Instance = this;
         }
-        
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         string sentryPath = "Sentries/";
         foreach (SentryName sentryName in Enum.GetValues(typeof(SentryName)))
         {
@@ -35,23 +28,17 @@ public class SentryManager : MonoBehaviour
             if (sentryData != null)
             {
                 if (!sentryData.Sentry.Equals(SentryName.BasicSentry))
-                    lockedSentry.Add(sentryData);
+                    LockedSentries.Add(sentryData);
                 else
                     AddSentry(sentryData);
             }
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AddSentry(SentryData sentryName)
     {
         SentryData data = null;
-        foreach (SentryData locked in lockedSentry)
+        foreach (SentryData locked in LockedSentries)
         {
             if (locked.Sentry.Equals(sentryName.Sentry))
             {
@@ -63,6 +50,6 @@ public class SentryManager : MonoBehaviour
             LevelCanvasManager.Instance.AddSentryUI(data);
         else
             LevelCanvasManager.Instance.AddSentryUI(sentryName);
-        lockedSentry.Remove(data);
+        LockedSentries.Remove(data);
     }
 }

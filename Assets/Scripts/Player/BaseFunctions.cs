@@ -8,12 +8,11 @@ public class BaseFunctions : MonoBehaviour
     public float simulateDamage;
     public bool upgradeBase = false;
     public bool testingAdd = false;
-    public bool removeTesting = false;
 
     public int currentLevel;
 
-    public float baseHealth;
-    public float baseHealthFactor;
+    public float maxHealth;
+    public float maxHealthFactor;
     private float currentHealth;
 
     public float maxShieldHealth;
@@ -32,6 +31,8 @@ public class BaseFunctions : MonoBehaviour
 
     public GameObject ShieldWave;
 
+    public Cannon cannon;
+
     public BaseEffects baseEffects;
     [System.Serializable]
     public class SocketSpawns
@@ -43,6 +44,8 @@ public class BaseFunctions : MonoBehaviour
 
     private int baseLevel = 0;
 
+    public Transform boxMesh;
+
     private void Awake()
     {
         baseEffects = gameObject.AddComponent<BaseEffects>();
@@ -52,7 +55,7 @@ public class BaseFunctions : MonoBehaviour
     void Start()
     {
         UpdateHealth();
-        currentHealth = baseHealth;
+        currentHealth = maxHealth;
         currentShield = maxShieldHealth;
     }
 
@@ -81,9 +84,6 @@ public class BaseFunctions : MonoBehaviour
             if (testingAdd)
             {
                 testingAdd = false;
-            }
-            if (removeTesting)
-            {
             }
         }
         if (isRaged && !isRageTriggered)
@@ -120,7 +120,8 @@ public class BaseFunctions : MonoBehaviour
             if (currentShield - amount < 0f)
             {
                 currentShield = 0f;
-                Instantiate(ShieldWave, transform.position, Quaternion.identity);
+                if (baseEffects.isShieldExplosion)
+                    Instantiate(ShieldWave, transform.position, Quaternion.identity);
             }
             else
                 currentShield -= amount;
@@ -132,13 +133,14 @@ public class BaseFunctions : MonoBehaviour
             if (overflow < 0)
             {
                 currentShield -= (amount + overflow);
-                Instantiate(ShieldWave, transform.position, Quaternion.identity);
+                if (baseEffects.isShieldExplosion)
+                    Instantiate(ShieldWave, transform.position, Quaternion.identity);
             }
             else
                 currentShield -= amount;
         }
         timeSinceDamage = shieldRecoverDelay;
-
+        LevelCanvasManager.Instance.SetShield(ShieldPercentage());
     }
 
     private void RecoverShield(float amount)
@@ -147,6 +149,7 @@ public class BaseFunctions : MonoBehaviour
             currentShield = maxShieldHealth;
         else
             currentShield += amount;
+        LevelCanvasManager.Instance.SetShield(ShieldPercentage());
     }
     private void TakeHealthDamage(float amount)
     {        
@@ -155,50 +158,82 @@ public class BaseFunctions : MonoBehaviour
             currentHealth = 0;
             if (GameManager.Instance)
             {
-                //run function for losing
+                GameManager.Instance.HandleDeath();
             }
         }
         else
             currentHealth -= amount;
-        if (baseEffects.isRage && currentHealth <= baseHealth * 0.3)
+        if (baseEffects.isRage && currentHealth <= maxHealth * 0.3)
         {
             isRaged = true;
         }
+        LevelCanvasManager.Instance.SetHealth(HealthPercentage());
     }
 
     public void RecoverHealth(float amount)
     {
-        if (currentHealth + amount > baseHealth)
-            currentHealth = baseHealth;
+        if (currentHealth + amount > maxHealth)
+            currentHealth = maxHealth;
         else
             currentHealth += amount;
-        if (baseEffects.isRage && currentHealth > baseHealth * 0.3)
+        if (baseEffects.isRage && currentHealth > maxHealth * 0.3)
         {
             isRaged = false;
         }
+        LevelCanvasManager.Instance.SetHealth(HealthPercentage());
     }
 
     public void UpgradeBase()
     {
+        if (baseLevel >= relativeSpawnPos.Length)
+            return;
+        if (baseLevel == 1)
+        {
+            Vector3 temp = boxMesh.localScale;
+            temp.z = 10;
+            boxMesh.localScale = temp;
+            BoxCollider collider = GetComponent<BoxCollider>();
+            Vector3 size = collider.size;
+            size.z *= 2;
+            collider.size = size;
+        }
         foreach (Vector3 spawnPos in relativeSpawnPos[baseLevel].pos)
         {
-            Instantiate(turretSocketPF, transform.position + spawnPos, Quaternion.identity, transform);
+            GameObject socket = Instantiate(turretSocketPF, transform.position + spawnPos, Quaternion.identity, transform);
+            socket.transform.RotateAround(transform.position, Vector3.up, Mathf.Ceil(transform.eulerAngles.y)); 
         }
         baseLevel++;
     }
 
     public void UpdateHealth()
     {
-        baseHealth = StatsManager.Instance.healthFactor * baseHealthFactor;
+        float newHealth = StatsManager.Instance.healthFactor * maxHealthFactor;
+        float healthDifference = newHealth - maxHealth;
+        maxHealth = StatsManager.Instance.healthFactor * maxHealthFactor;
+        RecoverHealth(healthDifference);
         maxShieldHealth = StatsManager.Instance.healthFactor * maxShieldFactor;
         shieldRecoverRate = maxShieldHealth * shieldRecoverFactor;
     }
 
+    public int HealthPercentage()
+    {
+        return Mathf.CeilToInt((currentHealth / maxHealth) * 100);
+    }
+
+    public int ShieldPercentage()
+    {
+        return Mathf.CeilToInt((currentShield / maxShieldHealth) * 100);
+    }
     public void DecreaseRecovery()
     {
         if (timeSinceDamage > 0)
         {
             timeSinceDamage -= 0.25f;
         }
+    }
+
+    public void ShopRecoverHealth()
+    {
+        RecoverHealth(maxHealth * 0.2f);
     }
 }

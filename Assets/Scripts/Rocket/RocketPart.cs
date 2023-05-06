@@ -34,6 +34,7 @@ public class RocketPart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        controls = LevelManager.Instance.player.GetComponent<PlayerInput>();
         var interactAction = controls.currentActionMap.FindAction("Interact");
         interactAction.performed += OnInteractDown;
         interactAction.canceled += OnInteractUp;
@@ -57,11 +58,9 @@ public class RocketPart : MonoBehaviour
     private void OnInteractDown(InputAction.CallbackContext context)
     {
         if (!canvas.enabled) return;
-        if (LevelManager.Instance.buildManager.novacite < requiredMaterials.novaciteAmount ||
-            LevelManager.Instance.buildManager.voidStone < requiredMaterials.voidstoneAmount ||
-            LevelManager.Instance.buildManager.xenorium < requiredMaterials.xenoriumAmount) return; //TODO: Add an error response
-
-        StartCoroutine(CraftPart());
+        //TODO: Add an error response
+        if(LevelManager.Instance.PurchaseItemIfPossible(requiredMaterials.xenoriumAmount, requiredMaterials.novaciteAmount, requiredMaterials.voidstoneAmount))
+            StartCoroutine(CraftPart());
     }
 
     private void OnInteractUp(InputAction.CallbackContext context)

@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 50384907}
   - component: {fileID: 50384909}
   - component: {fileID: 50384908}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: SentryTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.27600002, y: 0.85348254}
   m_AnchorMax: {x: 0.72400004, y: 0.96348244}
-  m_AnchoredPosition: {x: 29.900002, y: -2.5}
+  m_AnchoredPosition: {x: 29.900024, y: -2.5}
   m_SizeDelta: {x: -67.92641, y: 0.33049774}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &50384909
@@ -771,7 +771,7 @@ GameObject:
   - component: {fileID: 244665265}
   - component: {fileID: 244665264}
   - component: {fileID: 244665263}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: CloseBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 246081313}
   - component: {fileID: 246081312}
   - component: {fileID: 246081311}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: leftBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1146,7 +1146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 306567183}
   - component: {fileID: 306567184}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1170,7 +1170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000022888184, y: 0}
+  m_AnchoredPosition: {x: -0.000015258789, y: 0}
   m_SizeDelta: {x: 701, y: 108.73}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &306567184
@@ -1344,7 +1344,7 @@ GameObject:
   - component: {fileID: 409983416}
   - component: {fileID: 409983415}
   - component: {fileID: 409983414}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Scrollbar Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1370,7 +1370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05657063, y: 0.24250315}
   m_AnchorMax: {x: 0.94228816, y: 0.7575032}
-  m_AnchoredPosition: {x: -0.2335968, y: -0.4699998}
+  m_AnchoredPosition: {x: -0.23361206, y: -0.4699998}
   m_SizeDelta: {x: -0.46720004, y: 0.46999}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &409983416
@@ -1665,18 +1665,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873c559af79ef0c488814f8befa829f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstAugBtn: {fileID: 2030244728}
-  secondAugBtn: {fileID: 60471448}
-  thirdAugBtn: {fileID: 1473802280}
-  firstAugImage: {fileID: 1837263470}
-  firstAugName: {fileID: 198807261}
-  firstAugDesc: {fileID: 291601507}
-  secondAugImage: {fileID: 422601302}
-  secondAugName: {fileID: 356574507}
-  secondAugDesc: {fileID: 1181290503}
-  thirdAugImage: {fileID: 1514219384}
-  thirdAugName: {fileID: 938793620}
-  thirdAugDesc: {fileID: 1942265677}
+  augmentButtons:
+  - {fileID: 2030244728}
+  - {fileID: 60471448}
+  - {fileID: 1473802280}
+  augmentSlots:
+  - augmentImage: {fileID: 1837263470}
+    augmentName: {fileID: 198807261}
+    augmentDesc: {fileID: 291601507}
+  - augmentImage: {fileID: 422601302}
+    augmentName: {fileID: 356574507}
+    augmentDesc: {fileID: 1181290503}
+  - augmentImage: {fileID: 1514219384}
+    augmentName: {fileID: 938793620}
+    augmentDesc: {fileID: 1942265677}
 --- !u!1 &576339619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,7 +1767,7 @@ GameObject:
   - component: {fileID: 851636576}
   - component: {fileID: 851636575}
   - component: {fileID: 851636574}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Viewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1990,7 +1992,7 @@ GameObject:
   - component: {fileID: 960707735}
   - component: {fileID: 960707737}
   - component: {fileID: 960707736}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2013,7 +2015,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.35717678, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -50.2379, y: 0.42}
   m_SizeDelta: {x: -100.4758, y: 8.5168}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2315,7 +2317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1173594416}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Sliding Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2921,7 +2923,9 @@ GameObject:
   - component: {fileID: 1621372990}
   - component: {fileID: 1621372992}
   - component: {fileID: 1621372991}
-  m_Layer: 5
+  - component: {fileID: 1160207111}
+  - component: {fileID: 1160207114}
+  m_Layer: 9
   m_Name: BuildMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2989,6 +2993,30 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1160207111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621372989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b2755d5aaa9dd4e84430a2b8d5dc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1160207114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621372989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf1918edf8b10343841831f066ce7e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1652681529
 GameObject:
   m_ObjectHideFlags: 0
@@ -3349,7 +3377,7 @@ GameObject:
   - component: {fileID: 1784730869}
   - component: {fileID: 1784730868}
   - component: {fileID: 1784730871}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: SentriesContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3758,7 +3786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1946502429}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: ScrollbarContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3800,7 +3828,7 @@ GameObject:
   - component: {fileID: 1965698569}
   - component: {fileID: 1965698568}
   - component: {fileID: 1965698567}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: RightBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3824,7 +3852,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015258789, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &1965698569
@@ -4046,6 +4074,7 @@ GameObject:
   - component: {fileID: 6800591896943399288}
   - component: {fileID: 6800591896943399289}
   - component: {fileID: 6800591896943399293}
+  - component: {fileID: 1943641776}
   m_Layer: 5
   m_Name: LevelCanvas
   m_TagString: Untagged
@@ -4070,7 +4099,7 @@ RectTransform:
   - {fileID: 1621372990}
   - {fileID: 554881079}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4151,14 +4180,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735633563824fdc43a92f30b7ee28bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceContainer: {fileID: 1481472459}
   xenoriumLabel: {fileID: 164064922}
   novaciteLabel: {fileID: 1114237562}
   voidStoneLabel: {fileID: 1695111115}
   closeBtn: {fileID: 244665263}
   sentryContainerPrefab: {fileID: 1117965133411027219, guid: 1eb973b2436493a4da6b9d22a5d3754d, type: 3}
   sentriesContent: {fileID: 306567182}
+  layer:
+    serializedVersion: 2
+    m_Bits: 1536
   augmentMenu: {fileID: 554881078}
   buildMenu: {fileID: 1621372989}
+  shopMenu: {fileID: 0}
+  overMenu: 0
+--- !u!114 &1943641776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6800591896943399290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1001 &680851349386348734
 PrefabInstance:
   m_ObjectHideFlags: 0

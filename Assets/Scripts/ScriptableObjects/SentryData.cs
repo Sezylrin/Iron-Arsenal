@@ -6,9 +6,14 @@ public enum SentryName
 {
     [Description("BasicSentry")]
     BasicSentry,
-    AdvancedSentry,
+    Gattling,
+    Cannon,
     FlameThrower,
-    FreezeTower
+    FreezeTower,
+    PoisonTower,
+    IceShardTower,
+    IncendiaryTower,
+    Plasma
 }
 
 [CreateAssetMenu(fileName = "SentryData",menuName ="ScriptableObjects/SentryData")]
@@ -27,8 +32,16 @@ public class SentryData : ScriptableObject
 
     public ProjectileData projectileData;
 
+    public Material mat;
+
     public int xenoriumCost;
     public int novaciteCost;
     public int voidStoneCost;
     public bool buildable;
+
+    public Augments[] defaultAugment;
+
+    public int unlockXenoriumCost;
+    public int unlockNovaciteCost;
+    public int unlockVoidStoneCost;
 }

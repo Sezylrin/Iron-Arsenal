@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff7c47f2eaad4447b4788586da1922c, type: 3}
   m_Name: BursterData
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  HealthScale: 1
   damageOnCollide: 10
-  speed: 3
-  ramLaunchMultiplier: 10
+  speed: 2
+  ramLaunchMultiplier: 20

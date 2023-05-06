@@ -13,8 +13,8 @@ public enum EnemyType
     Dodger,
     Splitter,
     Cloaker,
-    Enemy9,
-    Enemy10,
+    Burster,
+    Sprinter,
     StaticSentry,
     Boss
 };
@@ -32,8 +32,7 @@ public abstract class Enemy : MonoBehaviour
     public EnemyType type;
     [field: SerializeField] public Rigidbody EnemyRB { get; set; }
     public EnemyData data;
-    [field: SerializeField] public int Wave { get; set; }
-
+    [field: SerializeField] public int Difficulty { get; set; }
     public EnemyManager Manager { get; set; }
     public GameObject Player { get; set; }
 
@@ -50,16 +49,15 @@ public abstract class Enemy : MonoBehaviour
         Player = GameObject.Find("Player");
         baseFunctions = Player.GetComponent<BaseFunctions>();
         Manager = EnemyManager.Instance;
-
-        Wave = Manager.Wave;
-        SetStats();
+        Difficulty = Manager.Difficulty;
+        SetStats(Manager.EnemyBaseHealth);
     }
 
-    public virtual void SetStats()
+    public virtual void SetStats(float baseHealth)
     {
-        MaxHealth = data.maxHealth * Mathf.Pow(1.1f, Wave - 1);
-        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, Wave - 1);
-        Speed = data.speed * Mathf.Pow(1.005f, Wave - 1);
+        MaxHealth = data.HealthScale * baseHealth * Mathf.Pow(1.15f, Difficulty - 1);
+        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, Difficulty - 1);
+        Speed = data.speed * Mathf.Pow(1.005f, Difficulty - 1);
         RamLaunchMultiplier = data.ramLaunchMultiplier;
         CurrentHealth = MaxHealth;
     }
@@ -139,6 +137,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void OnDeath()
     {
+        Manager.EnemyDeath();
         switch (type)
         {
             case EnemyType.Basic:
@@ -168,6 +167,12 @@ public abstract class Enemy : MonoBehaviour
             case EnemyType.Cloaker:
                 Manager.PoolEnemy(gameObject, 8);
                 break;
+            case EnemyType.Burster:
+                Manager.PoolEnemy(gameObject, 8);
+                break;
+            case EnemyType.Sprinter:
+                Manager.PoolEnemy(gameObject, 8);
+                break;
             default:
                 Destroy(gameObject);
                 break;
@@ -186,9 +191,9 @@ public abstract class Enemy : MonoBehaviour
             
     public virtual IEnumerator SlowEnemy(float slowStrength)
     {
-        Speed = (data.speed * Mathf.Pow(1.005f, Wave - 1)) * slowStrength;
+        Speed = (data.speed * Mathf.Pow(1.005f, Difficulty - 1)) * slowStrength;
         yield return new WaitForSeconds(5f);
-        Speed = data.speed * Mathf.Pow(1.005f, Wave - 1);
+        Speed = data.speed * Mathf.Pow(1.005f, Difficulty - 1);
     }
 
     public void InitEnemyEffects(GameObject[] augmentPF)
@@ -202,6 +207,4 @@ public abstract class Enemy : MonoBehaviour
         enemyEffects.augmentPFList = augmentPF;
         
     }
-
-
 }

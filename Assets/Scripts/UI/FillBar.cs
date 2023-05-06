@@ -7,13 +7,13 @@ public class FillBar : MonoBehaviour
 {   
     public Slider slider;
 
-    public void SetMaxSliderValue(int maxValue)
+    public void SetMaxSliderValue(float maxValue)
     {
         slider.maxValue = maxValue;
         slider.value = maxValue;
     }
 
-    public void SetSliderAmount(int sliderAmount)
+    public void SetSliderAmount(float sliderAmount)
     {
         slider.value = sliderAmount;
     }

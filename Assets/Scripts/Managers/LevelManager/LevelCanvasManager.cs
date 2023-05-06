@@ -6,7 +6,15 @@ using System;
 
 public class LevelCanvasManager : MonoBehaviour
 {
+    [Header("Sliders")]
+    [SerializeField] private FillBar healthBar;
+    [SerializeField] private FillBar shieldBar;
+    [SerializeField] private GameObject bossHealthObj;
+    [SerializeField] private FillBar bossHealthBar;
+    [SerializeField] private FillBar waveBar;
+
     [Header("Ore Labels")]
+    [SerializeField] private GameObject resourceContainer;
     [SerializeField] private TMP_Text xenoriumLabel;
     [SerializeField] private TMP_Text novaciteLabel;
     [SerializeField] private TMP_Text voidStoneLabel;
@@ -20,7 +28,16 @@ public class LevelCanvasManager : MonoBehaviour
     [Header("Menus")]
     [SerializeField] private GameObject augmentMenu;
     [SerializeField] private GameObject buildMenu;
+    [SerializeField] private GameObject shopMenu;
     private List<SentryBuildInitialise> allButtons = new List<SentryBuildInitialise>();
+
+    public List<SentrySocket> allSockets = new List<SentrySocket>();
+
+    public Material[] mats;
+
+    private bool changedMat = false;
+
+    public GameObject instantiatedToolTip;
 
     public bool overMenu = false;
     public static LevelCanvasManager Instance { get; private set; }
@@ -40,20 +57,39 @@ public class LevelCanvasManager : MonoBehaviour
     private void Start()
     {
         closeBtn.onClick.AddListener(CloseBuildMenu);
-        //LoadSentries();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || LevelManager.Instance.currentState == State.Normal)
         {
             CloseBuildMenu();
+        }
+        if(LevelManager.Instance.currentState == State.Building && !changedMat)
+        {
+            changedMat = true;
+            foreach(SentrySocket socket in allSockets)
+            {
+                if (!socket.HasSentry())
+                {
+                    socket.meshRender.material = mats[0];
+                }
+            }
+        }
+        else if (LevelManager.Instance.currentState != State.Building && changedMat)
+        {
+            changedMat = false;
+            foreach (SentrySocket socket in allSockets)
+            {
+                socket.meshRender.material = socket.mat;
+            }
         }
         if (Input.GetMouseButtonDown(0) && LevelManager.Instance.currentState == State.Building)
         {
             Vector3 MousePos = MousePosition.MouseToWorld3D(Camera.main, -1);
             MousePos.y = transform.position.y;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
             if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, layer))
             {
                 if (hit.collider.CompareTag("Socket"))
@@ -63,13 +99,29 @@ public class LevelCanvasManager : MonoBehaviour
                     {
                         AssignSocket(socket);
                         OpenBuildMenu();
+                        foreach (SentrySocket sockets in allSockets)
+                        {
+                            if (!sockets.HasSentry())
+                            {
+                                sockets.meshRender.material = mats[0];
+                            }
+                        }
+                        socket.meshRender.material = mats[1];
                     }
                 }
             }
             else if (!overMenu)
             {
+                foreach (SentrySocket socket in allSockets)
+                {
+                    if (!socket.HasSentry())
+                    {
+                        socket.meshRender.material = mats[0];
+                    }
+                }
                 AssignSocket(null);
                 CloseBuildMenu();
+
             }
         }
     }
@@ -98,11 +150,16 @@ public class LevelCanvasManager : MonoBehaviour
     public void RemoveAugmentChoices()
     {
         augmentMenu.SetActive(false);
+        
     }
 
     public void CloseBuildMenu()
     {
         buildMenu.SetActive(false);
+        overMenu = false;
+        if (instantiatedToolTip)
+            Destroy(instantiatedToolTip);
+        instantiatedToolTip = null;
     }
 
     public void OpenBuildMenu()
@@ -110,26 +167,17 @@ public class LevelCanvasManager : MonoBehaviour
         buildMenu.SetActive(true);
     }
 
-    private void LoadSentries()
+    public void OpenShopMenu(ShopManager shopManager)
     {
-        List<SentryData> sentries = new();
-        string sentryPath = "Sentries/";
+        shopMenu.SetActive(true);
+        resourceContainer.SetActive(false);
+        shopMenu.GetComponent<ShopMenu>().OpenMenu(shopManager);
+    }
 
-        foreach(SentryName sentryName in Enum.GetValues(typeof(SentryName)))
-        {
-            SentryData sentryData = Resources.Load<SentryData>(sentryPath + sentryName);
-            if (sentryData != null)
-            {
-                sentries.Add(sentryData);
-                GameObject sentryContainer = Instantiate(sentryContainerPrefab);
-                sentryContainer.transform.SetParent(sentriesContent.transform, false);
-                sentryContainer.GetComponent<SentryBuildInitialise>().InitialiseSentryContainer(sentryData);
-            }
-            else 
-            {
-                Debug.LogError("Unable to load SentryData asset: " + sentryName);
-            }
-        }
+    public void CloseShopMenu()
+    {
+        shopMenu.SetActive(false);
+        resourceContainer.SetActive(true);
     }
 
     public void AddSentryUI(SentryData sentryToAdd)
@@ -147,5 +195,36 @@ public class LevelCanvasManager : MonoBehaviour
         {
             init.SetSocket(socket);
         }
+    }
+
+    public void SetHealth(float newHealth)
+    {
+        healthBar.SetSliderAmount(newHealth);
+    }
+
+    public void SetShield(float newShield)
+    {
+        shieldBar.SetSliderAmount(newShield);
+    }
+
+    public void SetWaveTimerBar(float newWaveTimer)
+    {
+        waveBar.SetSliderAmount(newWaveTimer);
+    }
+
+    public void EnableBossHealthBar()
+    {
+        bossHealthObj.SetActive(true);
+        bossHealthBar.SetSliderAmount(100);
+    }
+
+    public void SetBossHealthBar(int newHealth)
+    {
+        bossHealthBar.SetSliderAmount(newHealth);
+    }
+
+    public void DisableBossHealthBar()
+    {
+        bossHealthObj.SetActive(false);
     }
 }

@@ -49,7 +49,6 @@ public class AugmentManager : MonoBehaviour
 
     public List<AugmentData> allAugments;
     public List<AugmentData> augmentChoices;
-    public AugmentData currentAugment;
     public bool selectingAugment { get; private set; } = false;
 
     // Start is called before the first frame update
@@ -106,6 +105,15 @@ public class AugmentManager : MonoBehaviour
         {
             sentry.AddAugmentToList(augmentToAdd);
         }
+
+        for (int i = allAugments.Count - 1; i >= 0; i--)
+        {
+            if (allAugments[i].augmentType == augmentToAdd)
+            {
+                allAugments.RemoveAt(i);
+            }
+        }
+
         playerFunctions.baseEffects.UpdateAugments();
     }
 

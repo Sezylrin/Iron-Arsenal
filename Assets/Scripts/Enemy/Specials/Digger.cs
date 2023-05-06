@@ -25,13 +25,13 @@ public class Digger : Enemy
         SetRotation();
         Move();
 
-        if (Vector3.Distance(Player.transform.position, transform.position) > 15 && !digging)
+        if (Vector3.Distance(Player.transform.position, transform.position) > 20 && !digging)
         {
             digging = true;
             StartCoroutine(DigDown());
         }
 
-        if (Vector3.Distance(Player.transform.position, transform.position) < 10 && digging)
+        if (Vector3.Distance(Player.transform.position, transform.position) < 15 && digging)
         {
             digging = false;
             StartCoroutine(DigUp());
@@ -42,7 +42,7 @@ public class Digger : Enemy
     {
         StopCoroutine(DigUp());
         enemyBC.enabled = false;
-        while (transform.position.y >= -0.5) 
+        while (transform.position.y >= -2.5) 
         {
             yield return new WaitForSeconds(0.01f);
             transform.Translate(0, -0.02f, 0);
@@ -52,7 +52,7 @@ public class Digger : Enemy
     IEnumerator DigUp()
     {
         StopCoroutine(DigDown());
-        while (transform.position.y <= 1)
+        while (transform.position.y <= 0)
         {
             yield return new WaitForSeconds(0.01f);
             transform.Translate(0, 0.02f, 0);

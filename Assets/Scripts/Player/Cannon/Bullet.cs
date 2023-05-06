@@ -6,7 +6,6 @@ public class Bullet : CannonProjectile
 {
     void Awake()
     {
-        Init();
     }
     
     // Start is called before the first frame update
@@ -16,8 +15,13 @@ public class Bullet : CannonProjectile
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Init()
     {
-        Move();
+        Vector3 tempPos = transform.position;
+        tempPos.y = 0;
+        Vector3 tempMouse = mousePos;
+        tempMouse.y = 0;
+        Shoot(tempMouse - tempPos);
+        base.Init();
     }
 }

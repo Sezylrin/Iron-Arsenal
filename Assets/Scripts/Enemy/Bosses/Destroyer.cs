@@ -18,10 +18,13 @@ public class Destroyer : Boss
     private bool ableToShoot;
     private Transform projectilesParent;
 
+    private bool canCharge;
+
     void Awake()
     {
+        NumberOfPatterns = 4;
+
         Init();
-        NumberOfPatterns = 2;
         projectilesParent = projectilesParent = GameObject.Find("Projectiles Parent").transform;
 
         StartCoroutine(DelayChoosingPattern(1));
@@ -31,6 +34,7 @@ public class Destroyer : Boss
     void Start()
     {
         ableToShoot = true;
+        canCharge = true;
     }
 
     // Update is called once per frame
@@ -43,25 +47,31 @@ public class Destroyer : Boss
             Move();
         }
 
-        else if (ActivePattern == 1)
+        if (ActivePattern == 0)
         {
-            Pattern1();
+            WaitingForNextPattern();
         }
-        else if (ActivePattern == 2)
+        else PatternActivate(ActivePattern);
+    }
+
+    protected override void WaitingForNextPattern()
+    {
+        canCharge = true;
+        base.WaitingForNextPattern();
+    }
+
+    protected override void Pattern2() //Heal Override
+    {
+        StartCoroutine(PatternLength(3));
+
+        if (canHeal)
         {
-            Pattern2();
-        }
-        else if (ActivePattern == 3)
-        {
-            Pattern3();
-        }
-        else if (ActivePattern == 4)
-        {
-            Pattern4();
+            Heal(MaxHealth / 10);
+            canHeal = false;
         }
     }
 
-    private void Pattern1() //Mega Bomb
+    protected override void Pattern3() //Mega Bomb
     {
         StartCoroutine(PatternLength(1));
 
@@ -80,36 +90,27 @@ public class Destroyer : Boss
 
             StartCoroutine(DelayFiring(destroyerBombScript.FireDelay));
         }
-
     }
 
-    private void Pattern2() //Bash
+    protected override void Pattern4() //Charge
     {
-        StartCoroutine(PatternLength(10));
+        StartCoroutine(PatternLength(1));
 
-        Move();
+        if (canCharge)
+        {
+            canCharge = false;
+            EnemyRB.AddForce(Vector3.Normalize(new Vector3(Player.transform.position.x - transform.position.x, 0, Player.transform.position.z - transform.position.z)) * 20, ForceMode.Impulse);
+        }
     }
+       
 
-    private void Pattern3() //Heal
-    { 
-        StartCoroutine(PatternLength(3));
-
-        Heal(MaxHealth / 10);
-    }
-
-    private void Pattern4()
+    public override void SetStats(float baseHealth)
     {
-        StartCoroutine(PatternLength(10));
+        base.SetStats(baseHealth);
 
-    }
-
-    public override void SetStats()
-    {
-        base.SetStats();
-
-        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Wave);
-        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Wave);
-        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Wave);
+        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Difficulty);
+        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Difficulty);
+        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Difficulty);
     }
 
     IEnumerator DelayFiring(float delay)

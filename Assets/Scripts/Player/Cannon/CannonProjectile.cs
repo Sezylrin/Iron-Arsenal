@@ -17,52 +17,111 @@ public abstract class CannonProjectile : MonoBehaviour
 {
     public CannonProjectileType type;
 
+    public StatAttribute attribute;
+
+    public GameObject ProjectilePF;
     public Cannon Owner { get; set; }
-    public Vector3 Direction { get; set; }
-    public float Damage { get; set; }
-    public float ProjectileSpeed { get; set; }
-    public float FireDelay { get; set; }
-    public float ProjectileLifetime { get; set; }
 
-    public CannonProjectileData data;
+    public Vector3 mousePos;
+
+    public ProjectileData data;
+
+    public float delay;
+
+    public Pooling projectiles = new Pooling();
+
+    public List<Augments> activeAugments = new List<Augments>();
     
-    protected virtual void Init()
+    public virtual void PoolProj(GameObject obj)
     {
-        SetStats();
+        projectiles.AddObj(obj);
+        OnDelete();
     }
 
-    public virtual void SetStats()
+    public virtual void Shoot(Vector3 dir)
     {
-        Damage = data.damage * data.level;
-        ProjectileSpeed = data.projectileSpeed + data.level;
-        FireDelay = data.fireDelay - (0.05f * data.level);
-        ProjectileLifetime = data.projectileLifetime;
+        GameObject bullet;
+        Projectile bulletProj;
+        if (projectiles.ListCount() > 0)
+        {
+            bullet = projectiles.FirstObj();
+            bullet.SetActive(true);
+            projectiles.RemoveObj(bullet);
+        }
+        else
+        {
+            bullet = Instantiate(ProjectilePF, Vector3.zero, Quaternion.identity, transform); 
+        }
+        bulletProj = bullet.GetComponent<Projectile>();
+        bulletProj.SetProjectileData(data, this, attribute);
+        if (activeAugments.Count - bulletProj.activeAugments.Count == 1)
+        {
+            Augments augmentToAdd = activeAugments[activeAugments.Count - 1];
+            bulletProj.activeAugments.Add(augmentToAdd);
+            AugmentBase temp = AugmentManager.Instance.AddAugmentToProjectile(augmentToAdd, bullet, bulletProj);
+            if (temp)
+            {
+                bulletProj.augmentBases.Add(temp);
+                temp.Init();
+            }
+        }
+        else if (activeAugments.Count - bulletProj.activeAugments.Count > 1)
+        {
+            AddAllAugments(bullet, bulletProj);
+        }
+        foreach (AugmentBase augmentBase in bulletProj.augmentBases)
+        {
+            augmentBase.Respawn();
+        }
+        Vector3 spawn = Owner.cannonProjectileSpawnPoint.position;
+        bulletProj.setSpawn(spawn);
+        Vector3 targetDir = dir;
+        targetDir.y = 0;
+        bulletProj.dir = targetDir.normalized;
+        bulletProj.SetRotation(dir,Vector3.zero);
     }
 
-    public virtual void SetStats(Cannon owner, Vector3 direction, float damage, float projectileSpeed, float fireDelay)
+    public void AddAllAugments(GameObject bullet, Projectile projData)
+    {
+        foreach (Augments augmentToAdd in activeAugments)
+        {
+            if (!projData.activeAugments.Contains(augmentToAdd))
+            {
+                AugmentBase temp = AugmentManager.Instance.AddAugmentToProjectile(augmentToAdd, bullet, projData);
+                if (temp)
+                {
+                    projData.augmentBases.Add(temp);
+                    temp.Init();
+                }
+                projData.activeAugments.Add(augmentToAdd);
+            }
+        }
+    }
+
+    public void AddAugments(Augments augmentToAdd)
+    {
+        if (!activeAugments.Contains(augmentToAdd))
+            activeAugments.Add(augmentToAdd);
+    }
+    public virtual void SetStats(Cannon owner, Vector3 mousePos)
     {
         Owner = owner;
-        Direction = direction;
-        Damage = damage;
-        ProjectileSpeed = projectileSpeed;
-        FireDelay = fireDelay;
-        ProjectileLifetime = data.projectileLifetime;
+        this.mousePos = mousePos;
     }
 
-    protected virtual void Move()
+    public virtual void Init()
     {
-        transform.Translate(Direction.x * ProjectileSpeed * Time.deltaTime, 0, Direction.z * ProjectileSpeed * Time.deltaTime);
+        Invoke("StartDelay", delay);
     }
 
-    public virtual void Shoot()
+    public virtual void StartDelay()
     {
-        StopCoroutine(StartDeletion(ProjectileLifetime));
-        StartCoroutine(StartDeletion(ProjectileLifetime));
+        Owner.DelayFiring();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
+        /*if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<Enemy>().TakeDamage(Damage);
             DeleteNow();
@@ -71,14 +130,10 @@ public abstract class CannonProjectile : MonoBehaviour
         if (other.gameObject.tag == "Wall")
         {
             DeleteNow();
-        }
+        }*/
     }
 
-    public virtual IEnumerator StartDeletion(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        OnDelete();
-    }
+
 
     public virtual void OnDelete()
     {
@@ -106,10 +161,5 @@ public abstract class CannonProjectile : MonoBehaviour
                 Owner.PoolProjectile(gameObject, 6);
                 break;
         }
-    }
-
-    public virtual void DeleteNow()
-    {
-        OnDelete();
     }
 }

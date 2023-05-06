@@ -11,8 +11,6 @@ public class RapidFire : CannonProjectile
 
     void Awake()
     {
-        Init();
-        projectilesParent = GameObject.Find("Projectiles Parent").transform;
     }
 
     // Start is called before the first frame update
@@ -27,7 +25,17 @@ public class RapidFire : CannonProjectile
         
     }
 
-    public override void Shoot()
+    public override void Init()
+    {
+        Vector3 tempPos = transform.position;
+        tempPos.y = 0;
+        Vector3 tempMouse = mousePos;
+        tempMouse.y = 0;
+        Shoot(tempMouse - tempPos);
+        base.Init();
+    }
+
+    /*public override void Shoot()
     {
         if (Owner.pools[0].ListCount() > 0)
         {
@@ -47,5 +55,5 @@ public class RapidFire : CannonProjectile
         bulletScript.Shoot();
 
         base.Shoot();
-    }
+    }*/
 }

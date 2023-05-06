@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dda3446bd6409a4e9b7da053173481d, type: 3}
+  m_Name: DrillUpgrade
+  m_EditorClassIdentifier: 
+  upgradeType: 1
+  icon: {fileID: 21300000, guid: 7f35d3d4cace9fe409ae2c613ae807f7, type: 3}
+  upgradeName: Drill Upgrade
+  description: Increase the mining speed of your drill
+  xenoriumCost: 100
+  novaciteCost: 100
+  voidStoneCost: 100

@@ -32,10 +32,7 @@ public class Burster : Enemy
     {
         SetRotation();
 
-        if (Vector3.Distance(Player.transform.position, transform.position) > 10)
-        {
-            Move();
-        }
+        Move();
     }
 
     protected override void OnDeath()
@@ -44,13 +41,13 @@ public class Burster : Enemy
         base.OnDeath();
     }
 
-    public override void SetStats()
+    public override void SetStats(float baseHealth)
     {
-        base.SetStats();
+        base.SetStats(baseHealth);
 
-        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Wave);
-        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Wave);
-        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Wave);
+        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Difficulty);
+        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Difficulty);
+        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Difficulty);
     }
 
     private void Burst()
@@ -69,7 +66,6 @@ public class Burster : Enemy
             {
                 newEnemyBullet = Instantiate(enemyBullet, projectilesParent);
             }
-
 
             if (spreadAngle == 0)
             {

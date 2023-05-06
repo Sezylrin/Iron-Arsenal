@@ -50,11 +50,12 @@ MonoBehaviour:
   range: 0
   fireRate: 0
   target: {fileID: 0}
-  testTransform: {fileID: 0}
   projectilePF: {fileID: 305608694543129271, guid: dc14465a1f1f1174c8c8619b097526b4, type: 3}
   bulletSpawnpoint: {fileID: 2497997829222323732}
   sentryHead: {fileID: 4206342168852149077}
   data: {fileID: 0}
+  activeAugments: 
+  isDouble: 0
 --- !u!1 &2497997829222323733
 GameObject:
   m_ObjectHideFlags: 0

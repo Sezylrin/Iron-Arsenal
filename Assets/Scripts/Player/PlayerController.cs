@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerData playerData;
     private Vector2 _moveInput;
     private Rigidbody _rb;
+    private Vector3 rotate;
+    public float angleSpeed;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -40,6 +42,14 @@ public class PlayerController : MonoBehaviour
         Friction(playerData.frictionAmount);
         // MovePlayer(1);
         NewMovePlayer(1);
+        if (_moveInput.magnitude > 0.8f)
+            rotate =  new Vector3(_moveInput.x, 0, _moveInput.y);
+        Quaternion rotation;
+        if (rotate != Vector3.zero)
+        {
+            rotation = Quaternion.LookRotation(rotate, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * angleSpeed);
+        }
     }
 
     public void MovePlayer(float lerpAmount)
