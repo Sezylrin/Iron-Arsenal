@@ -147,7 +147,7 @@ public class PurchaseItem : MonoBehaviour
                             StatsManager.Instance.UpgradeElemental();
                             break;
                     }
-                    shopMenu.PurchaseItem();
+                    shopMenu.PurchaseAttribute(attributeUpgradeData);
                 }
                 break;
             case TabType.augmentPurchases:

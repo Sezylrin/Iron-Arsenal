@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     public MechUpgradeData[] mechUpgrades = new MechUpgradeData[3];
-    public AttributeUpgradeData[] attributeUpgrades = new AttributeUpgradeData[3];
+    public List<AttributeUpgradeData> attributeUpgrades = new();
     private List<SentryData> purchasableSentries = new();
     private List<AugmentData> purchasableAugments = new();
     public GameObject canvas;
@@ -89,6 +89,11 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void PurchaseAttributeUpgrade(AttributeUpgradeData attrUpgrade)
+    {
+        attributeUpgrades.Remove(attrUpgrade);
+    }
+
     public void PurchaseSentry(SentryData sentryData)
     {
         purchasableSentries.Remove(sentryData);
@@ -97,6 +102,11 @@ public class ShopManager : MonoBehaviour
     public void PurchaseAugment(AugmentData augmentData)
     {
         purchasableAugments.Remove(augmentData);
+    }
+
+    public List<AttributeUpgradeData> GetAttributeUpgradesRemaining()
+    {
+        return attributeUpgrades;
     }
 
     public List<SentryData> GetPurchasableSentries()
