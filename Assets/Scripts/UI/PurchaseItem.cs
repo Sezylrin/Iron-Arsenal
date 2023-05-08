@@ -90,7 +90,6 @@ public class PurchaseItem : MonoBehaviour
 
     private void HandlePurchase()
     {
-        Debug.Log("ttest");
         switch (currTab)
         {
             case TabType.mechUpgrades:

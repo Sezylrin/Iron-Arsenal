@@ -46,7 +46,7 @@ public class ShopManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && collidingWithPlayer)
+        if (Input.GetKeyDown(KeyCode.E))
         {
             OpenShop();
         }

@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 210200065431127010}
   - component: {fileID: 210200065431127021}
   m_Layer: 5
-  m_Name: Xenorium (1)
+  m_Name: Xenorium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -745,9 +745,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e980b5cc4d6314ea2f2707dd77f207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeImg: {fileID: 21300000, guid: 54121f22350fbc24db0b6b599ce14129, type: 3}
-  inactiveImg: {fileID: 21300000, guid: 1c81605727c589e46873e587e6cca8b5, type: 3}
-  tabType: 0
+  activeImg: {fileID: 21300000, guid: 3b2d20c1b9f28224a80e63eb299b7eac, type: 3}
+  inactiveImg: {fileID: 21300000, guid: e49940d30e8ede64d8a107c7b5082632, type: 3}
+  tabType: 2
 --- !u!1 &210200067182749065
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,7 +895,7 @@ GameObject:
   - component: {fileID: 210200067224047203}
   - component: {fileID: 210200067224047202}
   m_Layer: 5
-  m_Name: Void Stone (1)
+  m_Name: Void Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1124,14 +1124,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c7429b22f327c42bce2ae8a10db398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelCanvasManager: {fileID: 0}
+  levelCanvasManager: {fileID: 1715962026865805886}
   possibleSentries:
-  - {fileID: 11400000, guid: 66217e87865c0d64bbe23256ded81bd0, type: 2}
-  enemyManager: {fileID: 0}
+  - {fileID: 11400000, guid: 9fa7e19b4d77df74bb885ad11a70a931, type: 2}
+  enemyManager: {fileID: 3075346082217855632}
   player: {fileID: 0}
   playerFunctions: {fileID: 0}
   playerMining: {fileID: 0}
   currentState: 0
+  unlimitedResources: 0
 --- !u!114 &2077974866772937159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1870,7 +1871,7 @@ MonoBehaviour:
   mats:
   - {fileID: 2100000, guid: a91526c7d36b8a741b60d5c2610e834d, type: 2}
   - {fileID: 2100000, guid: e3675e120c284804695d4ee5b7fd9232, type: 2}
-  instantiatedToolTips: {fileID: 0}
+  instantiatedToolTip: {fileID: 0}
   overMenu: 0
 --- !u!114 &5309985938440111603
 MonoBehaviour:
@@ -4829,7 +4830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5061726209140956515
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4909,6 +4910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mechUpgradesTab: {fileID: 5061726209069708168}
   attributeUpgradesTab: {fileID: 5061726209485103929}
+  augmentUpgradesTab: {fileID: 210200066793314997}
   sentryPurchaseTab: {fileID: 5061726208504286696}
   xenorium: {fileID: 1715962027100417619}
   novacite: {fileID: 5903813891303768599}
