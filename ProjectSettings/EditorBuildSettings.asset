@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/BuidlScenes/Game.unity
+    path: Assets/Scenes/Polish.unity
     guid: 2a8a4d2aeb41f7140bf884f51643893d
   - enabled: 1
     path: Assets/Scenes/BuidlScenes/Victory.unity
