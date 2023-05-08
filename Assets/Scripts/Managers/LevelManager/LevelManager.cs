@@ -140,6 +140,11 @@ public class LevelManager : MonoBehaviour
         return didSucceed;
     }
 
+    public bool CanPurchaseItem(int xenoriumCost, int novaciteCost, int voidStoneCost)
+    {
+        return buildManager.CanPurchaseItem(xenoriumCost, novaciteCost, voidStoneCost);
+    }
+
     public void SpawnAugmentChoice()
     {
         augmentManager.CreateAugmentChoices();
