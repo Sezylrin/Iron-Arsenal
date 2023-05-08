@@ -24,7 +24,6 @@ public class SentryManager : MonoBehaviour
         {
 
             SentryData sentryData = Resources.Load<SentryData>(sentryPath + sentryName);
-            Debug.Log(sentryData);
 
             if (sentryData != null)
             {

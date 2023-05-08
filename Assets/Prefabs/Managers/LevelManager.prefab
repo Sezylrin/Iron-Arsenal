@@ -1110,7 +1110,7 @@ Transform:
   - {fileID: 4270237731087638297}
   - {fileID: 1715962026865805885}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2077974866772937153
 MonoBehaviour:
@@ -2297,12 +2297,12 @@ MonoBehaviour:
   <PreviousBoss>k__BackingField: 0
   debugStartBossRush: 0
   <NormalSpawnDelay>k__BackingField: 0
-  <NSDMinimum>k__BackingField: 0
-  <NSDMultiplier>k__BackingField: 0
+  <NSDMinimum>k__BackingField: 10
+  <NSDMultiplier>k__BackingField: 1
   <NSDExponential>k__BackingField: 0
   <RushSpawnDelay>k__BackingField: 0
-  <RSDMinimum>k__BackingField: 0
-  <RSDMultiplier>k__BackingField: 0
+  <RSDMinimum>k__BackingField: 10
+  <RSDMultiplier>k__BackingField: 1
   <RSDSpawnsModifier>k__BackingField: 0
   <RSDExponential>k__BackingField: 0
   <AllowedEnemies>k__BackingField: 0
