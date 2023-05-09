@@ -29,6 +29,7 @@ public class LevelCanvasManager : MonoBehaviour
     [SerializeField] private GameObject augmentMenu;
     [SerializeField] private GameObject buildMenu;
     [SerializeField] private GameObject shopMenu;
+    [SerializeField] private GameObject attributeMenu;
     private List<SentryBuildInitialise> allButtons = new List<SentryBuildInitialise>();
 
     public List<SentrySocket> allSockets = new List<SentrySocket>();
@@ -37,7 +38,7 @@ public class LevelCanvasManager : MonoBehaviour
 
     private bool changedMat = false;
 
-    public GameObject instantiatedToolTips;
+    public GameObject instantiatedToolTip;
 
     public bool overMenu = false;
     public static LevelCanvasManager Instance { get; private set; }
@@ -57,7 +58,6 @@ public class LevelCanvasManager : MonoBehaviour
     private void Start()
     {
         closeBtn.onClick.AddListener(CloseBuildMenu);
-        //LoadSentries();
     }
 
     private void Update()
@@ -148,19 +148,29 @@ public class LevelCanvasManager : MonoBehaviour
         augmentMenu.SetActive(true);
     }
 
+    public void ShowAttributeChoices()
+    {
+        attributeMenu.GetComponent<AttributeMenu>().SetAttributes();
+        attributeMenu.SetActive(true);
+    }
+
     public void RemoveAugmentChoices()
     {
         augmentMenu.SetActive(false);
-        
+    }
+
+    public void RemoveAttributeChoices()
+    {
+        attributeMenu.SetActive(false);
     }
 
     public void CloseBuildMenu()
     {
         buildMenu.SetActive(false);
         overMenu = false;
-        if (instantiatedToolTips)
-            Destroy(instantiatedToolTips);
-        instantiatedToolTips = null;
+        if (instantiatedToolTip)
+            Destroy(instantiatedToolTip);
+        instantiatedToolTip = null;
     }
 
     public void OpenBuildMenu()
