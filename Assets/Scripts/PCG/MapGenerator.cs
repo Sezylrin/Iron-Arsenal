@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -19,15 +20,14 @@ public class MapGenerator : MonoBehaviour
     public GameObject groundMapTile;
 
     [Serializable]
-    public class EventTiles
+    public class SpawnableEvent
     {
         public GameObject eventToSpawn;
         public float chanceToSpawn;
         public int DCToStartSpawning;
         public GameObject eventMapTile;
     }
-    public List<EventTiles> eventTilesList = new List<EventTiles>();
-    private int eventTilesListEle = -1;
+    public List<SpawnableEvent> spawnableEventList = new List<SpawnableEvent>();
 
     // public GameObject emptyTile;
     // public ObjectTiles objectTiles;
@@ -76,6 +76,26 @@ public class MapGenerator : MonoBehaviour
         // GameObject tileInstance = Instantiate(emptyTile, new Vector3(0.0f,0.01f,0.0f), Quaternion.identity, objectTilesContainer);
         // EventTile tile = new EventTile(tileInstance, true);
         // allEventTiles[Vector3.zero] = tile;
+        // GameObject foo;
+        // EventTile tile;
+        // foo = Instantiate(spawnableEventList[0].eventToSpawn, Vector3.zero, Quaternion.identity);
+        // tile = new EventTile(foo);
+        // allEventTiles.Add(Vector3.zero, tile);
+        // foo = Instantiate(spawnableEventList[0].eventToSpawn, Vector3.one, Quaternion.identity);
+        // tile = new EventTile(foo);
+        // allEventTiles.Add(Vector3.one, tile);
+        //
+        // int total = 0;
+        // foreach (var eventTile in allEventTiles)
+        // {
+        //     Debug.Log(eventTile.Value.tileObject.name);
+        //     Debug.Log(spawnableEventList[0].eventToSpawn.name);
+        //     if (eventTile.Value.tileObject.name == spawnableEventList[0].eventToSpawn.name + "(Clone)")
+        //     {
+        //         total++;
+        //     }
+        // }
+        // Debug.Log(total);
     }
 
     private void Update()
@@ -100,7 +120,7 @@ public class MapGenerator : MonoBehaviour
                 if (!allGroundTiles.ContainsKey(pos))
                 {
                     SpawnNewGroundTile(pos, cTime);
-                    SpawnNewMapObject(pos);
+                    SpawnNewMapObject(pos, new EventTile());
                 }
                 // If a tile occupies that position
                 else
@@ -135,8 +155,8 @@ public class MapGenerator : MonoBehaviour
 
                 if (!allEventTiles.ContainsKey(pos))
                 {
-                    SpawnNewObjectTile(pos, cTime);
-                    SpawnNewMapObject(pos);
+                    EventTile newEventTile = SpawnNewEventTile(pos);
+                    SpawnNewMapObject(pos, newEventTile);
                 }
             }
         }
@@ -178,12 +198,12 @@ public class MapGenerator : MonoBehaviour
         startPos = player.transform.position;
     }
 
-    private void SpawnNewTile(Vector3 pos, float cTime)
-    {
-        SpawnNewGroundTile(pos, cTime);
-
-        SpawnNewObjectTile(pos, cTime);
-    }
+    // private void SpawnNewTile(Vector3 pos, float cTime)
+    // {
+    //     SpawnNewGroundTile(pos, cTime);
+    //
+    //     SpawnNewEventTile(pos);
+    // }
 
     private void SpawnNewGroundTile(Vector3 pos, float cTime)
     {
@@ -193,52 +213,42 @@ public class MapGenerator : MonoBehaviour
         allGroundTiles.Add(pos, tile);
     }
 
-    private void SpawnNewObjectTile(Vector3 pos, float cTime)
+    private EventTile SpawnNewEventTile(Vector3 pos)
     {
-        GameObject tileType = RandomTile();
+        SpawnableEvent tileType = RandomEventTile();
         EventTile tile = new EventTile();
-        if (tileType && !EventIsNearOtherEvents(pos))
+        if (tileType != null && !EventIsNearOtherEvents(pos))
         {
-            GameObject tileInstance = Instantiate(tileType, pos + new Vector3(0.0f,0.01f,0.0f), Quaternion.identity, eventTilesContainer);
-            tile = new EventTile(tileInstance);
+            GameObject tileInstance = Instantiate(tileType.eventToSpawn, pos + new Vector3(0.0f,0.01f,0.0f), Quaternion.identity, eventTilesContainer);
+            tile = new EventTile(tileInstance, tileType.eventMapTile);
         }
         // activeEventTiles.Add(pos, tile);
         allEventTiles.Add(pos, tile);
+        return tile;
     }
 
-    private void SpawnNewMapObject(Vector3 pos)
+    private void SpawnNewMapObject(Vector3 pos, EventTile eventTile)
     {
-        if (eventTilesListEle < 0)
-        {
-            // Spawn ground mapObj
-            Instantiate(groundMapTile, pos, Quaternion.identity, mapTilesContainer);
-        }
-        else
-        {
-            // Spawn event mapObj
-            Instantiate(eventTilesList[eventTilesListEle].eventMapTile, pos, Quaternion.identity, mapTilesContainer);
-        }
-
+        GameObject mapTileType = (eventTile.isEmpty) ? groundMapTile : eventTile.eventMapTile;
+        if (mapTileType != groundMapTile) pos += new Vector3(0.0f, 0.01f, 0.0f);
+        Instantiate(mapTileType, pos, Quaternion.identity, mapTilesContainer);
     }
 
-    private GameObject RandomTile()
+    private SpawnableEvent RandomEventTile()
     {
         int random = Random.Range(0, 1000);
-        GameObject tileType = null;
-        eventTilesListEle = -1;
-
-        for (int i = 0; i < eventTilesList.Count; i++)
+        SpawnableEvent tileType = null;
+        for (int i = 0; i < spawnableEventList.Count; i++)
         {
             float lowerBound = 0;
             for (int j = 0; j < i; j++)
             {
-                lowerBound += eventTilesList[j].chanceToSpawn;
+                lowerBound += spawnableEventList[j].chanceToSpawn;
             }
-            float upperBound = eventTilesList[i].chanceToSpawn + lowerBound;
-            if (lowerBound <= random && random < upperBound || enemyManagerInScene && EnemyManager.Instance.Difficulty >= eventTilesList[i].DCToStartSpawning)
+            float upperBound = spawnableEventList[i].chanceToSpawn + lowerBound;
+            if (lowerBound <= random && random < upperBound || enemyManagerInScene && EnemyManager.Instance.Difficulty >= spawnableEventList[i].DCToStartSpawning)
             {
-                tileType = eventTilesList[i].eventToSpawn;
-                eventTilesListEle = i;
+                tileType = spawnableEventList[i];
             }
         }
 
@@ -261,6 +271,7 @@ public class MapGenerator : MonoBehaviour
     {
         public bool isEmpty;
         public GameObject tileObject;
+        public GameObject eventMapTile;
 
         public EventTile()
         {
@@ -271,6 +282,13 @@ public class MapGenerator : MonoBehaviour
         {
             isEmpty = false;
             this.tileObject = tileObject;
+        }
+
+        public EventTile(GameObject tileObject, GameObject eventMapTile)
+        {
+            isEmpty = false;
+            this.tileObject = tileObject;
+            this.eventMapTile = eventMapTile;
         }
     }
 

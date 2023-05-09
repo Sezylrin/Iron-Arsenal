@@ -389,7 +389,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2047
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -476,6 +476,54 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1190677623}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: groundTile
+      value: 
+      objectReference: {fileID: 4615277617440184175, guid: b4d5e1293210fca4c9dc451d739be638, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: groundMapTile
+      value: 
+      objectReference: {fileID: 3751377949531917548, guid: f7de2f10e535c3d44b02236c4bfac47f, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[0].eventMapTile
+      value: 
+      objectReference: {fileID: 4257981420888131409, guid: f91408b1ec929a34e86a3930cc15098b, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[0].eventToSpawn
+      value: 
+      objectReference: {fileID: 8554378202571416629, guid: 953d56150040ebc4bb2469312b3bb9ad, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[1].eventMapTile
+      value: 
+      objectReference: {fileID: 1862945125839783886, guid: 4f0315fc60c7a9d43aaafca9f34e907f, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[1].eventToSpawn
+      value: 
+      objectReference: {fileID: 3437153877345992295, guid: cf4089a08027b4b4dabc645cac347277, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[2].eventMapTile
+      value: 
+      objectReference: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[2].eventToSpawn
+      value: 
+      objectReference: {fileID: 5440523406789250478, guid: e6424028bb726e446ae3a8f91e531eb2, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[0].chanceToSpawn
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[1].chanceToSpawn
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[2].chanceToSpawn
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
