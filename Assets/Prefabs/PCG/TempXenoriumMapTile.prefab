@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1069566957736193465}
   - component: {fileID: 3852604100207213059}
   - component: {fileID: 6168893408879165808}
-  m_Layer: 0
-  m_Name: TempTile2
+  m_Layer: 11
+  m_Name: TempXenoriumMapTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

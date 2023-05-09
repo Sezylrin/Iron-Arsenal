@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour
@@ -13,22 +14,29 @@ public class MapGenerator : MonoBehaviour
     //     public GameObject voidstone;
     //     public GameObject xenorium;
     // }
+    [Header("Spawned tiles")]
+    public GameObject groundTile;
+    public GameObject groundMapTile;
 
     [Serializable]
-    public class ObjectTiles
+    public class EventTiles
     {
-        public GameObject objectToSpawn;
+        public GameObject eventToSpawn;
         public float chanceToSpawn;
         public int DCToStartSpawning;
+        public GameObject eventMapTile;
     }
-    public List<ObjectTiles> objectTilesList = new List<ObjectTiles>();
+    public List<EventTiles> eventTilesList = new List<EventTiles>();
+    private int eventTilesListEle = -1;
 
-    public GameObject groundTile;
-    public GameObject emptyTile;
+    // public GameObject emptyTile;
     // public ObjectTiles objectTiles;
-    public GameObject player;
+
+    [SerializeField, Header("For testing, should auto grab player if LevelManager in scene")] private GameObject player;
+    [Header("Containers: Drag the corresponding siblings into these fields if empty")]
     public Transform groundTilesContainer;
-    public Transform objectTilesContainer;
+    public Transform eventTilesContainer;
+    public Transform mapTilesContainer;
 
     [Header("How far away from the player that ground will spawn")]
     public int groundRadius = 10;
@@ -39,7 +47,7 @@ public class MapGenerator : MonoBehaviour
     [Header("Tiles between event spawns")]
     public int minTilesBtwnEvents;
     [Header("Turn this on in scene with an enemy manager to activate DCToStartSpawning")]
-    public bool EnemyManagerInScene = false;
+    public bool enemyManagerInScene = false;
 
     private Vector3 startPos = Vector3.zero;
 
@@ -52,7 +60,15 @@ public class MapGenerator : MonoBehaviour
     private Dictionary<Vector3, GroundTile> allGroundTiles = new Dictionary<Vector3, GroundTile>();
     private Dictionary<Vector3, GroundTile> activeGroundTiles = new Dictionary<Vector3, GroundTile>();
     private Dictionary<Vector3, EventTile> allEventTiles = new Dictionary<Vector3, EventTile>();
-    private Dictionary<Vector3, EventTile> activeEventTiles = new Dictionary<Vector3, EventTile>();
+    // private Dictionary<Vector3, EventTile> activeEventTiles = new Dictionary<Vector3, EventTile>();
+
+    private void Awake()
+    {
+        if (!player)
+        {
+            player = LevelManager.Instance.player;
+        }
+    }
 
     private void Start()
     {
@@ -84,6 +100,7 @@ public class MapGenerator : MonoBehaviour
                 if (!allGroundTiles.ContainsKey(pos))
                 {
                     SpawnNewGroundTile(pos, cTime);
+                    SpawnNewMapObject(pos);
                 }
                 // If a tile occupies that position
                 else
@@ -119,6 +136,7 @@ public class MapGenerator : MonoBehaviour
                 if (!allEventTiles.ContainsKey(pos))
                 {
                     SpawnNewObjectTile(pos, cTime);
+                    SpawnNewMapObject(pos);
                 }
             }
         }
@@ -178,34 +196,49 @@ public class MapGenerator : MonoBehaviour
     private void SpawnNewObjectTile(Vector3 pos, float cTime)
     {
         GameObject tileType = RandomTile();
-        GameObject tileInstance;
         EventTile tile = new EventTile();
         if (tileType && !EventIsNearOtherEvents(pos))
         {
-            tileInstance = Instantiate(tileType, pos + new Vector3(0.0f,0.01f,0.0f), Quaternion.identity, objectTilesContainer);
+            GameObject tileInstance = Instantiate(tileType, pos + new Vector3(0.0f,0.01f,0.0f), Quaternion.identity, eventTilesContainer);
             tile = new EventTile(tileInstance);
         }
         // activeEventTiles.Add(pos, tile);
         allEventTiles.Add(pos, tile);
     }
 
+    private void SpawnNewMapObject(Vector3 pos)
+    {
+        if (eventTilesListEle < 0)
+        {
+            // Spawn ground mapObj
+            Instantiate(groundMapTile, pos, Quaternion.identity, mapTilesContainer);
+        }
+        else
+        {
+            // Spawn event mapObj
+            Instantiate(eventTilesList[eventTilesListEle].eventMapTile, pos, Quaternion.identity, mapTilesContainer);
+        }
+
+    }
+
     private GameObject RandomTile()
     {
         int random = Random.Range(0, 1000);
         GameObject tileType = null;
+        eventTilesListEle = -1;
 
-        for (int i = 0; i < objectTilesList.Count; i++)
+        for (int i = 0; i < eventTilesList.Count; i++)
         {
             float lowerBound = 0;
-            float upperBound;
             for (int j = 0; j < i; j++)
             {
-                lowerBound += objectTilesList[j].chanceToSpawn;
+                lowerBound += eventTilesList[j].chanceToSpawn;
             }
-            upperBound = objectTilesList[i].chanceToSpawn + lowerBound;
-            if (lowerBound <= random && random < upperBound || EnemyManagerInScene && EnemyManager.Instance.Difficulty >= objectTilesList[i].DCToStartSpawning)
+            float upperBound = eventTilesList[i].chanceToSpawn + lowerBound;
+            if (lowerBound <= random && random < upperBound || enemyManagerInScene && EnemyManager.Instance.Difficulty >= eventTilesList[i].DCToStartSpawning)
             {
-                tileType = objectTilesList[i].objectToSpawn;
+                tileType = eventTilesList[i].eventToSpawn;
+                eventTilesListEle = i;
             }
         }
 
