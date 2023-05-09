@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2886581605934022117}
   - component: {fileID: 4021825786333188280}
   - component: {fileID: 3399830224947855110}
-  m_Layer: 0
-  m_Name: TempGroundTile
+  m_Layer: 11
+  m_Name: TempGroundMapTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
