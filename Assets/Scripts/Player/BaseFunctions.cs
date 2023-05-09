@@ -32,6 +32,8 @@ public class BaseFunctions : MonoBehaviour
     public GameObject ShieldWave;
 
     public Cannon cannon;
+    public GameObject Arrow;
+    public GameObject ArrowRotatePoint;
 
     public BaseEffects baseEffects;
     [System.Serializable]
@@ -101,6 +103,27 @@ public class BaseFunctions : MonoBehaviour
             foreach (Sentry sentry in AugmentManager.Instance.activeSentries)
             {
                 sentry.fireRate /= 1.2f;
+            }
+        }
+
+
+        if (EnemyManager.Instance.IsBossAlive)
+        {
+            if (Arrow.activeSelf == false)
+            {
+                Arrow.SetActive(true);
+            }
+
+            Vector3 bossPosition = EnemyManager.Instance.ActiveBoss.transform.position;
+            bossPosition.y = ArrowRotatePoint.transform.position.y;
+            ArrowRotatePoint.transform.LookAt(bossPosition);
+        }
+
+        if (!EnemyManager.Instance.IsBossAlive || Vector3.Distance(gameObject.transform.position, EnemyManager.Instance.ActiveBoss.transform.position) < 25)
+        {
+            if (Arrow.activeSelf == true)
+            {
+                Arrow.SetActive(false);
             }
         }
     }

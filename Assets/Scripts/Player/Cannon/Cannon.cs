@@ -13,6 +13,7 @@ public class Cannon : MonoBehaviour
     public GameObject[] cannonProjectileArray;
     public List<int> lockedCannonProjectiles;
     public List<int> unlockedCannonProjectiles;
+    public bool switchingEnabled;
 
     [field: Header("Flamethrower")]
     public CannonProjectileData flameData;
@@ -52,6 +53,7 @@ public class Cannon : MonoBehaviour
         activeCannonProjectile = 0;
         flamethrowerIndex = -1;
         ableToShoot = true;
+        switchingEnabled = true;
 
         pools.Add(pooledBullets);
         pools.Add(pooledShotguns);
@@ -62,14 +64,13 @@ public class Cannon : MonoBehaviour
         pools.Add(pooledFlames);
 
         unlockedCannonProjectiles.Add(0);
-        unlockedCannonProjectiles.Add(1);
-        unlockedCannonProjectiles.Add(2);
-        unlockedCannonProjectiles.Add(3);
-        unlockedCannonProjectiles.Add(4);
-        unlockedCannonProjectiles.Add(5);
+        lockedCannonProjectiles.Add(1);
+        lockedCannonProjectiles.Add(2);
+        lockedCannonProjectiles.Add(3);
+        lockedCannonProjectiles.Add(4);
+        lockedCannonProjectiles.Add(5);
         lockedCannonProjectiles.Add(6);
-        UnlockRandomCannon();
-        
+                
     }
 
     // Update is called once per frame
@@ -138,52 +139,56 @@ public class Cannon : MonoBehaviour
             cannonProjectileScript.Init();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (switchingEnabled)
         {
-            activeCannonProjectile = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (unlockedCannonProjectiles.Count >= 2)
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                activeCannonProjectile = 1;
+                activeCannonProjectile = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                if (unlockedCannonProjectiles.Count >= 2)
+                {
+                    activeCannonProjectile = 1;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                if (unlockedCannonProjectiles.Count >= 3)
+                {
+                    activeCannonProjectile = 2;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                if (unlockedCannonProjectiles.Count >= 4)
+                {
+                    activeCannonProjectile = 3;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                if (unlockedCannonProjectiles.Count >= 5)
+                {
+                    activeCannonProjectile = 4;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                if (unlockedCannonProjectiles.Count >= 6)
+                {
+                    activeCannonProjectile = 5;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                if (unlockedCannonProjectiles.Count >= 7)
+                {
+                    activeCannonProjectile = 6;
+                }
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (unlockedCannonProjectiles.Count >= 3)
-            {
-                activeCannonProjectile = 2;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            if (unlockedCannonProjectiles.Count >= 4)
-            {
-                activeCannonProjectile = 3;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            if (unlockedCannonProjectiles.Count >= 5)
-            {
-                activeCannonProjectile = 4;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            if (unlockedCannonProjectiles.Count >= 6)
-            {
-                activeCannonProjectile = 5;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            if (unlockedCannonProjectiles.Count >= 7)
-            {
-                activeCannonProjectile = 6;
-            }
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -215,6 +220,13 @@ public class Cannon : MonoBehaviour
             {
                 flamethrowerIndex = unlockedCannonProjectiles.Count - 1;
             }
-        } 
+
+            activeCannonProjectile = unlockedCannonProjectiles.Count - 1;
+        }
+    }
+
+    public void SetSwitchingEnabledState(bool state)
+    {
+        switchingEnabled = state;
     }
 }

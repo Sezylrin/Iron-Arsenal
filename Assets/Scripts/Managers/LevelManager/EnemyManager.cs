@@ -27,6 +27,7 @@ public class EnemyManager : MonoBehaviour
     public bool debugEndRush;
     [field: Space(15)]
     [field: SerializeField, ReadOnly] public bool IsBossAlive { get; private set; }
+    [field: SerializeField, ReadOnly] public GameObject ActiveBoss { get; private set; }
     [field: SerializeField, ReadOnly] private int PreviousBoss { get; set; }
     public bool debugStartBossRush;
     [field: Space(15)]
@@ -278,6 +279,7 @@ public class EnemyManager : MonoBehaviour
     public void BossDeath(Transform bossTransform)
     {
         enemyList.Remove(bossTransform);
+        ActiveBoss = null;
         IsBossAlive = false;
     }
 
@@ -365,6 +367,7 @@ public class EnemyManager : MonoBehaviour
         if (isBoss)
         {
             newEnemy = Instantiate(bossPrefabs[enemyType], gameObject.transform);
+            ActiveBoss = newEnemy;
             IsBossAlive = true;
         }
         else
