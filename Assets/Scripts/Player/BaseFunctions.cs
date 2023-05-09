@@ -164,7 +164,6 @@ public class BaseFunctions : MonoBehaviour
         }
         timeSinceDamage = shieldRecoverDelay;
         LevelCanvasManager.Instance.SetShield(ShieldPercentage());
-        NumberManager.Instance.SpawnText(transform.position, Mathf.CeilToInt(amount).ToString(), 1, Color.cyan);
     }
 
     private void RecoverShield(float amount)

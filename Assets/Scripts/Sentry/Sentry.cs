@@ -257,12 +257,14 @@ public class Sentry : MonoBehaviour
 
     public void UpdateAugments()
     {
+        Debug.Log(sentryEffects);
         if (!sentryEffects)
         {
             sentryEffects = gameObject.AddComponent<SentryEffects>();
             sentryEffects.hostSentry = this;
 
         }
+        Debug.Log(sentryEffects);
         sentryEffects.UpdateAugments();
     }
 

@@ -5,7 +5,6 @@ public enum TabType
 {
     mechUpgrades,
     attributeUpgrades,
-    augmentPurchases,
     sentryPurchases
 }
 
