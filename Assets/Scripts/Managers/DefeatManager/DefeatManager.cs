@@ -12,6 +12,6 @@ public class DefeatManager : MonoBehaviour
 
     private void HandlePlayAgain()
     {
-        Loader.Load(Scene.Game);
+        Loader.Load(SceneState.Game);
     }
 }

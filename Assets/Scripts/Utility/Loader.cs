@@ -1,5 +1,5 @@
 using UnityEngine.SceneManagement;
-public enum Scene
+public enum SceneState
 {
     MainMenu,
     Game,
@@ -9,7 +9,7 @@ public enum Scene
 
 public static class Loader
 {
-    public static void Load(Scene scene)
+    public static void Load(SceneState scene)
     {
         SceneManager.LoadSceneAsync(scene.ToString());
     }
