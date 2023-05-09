@@ -285,6 +285,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca667ca4187569e4181f5004bbd96457, type: 3}
+--- !u!1 &539890183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 539890184}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &539890184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539890183}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24.296719, y: 11.080023, z: -2.224798}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &685149123
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,6 +1023,14 @@ PrefabInstance:
       propertyPath: <AllowedEnemiesPerDifficultyModifier>k__BackingField
       value: 49
       objectReference: {fileID: 0}
+    - target: {fileID: 4797737709738731196, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797737709738731196, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4797737709803221971, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1005,6 +1044,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4797737711469406735, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6144228584691745231, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6144228584691745231, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6144228585720403987, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6144228585720403987, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
