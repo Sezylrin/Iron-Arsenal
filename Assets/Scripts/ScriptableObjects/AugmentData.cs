@@ -40,18 +40,12 @@ public enum AugmentName
     Thorns,
     [Description("ShieldRegen")]
     ShieldRegen,
-    [Description("ShieldSegment")]
-    ShieldSegment,
-    [Description("ShieldWave")]
-    ShieldWave,
     [Description("ShieldUp")]
     ShieldUp,
     [Description("Shieldsteal")]
     Shieldsteal,
     [Description("Lifesteal")]
     Lifesteal,
-    [Description("OverDrive")]
-    OverDrive,
 }
 
 [CreateAssetMenu(fileName = "AugmentData", menuName = "ScriptableObjects/AugmentData")]
@@ -62,8 +56,4 @@ public class AugmentData : ScriptableObject
     public string description;
 
     public Augments augmentType;
-
-    public int xenoriumCost;
-    public int novaciteCost;
-    public int voidStoneCost;
 }

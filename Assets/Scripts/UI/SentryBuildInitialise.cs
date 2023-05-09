@@ -46,13 +46,13 @@ public class SentryBuildInitialise : MonoBehaviour, IPointerEnterHandler, IPoint
         resourceContainer.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>().text = sentry.xenoriumCost.ToString();
         resourceContainer.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>().text = sentry.novaciteCost.ToString();
         resourceContainer.transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>().text = sentry.voidStoneCost.ToString();
-        LevelCanvasManager.Instance.instantiatedToolTip = instantiatedToolTip;
+        LevelCanvasManager.Instance.instantiatedToolTips = instantiatedToolTip;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         Destroy(instantiatedToolTip);
-        LevelCanvasManager.Instance.instantiatedToolTip = null;
+        LevelCanvasManager.Instance.instantiatedToolTips = null;
     }
 
     public void SpawnSentry()
