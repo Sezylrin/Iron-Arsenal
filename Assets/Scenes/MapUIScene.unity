@@ -707,7 +707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 653026692}
   - component: {fileID: 653026691}
-  - component: {fileID: 653026690}
+  - component: {fileID: 653026693}
   m_Layer: 0
   m_Name: MapCamera
   m_TagString: Untagged
@@ -715,14 +715,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &653026690
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653026689}
-  m_Enabled: 1
 --- !u!20 &653026691
 Camera:
   m_ObjectHideFlags: 0
@@ -789,6 +781,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &653026693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653026689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634e33abac8b853479628690543cc285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 195890466}
+  playerYOffset: 12
+  allowMinimapRotation: 0
 --- !u!1 &781063732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,13 +1328,8 @@ MonoBehaviour:
     the UI.
 
 
-    ALL OTHER CAMERAS SHOULD EXCLUDE THE ''MapIcons'' LAYER TO SAVE
-    CPU USAGE
-
-
-    To make this feature work with what we have currently, A 2D sprite
-    should be placed underneath/in the same position as all objects that will show
-    up in the map.'
+    ALL OTHER CAMERAS SHOULD EXCLUDE THE ''MapTile'' LAYER TO SAVE
+    CPU USAGE'
 --- !u!222 &1561033495
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1366,7 +1368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1690781782}
   - component: {fileID: 1690781781}
-  - component: {fileID: 1690781780}
+  - component: {fileID: 1690781783}
   m_Layer: 0
   m_Name: MinimapCamera
   m_TagString: Untagged
@@ -1374,14 +1376,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1690781780
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690781779}
-  m_Enabled: 1
 --- !u!20 &1690781781
 Camera:
   m_ObjectHideFlags: 0
@@ -1448,6 +1442,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1690781783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690781779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634e33abac8b853479628690543cc285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 195890466}
+  playerYOffset: 12
+  allowMinimapRotation: 1
 --- !u!1 &1716286949
 GameObject:
   m_ObjectHideFlags: 0
