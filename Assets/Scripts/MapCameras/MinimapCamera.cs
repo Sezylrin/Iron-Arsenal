@@ -6,7 +6,7 @@ using UnityEngine;
 public class MinimapCamera : MonoBehaviour
 {
     [SerializeField, Header("For testing, should auto grab player if LevelManager in scene")] private Transform player;
-    public float playerYOffset = 12f;
+    public float playerYOffset = 300f;
     public bool allowMinimapRotation;
 
     private void Start()
