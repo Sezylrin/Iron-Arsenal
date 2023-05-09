@@ -32,6 +32,8 @@ public class BaseFunctions : MonoBehaviour
     public GameObject ShieldWave;
 
     public Cannon cannon;
+    public GameObject Arrow;
+    public GameObject ArrowRotatePoint;
 
     public BaseEffects baseEffects;
     [System.Serializable]
@@ -103,6 +105,27 @@ public class BaseFunctions : MonoBehaviour
                 sentry.fireRate /= 1.2f;
             }
         }
+
+
+        if (EnemyManager.Instance.IsBossAlive)
+        {
+            if (Arrow.activeSelf == false)
+            {
+                Arrow.SetActive(true);
+            }
+
+            Vector3 bossPosition = EnemyManager.Instance.ActiveBoss.transform.position;
+            bossPosition.y = ArrowRotatePoint.transform.position.y;
+            ArrowRotatePoint.transform.LookAt(bossPosition);
+        }
+
+        if (!EnemyManager.Instance.IsBossAlive || Vector3.Distance(gameObject.transform.position, EnemyManager.Instance.ActiveBoss.transform.position) < 25)
+        {
+            if (Arrow.activeSelf == true)
+            {
+                Arrow.SetActive(false);
+            }
+        }
     }
 
     public void TakeDamage(float amount)
@@ -141,7 +164,6 @@ public class BaseFunctions : MonoBehaviour
         }
         timeSinceDamage = shieldRecoverDelay;
         LevelCanvasManager.Instance.SetShield(ShieldPercentage());
-        NumberManager.Instance.SpawnText(transform.position, Mathf.CeilToInt(amount).ToString(), 1, Color.cyan);
     }
 
     private void RecoverShield(float amount)
@@ -153,7 +175,7 @@ public class BaseFunctions : MonoBehaviour
         LevelCanvasManager.Instance.SetShield(ShieldPercentage());
     }
     private void TakeHealthDamage(float amount)
-    {        
+    {
         if (currentHealth - amount <= 0)
         {
             currentHealth = 0;
@@ -201,7 +223,7 @@ public class BaseFunctions : MonoBehaviour
         foreach (Vector3 spawnPos in relativeSpawnPos[baseLevel].pos)
         {
             GameObject socket = Instantiate(turretSocketPF, transform.position + spawnPos, Quaternion.identity, transform);
-            socket.transform.RotateAround(transform.position, Vector3.up, Mathf.Ceil(transform.eulerAngles.y)); 
+            socket.transform.RotateAround(transform.position, Vector3.up, Mathf.Ceil(transform.eulerAngles.y));
         }
         baseLevel++;
     }

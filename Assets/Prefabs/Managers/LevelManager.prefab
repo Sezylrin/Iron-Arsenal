@@ -934,6 +934,51 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1414778386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1414778387}
+  - component: {fileID: 1414778388}
+  m_Layer: 0
+  m_Name: Event Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1414778387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414778386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.083869, y: 2.0242283, z: -12.417757}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077974866772937158}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1414778388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414778386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c266e84e41781458dcfd9f3aeecff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EventActive>k__BackingField: 0
 --- !u!1 &1435265577
 GameObject:
   m_ObjectHideFlags: 0
@@ -3067,6 +3112,7 @@ Transform:
   m_Children:
   - {fileID: 3075346082217855639}
   - {fileID: 4384917254289960572}
+  - {fileID: 1414778387}
   - {fileID: 5547406521473743587}
   - {fileID: 4270237731087638297}
   - {fileID: 1715962026865805885}
@@ -4244,34 +4290,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <NumberOfAliveEnemies>k__BackingField: 0
-  <EnemyBaseHealth>k__BackingField: 160
-  <Difficulty>k__BackingField: 0
-  <DifficultyIncreaseFrequency>k__BackingField: 0
-  <InitialSpawnDelaySeconds>k__BackingField: 0
-  <SafeSpawnArea>k__BackingField: 20
+  <EnemyBaseHealth>k__BackingField: 300
+  <Difficulty>k__BackingField: 1
+  <DifficultyIncreaseFrequency>k__BackingField: 60
+  <InitialSpawnDelaySeconds>k__BackingField: 3
+  <SafeSpawnArea>k__BackingField: 35
   <BasicEnemyChance>k__BackingField: 80
-  <BECDecreaseOnDifficultyChange>k__BackingField: 0
+  <BECDecreaseOnDifficultyChange>k__BackingField: 2
   <SpecialEnemyChance>k__BackingField: 0
   <IsRushActive>k__BackingField: 0
   <NumberOfSpawnsThisRush>k__BackingField: 0
   debugStartRush: 0
   debugEndRush: 0
   <IsBossAlive>k__BackingField: 0
+  <ActiveBoss>k__BackingField: {fileID: 0}
   <PreviousBoss>k__BackingField: 0
   debugStartBossRush: 0
   <NormalSpawnDelay>k__BackingField: 0
-  <NSDMinimum>k__BackingField: 10
-  <NSDMultiplier>k__BackingField: 1
-  <NSDExponential>k__BackingField: 0
+  <NSDMinimum>k__BackingField: 3
+  <NSDMultiplier>k__BackingField: 2
+  <NSDExponential>k__BackingField: 1.1
   <RushSpawnDelay>k__BackingField: 0
-  <RSDMinimum>k__BackingField: 10
-  <RSDMultiplier>k__BackingField: 1
-  <RSDSpawnsModifier>k__BackingField: 0
-  <RSDExponential>k__BackingField: 0
+  <RSDMinimum>k__BackingField: 0.25
+  <RSDMultiplier>k__BackingField: 0.5
+  <RSDSpawnsModifier>k__BackingField: 0.002
+  <RSDExponential>k__BackingField: 1.05
   <AllowedEnemies>k__BackingField: 0
-  <AEMin>k__BackingField: 0
-  <AEDifficultyModifier>k__BackingField: 0
-  <AERushBonus>k__BackingField: 0
+  <AEMin>k__BackingField: 10
+  <AEDifficultyModifier>k__BackingField: 5
+  <AERushBonus>k__BackingField: 10
   enemyPrefabs:
   - {fileID: 3061924111405816818, guid: 2fb6490e21c6eb447b04e176e2d6830a, type: 3}
   - {fileID: 1854458944056088684, guid: d1dcde8f2e7bc7e46923b263d4f3fb02, type: 3}
