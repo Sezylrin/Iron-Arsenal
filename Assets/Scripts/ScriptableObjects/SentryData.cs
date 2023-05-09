@@ -4,7 +4,6 @@ using System.ComponentModel;
 
 public enum SentryName
 {
-    [Description("BasicSentry")]
     BasicSentry,
     Gattling,
     Cannon,

@@ -25,7 +25,7 @@ public class BuildManager
             }
             else
             {
-                //Debug.Log("Unable to load SentryData asset: " + sentryName);
+                Debug.Log("Unable to load SentryData asset: " + sentryName);
             }
         }
     }
@@ -73,7 +73,7 @@ public class BuildManager
 
     public bool PurchaseItemIfPossible(int xenoriumCost, int novaciteCost, int voidStoneCost)
     {
-        if (xenorium >= xenoriumCost && novacite >= novaciteCost && voidStone >= voidStoneCost)
+        if (CanPurchaseItem(xenoriumCost, novaciteCost, voidStoneCost))
         {
             xenorium -= xenoriumCost;
             novacite -= novaciteCost;
@@ -81,5 +81,10 @@ public class BuildManager
             return true;
         }
         return false;
+    }
+
+    public bool CanPurchaseItem(int xenoriumCost, int novaciteCost, int voidStoneCost)
+    {
+        return xenorium >= xenoriumCost && novacite >= novaciteCost && voidStone >= voidStoneCost;
     }
 }

@@ -35,6 +35,8 @@ public class LevelManager : MonoBehaviour
     public Mining playerMining;
     public State currentState = State.Normal;
 
+    [SerializeField] private bool unlimitedResources = false;
+
     private void Awake()
     {
         if (Instance != null)
@@ -76,6 +78,10 @@ public class LevelManager : MonoBehaviour
     }
     public bool CanBuildSentry(SentryName sentryName)
     {
+        if (unlimitedResources)
+        {
+            return true;
+        }
         return buildManager.CanBuildSentry(sentryName);
     }
 
@@ -122,11 +128,21 @@ public class LevelManager : MonoBehaviour
 
     public bool PurchaseItemIfPossible(int xenoriumCost, int novaciteCost, int voidStoneCost)
     {
+        if (unlimitedResources)
+        {
+            return true;
+        }
+
         bool didSucceed = buildManager.PurchaseItemIfPossible(xenoriumCost, novaciteCost, voidStoneCost);
         levelCanvasManager.SetXenoriumAmount(buildManager.xenorium);
         levelCanvasManager.SetNovaciteAmount(buildManager.novacite);
         levelCanvasManager.SetVoidStoneAmount(buildManager.voidStone);
         return didSucceed;
+    }
+
+    public bool CanPurchaseItem(int xenoriumCost, int novaciteCost, int voidStoneCost)
+    {
+        return buildManager.CanPurchaseItem(xenoriumCost, novaciteCost, voidStoneCost);
     }
 
     public void SpawnAugmentChoice()
@@ -136,6 +152,11 @@ public class LevelManager : MonoBehaviour
         {
             levelCanvasManager.ShowAugmentChoices(augmentManager.augmentChoices);
         }
+    }
+
+    public void SpawnAttributeChoice()
+    {
+        LevelCanvasManager.Instance.ShowAttributeChoices();
     }
 
     public ResourcesAmount GetResources()
