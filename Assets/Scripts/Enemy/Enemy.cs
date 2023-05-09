@@ -142,36 +142,53 @@ public abstract class Enemy : MonoBehaviour
         {
             case EnemyType.Basic:
                 Manager.PoolEnemy(gameObject, 0);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Tank:
                 Manager.PoolEnemy(gameObject, 1);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Exploder:
                 Manager.PoolEnemy(gameObject, 2);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Digger:
                 Manager.PoolEnemy(gameObject, 3);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Charger:
                 Manager.PoolEnemy(gameObject, 4);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Shooter:
                 Manager.PoolEnemy(gameObject, 5);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Dodger:
                 Manager.PoolEnemy(gameObject, 6);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Splitter:
                 Manager.PoolEnemy(gameObject, 7);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Cloaker:
                 Manager.PoolEnemy(gameObject, 8);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Burster:
-                Manager.PoolEnemy(gameObject, 8);
+                Manager.PoolEnemy(gameObject, 9);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Sprinter:
-                Manager.PoolEnemy(gameObject, 8);
+                Manager.PoolEnemy(gameObject, 10);
+                break;
+            case EnemyType.Boss:
+                Destroy(gameObject);
+                LevelManager.Instance.GainXenorium((int)Random.Range(200, 401));
+                LevelManager.Instance.GainNovacite((int)Random.Range(200, 401));
+                LevelManager.Instance.GainVoidStone((int)Random.Range(200, 401));
+                LevelManager.Instance.SpawnAugmentChoice();
                 break;
             default:
                 Destroy(gameObject);
