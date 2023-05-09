@@ -154,6 +154,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void SpawnAttributeChoice()
+    {
+        LevelCanvasManager.Instance.ShowAttributeChoices();
+    }
+
     public ResourcesAmount GetResources()
     {
         return new ResourcesAmount(buildManager.xenorium, buildManager.novacite, buildManager.voidStone);
