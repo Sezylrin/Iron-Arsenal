@@ -58,11 +58,11 @@ public class GameManager : MonoBehaviour
     {
         if (currentSelection != CurrentSelection.Playing)
         {
-            Time.timeScale = 0;
+            PauseGame();
         }
         else
         {
-            Time.timeScale = 1;
+            ResumeGame();
         }
         if (Input.GetKeyDown(KeyCode.Escape) && currentSelection == CurrentSelection.Playing)
         {
@@ -80,6 +80,16 @@ public class GameManager : MonoBehaviour
         {
             HandleExitSettings();
         }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 
     public void HandleResume()
