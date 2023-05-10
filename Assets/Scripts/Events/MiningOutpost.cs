@@ -8,12 +8,15 @@ public class MiningOutpost : Event
 
     public GameObject miningArea;
 
+    private Mining miningScript;
+
     // Start is called before the first frame update
 
     void Start()
     {
         Init();
         miningArea.SetActive(false);
+        miningScript = LevelManager.Instance.player.GetComponent<Mining>();
     }
 
     void Update()
@@ -55,7 +58,7 @@ public class MiningOutpost : Event
         {
             yield return new WaitForSeconds(1);
 
-            int random = Random.Range(5, 11);
+            int random = Random.Range(miningScript.miningOutput, miningScript.miningOutput * 2);
             if (type == MiningOutpostType.Novacite)
             {
                 LevelManager.Instance.GainNovacite(random);

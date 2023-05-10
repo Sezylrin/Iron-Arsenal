@@ -45,9 +45,9 @@ public class RocketPad : MonoBehaviour
     private void OnInteract(InputAction.CallbackContext context)
     {
         if (!readyToActivate) return;
-        //TODO: Escape/Win/TriggerFinalSequence
-        Debug.Log("Congrats!");
-        GameManager.Instance.HandleVictory();
+        EnemyManager.Instance.StartBossRush();
+        //Debug.Log("Congrats!");
+        
     }
 
     private void OnTriggerEnter(Collider col)

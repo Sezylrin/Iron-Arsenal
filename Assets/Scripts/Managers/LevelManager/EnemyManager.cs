@@ -29,6 +29,8 @@ public class EnemyManager : MonoBehaviour
     [field: SerializeField, ReadOnly] public bool IsBossAlive { get; private set; }
     [field: SerializeField, ReadOnly] public GameObject ActiveBoss { get; private set; }
     [field: SerializeField, ReadOnly] private int PreviousBoss { get; set; }
+    [field: SerializeField, ReadOnly] private bool IsBossRushActive { get; set; }
+    [field: SerializeField, ReadOnly] private int BossesDefeatedInRush { get; set; }
     public bool debugStartBossRush;
     [field: Space(15)]
     [field: SerializeField, ReadOnly] private float NormalSpawnDelay { get; set; }
@@ -102,6 +104,7 @@ public class EnemyManager : MonoBehaviour
 
         IsBossAlive = false;
         IsRushActive = false;
+        IsBossRushActive = true;
 
         PreviousBoss = -1;
         debugStartRush = false;
@@ -222,19 +225,24 @@ public class EnemyManager : MonoBehaviour
 
     private IEnumerator BossRush()
     {
-        int i = 0;
-        while (i < bossPrefabs.Length)
+        int bossesSpawned = 0;
+        
+        while (true)
         {
             yield return new WaitForSeconds(1);
-            if (!IsBossAlive)
+
+            if (bossesSpawned != bossPrefabs.Length && !IsBossAlive)
             {
-                SpawnEnemy(true, i);
-                i++;
+                SpawnEnemy(true, bossesSpawned);
+                bossesSpawned++;
+            }
+
+            if (BossesDefeatedInRush == bossPrefabs.Length)
+            {
+                break;
             }
         }
-
-        Debug.Log("Game Won");
-        //Trigger Win Screen
+        GameManager.Instance.HandleVictory();
     }
 
     public void StartRush()
@@ -269,6 +277,7 @@ public class EnemyManager : MonoBehaviour
 
     public void StartBossRush()
     {
+        IsBossRushActive = true;
         StartCoroutine(BossRush());
     }
 
@@ -282,6 +291,10 @@ public class EnemyManager : MonoBehaviour
         enemyList.Remove(bossTransform);
         ActiveBoss = null;
         IsBossAlive = false;
+        if (IsBossRushActive)
+        {
+            BossesDefeatedInRush++;
+        }
     }
 
     private int SelectEnemyToSpawn(bool isBoss)
