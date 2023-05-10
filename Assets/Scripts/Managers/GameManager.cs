@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public int SFXVolume = 100;
     public int BGMVolume = 100;
     
-    private LevelManager levelManager;
+    public LevelManager levelManager;
     private CurrentSelection currentSelection = CurrentSelection.Playing;
 
     private void Awake()
