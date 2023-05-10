@@ -265,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2021412381409304332, guid: d982d76a9603e85499fa4429e4705203, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 2021412381409304332, guid: d982d76a9603e85499fa4429e4705203, type: 3}
       propertyPath: m_LocalPosition.z
@@ -764,142 +764,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapGenerator
       objectReference: {fileID: 0}
-    - target: {fileID: 5099565300877849573, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: minTilesBtwnEvents
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: enemyManagerInScene
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: objectTilesList.Array.data[3].objectToSpawn
-      value: 
-      objectReference: {fileID: 5775609093941070977, guid: 7eaa3cb6cdd96a54eafd1541b459c259, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: objectTilesList.Array.data[4].objectToSpawn
-      value: 
-      objectReference: {fileID: 7680696273879097742, guid: ed9f8edb8189c7544a9f97632b351946, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: objectTilesList.Array.data[5].objectToSpawn
-      value: 
-      objectReference: {fileID: 4803366461123179043, guid: c88c692dc3cba794da889084b3ea0479, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[0].eventToSpawn
-      value: 
-      objectReference: {fileID: 5100279081852817202, guid: 637c161f44b007a4b96886eb0307d689, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[1].eventToSpawn
-      value: 
-      objectReference: {fileID: 362598567648167908, guid: 78847fb21d402414a8083dbb55faf9b5, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[2].eventToSpawn
-      value: 
-      objectReference: {fileID: 5052039952760676844, guid: b0d9f2b454364544f89739d8c4faf2bd, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[3].eventMapTile
-      value: 
-      objectReference: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[3].eventToSpawn
-      value: 
-      objectReference: {fileID: 4615687775888522599, guid: 368ee64a6932e0741aff22c6fb29615c, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[4].eventMapTile
-      value: 
-      objectReference: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[4].eventToSpawn
-      value: 
-      objectReference: {fileID: 4463657494305407263, guid: c00cd279673156d48afdf71942bc832c, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[5].eventMapTile
-      value: 
-      objectReference: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[5].eventToSpawn
-      value: 
-      objectReference: {fileID: 114454609238557304, guid: 9bea9768685718f43856017ed97cc670, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[6].eventMapTile
-      value: 
-      objectReference: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[6].eventToSpawn
-      value: 
-      objectReference: {fileID: 3772610250572434524, guid: e1cc1f4bddda500429cd08e3122abbf9, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[7].eventMapTile
-      value: 
-      objectReference: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[7].eventToSpawn
-      value: 
-      objectReference: {fileID: 5775609093941070977, guid: 7eaa3cb6cdd96a54eafd1541b459c259, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[8].eventMapTile
-      value: 
-      objectReference: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[8].eventToSpawn
-      value: 
-      objectReference: {fileID: 3772610250572434524, guid: e1cc1f4bddda500429cd08e3122abbf9, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[0].chanceToSpawn
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[1].chanceToSpawn
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[2].chanceToSpawn
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[3].chanceToSpawn
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[4].chanceToSpawn
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[5].chanceToSpawn
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[6].chanceToSpawn
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[7].chanceToSpawn
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[8].chanceToSpawn
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: objectTilesList.Array.data[4].waveToStartSpawning
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: objectTilesList.Array.data[5].waveToStartSpawning
-      value: 11
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -959,10 +823,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1892163461463820708, guid: dbbf6082152c5564dbbc08e8df9c8782, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1892163461463820709, guid: dbbf6082152c5564dbbc08e8df9c8782, type: 3}
-      propertyPath: allowMinimapRotation
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
