@@ -345,7 +345,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 1
 --- !u!65 &9007796981090360850
 BoxCollider:
@@ -388,7 +388,7 @@ MonoBehaviour:
   type: 12
   <EnemyRB>k__BackingField: {fileID: 9007796981090360851}
   data: {fileID: 11400000, guid: 9555d83a1fa265449934144ad2834f17, type: 2}
-  <Wave>k__BackingField: 0
+  <Difficulty>k__BackingField: 0
   enemyEffects: {fileID: 0}
   damageFactor: 1
   speedFactor: 1

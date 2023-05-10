@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
+using UnityEngine.InputSystem;
 
 public class LevelCanvasManager : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class LevelCanvasManager : MonoBehaviour
     public GameObject instantiatedToolTip;
 
     public bool overMenu = false;
+
+    public GameObject mapUI;
+
     public static LevelCanvasManager Instance { get; private set; }
 
     private void Awake()
@@ -237,5 +241,25 @@ public class LevelCanvasManager : MonoBehaviour
     public void DisableBossHealthBar()
     {
         bossHealthObj.SetActive(false);
+    }
+
+    public void ToggleMap(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            if (!mapUI.activeSelf && GameManager.Instance.currentSelection == CurrentSelection.Playing)
+            {
+                mapUI.SetActive(true);
+            }
+            else
+            {
+                CloseMap();
+            }
+        }
+    }
+
+    public void CloseMap()
+    {
+        mapUI.SetActive(false);
     }
 }

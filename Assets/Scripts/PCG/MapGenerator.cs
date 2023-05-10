@@ -64,14 +64,15 @@ public class MapGenerator : MonoBehaviour
 
     private void Awake()
     {
-        if (!player)
-        {
-            player = LevelManager.Instance.player;
-        }
+        
     }
 
     private void Start()
     {
+        if (!player)
+        {
+            player = LevelManager.Instance.player;
+        }
         GenerateTiles();
         // GameObject tileInstance = Instantiate(emptyTile, new Vector3(0.0f,0.01f,0.0f), Quaternion.identity, objectTilesContainer);
         // EventTile tile = new EventTile(tileInstance, true);
@@ -232,7 +233,7 @@ public class MapGenerator : MonoBehaviour
         EventTile tile = new EventTile();
         if (tileType != null && !EventIsNearOtherEvents(pos))
         {
-            GameObject tileInstance = Instantiate(tileType.eventToSpawn, pos + new Vector3(0.0f,0.01f,0.0f), Quaternion.identity, eventTilesContainer);
+            GameObject tileInstance = Instantiate(tileType.eventToSpawn, pos + new Vector3(0.0f,1.51f,0.0f), Quaternion.identity, eventTilesContainer);
             tile = new EventTile(tileInstance, tileType.eventMapTile);
         }
         // activeEventTiles.Add(pos, tile);

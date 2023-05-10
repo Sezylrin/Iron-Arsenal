@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum CurrentSelection
+public enum CurrentSelection
 {
     Playing,
     Paused,
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public int BGMVolume = 100;
     
     private LevelManager levelManager;
-    private CurrentSelection currentSelection = CurrentSelection.Playing;
+    public CurrentSelection currentSelection = CurrentSelection.Playing;
 
     private void Awake()
     {
@@ -82,6 +82,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlayGame()
+    {
+        currentSelection = CurrentSelection.Playing;
+        Loader.Load(SceneState.Game);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void PauseGame()
     {
         Time.timeScale = 0;
@@ -100,14 +111,17 @@ public class GameManager : MonoBehaviour
 
     public void HandleDisplaySettings()
     {
+        settingsMenu.SetActive(false);
         currentSelection = CurrentSelection.Settings;
-        settingsMenu.SetActive(true);
         pauseMenu.SetActive(false);
+        settingsMenu.SetActive(true);
     }
 
     public void HandleQuit()
     {
-
+        pauseMenu.SetActive(false);
+        Loader.Load(SceneState.MainMenu);
+        DestroyImmediate(this);
     }
 
     public void IncreaseSFX()
@@ -189,9 +203,13 @@ public class GameManager : MonoBehaviour
 
     public void HandleExitSettings()
     {
-        currentSelection = CurrentSelection.Paused;
+        Scene currentScene = SceneManager.GetActiveScene();
         settingsMenu.SetActive(false);
-        pauseMenu.SetActive(true);
+        if (currentScene.name == SceneState.Game.ToString())
+        {
+            currentSelection = CurrentSelection.Paused;
+            pauseMenu.SetActive(true);
+        }
     }
 
     public void HandleDeath()
