@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using System;
+using System.Collections;
 using UnityEngine.InputSystem;
 
 public class LevelCanvasManager : MonoBehaviour
@@ -25,6 +25,10 @@ public class LevelCanvasManager : MonoBehaviour
     [SerializeField] private GameObject sentryContainerPrefab;
     [SerializeField] private GameObject sentriesContent;
     [SerializeField] private LayerMask layer;
+
+    [Header("Timer")]
+    [SerializeField] private GameObject timer;
+    [SerializeField] private TMP_Text timerTxt;
 
     [Header("Menus")]
     [SerializeField] private GameObject augmentMenu;
@@ -262,4 +266,29 @@ public class LevelCanvasManager : MonoBehaviour
     {
         mapUI.SetActive(false);
     }
+
+    public void StartTimer(int seconds)
+    {
+        timer.SetActive(true);
+        StartCoroutine(CountdownCoroutine(seconds));
+    }
+
+    private IEnumerator CountdownCoroutine(int seconds)
+    {
+        while (seconds > 0)
+        {
+            UpdateTimer(seconds);
+            yield return new WaitForSeconds(1);
+            seconds--;
+        }
+
+        UpdateTimer(0);
+        timer.SetActive(false);
+    }
+
+    private void UpdateTimer(int secondsRemaining)
+    {
+        timerTxt.text = secondsRemaining.ToString();
+    }
+
 }
