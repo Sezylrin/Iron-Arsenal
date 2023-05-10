@@ -32,7 +32,7 @@ public class MapGenerator : MonoBehaviour
     // public GameObject emptyTile;
     // public ObjectTiles objectTiles;
 
-    [SerializeField, Header("For testing, should auto grab player if LevelManager in scene")] private GameObject player;
+    [Header("For testing, should auto grab player if LevelManager in scene")] public GameObject player;
     [Header("Containers: Drag the corresponding siblings into these fields if empty")]
     public Transform groundTilesContainer;
     public Transform eventTilesContainer;
@@ -59,7 +59,7 @@ public class MapGenerator : MonoBehaviour
 
     private Dictionary<Vector3, GroundTile> allGroundTiles = new Dictionary<Vector3, GroundTile>();
     private Dictionary<Vector3, GroundTile> activeGroundTiles = new Dictionary<Vector3, GroundTile>();
-    private Dictionary<Vector3, EventTile> allEventTiles = new Dictionary<Vector3, EventTile>();
+    public Dictionary<Vector3, EventTile> allEventTiles = new Dictionary<Vector3, EventTile>();
     // private Dictionary<Vector3, EventTile> activeEventTiles = new Dictionary<Vector3, EventTile>();
 
     private void Awake()
@@ -100,6 +100,19 @@ public class MapGenerator : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EventTile radar = Radar(spawnableEventList[0]);
+            if (radar == null)
+            {
+                Debug.Log("None found");
+            }
+            else
+            {
+                Debug.Log(radar.tileObject.transform.position);
+                Debug.Log(radar.tileObject.name);
+            }
+        }
         if (!PlayerHasMoved()) return;
         GenerateTiles();
     }
@@ -267,7 +280,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private class EventTile
+    public class EventTile
     {
         public bool isEmpty;
         public GameObject tileObject;
@@ -325,4 +338,26 @@ public class MapGenerator : MonoBehaviour
 
         return false;
     }
+
+    private EventTile Radar(SpawnableEvent eventToSearchFor)
+    {
+        Vector3 maxStartPos = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+        Vector3 closestEventPos = maxStartPos;
+        // int total = 0;
+        foreach (var tile in allEventTiles)
+        {
+            if (tile.Value.isEmpty) continue;
+            if (!tile.Value.tileObject) continue;
+            if (tile.Value.tileObject.name == eventToSearchFor.eventToSpawn.name + "(Clone)")
+                // total++;
+                if (DistFromPlayer(tile.Key) < DistFromPlayer(closestEventPos))
+                    closestEventPos = tile.Key;
+        }
+
+        // Debug.Log(total);
+        // Debug.Log(closestEventPos);
+        return (closestEventPos != maxStartPos) ? allEventTiles[closestEventPos] : null;
+    }
+
+    private float DistFromPlayer(Vector3 pos) => Vector3.Distance(pos, player.transform.position);
 }
