@@ -16,3 +16,6 @@ MonoBehaviour:
   augName: Lifesteal
   description: Doing damage to enemies now slightly replenishes your health
   augmentType: 24
+  xenoriumCost: 300
+  novaciteCost: 50
+  voidStoneCost: 100

@@ -49,6 +49,6 @@ MonoBehaviour:
   ProjectilePF: {fileID: 305608694543129271, guid: dc14465a1f1f1174c8c8619b097526b4, type: 3}
   mousePos: {x: 0, y: 0, z: 0}
   data: {fileID: 11400000, guid: 602a4e8fd4bc43d4682952bac3918b9b, type: 2}
-  delay: 0.25
+  delay: 0.75
   activeAugments: 
   cannonMat: {fileID: 2100000, guid: 76b59087d4ce7504e9bf95dd6b4891b6, type: 2}

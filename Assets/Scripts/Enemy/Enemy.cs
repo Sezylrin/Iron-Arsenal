@@ -91,6 +91,7 @@ public abstract class Enemy : MonoBehaviour
             damage *= 1.2f;
         float finalDamage = damage * damageFactor;
         CurrentHealth -= finalDamage;
+        NumberManager.Instance.SpawnText(transform.position, finalDamage.ToString(), 1, Color.white);
         if (enemyEffects.isLifeSteal)
         {
             baseFunctions.RecoverHealth(finalDamage * 0.05f);

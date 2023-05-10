@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbef564ee5eb0f24a89f90190d7fb462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Rocket Engine
+  name: Rocket Componenet
   requiredMaterials:
     novaciteAmount: 0
     voidstoneAmount: 0

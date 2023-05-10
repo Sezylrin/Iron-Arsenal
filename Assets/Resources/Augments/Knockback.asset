@@ -16,3 +16,6 @@ MonoBehaviour:
   augName: Knockback
   description: All projectiles knock enemies back
   augmentType: 3
+  xenoriumCost: 300
+  novaciteCost: 50
+  voidStoneCost: 100

@@ -28,6 +28,7 @@ public class Chest : Event
         LevelManager.Instance.GainNovacite((int)Random.Range(100, 201));
         LevelManager.Instance.GainVoidStone((int)Random.Range(100, 201));
         LevelManager.Instance.SpawnAugmentChoice();
+        LevelManager.Instance.SpawnAttributeChoice();
         base.End();
     }
 }

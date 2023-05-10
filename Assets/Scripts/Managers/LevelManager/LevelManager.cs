@@ -66,12 +66,17 @@ public class LevelManager : MonoBehaviour
         if (currentState == State.Normal && Input.GetKeyDown(KeyCode.B))
         {
             currentState = State.Building;
+            GameManager.Instance.PauseGame();
+            
         }
         else if (Input.GetKeyDown(KeyCode.B))
         {
             currentState = State.Normal;
+            GameManager.Instance.ResumeGame();
+            LevelCanvasManager.Instance.CloseBuildMenu();
+            LevelCanvasManager.Instance.CloseRemoveSentryBtn();
         }
-
+        
         if (!AugmentManager.Instance.selectingAugment && Input.GetKeyDown(KeyCode.P)) {
             SpawnAugmentChoice();
         }

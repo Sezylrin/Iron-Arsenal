@@ -17,5 +17,5 @@ MonoBehaviour:
   upgradeName: Physical
   description: Increase physical damage by
   xenoriumCost: 200
-  novaciteCost: 200
-  voidStoneCost: 200
+  novaciteCost: 100
+  voidStoneCost: 25

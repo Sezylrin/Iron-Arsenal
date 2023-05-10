@@ -95,11 +95,13 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        currentSelection = CurrentSelection.Paused;
         Time.timeScale = 0;
     }
 
     public void ResumeGame()
     {
+        currentSelection = CurrentSelection.Playing;
         Time.timeScale = 1;
     }
 

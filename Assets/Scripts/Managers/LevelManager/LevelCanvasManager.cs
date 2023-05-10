@@ -52,6 +52,8 @@ public class LevelCanvasManager : MonoBehaviour
 
     public GameObject mapUI;
 
+    private SentrySocket socket;
+
     public static LevelCanvasManager Instance { get; private set; }
 
     private void Awake()
@@ -101,25 +103,28 @@ public class LevelCanvasManager : MonoBehaviour
             Vector3 MousePos = MousePosition.MouseToWorld3D(Camera.main, -1);
             MousePos.y = transform.position.y;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            
             if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, layer))
             {
                 if (hit.collider.CompareTag("Socket"))
                 {
-                    SentrySocket socket = hit.collider.GetComponent<SentrySocket>();
+                    socket = hit.collider.GetComponent<SentrySocket>();
+                    AssignSocket(socket);
                     if (!socket.HasSentry())
                     {
-                        AssignSocket(socket);
-                        OpenBuildMenu();
-                        foreach (SentrySocket sockets in allSockets)
-                        {
-                            if (!sockets.HasSentry())
-                            {
-                                sockets.meshRender.material = mats[0];
-                            }
-                        }
-                        socket.meshRender.material = mats[1];
+                        OpenBuildMenu();                        
                     }
+                    else
+                    {
+                        ShowRemoveSentryBtn();
+                    }
+                    foreach (SentrySocket sockets in allSockets)
+                    {
+                        if (!sockets.HasSentry())
+                        {
+                            sockets.meshRender.material = mats[0];
+                        }
+                    }
+                    socket.meshRender.material = mats[1];
                 }
             }
             else if (!overMenu)
@@ -131,9 +136,10 @@ public class LevelCanvasManager : MonoBehaviour
                         socket.meshRender.material = mats[0];
                     }
                 }
+                socket = null;
                 AssignSocket(null);
                 CloseBuildMenu();
-
+                CloseRemoveSentryBtn();
             }
         }
     }
@@ -155,23 +161,27 @@ public class LevelCanvasManager : MonoBehaviour
 
     public void ShowAugmentChoices(List<AugmentData> augments)
     {
+        GameManager.Instance.PauseGame();
         augmentMenu.GetComponent<AugmentMenu>().CreateAugmentChoices(augments);
         augmentMenu.SetActive(true);
     }
 
     public void ShowAttributeChoices()
     {
+        GameManager.Instance.PauseGame();
         attributeMenu.GetComponent<AttributeMenu>().SetAttributes();
         attributeMenu.SetActive(true);
     }
 
     public void RemoveAugmentChoices()
     {
+        GameManager.Instance.ResumeGame();
         augmentMenu.SetActive(false);
     }
 
     public void RemoveAttributeChoices()
     {
+        GameManager.Instance.ResumeGame();
         attributeMenu.SetActive(false);
     }
 
@@ -191,6 +201,7 @@ public class LevelCanvasManager : MonoBehaviour
 
     public void OpenShopMenu(ShopManager shopManager)
     {
+        GameManager.Instance.PauseGame();
         shopMenu.SetActive(true);
         resourceContainer.SetActive(false);
         shopMenu.GetComponent<ShopMenu>().OpenMenu(shopManager);
@@ -198,6 +209,7 @@ public class LevelCanvasManager : MonoBehaviour
 
     public void CloseShopMenu()
     {
+        GameManager.Instance.ResumeGame();
         shopMenu.SetActive(false);
         resourceContainer.SetActive(true);
     }
@@ -306,6 +318,8 @@ public class LevelCanvasManager : MonoBehaviour
 
     public void RemoveSentry()
     {
+        if (socket)
+            socket.DeleteTurret();
         CloseRemoveSentryBtn();
     }
 }

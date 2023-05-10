@@ -201,7 +201,7 @@ public class Cannon : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.F2))
         {
             UnlockRandomCannon();
         }

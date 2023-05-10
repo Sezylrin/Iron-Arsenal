@@ -12,6 +12,8 @@ public class BasicCamera : MonoBehaviour
     private Vector3 pos;
     void Start()
     {
+        if (!player)
+            player = GameObject.FindWithTag("Player").transform;
         pos = transform.position;
         Rotation = transform.eulerAngles;
         cam = GetComponent<Camera>();

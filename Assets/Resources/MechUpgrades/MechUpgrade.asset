@@ -17,5 +17,5 @@ MonoBehaviour:
   upgradeName: Mech Upgrade
   description: Add another platform to your mech allowing you to place more sentries
   xenoriumCost: 500
-  novaciteCost: 500
-  voidStoneCost: 500
+  novaciteCost: 300
+  voidStoneCost: 150

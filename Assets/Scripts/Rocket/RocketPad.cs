@@ -83,7 +83,7 @@ public class RocketPad : MonoBehaviour
     private void UpdateTextGUI()
     {
         // TODO: Replace this with their sprite instead
-        text.text = "Rocket Parts Collected: " + RocketManager.rocketPartsCollected + "/" + RocketManager.requiredRocketPartsToEscape + "\n" +
+        text.text = "Rocket Components Collected: " + RocketManager.rocketPartsCollected + "/" + RocketManager.requiredRocketPartsToEscape + "\n" +
                     "Press 'E' to launch";
     }
 }
