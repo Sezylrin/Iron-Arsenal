@@ -82,6 +82,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlayGame()
+    {
+        currentSelection = CurrentSelection.Playing;
+        Loader.Load(SceneState.Game);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void PauseGame()
     {
         Time.timeScale = 0;
@@ -100,14 +111,15 @@ public class GameManager : MonoBehaviour
 
     public void HandleDisplaySettings()
     {
+        settingsMenu.SetActive(false);
         currentSelection = CurrentSelection.Settings;
-        settingsMenu.SetActive(true);
         pauseMenu.SetActive(false);
+        settingsMenu.SetActive(true);
     }
 
     public void HandleQuit()
     {
-
+        Loader.Load(SceneState.MainMenu);
     }
 
     public void IncreaseSFX()
@@ -189,9 +201,13 @@ public class GameManager : MonoBehaviour
 
     public void HandleExitSettings()
     {
-        currentSelection = CurrentSelection.Paused;
+        Scene currentScene = SceneManager.GetActiveScene();
         settingsMenu.SetActive(false);
-        pauseMenu.SetActive(true);
+        if (currentScene.name == SceneState.Game.ToString())
+        {
+            currentSelection = CurrentSelection.Paused;
+            pauseMenu.SetActive(true);
+        }
     }
 
     public void HandleDeath()
