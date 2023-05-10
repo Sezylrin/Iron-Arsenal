@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/BuidlScenes/Defeat.unity
     guid: ec9e7ea6eb8119940bbd3fdab4a45ed4
   - enabled: 1
-    path: Assets/Scenes/Polish.unity
-    guid: 2a8a4d2aeb41f7140bf884f51643893d
+    path: Assets/Scenes/BuidlScenes/Game.unity
+    guid: 84d7fe3fb64b77c4b977592181f71fcb
   m_configObjects: {}
