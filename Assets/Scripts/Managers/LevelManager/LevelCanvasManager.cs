@@ -26,6 +26,9 @@ public class LevelCanvasManager : MonoBehaviour
     [SerializeField] private GameObject sentriesContent;
     [SerializeField] private LayerMask layer;
 
+    [Header("Remove Sentry Button")]
+    [SerializeField] private GameObject removeSentryBtn;
+
     [Header("Timer")]
     [SerializeField] private GameObject timer;
     [SerializeField] private TMP_Text timerTxt;
@@ -291,4 +294,18 @@ public class LevelCanvasManager : MonoBehaviour
         timerTxt.text = secondsRemaining.ToString();
     }
 
+    public void ShowRemoveSentryBtn()
+    {
+        removeSentryBtn.SetActive(true);
+    }
+
+    public void CloseRemoveSentryBtn()
+    {
+        removeSentryBtn.SetActive(false);
+    }
+
+    public void RemoveSentry()
+    {
+        CloseRemoveSentryBtn();
+    }
 }
