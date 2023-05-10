@@ -24,6 +24,7 @@ public class RocketPart : MonoBehaviour
     [SerializeField] private PlayerInput controls;
     private Canvas canvas;
     private Transform cameraTransform;
+    public int eventTime;
 
     private void Awake()
     {
@@ -60,7 +61,11 @@ public class RocketPart : MonoBehaviour
         if (!canvas.enabled) return;
         //TODO: Add an error response
         if(LevelManager.Instance.PurchaseItemIfPossible(requiredMaterials.xenoriumAmount, requiredMaterials.novaciteAmount, requiredMaterials.voidstoneAmount))
+        {
             StartCoroutine(CraftPart());
+            EnemyManager.Instance.StartRushWithTimer(eventTime);
+            EnemyManager.Instance.SpawnEnemy(true);
+        }
     }
 
     private void OnInteractUp(InputAction.CallbackContext context)

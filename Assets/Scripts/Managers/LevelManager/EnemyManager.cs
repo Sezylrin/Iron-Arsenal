@@ -103,6 +103,7 @@ public class EnemyManager : MonoBehaviour
         IsBossAlive = false;
         IsRushActive = false;
 
+        PreviousBoss = -1;
         debugStartRush = false;
         debugEndRush = false;
         debugStartBossRush = false;
