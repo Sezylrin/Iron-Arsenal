@@ -16,6 +16,7 @@ TagManager:
   - Socket
   - NotSocket
   - Wall
+  - MiningArea
   layers:
   - Default
   - TransparentFX
