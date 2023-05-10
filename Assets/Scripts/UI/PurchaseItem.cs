@@ -122,15 +122,17 @@ public class PurchaseItem : MonoBehaviour
                     {
                         case UpgradeType.health:
                             LevelManager.Instance.playerFunctions.ShopRecoverHealth();
+                            shopMenu.PurchaseItem();
                             break;
                         case UpgradeType.drill:
                             LevelManager.Instance.playerMining.UpgradeMining();
+                            shopMenu.PurchaseItem();
                             break;
                         case UpgradeType.baseSize:
                             LevelManager.Instance.playerFunctions.UpgradeBase();
+                            shopMenu.PurchaseBaseUpgrade();
                             break;
                     }
-                    shopMenu.PurchaseItem();
                 }
                 break;
             case TabType.attributeUpgrades:

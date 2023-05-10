@@ -25,6 +25,7 @@ public class ShopMenu : MonoBehaviour
     [SerializeField] private Button closeBtn;
 
     private ShopManager shopManager;
+    private int baseUpgradesPurchased = 0;
 
     private void Update()
     {
@@ -104,8 +105,15 @@ public class ShopMenu : MonoBehaviour
                 item1.SetActive(true);
                 item2.GetComponent<PurchaseItem>().SetMechUpgrade(shopManager.mechUpgrades[1], TabType.mechUpgrades, this);
                 item2.SetActive(true);
-                item3.GetComponent<PurchaseItem>().SetMechUpgrade(shopManager.mechUpgrades[2], TabType.mechUpgrades, this);
-                item3.SetActive(true);
+                if (baseUpgradesPurchased < 3)
+                {
+                    item3.GetComponent<PurchaseItem>().SetMechUpgrade(shopManager.mechUpgrades[2], TabType.mechUpgrades, this);
+                    item3.SetActive(true);
+                }
+                else
+                {
+                    item3.SetActive(false);
+                }
                 break;
             case TabType.attributeUpgrades:
                 DisplayAttributePurchases();
@@ -158,6 +166,13 @@ public class ShopMenu : MonoBehaviour
             sentryPurchaseTab.SetActive(false);
         }
 
+        DisplayItems(FindCurrentTab());
+    }
+
+    public void PurchaseBaseUpgrade()
+    {
+        baseUpgradesPurchased++;
+        UpdateResources();
         DisplayItems(FindCurrentTab());
     }
 
