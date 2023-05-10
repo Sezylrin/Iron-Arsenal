@@ -1120,7 +1120,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   projectilePF: {fileID: 0}
-  meshes: []
+  meshes:
+  - {fileID: 7283558286033870367}
+  - {fileID: 7283558284641405249}
 --- !u!198 &1376580980
 ParticleSystem:
   m_ObjectHideFlags: 0

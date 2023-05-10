@@ -428,18 +428,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2465016980605634143, guid: d982d76a9603e85499fa4429e4705203, type: 3}
-      propertyPath: meshes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2465016980605634143, guid: d982d76a9603e85499fa4429e4705203, type: 3}
-      propertyPath: meshes.Array.data[0]
-      value: 
-      objectReference: {fileID: 660726226}
-    - target: {fileID: 2465016980605634143, guid: d982d76a9603e85499fa4429e4705203, type: 3}
-      propertyPath: meshes.Array.data[1]
-      value: 
-      objectReference: {fileID: 1300636324}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -542,11 +530,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 719d6e11a431f014abf9f537a2036450, type: 3}
---- !u!23 &660726226 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7283558286033870367, guid: d982d76a9603e85499fa4429e4705203, type: 3}
-  m_PrefabInstance: {fileID: 190739820}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &692410921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -838,11 +821,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Asset: {fileID: -944628639613478452, guid: 90131fcc131d9454fbf4c0af145b7e74, type: 3}
   m_ActionId: f6c91717-63ab-4dbe-914f-b18f8c7e2db3
---- !u!23 &1300636324 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7283558284641405249, guid: d982d76a9603e85499fa4429e4705203, type: 3}
-  m_PrefabInstance: {fileID: 190739820}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1560597033
 MonoBehaviour:
   m_ObjectHideFlags: 0
