@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MiningOutpostType
+{
+    Novacite,
+    Voidstone
+};
+
 public abstract class Event : MonoBehaviour
 {
     [field: SerializeField] public int LengthInSeconds { get; set; }
     [field: SerializeField] public bool Condition { get; set; }
     [field: SerializeField] public bool CanStart { get; set; }
     [field: SerializeField] public bool Active { get; set; }
+    public GameObject trigger;
 
     protected virtual void Init()
     {
@@ -19,6 +26,7 @@ public abstract class Event : MonoBehaviour
     {
         if (!EventManager.Instance.EventActive)
         {
+            trigger.SetActive(false);
             EventManager.Instance.EventActive = true;
             Active = true;
             StartCoroutine(BeginTimer());
