@@ -119,7 +119,9 @@ public class GameManager : MonoBehaviour
 
     public void HandleQuit()
     {
+        pauseMenu.SetActive(false);
         Loader.Load(SceneState.MainMenu);
+        DestroyImmediate(this);
     }
 
     public void IncreaseSFX()
