@@ -19,16 +19,20 @@ public class SentryManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    private void Start()
+    {
         string sentryPath = "Sentries/";
         foreach (SentryName sentryName in Enum.GetValues(typeof(SentryName)))
         {
-
             SentryData sentryData = Resources.Load<SentryData>(sentryPath + sentryName);
-
             if (sentryData != null)
             {
                 if (!sentryData.Sentry.Equals(SentryName.BasicSentry))
+                {
                     LockedSentries.Add(sentryData);
+                }
                 else
                     AddSentry(sentryData);
             }
