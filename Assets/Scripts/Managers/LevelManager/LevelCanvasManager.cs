@@ -247,7 +247,7 @@ public class LevelCanvasManager : MonoBehaviour
     {
         if (ctx.started)
         {
-            if (!mapUI.activeSelf)
+            if (!mapUI.activeSelf && GameManager.Instance.currentSelection == CurrentSelection.Playing)
             {
                 mapUI.SetActive(true);
             }
@@ -263,4 +263,3 @@ public class LevelCanvasManager : MonoBehaviour
         mapUI.SetActive(false);
     }
 }
-
