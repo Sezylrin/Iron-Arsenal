@@ -23,6 +23,7 @@ public class Simulation : Event
         playerCannonScript.UnlockRandomCannon();
         playerCannonScript.SetSwitchingEnabledState(false);
         EnemyManager.Instance.StartRushWithTimer(LengthInSeconds);
+        LevelCanvasManager.Instance.StartTimer(LengthInSeconds);
         base.Begin();
     }
 

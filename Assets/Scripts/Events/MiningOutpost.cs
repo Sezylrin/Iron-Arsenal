@@ -9,6 +9,7 @@ public class MiningOutpost : Event
     public GameObject miningArea;
 
     // Start is called before the first frame update
+
     void Start()
     {
         Init();

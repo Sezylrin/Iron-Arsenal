@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -817,7 +817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
       propertyPath: spawnableEventList.Array.size
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
       propertyPath: objectTilesList.Array.data[3].objectToSpawn
@@ -860,6 +860,38 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4463657494305407263, guid: c00cd279673156d48afdf71942bc832c, type: 3}
     - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[5].eventMapTile
+      value: 
+      objectReference: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[5].eventToSpawn
+      value: 
+      objectReference: {fileID: 114454609238557304, guid: 9bea9768685718f43856017ed97cc670, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[6].eventMapTile
+      value: 
+      objectReference: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[6].eventToSpawn
+      value: 
+      objectReference: {fileID: 3772610250572434524, guid: e1cc1f4bddda500429cd08e3122abbf9, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[7].eventMapTile
+      value: 
+      objectReference: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[7].eventToSpawn
+      value: 
+      objectReference: {fileID: 5775609093941070977, guid: 7eaa3cb6cdd96a54eafd1541b459c259, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[8].eventMapTile
+      value: 
+      objectReference: {fileID: 1395071268080779039, guid: 36595727476c97d4fbad7da7f776f4f0, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[8].eventToSpawn
+      value: 
+      objectReference: {fileID: 3772610250572434524, guid: e1cc1f4bddda500429cd08e3122abbf9, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
       propertyPath: spawnableEventList.Array.data[0].chanceToSpawn
       value: 20
       objectReference: {fileID: 0}
@@ -877,6 +909,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
       propertyPath: spawnableEventList.Array.data[4].chanceToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[5].chanceToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[6].chanceToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[7].chanceToSpawn
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[8].chanceToSpawn
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}

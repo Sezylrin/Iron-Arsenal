@@ -91,6 +91,7 @@ public abstract class Event : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && CanStart && !EventManager.Instance.EventActive)
         {
             Begin();
+            canvas.enabled = false;
         }
     }
 

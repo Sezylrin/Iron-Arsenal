@@ -33,7 +33,6 @@ public class APoison : AugmentBase
             lastHit = other;
             //Debug.Log((int)(5 * (baseProjectile.modifiedDamage / baseValue)));
             EnemyEffects effect = other.gameObject.GetComponent<EnemyEffects>();
-            Debug.Log("running");
             if (isPoison)
             {
                 effect.poisonTick += 5;
