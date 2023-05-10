@@ -121,7 +121,7 @@ public class MapGenerator : MonoBehaviour
     private void GenerateTiles()
     {
         var newActiveGroundTiles = new Dictionary<Vector3, GroundTile>();
-        var newActiveObjectTiles = new Dictionary<Vector3, GroundTile>();
+        // var newActiveObjectTiles = new Dictionary<Vector3, GroundTile>();
         float cTime = Time.realtimeSinceStartup;
 
         for (int x = -groundRadius; x <= groundRadius; x++)
@@ -231,7 +231,7 @@ public class MapGenerator : MonoBehaviour
     {
         SpawnableEvent tileType = RandomEventTile();
         EventTile tile = new EventTile();
-        if (tileType != null && !EventIsNearOtherEvents(pos))
+        if (tileType != null && !EventIsNearOtherEvents(pos) && pos != Vector3.zero)
         {
             GameObject tileInstance = Instantiate(tileType.eventToSpawn, pos + new Vector3(0.0f,1.51f,0.0f), Quaternion.identity, eventTilesContainer);
             tile = new EventTile(tileInstance, tileType.eventMapTile);
