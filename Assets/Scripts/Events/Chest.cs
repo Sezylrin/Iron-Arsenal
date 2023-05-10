@@ -17,9 +17,9 @@ public class Chest : Event
 
     protected override void Begin()
     {
-        Condition = true;
         EnemyManager.Instance.StartRushWithTimer(LengthInSeconds);
         base.Begin();
+        Condition = true;
     }
 
     protected override void End()
