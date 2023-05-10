@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum CurrentSelection
+public enum CurrentSelection
 {
     Playing,
     Paused,
@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
     public int SFXVolume = 100;
     public int BGMVolume = 100;
     
-    public LevelManager levelManager;
-    private CurrentSelection currentSelection = CurrentSelection.Playing;
+    private LevelManager levelManager;
+    public CurrentSelection currentSelection = CurrentSelection.Playing;
 
     private void Awake()
     {
