@@ -91,7 +91,8 @@ public class EnemyEffects : MonoBehaviour
     public void FreezeTarget()
     {
         float freezeRate = frozenAmount / maxFreeze;
-        hostenemy.speedFactor = 1 - freezeRate;
+        if (!hostenemy.type.Equals(EnemyType.Boss))
+            hostenemy.speedFactor = 1 - freezeRate;
         if (freezeRate > 0.5f && isFreezeDeath)
         {
             if (hostenemy.CurrentHealth <= hostenemy.MaxHealth * 0.2)

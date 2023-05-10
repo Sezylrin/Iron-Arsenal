@@ -41,6 +41,8 @@ public class Cannon : MonoBehaviour
     private Pooling pooledFlames = new Pooling();       // 6 - Flamethrower
     public List<Pooling> pools = new List<Pooling>();
 
+    public MeshRenderer[] meshes;
+
     void Awake()
     {
         projectilesParent = GameObject.Find("Projectiles Parent").transform;
@@ -70,6 +72,8 @@ public class Cannon : MonoBehaviour
         lockedCannonProjectiles.Add(4);
         lockedCannonProjectiles.Add(5);
         lockedCannonProjectiles.Add(6);
+
+        UpdateMaterial();
 
     }
 
@@ -144,12 +148,14 @@ public class Cannon : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 activeCannonProjectile = 0;
+                UpdateMaterial();
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 if (unlockedCannonProjectiles.Count >= 2)
                 {
                     activeCannonProjectile = 1;
+                    UpdateMaterial();
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -157,6 +163,7 @@ public class Cannon : MonoBehaviour
                 if (unlockedCannonProjectiles.Count >= 3)
                 {
                     activeCannonProjectile = 2;
+                    UpdateMaterial();
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -164,6 +171,7 @@ public class Cannon : MonoBehaviour
                 if (unlockedCannonProjectiles.Count >= 4)
                 {
                     activeCannonProjectile = 3;
+                    UpdateMaterial();
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha5))
@@ -171,6 +179,7 @@ public class Cannon : MonoBehaviour
                 if (unlockedCannonProjectiles.Count >= 5)
                 {
                     activeCannonProjectile = 4;
+                    UpdateMaterial();
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha6))
@@ -178,6 +187,7 @@ public class Cannon : MonoBehaviour
                 if (unlockedCannonProjectiles.Count >= 6)
                 {
                     activeCannonProjectile = 5;
+                    UpdateMaterial();
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha7))
@@ -185,6 +195,7 @@ public class Cannon : MonoBehaviour
                 if (unlockedCannonProjectiles.Count >= 7)
                 {
                     activeCannonProjectile = 6;
+                    UpdateMaterial();
                 }
             }
         }
@@ -193,6 +204,16 @@ public class Cannon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
         {
             UnlockRandomCannon();
+        }
+    }
+
+    public void UpdateMaterial()
+    {
+        CannonProjectile temp = cannonProjectileArray[unlockedCannonProjectiles[activeCannonProjectile]].GetComponent<CannonProjectile>();
+        foreach (MeshRenderer mesh in meshes)
+        {
+            if (temp.cannonMat)
+                mesh.material = temp.cannonMat;
         }
     }
 

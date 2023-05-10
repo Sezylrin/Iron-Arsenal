@@ -494,7 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 615bc8c378d16474a9688ed155868487, type: 2}
-  angleSpeed: 0
+  angleSpeed: 3
 --- !u!114 &2021412381409304333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1120,6 +1120,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   projectilePF: {fileID: 0}
+  meshes: []
 --- !u!198 &1376580980
 ParticleSystem:
   m_ObjectHideFlags: 0
