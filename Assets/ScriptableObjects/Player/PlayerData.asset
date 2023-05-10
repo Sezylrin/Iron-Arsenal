@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d9735f22c037448881d60633a77b7e, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: 15
   moveAccel: 5
   moveDecel: 10
   accelPower: 1
