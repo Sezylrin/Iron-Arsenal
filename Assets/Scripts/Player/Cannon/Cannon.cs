@@ -243,6 +243,7 @@ public class Cannon : MonoBehaviour
             }
 
             activeCannonProjectile = unlockedCannonProjectiles.Count - 1;
+            UpdateMaterial();
         }
     }
 

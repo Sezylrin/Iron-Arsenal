@@ -117,9 +117,6 @@ public class RocketPart : MonoBehaviour
     {
         // TODO: Replace this with their sprite instead
         text.text = name + "\n " +
-                    "Novacite: " + LevelManager.Instance.buildManager.novacite + "/" + requiredMaterials.novaciteAmount + "\n" +
-                    "Voidstone: " + LevelManager.Instance.buildManager.voidStone + "/" + requiredMaterials.voidstoneAmount + "\n" +
-                    "Xenorium: " + LevelManager.Instance.buildManager.xenorium + "/" + requiredMaterials.xenoriumAmount + "\n" +
-                    "Hold 'E' to craft";
+                    "Press 'E' to craft";
     }
 }

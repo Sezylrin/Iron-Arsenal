@@ -38,7 +38,13 @@ public class MiningOutpost : Event
     {
         if (other.gameObject.tag == "Player")
         {
-            Condition = true;
+            CanStart = false;
+            canvas.enabled = false;
+
+            if (Active)
+            {
+                EndCondition = true;
+            }
         }
     }
 

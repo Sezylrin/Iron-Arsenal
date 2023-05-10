@@ -103,7 +103,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 25, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &114454609238557304
 GameObject:
@@ -141,7 +141,7 @@ Transform:
   - {fileID: 114454608414645445}
   - {fileID: 6428543366932037455}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &114454609238557309
 MeshFilter:
@@ -255,12 +255,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Rocket Engine
   requiredMaterials:
-    novaciteAmount: 500
-    voidstoneAmount: 500
-    xenoriumAmount: 500
+    novaciteAmount: 0
+    voidstoneAmount: 0
+    xenoriumAmount: 0
   timeToCraft: 1
   text: {fileID: 6428543365430509951}
   controls: {fileID: 0}
+  eventTime: 15
 --- !u!1 &6428543365430509949
 GameObject:
   m_ObjectHideFlags: 0

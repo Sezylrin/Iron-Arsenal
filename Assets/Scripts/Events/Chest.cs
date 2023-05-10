@@ -19,7 +19,7 @@ public class Chest : Event
     {
         EnemyManager.Instance.StartRushWithTimer(LengthInSeconds);
         base.Begin();
-        Condition = true;
+        EndCondition = true;
     }
 
     protected override void End()

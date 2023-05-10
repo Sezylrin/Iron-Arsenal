@@ -11,15 +11,19 @@ public enum MiningOutpostType
 public abstract class Event : MonoBehaviour
 {
     [field: SerializeField] public int LengthInSeconds { get; set; }
-    [field: SerializeField] public bool Condition { get; set; }
+    [field: SerializeField] public bool EndCondition { get; set; }
     [field: SerializeField] public bool CanStart { get; set; }
     [field: SerializeField] public bool Active { get; set; }
     public GameObject trigger;
+    public Canvas canvas;
+
+    private Transform cameraTransform;
 
     protected virtual void Init()
     {
         CanStart = false;
-        Condition = false;
+        EndCondition = false;
+        cameraTransform = GameObject.Find("Main Camera").transform;
     }
 
     protected virtual void Begin()
@@ -41,7 +45,7 @@ public abstract class Event : MonoBehaviour
         }
         else
         {
-            while (!Condition)
+            while (!EndCondition)
             {
                 yield return new WaitForSeconds(0.5f);
             }
@@ -61,6 +65,15 @@ public abstract class Event : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             CanStart = true;
+            canvas.enabled = true;
+        }
+    }
+
+    protected virtual void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            OrientCanvasToCamera();
         }
     }
 
@@ -69,6 +82,7 @@ public abstract class Event : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             CanStart = false;
+            canvas.enabled = false;
         }
     }
 
@@ -78,5 +92,13 @@ public abstract class Event : MonoBehaviour
         {
             Begin();
         }
+    }
+
+    private void OrientCanvasToCamera()
+    {
+        if (!canvas.enabled) return;
+        canvas.transform.rotation = Quaternion.LookRotation(transform.position - new Vector3(transform.position.x,
+                                                                                            cameraTransform.position.y,
+                                                                                            cameraTransform.position.z));
     }
 }

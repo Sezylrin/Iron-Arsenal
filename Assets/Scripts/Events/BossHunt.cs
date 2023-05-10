@@ -18,7 +18,7 @@ public class BossHunt : Event
         {
             if (!EnemyManager.Instance.IsBossAlive)
             {
-                Condition = true;
+                EndCondition = true;
             }
         }
     }
