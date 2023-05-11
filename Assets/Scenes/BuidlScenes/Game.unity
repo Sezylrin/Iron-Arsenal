@@ -213,6 +213,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5061726209140956514, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061726209140956518, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: xenorium
+      value: 
+      objectReference: {fileID: 1797207400}
+    - target: {fileID: 5061726209140956518, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: voidStone
+      value: 
+      objectReference: {fileID: 1346831366}
     - target: {fileID: 6144228585720403987, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -222,7 +234,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1766765862, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+    - {fileID: 471922853, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2077974866772937158, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       insertIndex: -1
@@ -431,7 +445,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: 10
+  m_Depth: 11
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 32
@@ -920,6 +934,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Asset: {fileID: -944628639613478452, guid: 90131fcc131d9454fbf4c0af145b7e74, type: 3}
   m_ActionId: f6c91717-63ab-4dbe-914f-b18f8c7e2db3
+--- !u!114 &1346831366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1715962027616533437, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+  m_PrefabInstance: {fileID: 123295384}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1466649644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,6 +1061,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1754483955, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
   m_PrefabInstance: {fileID: 123295384}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1797207400 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1715962027100417619, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+  m_PrefabInstance: {fileID: 123295384}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1830001050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1092,6 +1128,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[2].eventMapTile
+      value: 
+      objectReference: {fileID: 1527707717304764863, guid: 21019ad5de5d5824ab43d040a4118d14, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: spawnableEventList.Array.data[3].eventMapTile
+      value: 
+      objectReference: {fileID: 6373782544702899194, guid: 70a67b0fc3e4cd04c9ce7ef231473e9e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1168,7 +1212,7 @@ Camera:
   m_Depth: 10
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4256
+    m_Bits: 4224
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

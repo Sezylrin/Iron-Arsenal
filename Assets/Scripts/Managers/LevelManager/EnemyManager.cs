@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager Instance { get; private set; }
 
     [field: Space(15)]
-    [field: SerializeField, ReadOnly] private int NumberOfAliveEnemies { get; set; }
+    [field: SerializeField] private int NumberOfAliveEnemies { get; set; }
     [field: SerializeField] public int EnemyBaseHealth { get; private set; }
     [field: SerializeField] public int Difficulty { get; private set; }
     [field: Space(15)]
@@ -19,32 +19,32 @@ public class EnemyManager : MonoBehaviour
     [field: Space(15)]
     [field: SerializeField, Range(0, 100)] private float BasicEnemyChance { get; set; }
     [field: SerializeField] private int BECDecreaseOnDifficultyChange { get; set; }
-    [field: SerializeField, ReadOnly] private float SpecialEnemyChance { get; set; }
+    [field: SerializeField] private float SpecialEnemyChance { get; set; }
     [field: Space(15)]
-    [field: SerializeField, ReadOnly] private bool IsRushActive { get; set; }
-    [field: SerializeField, ReadOnly] private int NumberOfSpawnsThisRush { get; set; }
+    [field: SerializeField] private bool IsRushActive { get; set; }
+    [field: SerializeField] private int NumberOfSpawnsThisRush { get; set; }
     public bool debugStartRush;
     public bool debugEndRush;
     [field: Space(15)]
-    [field: SerializeField, ReadOnly] public bool IsBossAlive { get; private set; }
-    [field: SerializeField, ReadOnly] public GameObject ActiveBoss { get; private set; }
-    [field: SerializeField, ReadOnly] private int PreviousBoss { get; set; }
-    [field: SerializeField, ReadOnly] private bool IsBossRushActive { get; set; }
-    [field: SerializeField, ReadOnly] private int BossesDefeatedInRush { get; set; }
+    [field: SerializeField] public bool IsBossAlive { get; private set; }
+    [field: SerializeField] public GameObject ActiveBoss { get; private set; }
+    [field: SerializeField] private int PreviousBoss { get; set; }
+    [field: SerializeField] private bool IsBossRushActive { get; set; }
+    [field: SerializeField] private int BossesDefeatedInRush { get; set; }
     public bool debugStartBossRush;
     [field: Space(15)]
-    [field: SerializeField, ReadOnly] private float NormalSpawnDelay { get; set; }
+    [field: SerializeField] private float NormalSpawnDelay { get; set; }
     [field: SerializeField] private float NSDMinimum { get; set; }
     [field: SerializeField] private float NSDMultiplier { get; set; }
     [field: SerializeField] private float NSDExponential { get; set; }
     [field: Space(15)]
-    [field: SerializeField, ReadOnly] private float RushSpawnDelay { get; set; }
+    [field: SerializeField] private float RushSpawnDelay { get; set; }
     [field: SerializeField] private float RSDMinimum { get; set; }
     [field: SerializeField] private float RSDMultiplier { get; set; }
     [field: SerializeField] private float RSDSpawnsModifier { get; set; }
     [field: SerializeField] private float RSDExponential { get; set; }
     [field: Space(15)]
-    [field: SerializeField, ReadOnly] private int AllowedEnemies { get; set; }
+    [field: SerializeField] private int AllowedEnemies { get; set; }
     [field: SerializeField] private int AEMin { get; set; }
     [field: SerializeField] private int AEDifficultyModifier { get; set; }
     [field: SerializeField] private int AERushBonus { get; set; }
