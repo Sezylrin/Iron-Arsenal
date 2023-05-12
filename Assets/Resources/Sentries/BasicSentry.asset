@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3d418b8a1155f54c8dde7db693ca303, type: 3}
+  m_Name: BasicSentry
+  m_EditorClassIdentifier: 
+  Sentry: 0
+  Attribute: 0
+  Colour: {fileID: 2100000, guid: 333f3a40f2b0f8b4197e43c308af8278, type: 2}
+  SentryIcon: {fileID: 21300000, guid: 0faccb5f1c66e4943b55050d11390614, type: 3}
+  sentryName: Basic Sentry
+  description: Basic Sentry with average damage
+  range: 15
+  losAngle: 180
+  fireRate: 2
+  projectileData: {fileID: 11400000, guid: 6c52d32082c5e194ba655e540ba523ca, type: 2}
+  mat: {fileID: 2100000, guid: aa66fb0b6f3db2840bb5d61eea4babde, type: 2}
+  xenoriumCost: 75
+  novaciteCost: 0
+  voidStoneCost: 0
+  buildable: 1
+  defaultAugment: 
+  unlockXenoriumCost: 0
+  unlockNovaciteCost: 0
+  unlockVoidStoneCost: 0

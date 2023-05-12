@@ -3,21 +3,34 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - UISelection
+  - UIDeletion
+  - Ore
+  - FriendlyProjectile
+  - Enemy
+  - CenterPoint
+  - BulletSpawnPoint
+  - TurretButton
+  - EnemyProjectile
+  - Socket
+  - NotSocket
+  - Wall
+  - MiningArea
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Enemy
+  - Build
+  - BuildUI
+  - Socket
+  - MapTile
+  - projectile
   - 
   - 
   - 
@@ -40,4 +53,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 1
+    uniqueID: 568844833
     locked: 0

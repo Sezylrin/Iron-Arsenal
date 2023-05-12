@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0c1a37897c8fc488cc495512be05d3, type: 3}
+  m_Name: RapidShot
+  m_EditorClassIdentifier: 
+  damageFactor: 0.25
+  bulletSpeed: 20
+  pierce: 0
+  maxDistance: 30
+  colliderSize: {x: 0, y: 0, z: 0}
+  invisible: 0
+  projectileMesh: {fileID: 0}
+  mat: {fileID: 2100000, guid: f7e8a2214808b0b40b1fd62f4f51b0ac, type: 2}
