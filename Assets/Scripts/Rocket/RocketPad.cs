@@ -2,82 +2,57 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class RocketPad : MonoBehaviour
+public class RocketPad : Event
 {
-    private bool readyToActivate;
-    [SerializeField] private PlayerInput controls;
-    [SerializeField] private TextMeshProUGUI text;
-    private Canvas canvas;
-    private Transform cameraTransform;
-
-    private void Awake()
-    {
-        canvas = GetComponentInChildren<Canvas>();
-        cameraTransform = FindObjectOfType<Camera>().transform;
-    }
+    [field: SerializeField] private int RushLength { get; set; }
+    [field: SerializeField] private TextMeshProUGUI text { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        controls = LevelManager.Instance.player.GetComponent<PlayerInput>();
-        var interactAction = controls.currentActionMap.FindAction("Interact");
-        interactAction.started += OnInteract;
+        Init();
         UpdateTextGUI();
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckBeginInput();
 
+        if (Active)
+        {
+            if (!EnemyManager.Instance.IsBossAlive)
+            {
+                EndCondition = true;
+            }
+        }
     }
 
-    private void OnDestroy()
+    protected override void CheckBeginInput()
     {
-        if (!controls) return;
-        var interactAction = controls.currentActionMap.FindAction("Interact");
-        interactAction.performed -= OnInteract;
+        if (Input.GetKeyDown(KeyCode.E) && CanStart && !EventManager.Instance.EventActive && RocketManager.canBuildEscapeRocket())
+        {
+            Begin();
+            canvas.enabled = false;
+        }
     }
 
-    private void OnInteract(InputAction.CallbackContext context)
+    protected override void Begin()
     {
-        if (!readyToActivate) return;
+        EnemyManager.Instance.StartRushWithTimer(RushLength);
         EnemyManager.Instance.StartBossRush();
-        //Debug.Log("Congrats!");
-        
+        base.Begin();
     }
 
-    private void OnTriggerEnter(Collider col)
+    protected override void End()
     {
-        if (!col.CompareTag("Player")) return;
-        canvas.enabled = true;
-        if (!RocketManager.canBuildEscapeRocket()) return;
-        readyToActivate = true;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        OrientCanvasToCamera();
-        UpdateTextGUI();
-    }
-
-    private void OnTriggerExit(Collider col)
-    {
-        if (!col.CompareTag("Player")) return;
-        canvas.enabled = false;
-        if (!RocketManager.canBuildEscapeRocket()) return;
-        readyToActivate = false;
-    }
-
-    private void OrientCanvasToCamera()
-    {
-        if (!canvas.enabled) return;
-        canvas.transform.rotation = Quaternion.LookRotation(transform.position - new Vector3(transform.position.x,
-                                                                                            cameraTransform.position.y,
-                                                                                            cameraTransform.position.z));
+        RocketManager.collectRocketPart();
+        base.End();
     }
 
     private void UpdateTextGUI()
@@ -86,4 +61,14 @@ public class RocketPad : MonoBehaviour
         text.text = "Rocket Components Collected: " + RocketManager.rocketPartsCollected + "/" + RocketManager.requiredRocketPartsToEscape + "\n" +
                     "Press 'E' to launch";
     }
+
+    protected override void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            OrientCanvasToCamera();
+            UpdateTextGUI();
+        }
+    }
 }
+

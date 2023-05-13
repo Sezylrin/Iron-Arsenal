@@ -253,15 +253,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbef564ee5eb0f24a89f90190d7fb462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Rocket Componenet
-  requiredMaterials:
-    novaciteAmount: 0
-    voidstoneAmount: 0
-    xenoriumAmount: 0
-  timeToCraft: 1
-  text: {fileID: 6428543365430509951}
-  controls: {fileID: 0}
-  eventTime: 15
+  <LengthInSeconds>k__BackingField: 0
+  <EndCondition>k__BackingField: 0
+  <CanStart>k__BackingField: 0
+  <Active>k__BackingField: 0
+  trigger: {fileID: 114454608414645442}
+  canvas: {fileID: 6428543366932037442}
+  <RushLength>k__BackingField: 15
 --- !u!1 &6428543365430509949
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +326,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'Rocket Part
+
+    Press ''E'' to collect
+
+    (Warning: Spawns a boss)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

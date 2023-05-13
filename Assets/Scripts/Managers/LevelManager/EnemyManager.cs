@@ -104,7 +104,7 @@ public class EnemyManager : MonoBehaviour
 
         IsBossAlive = false;
         IsRushActive = false;
-        IsBossRushActive = true;
+        IsBossRushActive = false;
 
         PreviousBoss = -1;
         debugStartRush = false;
@@ -237,7 +237,7 @@ public class EnemyManager : MonoBehaviour
                 bossesSpawned++;
             }
 
-            if (BossesDefeatedInRush == bossPrefabs.Length)
+            if (BossesDefeatedInRush >= bossPrefabs.Length)
             {
                 break;
             }

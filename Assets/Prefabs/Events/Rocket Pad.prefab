@@ -385,8 +385,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6588a275b2918440b5c585eefbd8f62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 0}
-  text: {fileID: 3772610249966449137}
+  <LengthInSeconds>k__BackingField: 0
+  <EndCondition>k__BackingField: 0
+  <CanStart>k__BackingField: 0
+  <Active>k__BackingField: 0
+  trigger: {fileID: 3772610250611900681}
+  canvas: {fileID: 3772610249065574377}
+  <RushLength>k__BackingField: 30
+  <text>k__BackingField: {fileID: 3772610249966449137}
 --- !u!1 &3772610250611900681
 GameObject:
   m_ObjectHideFlags: 0
