@@ -390,12 +390,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42c61619de62af4db71061939691a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <LengthInSeconds>k__BackingField: 30
+  <LengthInSeconds>k__BackingField: 0
   <EndCondition>k__BackingField: 0
   <CanStart>k__BackingField: 0
   <Active>k__BackingField: 0
   trigger: {fileID: 4463657492390453157}
   canvas: {fileID: 6786345728125815510}
+  <RushLength>k__BackingField: 30
 --- !u!1 &4874110570811885865
 GameObject:
   m_ObjectHideFlags: 0
