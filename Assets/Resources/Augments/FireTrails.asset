@@ -16,3 +16,6 @@ MonoBehaviour:
   augName: Fire Trails
   description: Enemies set on fire now create fire trails
   augmentType: 6
+  xenoriumCost: 300
+  novaciteCost: 50
+  voidStoneCost: 100

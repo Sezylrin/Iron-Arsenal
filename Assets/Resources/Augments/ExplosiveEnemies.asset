@@ -16,3 +16,6 @@ MonoBehaviour:
   augName: Explosive Enemies
   description: Enemies explode on death
   augmentType: 4
+  xenoriumCost: 300
+  novaciteCost: 50
+  voidStoneCost: 100

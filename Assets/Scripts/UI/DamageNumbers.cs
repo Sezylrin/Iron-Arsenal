@@ -25,7 +25,7 @@ public class DamageNumbers : MonoBehaviour
         tmpText.color = color;
         transform.localScale *= scale;
         transform.LookAt((transform.position - cam.position) + transform.position, Vector3.up);
-        Invoke("PoolSelf", 3f);
+        Invoke("PoolSelf", 0.5f);
     }
 
     public void PoolSelf()

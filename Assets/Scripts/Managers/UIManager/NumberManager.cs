@@ -48,7 +48,7 @@ public class NumberManager : MonoBehaviour
         }
         DamageNumbers tempNum = tmpText.GetComponent<DamageNumbers>();
         tempNum.Init(pos, number, scale, cam, color);
-        tmpText.transform.parent = transform;
+        tmpText.transform.SetParent(transform);
     }
 
     public void PoolObj(GameObject obj)

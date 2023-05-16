@@ -25,6 +25,7 @@ public class ShopMenu : MonoBehaviour
     [SerializeField] private Button closeBtn;
 
     private ShopManager shopManager;
+    private int baseUpgradesPurchased = 0;
 
     private void Update()
     {
@@ -104,16 +105,18 @@ public class ShopMenu : MonoBehaviour
                 item1.SetActive(true);
                 item2.GetComponent<PurchaseItem>().SetMechUpgrade(shopManager.mechUpgrades[1], TabType.mechUpgrades, this);
                 item2.SetActive(true);
-                item3.GetComponent<PurchaseItem>().SetMechUpgrade(shopManager.mechUpgrades[2], TabType.mechUpgrades, this);
-                item3.SetActive(true);
+                if (baseUpgradesPurchased < 3)
+                {
+                    item3.GetComponent<PurchaseItem>().SetMechUpgrade(shopManager.mechUpgrades[2], TabType.mechUpgrades, this);
+                    item3.SetActive(true);
+                }
+                else
+                {
+                    item3.SetActive(false);
+                }
                 break;
             case TabType.attributeUpgrades:
-                item1.GetComponent<PurchaseItem>().SetAttributeUpgrade(shopManager.attributeUpgrades[0], TabType.attributeUpgrades, this);
-                item1.SetActive(true);
-                item2.GetComponent<PurchaseItem>().SetAttributeUpgrade(shopManager.attributeUpgrades[1], TabType.attributeUpgrades, this);
-                item2.SetActive(true);
-                item3.GetComponent<PurchaseItem>().SetAttributeUpgrade(shopManager.attributeUpgrades[2], TabType.attributeUpgrades, this);
-                item3.SetActive(true);
+                DisplayAttributePurchases();
                 break;
             case TabType.augmentPurchases:
                 DisplayAugmentPurchases();
@@ -122,6 +125,20 @@ public class ShopMenu : MonoBehaviour
                 DisplaySentryPurchases();
                 break;
         }
+    }
+
+    public void PurchaseAttribute(AttributeUpgradeData attrUpgrade)
+    {
+        shopManager.PurchaseAttributeUpgrade(attrUpgrade);
+        UpdateResources();
+
+        if (shopManager.GetAttributeUpgradesRemaining().Count == 0)
+        {
+            HandleClickTab(mechUpgradesTab.GetComponent<Tab>());
+            attributeUpgradesTab.SetActive(false);
+        }
+
+        DisplayItems(FindCurrentTab());
     }
 
     public void PurchaseAugment(AugmentData augment)
@@ -152,6 +169,13 @@ public class ShopMenu : MonoBehaviour
         DisplayItems(FindCurrentTab());
     }
 
+    public void PurchaseBaseUpgrade()
+    {
+        baseUpgradesPurchased++;
+        UpdateResources();
+        DisplayItems(FindCurrentTab());
+    }
+
     public void PurchaseItem()
     {
         UpdateResources();
@@ -163,6 +187,28 @@ public class ShopMenu : MonoBehaviour
         xenorium.text = LevelManager.Instance.GetXenorium().ToString();
         novacite.text = LevelManager.Instance.GetNovacite().ToString();
         voidStone.text = LevelManager.Instance.GetVoidStone().ToString();
+    }
+
+    private void DisplayAttributePurchases()
+    {
+        List<AttributeUpgradeData> purchasableAttributes = shopManager.GetAttributeUpgradesRemaining();
+        item1.GetComponent<PurchaseItem>().SetAttributeUpgrade(purchasableAttributes[0], TabType.attributeUpgrades, this);
+
+        if (purchasableAttributes.Count == 1)
+        {
+            item2.SetActive(false);
+            item3.SetActive(false);
+        }
+        else if (purchasableAttributes.Count == 2)
+        {
+            item2.GetComponent<PurchaseItem>().SetAttributeUpgrade(purchasableAttributes[1], TabType.attributeUpgrades, this);
+            item3.SetActive(false);
+        }
+        else if (purchasableAttributes.Count == 3)
+        {
+            item2.GetComponent<PurchaseItem>().SetAttributeUpgrade(purchasableAttributes[1], TabType.attributeUpgrades, this);
+            item3.GetComponent<PurchaseItem>().SetAttributeUpgrade(purchasableAttributes[2], TabType.attributeUpgrades, this);
+        }
     }
 
     private void DisplayAugmentPurchases()

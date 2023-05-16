@@ -13,6 +13,7 @@ public class Cannon : MonoBehaviour
     public GameObject[] cannonProjectileArray;
     public List<int> lockedCannonProjectiles;
     public List<int> unlockedCannonProjectiles;
+    public bool switchingEnabled;
 
     [field: Header("Flamethrower")]
     public CannonProjectileData flameData;
@@ -30,7 +31,7 @@ public class Cannon : MonoBehaviour
     private Transform projectilesParent;
     private bool mouseHeldDown = false;
     private bool firing = false;
-        
+
     private Pooling pooledBullets = new Pooling();      // 0 - Default (Bullets)
     private Pooling pooledShotguns = new Pooling();     // 1 - Shotgun
     private Pooling pooledRapidFires = new Pooling();   // 2 - Rapid Fire
@@ -38,7 +39,9 @@ public class Cannon : MonoBehaviour
     private Pooling pooledPoisonShots = new Pooling();  // 4 - Poison (DoT) Gun
     private Pooling pooledRockets = new Pooling();      // 5 - Rocket Launcher
     private Pooling pooledFlames = new Pooling();       // 6 - Flamethrower
-    public List<Pooling> pools = new List<Pooling>();   
+    public List<Pooling> pools = new List<Pooling>();
+
+    public MeshRenderer[] meshes;
 
     void Awake()
     {
@@ -52,6 +55,7 @@ public class Cannon : MonoBehaviour
         activeCannonProjectile = 0;
         flamethrowerIndex = -1;
         ableToShoot = true;
+        switchingEnabled = true;
 
         pools.Add(pooledBullets);
         pools.Add(pooledShotguns);
@@ -62,14 +66,15 @@ public class Cannon : MonoBehaviour
         pools.Add(pooledFlames);
 
         unlockedCannonProjectiles.Add(0);
-        unlockedCannonProjectiles.Add(1);
-        unlockedCannonProjectiles.Add(2);
-        unlockedCannonProjectiles.Add(3);
-        unlockedCannonProjectiles.Add(4);
-        unlockedCannonProjectiles.Add(5);
+        lockedCannonProjectiles.Add(1);
+        lockedCannonProjectiles.Add(2);
+        lockedCannonProjectiles.Add(3);
+        lockedCannonProjectiles.Add(4);
+        lockedCannonProjectiles.Add(5);
         lockedCannonProjectiles.Add(6);
-        UnlockRandomCannon();
-        
+
+        UpdateMaterial();
+
     }
 
     // Update is called once per frame
@@ -85,9 +90,9 @@ public class Cannon : MonoBehaviour
         worldPosition.y = rotatePoint.transform.position.y;
         rotatePoint.LookAt(worldPosition, Vector3.down);
 
-        
 
-        if (Input.GetKeyDown(KeyCode.Mouse0)) 
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             mouseHeldDown = true;
         }
@@ -97,7 +102,7 @@ public class Cannon : MonoBehaviour
             mouseHeldDown = false;
         }
 
-        if (activeCannonProjectile == flamethrowerIndex && mouseHeldDown && !firing) 
+        if (activeCannonProjectile == flamethrowerIndex && mouseHeldDown && !firing)
         {
             firing = true;
             flamethrower.Play();
@@ -138,56 +143,77 @@ public class Cannon : MonoBehaviour
             cannonProjectileScript.Init();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (switchingEnabled)
         {
-            activeCannonProjectile = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (unlockedCannonProjectiles.Count >= 2)
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                activeCannonProjectile = 1;
+                activeCannonProjectile = 0;
+                UpdateMaterial();
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (unlockedCannonProjectiles.Count >= 3)
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                activeCannonProjectile = 2;
+                if (unlockedCannonProjectiles.Count >= 2)
+                {
+                    activeCannonProjectile = 1;
+                    UpdateMaterial();
+                }
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            if (unlockedCannonProjectiles.Count >= 4)
+            if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                activeCannonProjectile = 3;
+                if (unlockedCannonProjectiles.Count >= 3)
+                {
+                    activeCannonProjectile = 2;
+                    UpdateMaterial();
+                }
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            if (unlockedCannonProjectiles.Count >= 5)
+            if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                activeCannonProjectile = 4;
+                if (unlockedCannonProjectiles.Count >= 4)
+                {
+                    activeCannonProjectile = 3;
+                    UpdateMaterial();
+                }
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            if (unlockedCannonProjectiles.Count >= 6)
+            if (Input.GetKeyDown(KeyCode.Alpha5))
             {
-                activeCannonProjectile = 5;
+                if (unlockedCannonProjectiles.Count >= 5)
+                {
+                    activeCannonProjectile = 4;
+                    UpdateMaterial();
+                }
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            if (unlockedCannonProjectiles.Count >= 7)
+            if (Input.GetKeyDown(KeyCode.Alpha6))
             {
-                activeCannonProjectile = 6;
+                if (unlockedCannonProjectiles.Count >= 6)
+                {
+                    activeCannonProjectile = 5;
+                    UpdateMaterial();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                if (unlockedCannonProjectiles.Count >= 7)
+                {
+                    activeCannonProjectile = 6;
+                    UpdateMaterial();
+                }
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
+
+        if (Input.GetKeyDown(KeyCode.F2))
         {
             UnlockRandomCannon();
+        }
+    }
+
+    public void UpdateMaterial()
+    {
+        CannonProjectile temp = cannonProjectileArray[unlockedCannonProjectiles[activeCannonProjectile]].GetComponent<CannonProjectile>();
+        foreach (MeshRenderer mesh in meshes)
+        {
+            if (temp.cannonMat)
+                mesh.material = temp.cannonMat;
         }
     }
 
@@ -202,7 +228,7 @@ public class Cannon : MonoBehaviour
         obj.SetActive(false);
         pools[projectileType].AddObj(obj);
     }
-    
+
     public void UnlockRandomCannon()
     {
         if (lockedCannonProjectiles.Count > 0)
@@ -215,6 +241,14 @@ public class Cannon : MonoBehaviour
             {
                 flamethrowerIndex = unlockedCannonProjectiles.Count - 1;
             }
-        } 
+
+            activeCannonProjectile = unlockedCannonProjectiles.Count - 1;
+            UpdateMaterial();
+        }
+    }
+
+    public void SetSwitchingEnabledState(bool state)
+    {
+        switchingEnabled = state;
     }
 }

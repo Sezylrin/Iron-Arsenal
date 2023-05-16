@@ -51,4 +51,5 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: d7c49dd1181052d4b94110af35a29b88, type: 2}
   delay: 0.1
   activeAugments: 
+  cannonMat: {fileID: 2100000, guid: a5ef15a970d8f764bb3a3bb4ed54c496, type: 2}
   bullet: {fileID: 1123763005487040603, guid: c4a3e8f0491194748ada7e901664ded6, type: 3}

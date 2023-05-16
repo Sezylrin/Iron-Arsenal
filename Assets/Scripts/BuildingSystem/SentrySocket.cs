@@ -58,6 +58,7 @@ public class SentrySocket : MonoBehaviour
         Sentry sentryComp = sentry.GetComponent<Sentry>();
         sentryComp.DestroyPool();
         AugmentManager.Instance.activeSentries.Remove(sentryComp);
+        sentryComp.RefundCost();
         Destroy(sentry);
         LevelCanvasManager.Instance.CloseBuildMenu();
     }

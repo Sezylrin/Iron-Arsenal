@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeType: 1
   icon: {fileID: 21300000, guid: 7f35d3d4cace9fe409ae2c613ae807f7, type: 3}
-  upgradeName: Drill Upgrade
-  description: Increase the mining speed of your drill
-  xenoriumCost: 100
-  novaciteCost: 100
-  voidStoneCost: 100
+  upgradeName: Outpost Effiency
+  description: Increase the output at outposts
+  xenoriumCost: 0
+  novaciteCost: 50
+  voidStoneCost: 50

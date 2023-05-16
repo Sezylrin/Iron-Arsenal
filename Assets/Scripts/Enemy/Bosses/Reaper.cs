@@ -203,7 +203,7 @@ public class Reaper : Boss
             TakeDamage(StatsManager.Instance.healthFactor * tempBase.collisionFactor);
             tempBase.TakeDamage(DamageOnCollide);
             EnemyRB.AddForce(Vector3.Normalize(new Vector3(transform.position.x - col.transform.position.x, 0, transform.position.z - col.transform.position.z)) * RamLaunchMultiplier, ForceMode.Impulse);
-            Heal(DamageOnCollide / 10);
+            Heal(DamageOnCollide / 2);
         }
     }
 }

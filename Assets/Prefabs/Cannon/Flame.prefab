@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!114 &8978151193261778469
 MonoBehaviour:
@@ -51,3 +51,4 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 419dfac8c034f8d41a6c282f164e0467, type: 2}
   delay: 0.05
   activeAugments: 05000000
+  cannonMat: {fileID: 2100000, guid: 146f14e19cb9b824eb7833c65375c9cf, type: 2}

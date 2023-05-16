@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-//using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
 public class Breeder : Boss
@@ -43,7 +42,7 @@ public class Breeder : Boss
         {
             canSpawnBasic = false;
             Manager.SpawnEnemy(false, 0, spawnPoint1.position);
-            StartCoroutine(DelayBasicSpawn(5));
+            StartCoroutine(DelayBasicSpawn(8));
         }
 
         if (ActivePattern == 0)
@@ -65,7 +64,7 @@ public class Breeder : Boss
 
     protected override void Pattern3() //Exploder Rush
     {
-        StartCoroutine(PatternLength(10));
+        StartCoroutine(PatternLength(14));
 
         if (canSpawnSpecial)
         {
@@ -74,13 +73,13 @@ public class Breeder : Boss
             Manager.SpawnEnemy(false, 2, spawnPoint2.position);
             Manager.SpawnEnemy(false, 2, spawnPoint3.position);
 
-            StartCoroutine(DelaySpecialSpawn(5));
+            StartCoroutine(DelaySpecialSpawn(7));
         }
     }
 
     protected override void Pattern4() //Splitter Rush
     {
-        StartCoroutine(PatternLength(10));
+        StartCoroutine(PatternLength(14));
 
         if (canSpawnSpecial)
         {
@@ -89,13 +88,13 @@ public class Breeder : Boss
             Manager.SpawnEnemy(false, 7, spawnPoint2.position);
             Manager.SpawnEnemy(false, 7, spawnPoint3.position);
 
-            StartCoroutine(DelaySpecialSpawn(5));
+            StartCoroutine(DelaySpecialSpawn(7));
         }
     }
 
     protected override void Pattern5() //Dodger Rush
     {
-        StartCoroutine(PatternLength(10));
+        StartCoroutine(PatternLength(14));
 
         if (canSpawnSpecial)
         {
@@ -104,13 +103,13 @@ public class Breeder : Boss
             Manager.SpawnEnemy(false, 6, spawnPoint2.position);
             Manager.SpawnEnemy(false, 6, spawnPoint3.position);
 
-            StartCoroutine(DelaySpecialSpawn(5));
+            StartCoroutine(DelaySpecialSpawn(7));
         }
     }
 
     protected override void Pattern6() //Random Rush
     {
-        StartCoroutine(PatternLength(10));
+        StartCoroutine(PatternLength(16));
 
         if (canSpawnSpecial)
         {
@@ -119,7 +118,7 @@ public class Breeder : Boss
             Manager.SpawnEnemy(false, spawnPoint2.position);
             Manager.SpawnEnemy(false, spawnPoint3.position);
             
-            StartCoroutine(DelaySpecialSpawn(5));
+            StartCoroutine(DelaySpecialSpawn(8));
         }
     }
 

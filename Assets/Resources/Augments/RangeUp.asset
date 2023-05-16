@@ -16,3 +16,6 @@ MonoBehaviour:
   augName: Range Up
   description: Your sentries have higher range
   augmentType: 18
+  xenoriumCost: 300
+  novaciteCost: 50
+  voidStoneCost: 100

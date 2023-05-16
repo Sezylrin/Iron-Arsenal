@@ -17,5 +17,5 @@ MonoBehaviour:
   upgradeName: Elemental
   description: 'Increases elemental damage by '
   xenoriumCost: 200
-  novaciteCost: 200
-  voidStoneCost: 200
+  novaciteCost: 100
+  voidStoneCost: 25
