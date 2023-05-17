@@ -233,7 +233,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1855059123989932641, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1556493140}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1855059123989932642, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 249045436}
   m_SourcePrefab: {fileID: 100100000, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
 --- !u!224 &125248752 stripped
 RectTransform:
@@ -245,6 +248,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1855059123989932642, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
   m_PrefabInstance: {fileID: 125248751}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &249045436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249045435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a649953bf029c4182cde004cef95b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerator: {fileID: 824777049}
+  sizeScale: {x: 100, y: 100}
+  startLocalPos: {x: -600, y: -500, z: 0}
+  buttonOffset: 150
+  maxButtonsInRow: 4
 --- !u!1001 &660501568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -498,7 +518,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapGenerator: {fileID: 824777049}
-  mapCanvas: {fileID: 249045435}
+  sizeScale: {x: 100, y: 100}
+  startLocalPos: {x: -600, y: -500, z: 0}
+  buttonOffset: 0
+  maxButtonsInRow: 5
 --- !u!4 &823628245
 Transform:
   m_ObjectHideFlags: 0

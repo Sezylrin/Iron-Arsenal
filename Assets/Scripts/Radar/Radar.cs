@@ -9,7 +9,11 @@ using UnityEngine.UI;
 public class Radar : MonoBehaviour
 {
     public MapGenerator mapGenerator;
-    public GameObject mapCanvas;
+    public Vector2 sizeScale = new Vector2(100, 100);
+    public Vector3 startLocalPos = new Vector3(-600, -500, 0);
+    public float buttonOffset = 150f;
+    public int maxButtonsInRow = 4;
+    // public GameObject mapCanvas;
     private List<MapGenerator.SpawnableEvent> spawnableEventsList;
     private Button button;
     private List<Button> buttonsList = new List<Button>();
@@ -45,25 +49,41 @@ public class Radar : MonoBehaviour
         Debug.Log(spawnableEventsList.Count);
         for (int i = 0; i < spawnableEventsList.Count; i++)
         {
-            GameObject buttonObject = TMP_DefaultControls.CreateButton(resources);
-            buttonObject.transform.SetParent(mapCanvas.transform, false);
-            RectTransform buttonRectTrans = buttonObject.GetComponent<RectTransform>();
-            buttonRectTrans.sizeDelta = new Vector2(100, 100);
-            buttonRectTrans.localPosition = new Vector3(-600 + 150 * i, -500, 0);
-            Destroy(buttonObject.transform.GetChild(0).gameObject);
-            button = buttonObject.GetComponent<Button>();
-            // listeners.Add(() => Scan(spawnableEventsList[0]));
-            // button.onClick.AddListener(OnButton);
-            var i1 = i;
-            button.onClick.AddListener(() => Scan(spawnableEventsList[i1]));
-            buttonsList.Add(button);
+            CreateButton(i, resources);
         }
     }
 
-    public void OnButton()
+    private void CreateButton(int i, TMP_DefaultControls.Resources resources)
     {
-        Scan(spawnableEventsList[0]);
+        GameObject buttonObject = TMP_DefaultControls.CreateButton(resources);
+
+        buttonObject.transform.SetParent(gameObject.transform, false);
+        RectTransform buttonRectTrans = buttonObject.GetComponent<RectTransform>();
+        buttonRectTrans.sizeDelta = sizeScale;
+        if (i > maxButtonsInRow)
+        {
+            buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * i, -buttonOffset, 0);
+        }
+        else
+        {
+            buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * i, 0, 0);
+        }
+        // buttonRectTrans.localPosition = new Vector3(-600 + 150 * i, -500, 0);
+
+        Destroy(buttonObject.transform.GetChild(0).gameObject);
+
+        button = buttonObject.GetComponent<Button>();
+
+        if (spawnableEventsList[i].eventMapTile.GetComponent<SpriteRenderer>())
+        {
+            button.GetComponent<Image>().sprite = spawnableEventsList[i].eventMapTile.GetComponent<SpriteRenderer>().sprite;
+        }
+
+        button.onClick.AddListener(() => Scan(spawnableEventsList[i]));
+        buttonsList.Add(button);
     }
+
+    public void OnButton() => Scan(spawnableEventsList[0]);
 
     private MapGenerator.EventTile Scan(MapGenerator.SpawnableEvent eventToSearchFor)
     {
@@ -87,8 +107,5 @@ public class Radar : MonoBehaviour
 
     private float DistFromPlayer(Vector3 pos) => Vector3.Distance(pos, mapGenerator.player.transform.position);
 
-    private void OnDisable()
-    {
-        button.onClick.RemoveAllListeners();
-    }
+    private void OnDisable() => button.onClick.RemoveAllListeners();
 }
