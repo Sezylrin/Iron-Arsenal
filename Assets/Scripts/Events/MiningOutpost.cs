@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MiningOutpost : Event
@@ -9,6 +10,8 @@ public class MiningOutpost : Event
     public GameObject miningArea;
 
     private Mining miningScript;
+
+    [field: SerializeField] private TextMeshProUGUI text { get; set; }
 
     // Start is called before the first frame update
 
@@ -35,6 +38,7 @@ public class MiningOutpost : Event
     protected override void End()
     {
         miningArea.SetActive(false);
+        EnemyManager.Instance.StopRush();
         base.End();
     }
 
@@ -54,6 +58,7 @@ public class MiningOutpost : Event
 
     private IEnumerator Mine()
     {
+        text.text = "Stay inside the zone to keep mining";
         while (true)
         {
             yield return new WaitForSeconds(1);

@@ -98,8 +98,6 @@ public abstract class Enemy : MonoBehaviour
         }
         if (CurrentHealth <= 0)
         {
-            StopCoroutine(TakeDamageOverTime(0f));
-            
             OnDeath();
             if (enemyEffects.isExplode && !type.Equals(EnemyType.Exploder))
             {
@@ -117,25 +115,6 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void StartDamageOverTime(float damage)
-    {
-        if (gameObject.activeSelf)
-        {
-            StartCoroutine(TakeDamageOverTime(damage));
-        }
-    }
-
-    public IEnumerator TakeDamageOverTime(float damage)
-    {
-        int ticks = 0;
-        while (ticks < 5)
-        {
-            yield return new WaitForSeconds(1f);
-            TakeDamage(damage);
-            ticks++;
-        }
-    }
-
     protected virtual void OnDeath()
     {
         Manager.EnemyDeath();
@@ -143,52 +122,53 @@ public abstract class Enemy : MonoBehaviour
         {
             case EnemyType.Basic:
                 Manager.PoolEnemy(gameObject, 0);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(2, 7));
                 break;
             case EnemyType.Tank:
                 Manager.PoolEnemy(gameObject, 1);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Exploder:
                 Manager.PoolEnemy(gameObject, 2);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Digger:
                 Manager.PoolEnemy(gameObject, 3);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Charger:
                 Manager.PoolEnemy(gameObject, 4);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Shooter:
                 Manager.PoolEnemy(gameObject, 5);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Dodger:
                 Manager.PoolEnemy(gameObject, 6);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Splitter:
                 Manager.PoolEnemy(gameObject, 7);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Cloaker:
                 Manager.PoolEnemy(gameObject, 8);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Burster:
                 Manager.PoolEnemy(gameObject, 9);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Sprinter:
                 Manager.PoolEnemy(gameObject, 10);
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Boss:
                 Destroy(gameObject);
-                LevelManager.Instance.GainXenorium((int)Random.Range(200, 401));
-                LevelManager.Instance.GainNovacite((int)Random.Range(200, 401));
-                LevelManager.Instance.GainVoidStone((int)Random.Range(200, 401));
+                LevelManager.Instance.GainXenorium((int)Random.Range(50, 151));
+                LevelManager.Instance.GainNovacite((int)Random.Range(50, 151));
+                LevelManager.Instance.GainVoidStone((int)Random.Range(50, 151));
                 LevelManager.Instance.SpawnAugmentChoice();
                 break;
             default:
@@ -196,22 +176,6 @@ public abstract class Enemy : MonoBehaviour
                 break;
         }
         enemyEffects.fireTick = 0;
-    }
-
-    public virtual void StartSlow(float slowStrength)
-    {
-        if (gameObject.activeSelf)
-        {
-            StopCoroutine(SlowEnemy(slowStrength));
-            StartCoroutine(SlowEnemy(slowStrength));
-        }
-    }
-            
-    public virtual IEnumerator SlowEnemy(float slowStrength)
-    {
-        Speed = (data.speed * Mathf.Pow(1.005f, Difficulty - 1)) * slowStrength;
-        yield return new WaitForSeconds(5f);
-        Speed = data.speed * Mathf.Pow(1.005f, Difficulty - 1);
     }
 
     public void InitEnemyEffects(GameObject[] augmentPF)
