@@ -307,7 +307,7 @@ public class MapGenerator : MonoBehaviour
     }
 
     private bool PlayerHasMoved() => Mathf.Abs(XPlayerMove) >= tileOffset || Mathf.Abs(ZPlayerMove) >= tileOffset;
-    
+
     private bool EventIsNearOtherEvents (Vector3 pos)
     {
         for (int i = 1; i < minTilesBtwnEvents; i++)

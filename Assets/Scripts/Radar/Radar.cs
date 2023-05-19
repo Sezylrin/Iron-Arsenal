@@ -9,8 +9,9 @@ using UnityEngine.UI;
 public class Radar : MonoBehaviour
 {
     public MapGenerator mapGenerator;
-    public Vector2 sizeScale = new Vector2(100, 100);
-    public Vector3 startLocalPos = new Vector3(-600, -500, 0);
+    // public Vector2 sizeScale = new Vector2(100, 100);
+    public float sizeScale = 100f;
+    public Vector3 startLocalPos;
     public float buttonOffset = 150f;
     public int maxButtonsInRow = 4;
     // public GameObject mapCanvas;
@@ -21,6 +22,7 @@ public class Radar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (buttonOffset < sizeScale) Debug.LogWarning("Button Offset should be >= Size Scale or the buttons overlap");
         spawnableEventsList = mapGenerator.spawnableEventList;
         CreateButtons();
     }
@@ -46,7 +48,7 @@ public class Radar : MonoBehaviour
     private void CreateButtons()
     {
         TMP_DefaultControls.Resources resources = new TMP_DefaultControls.Resources();
-        Debug.Log(spawnableEventsList.Count);
+        startLocalPos = new Vector3(-(buttonOffset/2) * (maxButtonsInRow-1), 0, 0);
         for (int i = 0; i < spawnableEventsList.Count; i++)
         {
             CreateButton(i, resources);
@@ -59,14 +61,15 @@ public class Radar : MonoBehaviour
 
         buttonObject.transform.SetParent(gameObject.transform, false);
         RectTransform buttonRectTrans = buttonObject.GetComponent<RectTransform>();
-        buttonRectTrans.sizeDelta = sizeScale;
+        buttonRectTrans.sizeDelta = new Vector2(sizeScale, sizeScale);
         if (i < maxButtonsInRow)
         {
+            // buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * i, 0, 0);
             buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * i, 0, 0);
         }
         else
         {
-            buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * (i - maxButtonsInRow), -buttonOffset, 0);
+            buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * (i % maxButtonsInRow), buttonOffset * (Mathf.FloorToInt(i/maxButtonsInRow)), 0);
         }
         // buttonRectTrans.localPosition = new Vector3(-600 + 150 * i, -500, 0);
 
@@ -84,6 +87,11 @@ public class Radar : MonoBehaviour
     }
 
     public void OnButton() => Scan(spawnableEventsList[0]);
+
+    public void ToggleRadarMenu()
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
+    }
 
     private MapGenerator.EventTile Scan(MapGenerator.SpawnableEvent eventToSearchFor)
     {
