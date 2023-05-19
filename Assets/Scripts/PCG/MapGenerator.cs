@@ -307,31 +307,21 @@ public class MapGenerator : MonoBehaviour
     }
 
     private bool PlayerHasMoved() => Mathf.Abs(XPlayerMove) >= tileOffset || Mathf.Abs(ZPlayerMove) >= tileOffset;
-
+    
     private bool EventIsNearOtherEvents (Vector3 pos)
     {
-        for (int i = 1; i <= minTilesBtwnEvents; i++)
+        for (int i = 1; i < minTilesBtwnEvents; i++)
         {
-            for (int x = -1; x <= 1; x++)
+            for (int x = -i; x <= i; x++)
             {
-                for (int z = -1; z <= 1; z++)
+                for (int z = -i; z <= i; z++)
                 {
                     if (x == 0 && z == 0) continue;
-                    if (Mathf.Abs(x) != Mathf.Abs(z))
+                    if (Mathf.Abs(x) + Mathf.Abs(z) > i) continue;
+                    Vector3 posToCheck = pos + new Vector3(tileOffset * x, 0, tileOffset * z);
+                    if (allEventTiles.ContainsKey(posToCheck) && !allEventTiles[posToCheck].isEmpty)
                     {
-                        Vector3 posToCheck = pos + new Vector3(tileOffset * x, 0, tileOffset * z) * i;
-                        if (allEventTiles.ContainsKey(posToCheck) && !allEventTiles[posToCheck].isEmpty)
-                        {
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        Vector3 posToCheck = pos + new Vector3(tileOffset * x, 0, tileOffset * z) * (i-1);
-                        if (allEventTiles.ContainsKey(posToCheck) && !allEventTiles[posToCheck].isEmpty)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
             }

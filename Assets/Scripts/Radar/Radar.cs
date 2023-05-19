@@ -60,13 +60,13 @@ public class Radar : MonoBehaviour
         buttonObject.transform.SetParent(gameObject.transform, false);
         RectTransform buttonRectTrans = buttonObject.GetComponent<RectTransform>();
         buttonRectTrans.sizeDelta = sizeScale;
-        if (i > maxButtonsInRow)
+        if (i < maxButtonsInRow)
         {
-            buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * i, -buttonOffset, 0);
+            buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * i, 0, 0);
         }
         else
         {
-            buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * i, 0, 0);
+            buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * (i - maxButtonsInRow), -buttonOffset, 0);
         }
         // buttonRectTrans.localPosition = new Vector3(-600 + 150 * i, -500, 0);
 
@@ -74,9 +74,9 @@ public class Radar : MonoBehaviour
 
         button = buttonObject.GetComponent<Button>();
 
-        if (spawnableEventsList[i].eventMapTile.GetComponent<SpriteRenderer>())
+        if (spawnableEventsList[i].eventMapTile.GetComponentInChildren<SpriteRenderer>())
         {
-            button.GetComponent<Image>().sprite = spawnableEventsList[i].eventMapTile.GetComponent<SpriteRenderer>().sprite;
+            button.GetComponent<Image>().sprite = spawnableEventsList[i].eventMapTile.GetComponentInChildren<SpriteRenderer>().sprite;
         }
 
         button.onClick.AddListener(() => Scan(spawnableEventsList[i]));
