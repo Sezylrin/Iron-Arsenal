@@ -16,7 +16,6 @@ public class Radar : MonoBehaviour
     public int maxButtonsInRow = 4;
     // public GameObject mapCanvas;
     private List<MapGenerator.SpawnableEvent> spawnableEventsList;
-    private Button button;
     private List<Button> buttonsList = new List<Button>();
     // private List<UnityAction> listeners = new List<UnityAction>();
     // Start is called before the first frame update
@@ -75,18 +74,17 @@ public class Radar : MonoBehaviour
 
         Destroy(buttonObject.transform.GetChild(0).gameObject);
 
-        button = buttonObject.GetComponent<Button>();
+        Button button = buttonObject.GetComponent<Button>();
 
         if (spawnableEventsList[i].eventMapTile.GetComponentInChildren<SpriteRenderer>())
         {
             button.GetComponent<Image>().sprite = spawnableEventsList[i].eventMapTile.GetComponentInChildren<SpriteRenderer>().sprite;
         }
 
-        button.onClick.AddListener(() => Scan(spawnableEventsList[i]));
+        button.onClick.AddListener(() => RevealEvent(Scan(spawnableEventsList[i])));
+        button.onClick.AddListener(ToggleRadarMenu);
         buttonsList.Add(button);
     }
-
-    public void OnButton() => Scan(spawnableEventsList[0]);
 
     public void ToggleRadarMenu()
     {
@@ -95,25 +93,41 @@ public class Radar : MonoBehaviour
 
     private MapGenerator.EventTile Scan(MapGenerator.SpawnableEvent eventToSearchFor)
     {
+        Debug.Log("Here");
         Vector3 maxStartPos = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
         Vector3 closestEventPos = maxStartPos;
-        // int total = 0;
+        //TODO: Cooldown
         foreach (var tile in mapGenerator.allEventTiles)
         {
-            // if (tile.Value.isEmpty) continue;
+            if (tile.Value.isEmpty) continue;
             if (!tile.Value.tileObjectPtr) continue;
-            if (tile.Value.tileObjectPtr.name == eventToSearchFor.eventToSpawn.name + "(Clone)")
-                // total++;
-                if (DistFromPlayer(tile.Key) < DistFromPlayer(closestEventPos))
-                    closestEventPos = tile.Key;
+            if (tile.Value.tileObjectPtr.name != eventToSearchFor.eventToSpawn.name + "(Clone)") continue;
+            if (!(DistFromPlayer(tile.Key) < DistFromPlayer(closestEventPos))) continue;
+            closestEventPos = tile.Key;
         }
 
-        // Debug.Log(total);
-        // Debug.Log(closestEventPos);
         return (closestEventPos != maxStartPos) ? mapGenerator.allEventTiles[closestEventPos] : null;
+    }
+
+    private void RevealEvent(MapGenerator.EventTile eventTile)
+    {
+        if (eventTile == null)
+        {
+            Debug.Log("Unluggy");
+            return;
+        }
+        eventTile.isDiscovered = true;
+        Debug.Log(eventTile.tileObjectPtr.transform.position);
+        //TODO: Do UI things
     }
 
     private float DistFromPlayer(Vector3 pos) => Vector3.Distance(pos, mapGenerator.player.transform.position);
 
-    private void OnDisable() => button.onClick.RemoveAllListeners();
+    private void OnDestroy()
+    {
+        foreach (var button in buttonsList)
+        {
+            button.onClick.RemoveAllListeners();
+        }
+    }
 }
