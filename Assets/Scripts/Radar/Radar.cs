@@ -93,7 +93,6 @@ public class Radar : MonoBehaviour
 
     private MapGenerator.EventTile Scan(MapGenerator.SpawnableEvent eventToSearchFor)
     {
-        Debug.Log("Here");
         Vector3 maxStartPos = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
         Vector3 closestEventPos = maxStartPos;
         //TODO: Cooldown
