@@ -39,8 +39,8 @@ public class Radar : MonoBehaviour
             }
             else
             {
-                Debug.Log(eventTile.tileObject.transform.position);
-                Debug.Log(eventTile.tileObject.name);
+                Debug.Log(eventTile.tileObjectPtr.transform.position);
+                Debug.Log(eventTile.tileObjectPtr.name);
             }
         }
     }
@@ -100,9 +100,9 @@ public class Radar : MonoBehaviour
         // int total = 0;
         foreach (var tile in mapGenerator.allEventTiles)
         {
-            if (tile.Value.isEmpty) continue;
-            if (!tile.Value.tileObject) continue;
-            if (tile.Value.tileObject.name == eventToSearchFor.eventToSpawn.name + "(Clone)")
+            // if (tile.Value.isEmpty) continue;
+            if (!tile.Value.tileObjectPtr) continue;
+            if (tile.Value.tileObjectPtr.name == eventToSearchFor.eventToSpawn.name + "(Clone)")
                 // total++;
                 if (DistFromPlayer(tile.Key) < DistFromPlayer(closestEventPos))
                     closestEventPos = tile.Key;
