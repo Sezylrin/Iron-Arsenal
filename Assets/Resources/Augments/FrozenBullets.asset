@@ -16,3 +16,6 @@ MonoBehaviour:
   augName: Frozen Bullets
   description: All projectiles become frozen
   augmentType: 12
+  xenoriumCost: 300
+  novaciteCost: 50
+  voidStoneCost: 100

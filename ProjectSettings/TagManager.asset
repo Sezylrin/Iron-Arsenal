@@ -16,6 +16,7 @@ TagManager:
   - Socket
   - NotSocket
   - Wall
+  - MiningArea
   layers:
   - Default
   - TransparentFX
@@ -28,8 +29,8 @@ TagManager:
   - Build
   - BuildUI
   - Socket
-  - 
-  - 
+  - MapTile
+  - projectile
   - 
   - 
   - 

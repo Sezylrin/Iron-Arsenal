@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 //using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
@@ -7,34 +8,51 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance { get; private set; }
 
-    [field: Header("Wave Management")]
-    [field: SerializeField] public int Wave { get; private set; }
-    [field: SerializeField] private int WaveDelay { get; set; }
-    [field: Header("Spawn Variable")]
-    [field: SerializeField] private float BasicEnemyChance { get; set; }
-    [field: SerializeField] private int InitialWaveAmount { get; set; }
-    [field: SerializeField] private int ExtraEnemyPerWave { get; set; }
-    [field: SerializeField] public int BossWaveFrequency { get; private set; }
-    [field: SerializeField] public int SafeSpawnArea { get; private set; }
+    [field: Space(15)]
+    [field: SerializeField] private int NumberOfAliveEnemies { get; set; }
     [field: SerializeField] public int EnemyBaseHealth { get; private set; }
-
-
-    public bool debugStartWaveNow; // Testing Variable
-    [field: Header("No Touch")]
-    [field: SerializeField] private bool WaveActive { get; set; }
-    [field: SerializeField] private bool IsBossWave { get; set; }
-    [field: SerializeField] public int SecondsUntilNextWave { get; private set; }
+    [field: SerializeField] public int Difficulty { get; private set; }
+    [field: Space(15)]
+    [field: SerializeField] private int DifficultyIncreaseFrequency { get; set; }
+    [field: SerializeField] private int InitialSpawnDelaySeconds { get; set; }
+    [field: SerializeField] public int SafeSpawnArea { get; private set; }
+    [field: Space(15)]
+    [field: SerializeField, Range(0, 100)] private float BasicEnemyChance { get; set; }
+    [field: SerializeField] private int BECDecreaseOnDifficultyChange { get; set; }
     [field: SerializeField] private float SpecialEnemyChance { get; set; }
+    [field: Space(15)]
+    [field: SerializeField] private bool IsRushActive { get; set; }
+    [field: SerializeField] private int NumberOfSpawnsThisRush { get; set; }
+    public bool debugStartRush;
+    public bool debugEndRush;
+    [field: Space(15)]
     [field: SerializeField] public bool IsBossAlive { get; private set; }
+    [field: SerializeField] public GameObject ActiveBoss { get; private set; }
     [field: SerializeField] private int PreviousBoss { get; set; }
-    [field: SerializeField] private bool SpawningWave { get; set; }
-
-    [field: Header("Lists")]
+    [field: SerializeField] private bool IsBossRushActive { get; set; }
+    [field: SerializeField] private int BossesDefeatedInRush { get; set; }
+    public bool debugStartBossRush;
+    [field: Space(15)]
+    [field: SerializeField] private float NormalSpawnDelay { get; set; }
+    [field: SerializeField] private float NSDMinimum { get; set; }
+    [field: SerializeField] private float NSDMultiplier { get; set; }
+    [field: SerializeField] private float NSDExponential { get; set; }
+    [field: Space(15)]
+    [field: SerializeField] private float RushSpawnDelay { get; set; }
+    [field: SerializeField] private float RSDMinimum { get; set; }
+    [field: SerializeField] private float RSDMultiplier { get; set; }
+    [field: SerializeField] private float RSDSpawnsModifier { get; set; }
+    [field: SerializeField] private float RSDExponential { get; set; }
+    [field: Space(15)]
+    [field: SerializeField] private int AllowedEnemies { get; set; }
+    [field: SerializeField] private int AEMin { get; set; }
+    [field: SerializeField] private int AEDifficultyModifier { get; set; }
+    [field: SerializeField] private int AERushBonus { get; set; }
+    [field: Space(15)]
     public GameObject[] enemyPrefabs;
     public GameObject[] bossPrefabs;
     public GameObject[] augmentPrefabs;
     public List<Transform> enemyList = new List<Transform>();
-    public List<GameObject> WaveList = new List<GameObject>();
 
     private GameObject Player { get; set; }
     private Vector3 PlayerPosition { get; set; }
@@ -51,7 +69,7 @@ public class EnemyManager : MonoBehaviour
     private Pooling pooledCloakerEnemies = new Pooling();   //8 - Cloaker Enemies
     private Pooling pooledBursterEnemies = new Pooling();   //9 - Burster Enemies
     private Pooling pooledSprinterEnemies = new Pooling();   //10 - Sprinter Enemies
-    public List<Pooling> pools = new List<Pooling>();
+    public List<Pooling> enemyPools = new List<Pooling>();
 
     public Pooling pooledEnemyBullets = new Pooling();
 
@@ -64,8 +82,7 @@ public class EnemyManager : MonoBehaviour
         else
         {
             Instance = this;
-        }
-        
+        }  
     }
 
     // Start is called before the first frame update
@@ -73,30 +90,41 @@ public class EnemyManager : MonoBehaviour
     {
         Player = LevelManager.Instance.player;
 
-        pools.Add(pooledBasicEnemies);
-        pools.Add(pooledTankEnemies);
-        pools.Add(pooledExploderEnemies);
-        pools.Add(pooledDiggerEnemies);
-        pools.Add(pooledChargerEnemies);
-        pools.Add(pooledSentryEnemies);
-        pools.Add(pooledDodgerEnemies);
-        pools.Add(pooledSplitterEnemies);
-        pools.Add(pooledCloakerEnemies);
-        pools.Add(pooledBursterEnemies);
-        pools.Add(pooledSprinterEnemies);
+        enemyPools.Add(pooledBasicEnemies);
+        enemyPools.Add(pooledTankEnemies);
+        enemyPools.Add(pooledExploderEnemies);
+        enemyPools.Add(pooledDiggerEnemies);
+        enemyPools.Add(pooledChargerEnemies);
+        enemyPools.Add(pooledSentryEnemies);
+        enemyPools.Add(pooledDodgerEnemies);
+        enemyPools.Add(pooledSplitterEnemies);
+        enemyPools.Add(pooledCloakerEnemies);
+        enemyPools.Add(pooledBursterEnemies);
+        enemyPools.Add(pooledSprinterEnemies);
+
+        IsBossAlive = false;
+        IsRushActive = false;
+        IsBossRushActive = false;
+
+        PreviousBoss = -1;
+        debugStartRush = false;
+        debugEndRush = false;
+        debugStartBossRush = false;
+
+        if (Difficulty <= 0)
+        {
+            Difficulty = 1;
+        }
 
         SpecialEnemyChance = (100 - BasicEnemyChance) / (enemyPrefabs.Length - 1);
 
-        IsBossAlive = false;
-        SpawningWave = false;
-        WaveActive = false;
-        IsBossWave = false;
+        SetMaxAllowedEnemies(false);
+        SetNormalSpawnDelay();
+        SetRushSpawnDelay();
 
-
-        Wave -= 1;
-        SecondsUntilNextWave = 0;
-
-        StartCoroutine(DelayWave());
+        StartCoroutine(InitialSpawnDelay());
+        StartCoroutine(IncreaseDifficulty());
+        StartCoroutine(Rush());
     }
 
     // Update is called once per frame
@@ -104,104 +132,169 @@ public class EnemyManager : MonoBehaviour
     {
         PlayerPosition = Player.transform.position;
 
-        if (debugStartWaveNow)
+        if (debugStartRush)
         {
-            debugStartWaveNow = false;
-            StartWaveEarly();
+            debugStartRush = false;
+            StartRush();
         }
-
-        if (WaveList.Count == 0 && WaveActive)
+        if (debugEndRush)
         {
-            WaveActive = false;
-            if (IsBossWave)
-            {
-                LevelManager.Instance.SpawnAugmentChoice(); //Temp
-            }
-            else if (Wave % 2 == 0)
-            {
-                LevelManager.Instance.SpawnAugmentChoice();
-            }
+            debugEndRush = false;
+            StopRush();
+        }
+        if (debugStartBossRush)
+        {
+            debugStartBossRush = false;
+            StartBossRush();
         }
     }
 
-    private void SelectWave()
+    private void SetNormalSpawnDelay() //Warning: Math
     {
-        Wave++;
-        BasicEnemyChance -= 2;
+        NormalSpawnDelay = NSDMinimum + NSDMultiplier * (Mathf.Pow(NSDExponential, 1 - Difficulty));
+    }
+
+    private void SetRushSpawnDelay() //Warning: Math
+    {
+        RushSpawnDelay = RSDMinimum + ((RSDMultiplier - (RSDSpawnsModifier * NumberOfSpawnsThisRush)) * (Mathf.Pow(RSDExponential, (1 - Difficulty))));
+    }
+
+    private void SetMaxAllowedEnemies(bool IsRushStart) //Warning: Math
+    {
+        if (IsRushStart)
+        {
+            AllowedEnemies = AEMin + AERushBonus + ((Difficulty - 1) * AEDifficultyModifier);
+        }
+        else AllowedEnemies = AEMin + ((Difficulty - 1) * AEDifficultyModifier);
+    }
+
+    private void UpdateSpawnChances()
+    {
+        BasicEnemyChance -= BECDecreaseOnDifficultyChange;
         SpecialEnemyChance = (100 - BasicEnemyChance) / (enemyPrefabs.Length - 1);
-
-        if (Wave <= 0)
-        {
-            Wave = 1;
-        }
-
-        IsBossWave = false;
-        if (Wave % BossWaveFrequency == 0)  
-        {
-            IsBossWave = true;
-            StartCoroutine(SpawnBossWave());
-        }
-        else StartCoroutine(SpawnWave());
     }
 
-    private IEnumerator DelayWave()
+    private IEnumerator IncreaseDifficulty()
     {
-        SecondsUntilNextWave = WaveDelay;
+        while (true)
+        {
+            yield return new WaitForSeconds(DifficultyIncreaseFrequency);
+            Difficulty++;
+            UpdateSpawnChances();
+
+            if (IsRushActive)
+            {
+                SetMaxAllowedEnemies(true);
+            }
+            else SetMaxAllowedEnemies(false);
+        }
+    }
+
+    private IEnumerator InitialSpawnDelay()
+    {
+        yield return new WaitForSeconds(InitialSpawnDelaySeconds);
+        StartCoroutine(DelaySpawn());
+    }
+
+    private IEnumerator DelaySpawn()
+    {
+        while (true)
+        {
+            SetNormalSpawnDelay();
+            yield return new WaitForSeconds(NormalSpawnDelay);
+            if (NumberOfAliveEnemies < AllowedEnemies)
+            {
+                SpawnEnemy(false);
+            }
+        }
+    }
+
+    private IEnumerator Rush()
+    {
+        while (true)
+        {
+            SetRushSpawnDelay();
+            yield return new WaitForSeconds(RushSpawnDelay);
+            if (IsRushActive && NumberOfAliveEnemies < AllowedEnemies)
+            {
+                SpawnEnemy(false);
+                NumberOfSpawnsThisRush++;
+            }
+        }
+    }
+
+    private IEnumerator BossRush()
+    {
+        int bossesSpawned = 0;
         
-        while (SecondsUntilNextWave > 0)
+        while (true)
         {
             yield return new WaitForSeconds(1);
-            SecondsUntilNextWave--;
-            LevelCanvasManager.Instance.SetWaveTimerBar(((float)SecondsUntilNextWave / (float)WaveDelay) * 100);
+
+            if (bossesSpawned != bossPrefabs.Length && !IsBossAlive)
+            {
+                SpawnEnemy(true, bossesSpawned);
+                bossesSpawned++;
+            }
+
+            if (BossesDefeatedInRush >= bossPrefabs.Length)
+            {
+                break;
+            }
         }
-        
-        SecondsUntilNextWave = 0;
-        SelectWave();
+        GameManager.Instance.HandleVictory();
     }
 
-    public void StartWaveEarly()
+    public void StartRush()
     {
-        if (!SpawningWave)
-        {
-            SecondsUntilNextWave = 0;
-        }
+        StopCoroutine(RushTimer(0));
+        IsRushActive = true;
+        NumberOfSpawnsThisRush = 0;
+        SetMaxAllowedEnemies(true);
     }
 
-    private IEnumerator SpawnWave()
+    public void StartRushWithTimer(int lengthInSeconds)
     {
-        SpawningWave = true;
-        int numberToSpawn = InitialWaveAmount + (Wave * ExtraEnemyPerWave);
-
-        while (numberToSpawn != 0)
-        {
-            yield return new WaitForSeconds(0.25f);
-
-            SpawnEnemy(false);
-
-            numberToSpawn--;
-        }
-
-        SpawningWave = false;
-        StartCoroutine(DelayWave());
+        StopCoroutine(RushTimer(0));
+        IsRushActive = true;
+        NumberOfSpawnsThisRush = 0;
+        SetMaxAllowedEnemies(true);
+        StartCoroutine(RushTimer(lengthInSeconds));
     }
 
-    private IEnumerator SpawnBossWave()
+    public IEnumerator RushTimer(int lengthInSeconds)
     {
-        SpawnEnemy(true);
-        IsBossAlive = true;
+        yield return new WaitForSeconds(lengthInSeconds);
+        StopRush();
+    }
 
-        while (IsBossAlive)
-        {
-            yield return new WaitForSeconds(2f);
-            SpawnEnemy(false);
-        }
-        StartCoroutine(DelayWave());
+    public void StopRush()
+    {
+        StopCoroutine(RushTimer(0));
+        IsRushActive = false;
+        SetMaxAllowedEnemies(false);
+    }
+
+    public void StartBossRush()
+    {
+        IsBossRushActive = true;
+        StartCoroutine(BossRush());
+    }
+
+    public void EnemyDeath()
+    {
+        NumberOfAliveEnemies--;
     }
 
     public void BossDeath(Transform bossTransform)
     {
         enemyList.Remove(bossTransform);
+        ActiveBoss = null;
         IsBossAlive = false;
+        if (IsBossRushActive)
+        {
+            BossesDefeatedInRush++;
+        }
     }
 
     private int SelectEnemyToSpawn(bool isBoss)
@@ -288,14 +381,16 @@ public class EnemyManager : MonoBehaviour
         if (isBoss)
         {
             newEnemy = Instantiate(bossPrefabs[enemyType], gameObject.transform);
+            ActiveBoss = newEnemy;
+            IsBossAlive = true;
         }
         else
         {
-            if (pools[enemyType].ListCount() > 0)
+            if (enemyPools[enemyType].ListCount() > 0)
             {
-                newEnemy = pools[enemyType].FirstObj();
+                newEnemy = enemyPools[enemyType].FirstObj();
                 newEnemy.SetActive(true);
-                pools[enemyType].RemoveObj(newEnemy);
+                enemyPools[enemyType].RemoveObj(newEnemy);
             }
             else
             {
@@ -308,12 +403,7 @@ public class EnemyManager : MonoBehaviour
         enemyScript.SetStats(EnemyBaseHealth);
         enemyScript.InitEnemyEffects(augmentPrefabs);
         enemyList.Add(newEnemy.transform);
-        WaveList.Add(newEnemy);
-
-        if (!WaveActive)
-        {
-            WaveActive = true;
-        }
+        NumberOfAliveEnemies++;
     }
 
     public Vector3 GetRandomPosition(int distanceFromPlayer)
@@ -355,17 +445,12 @@ public class EnemyManager : MonoBehaviour
     {
         obj.transform.Translate(Vector3.down * -1000);
         obj.SetActive(false);
-        pools[enemyType].AddObj(obj);
+        enemyPools[enemyType].AddObj(obj);
     }
 
     public void PoolEnemyBullet(GameObject obj)
     {
         obj.SetActive(false);
         pooledEnemyBullets.AddObj(obj);
-    }
-
-    public void RemoveFromWaveList(GameObject enemy)
-    {
-        WaveList.Remove(enemy);
     }
 }

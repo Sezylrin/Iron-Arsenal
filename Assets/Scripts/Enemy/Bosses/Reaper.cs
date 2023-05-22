@@ -155,9 +155,9 @@ public class Reaper : Boss
     {
         base.SetStats(baseHealth);
 
-        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Wave);
-        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Wave);
-        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Wave);
+        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Difficulty);
+        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Difficulty);
+        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Difficulty);
     }
 
     IEnumerator DelayFiring(float delay)
@@ -203,7 +203,7 @@ public class Reaper : Boss
             TakeDamage(StatsManager.Instance.healthFactor * tempBase.collisionFactor);
             tempBase.TakeDamage(DamageOnCollide);
             EnemyRB.AddForce(Vector3.Normalize(new Vector3(transform.position.x - col.transform.position.x, 0, transform.position.z - col.transform.position.z)) * RamLaunchMultiplier, ForceMode.Impulse);
-            Heal(DamageOnCollide / 10);
+            Heal(DamageOnCollide / 2);
         }
     }
 }

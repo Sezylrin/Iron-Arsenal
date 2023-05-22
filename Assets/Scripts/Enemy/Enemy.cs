@@ -32,7 +32,7 @@ public abstract class Enemy : MonoBehaviour
     public EnemyType type;
     [field: SerializeField] public Rigidbody EnemyRB { get; set; }
     public EnemyData data;
-    [field: SerializeField] public int Wave { get; set; }
+    [field: SerializeField] public int Difficulty { get; set; }
     public EnemyManager Manager { get; set; }
     public GameObject Player { get; set; }
 
@@ -49,15 +49,15 @@ public abstract class Enemy : MonoBehaviour
         Player = GameObject.Find("Player");
         baseFunctions = Player.GetComponent<BaseFunctions>();
         Manager = EnemyManager.Instance;
-        Wave = Manager.Wave;
+        Difficulty = Manager.Difficulty;
         SetStats(Manager.EnemyBaseHealth);
     }
 
     public virtual void SetStats(float baseHealth)
     {
-        MaxHealth = data.HealthScale * baseHealth * Mathf.Pow(1.15f, Wave - 1);
-        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, Wave - 1);
-        Speed = data.speed * Mathf.Pow(1.005f, Wave - 1);
+        MaxHealth = data.HealthScale * baseHealth * Mathf.Pow(1.15f, Difficulty - 1);
+        DamageOnCollide = data.damageOnCollide * Mathf.Pow(1.1f, Difficulty - 1);
+        Speed = data.speed * Mathf.Pow(1.005f, Difficulty - 1);
         RamLaunchMultiplier = data.ramLaunchMultiplier;
         CurrentHealth = MaxHealth;
     }
@@ -91,6 +91,7 @@ public abstract class Enemy : MonoBehaviour
             damage *= 1.2f;
         float finalDamage = damage * damageFactor;
         CurrentHealth -= finalDamage;
+        NumberManager.Instance.SpawnText(transform.position, finalDamage.ToString(), 1, Color.white);
         if (enemyEffects.isLifeSteal)
         {
             baseFunctions.RecoverHealth(finalDamage * 0.05f);
@@ -137,41 +138,58 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void OnDeath()
     {
-        Manager.RemoveFromWaveList(this.gameObject);
+        Manager.EnemyDeath();
         switch (type)
         {
             case EnemyType.Basic:
                 Manager.PoolEnemy(gameObject, 0);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Tank:
                 Manager.PoolEnemy(gameObject, 1);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Exploder:
                 Manager.PoolEnemy(gameObject, 2);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Digger:
                 Manager.PoolEnemy(gameObject, 3);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Charger:
                 Manager.PoolEnemy(gameObject, 4);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Shooter:
                 Manager.PoolEnemy(gameObject, 5);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Dodger:
                 Manager.PoolEnemy(gameObject, 6);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Splitter:
                 Manager.PoolEnemy(gameObject, 7);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Cloaker:
                 Manager.PoolEnemy(gameObject, 8);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Burster:
-                Manager.PoolEnemy(gameObject, 8);
+                Manager.PoolEnemy(gameObject, 9);
+                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
                 break;
             case EnemyType.Sprinter:
-                Manager.PoolEnemy(gameObject, 8);
+                Manager.PoolEnemy(gameObject, 10);
+                break;
+            case EnemyType.Boss:
+                Destroy(gameObject);
+                LevelManager.Instance.GainXenorium((int)Random.Range(200, 401));
+                LevelManager.Instance.GainNovacite((int)Random.Range(200, 401));
+                LevelManager.Instance.GainVoidStone((int)Random.Range(200, 401));
+                LevelManager.Instance.SpawnAugmentChoice();
                 break;
             default:
                 Destroy(gameObject);
@@ -191,9 +209,9 @@ public abstract class Enemy : MonoBehaviour
             
     public virtual IEnumerator SlowEnemy(float slowStrength)
     {
-        Speed = (data.speed * Mathf.Pow(1.005f, Wave - 1)) * slowStrength;
+        Speed = (data.speed * Mathf.Pow(1.005f, Difficulty - 1)) * slowStrength;
         yield return new WaitForSeconds(5f);
-        Speed = data.speed * Mathf.Pow(1.005f, Wave - 1);
+        Speed = data.speed * Mathf.Pow(1.005f, Difficulty - 1);
     }
 
     public void InitEnemyEffects(GameObject[] augmentPF)

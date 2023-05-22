@@ -16,3 +16,6 @@ MonoBehaviour:
   augName: Poison
   description: Poisoned enemies have their max health reduced
   augmentType: 10
+  xenoriumCost: 300
+  novaciteCost: 50
+  voidStoneCost: 100

@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/BuidlScenes/Game.unity
-    guid: 2a8a4d2aeb41f7140bf884f51643893d
+    path: Assets/Scenes/BuidlScenes/MainMenu.unity
+    guid: cc50855622437cb44a6ac24e55703335
   - enabled: 1
-    path: Assets/Scenes/BuidlScenes/Victory.unity
-    guid: f059aa8db68139342bb9db910009890b
+    path: Assets/Scenes/BuidlScenes/Game.unity
+    guid: 84d7fe3fb64b77c4b977592181f71fcb
   - enabled: 1
     path: Assets/Scenes/BuidlScenes/Defeat.unity
     guid: ec9e7ea6eb8119940bbd3fdab4a45ed4
+  - enabled: 1
+    path: Assets/Scenes/BuidlScenes/Victory.unity
+    guid: f059aa8db68139342bb9db910009890b
   m_configObjects: {}

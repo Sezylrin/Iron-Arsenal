@@ -257,19 +257,24 @@ public class Sentry : MonoBehaviour
 
     public void UpdateAugments()
     {
-        Debug.Log(sentryEffects);
         if (!sentryEffects)
         {
             sentryEffects = gameObject.AddComponent<SentryEffects>();
             sentryEffects.hostSentry = this;
 
         }
-        Debug.Log(sentryEffects);
         sentryEffects.UpdateAugments();
     }
 
     public void DestroyPool()
     {
         Destroy(poolObject);
+    }
+
+    public void RefundCost()
+    {
+        LevelManager.Instance.GainNovacite(Mathf.FloorToInt(data.novaciteCost * 0.7f));
+        LevelManager.Instance.GainVoidStone(Mathf.FloorToInt(data.voidStoneCost * 0.7f));
+        LevelManager.Instance.GainXenorium(Mathf.FloorToInt(data.xenoriumCost * 0.7f));
     }
 }

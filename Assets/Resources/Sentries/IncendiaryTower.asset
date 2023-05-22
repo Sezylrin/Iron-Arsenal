@@ -23,11 +23,11 @@ MonoBehaviour:
   fireRate: 2
   projectileData: {fileID: 11400000, guid: 799081248be9cd34f9aaf97743dac523, type: 2}
   mat: {fileID: 2100000, guid: b405c5bb1ece81f4cb4b04fcef1766e3, type: 2}
-  xenoriumCost: 100
+  xenoriumCost: 250
   novaciteCost: 100
   voidStoneCost: 100
   buildable: 1
   defaultAugment: 05000000
-  unlockXenoriumCost: 150
-  unlockNovaciteCost: 150
-  unlockVoidStoneCost: 150
+  unlockXenoriumCost: 250
+  unlockNovaciteCost: 80
+  unlockVoidStoneCost: 30

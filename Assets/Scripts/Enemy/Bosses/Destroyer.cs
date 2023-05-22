@@ -18,11 +18,13 @@ public class Destroyer : Boss
     private bool ableToShoot;
     private Transform projectilesParent;
 
+    public GameObject shield;
+
     private bool canCharge;
 
     void Awake()
     {
-        NumberOfPatterns = 4;
+        NumberOfPatterns = 5;
 
         Init();
         projectilesParent = projectilesParent = GameObject.Find("Projectiles Parent").transform;
@@ -35,6 +37,7 @@ public class Destroyer : Boss
     {
         ableToShoot = true;
         canCharge = true;
+        shield.SetActive(false);
     }
 
     // Update is called once per frame
@@ -50,6 +53,10 @@ public class Destroyer : Boss
         if (ActivePattern == 0)
         {
             WaitingForNextPattern();
+            if (shield.activeSelf)
+            {
+                shield.SetActive(false);
+            }
         }
         else PatternActivate(ActivePattern);
     }
@@ -102,15 +109,25 @@ public class Destroyer : Boss
             EnemyRB.AddForce(Vector3.Normalize(new Vector3(Player.transform.position.x - transform.position.x, 0, Player.transform.position.z - transform.position.z)) * 20, ForceMode.Impulse);
         }
     }
-       
+
+    protected override void Pattern5() //Shield
+    {
+        StartCoroutine(PatternLength(5));
+
+        if (!shield.activeSelf)
+        {
+            shield.SetActive(true);
+        }
+    }
+
 
     public override void SetStats(float baseHealth)
     {
         base.SetStats(baseHealth);
 
-        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Wave);
-        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Wave);
-        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Wave);
+        BulletDamage = bulletData.damage * Mathf.Pow(1.1f, Difficulty);
+        BulletSpeed = bulletData.projectileSpeed * Mathf.Pow(1.01f, Difficulty);
+        BulletFireDelay = bulletData.fireDelay * Mathf.Pow(1.01f, -Difficulty);
     }
 
     IEnumerator DelayFiring(float delay)

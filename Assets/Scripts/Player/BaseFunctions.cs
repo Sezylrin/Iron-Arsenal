@@ -32,6 +32,8 @@ public class BaseFunctions : MonoBehaviour
     public GameObject ShieldWave;
 
     public Cannon cannon;
+    public GameObject Arrow;
+    public GameObject ArrowRotatePoint;
 
     public BaseEffects baseEffects;
     [System.Serializable]
@@ -44,7 +46,9 @@ public class BaseFunctions : MonoBehaviour
 
     private int baseLevel = 0;
 
-    public Transform boxMesh;
+    public GameObject[] baseMesh;
+
+    public BoxCollider boxCollider;
 
     private void Awake()
     {
@@ -103,6 +107,27 @@ public class BaseFunctions : MonoBehaviour
                 sentry.fireRate /= 1.2f;
             }
         }
+
+
+        if (EnemyManager.Instance.IsBossAlive)
+        {
+            if (Arrow.activeSelf == false)
+            {
+                Arrow.SetActive(true);
+            }
+
+            Vector3 bossPosition = EnemyManager.Instance.ActiveBoss.transform.position;
+            bossPosition.y = ArrowRotatePoint.transform.position.y;
+            ArrowRotatePoint.transform.LookAt(bossPosition);
+        }
+
+        if (!EnemyManager.Instance.IsBossAlive || Vector3.Distance(gameObject.transform.position, EnemyManager.Instance.ActiveBoss.transform.position) < 25)
+        {
+            if (Arrow.activeSelf == true)
+            {
+                Arrow.SetActive(false);
+            }
+        }
     }
 
     public void TakeDamage(float amount)
@@ -152,7 +177,7 @@ public class BaseFunctions : MonoBehaviour
         LevelCanvasManager.Instance.SetShield(ShieldPercentage());
     }
     private void TakeHealthDamage(float amount)
-    {        
+    {
         if (currentHealth - amount <= 0)
         {
             currentHealth = 0;
@@ -189,18 +214,18 @@ public class BaseFunctions : MonoBehaviour
             return;
         if (baseLevel == 1)
         {
-            Vector3 temp = boxMesh.localScale;
-            temp.z = 10;
-            boxMesh.localScale = temp;
-            BoxCollider collider = GetComponent<BoxCollider>();
-            Vector3 size = collider.size;
-            size.z *= 2;
-            collider.size = size;
+            baseMesh[0].SetActive(false);
+            baseMesh[1].SetActive(true);
+            transform.Translate(Vector3.up * 1.3f * transform.localScale.x);
+            boxCollider.size *= 2.25f * transform.localScale.x;
+            boxCollider.size = boxCollider.size + (Vector3.right * 2 * transform.localScale.x);
+            boxCollider.center = new Vector3(boxCollider.center.x, boxCollider.center.y - (1.5f * transform.localScale.x), boxCollider.center.z);
+
         }
         foreach (Vector3 spawnPos in relativeSpawnPos[baseLevel].pos)
         {
-            GameObject socket = Instantiate(turretSocketPF, transform.position + spawnPos, Quaternion.identity, transform);
-            socket.transform.RotateAround(transform.position, Vector3.up, Mathf.Ceil(transform.eulerAngles.y)); 
+            GameObject socket = Instantiate(turretSocketPF, transform.position + (spawnPos * transform.localScale.x), Quaternion.identity, transform);
+            socket.transform.RotateAround(transform.position, Vector3.up, Mathf.Ceil(transform.eulerAngles.y));
         }
         baseLevel++;
     }

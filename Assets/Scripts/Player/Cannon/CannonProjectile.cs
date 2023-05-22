@@ -31,6 +31,8 @@ public abstract class CannonProjectile : MonoBehaviour
     public Pooling projectiles = new Pooling();
 
     public List<Augments> activeAugments = new List<Augments>();
+
+    public Material cannonMat;
     
     public virtual void PoolProj(GameObject obj)
     {

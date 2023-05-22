@@ -16,3 +16,6 @@ MonoBehaviour:
   augName: Shield Wave
   description: Upon shield break, generate a pulse knocking back enemies
   augmentType: 27
+  xenoriumCost: 300
+  novaciteCost: 50
+  voidStoneCost: 100

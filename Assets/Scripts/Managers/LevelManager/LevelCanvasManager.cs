@@ -2,7 +2,8 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using System;
+using System.Collections;
+using UnityEngine.InputSystem;
 
 public class LevelCanvasManager : MonoBehaviour
 {
@@ -25,10 +26,18 @@ public class LevelCanvasManager : MonoBehaviour
     [SerializeField] private GameObject sentriesContent;
     [SerializeField] private LayerMask layer;
 
+    [Header("Remove Sentry Button")]
+    [SerializeField] private GameObject removeSentryBtn;
+
+    [Header("Timer")]
+    [SerializeField] private GameObject timer;
+    [SerializeField] private TMP_Text timerTxt;
+
     [Header("Menus")]
     [SerializeField] private GameObject augmentMenu;
     [SerializeField] private GameObject buildMenu;
     [SerializeField] private GameObject shopMenu;
+    [SerializeField] private GameObject attributeMenu;
     private List<SentryBuildInitialise> allButtons = new List<SentryBuildInitialise>();
 
     public List<SentrySocket> allSockets = new List<SentrySocket>();
@@ -37,9 +46,14 @@ public class LevelCanvasManager : MonoBehaviour
 
     private bool changedMat = false;
 
-    public GameObject instantiatedToolTips;
+    public GameObject instantiatedToolTip;
 
     public bool overMenu = false;
+
+    public GameObject mapUI;
+
+    private SentrySocket socket;
+
     public static LevelCanvasManager Instance { get; private set; }
 
     private void Awake()
@@ -57,7 +71,6 @@ public class LevelCanvasManager : MonoBehaviour
     private void Start()
     {
         closeBtn.onClick.AddListener(CloseBuildMenu);
-        //LoadSentries();
     }
 
     private void Update()
@@ -90,25 +103,28 @@ public class LevelCanvasManager : MonoBehaviour
             Vector3 MousePos = MousePosition.MouseToWorld3D(Camera.main, -1);
             MousePos.y = transform.position.y;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            
             if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, layer))
             {
                 if (hit.collider.CompareTag("Socket"))
                 {
-                    SentrySocket socket = hit.collider.GetComponent<SentrySocket>();
+                    socket = hit.collider.GetComponent<SentrySocket>();
+                    AssignSocket(socket);
                     if (!socket.HasSentry())
                     {
-                        AssignSocket(socket);
-                        OpenBuildMenu();
-                        foreach (SentrySocket sockets in allSockets)
-                        {
-                            if (!sockets.HasSentry())
-                            {
-                                sockets.meshRender.material = mats[0];
-                            }
-                        }
-                        socket.meshRender.material = mats[1];
+                        OpenBuildMenu();                        
                     }
+                    else
+                    {
+                        ShowRemoveSentryBtn();
+                    }
+                    foreach (SentrySocket sockets in allSockets)
+                    {
+                        if (!sockets.HasSentry())
+                        {
+                            sockets.meshRender.material = mats[0];
+                        }
+                    }
+                    socket.meshRender.material = mats[1];
                 }
             }
             else if (!overMenu)
@@ -120,9 +136,10 @@ public class LevelCanvasManager : MonoBehaviour
                         socket.meshRender.material = mats[0];
                     }
                 }
+                socket = null;
                 AssignSocket(null);
                 CloseBuildMenu();
-
+                CloseRemoveSentryBtn();
             }
         }
     }
@@ -144,23 +161,37 @@ public class LevelCanvasManager : MonoBehaviour
 
     public void ShowAugmentChoices(List<AugmentData> augments)
     {
+        GameManager.Instance.PauseGame();
         augmentMenu.GetComponent<AugmentMenu>().CreateAugmentChoices(augments);
         augmentMenu.SetActive(true);
     }
 
+    public void ShowAttributeChoices()
+    {
+        GameManager.Instance.PauseGame();
+        attributeMenu.GetComponent<AttributeMenu>().SetAttributes();
+        attributeMenu.SetActive(true);
+    }
+
     public void RemoveAugmentChoices()
     {
+        GameManager.Instance.ResumeGame();
         augmentMenu.SetActive(false);
-        
+    }
+
+    public void RemoveAttributeChoices()
+    {
+        GameManager.Instance.ResumeGame();
+        attributeMenu.SetActive(false);
     }
 
     public void CloseBuildMenu()
     {
         buildMenu.SetActive(false);
         overMenu = false;
-        if (instantiatedToolTips)
-            Destroy(instantiatedToolTips);
-        instantiatedToolTips = null;
+        if (instantiatedToolTip)
+            Destroy(instantiatedToolTip);
+        instantiatedToolTip = null;
     }
 
     public void OpenBuildMenu()
@@ -170,6 +201,7 @@ public class LevelCanvasManager : MonoBehaviour
 
     public void OpenShopMenu(ShopManager shopManager)
     {
+        GameManager.Instance.PauseGame();
         shopMenu.SetActive(true);
         resourceContainer.SetActive(false);
         shopMenu.GetComponent<ShopMenu>().OpenMenu(shopManager);
@@ -177,6 +209,7 @@ public class LevelCanvasManager : MonoBehaviour
 
     public void CloseShopMenu()
     {
+        GameManager.Instance.ResumeGame();
         shopMenu.SetActive(false);
         resourceContainer.SetActive(true);
     }
@@ -227,5 +260,66 @@ public class LevelCanvasManager : MonoBehaviour
     public void DisableBossHealthBar()
     {
         bossHealthObj.SetActive(false);
+    }
+
+    public void ToggleMap(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            if (!mapUI.activeSelf && GameManager.Instance.currentSelection == CurrentSelection.Playing)
+            {
+                mapUI.SetActive(true);
+            }
+            else
+            {
+                CloseMap();
+            }
+        }
+    }
+
+    public void CloseMap()
+    {
+        mapUI.SetActive(false);
+    }
+
+    public void StartTimer(int seconds)
+    {
+        timer.SetActive(true);
+        StartCoroutine(CountdownCoroutine(seconds));
+    }
+
+    private IEnumerator CountdownCoroutine(int seconds)
+    {
+        while (seconds > 0)
+        {
+            UpdateTimer(seconds);
+            yield return new WaitForSeconds(1);
+            seconds--;
+        }
+
+        UpdateTimer(0);
+        timer.SetActive(false);
+    }
+
+    private void UpdateTimer(int secondsRemaining)
+    {
+        timerTxt.text = secondsRemaining.ToString();
+    }
+
+    public void ShowRemoveSentryBtn()
+    {
+        removeSentryBtn.SetActive(true);
+    }
+
+    public void CloseRemoveSentryBtn()
+    {
+        removeSentryBtn.SetActive(false);
+    }
+
+    public void RemoveSentry()
+    {
+        if (socket)
+            socket.DeleteTurret();
+        CloseRemoveSentryBtn();
     }
 }

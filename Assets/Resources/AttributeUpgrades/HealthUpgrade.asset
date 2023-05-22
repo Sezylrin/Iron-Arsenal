@@ -17,5 +17,5 @@ MonoBehaviour:
   upgradeName: Health
   description: 'Increases max health of your mech by '
   xenoriumCost: 200
-  novaciteCost: 200
-  voidStoneCost: 200
+  novaciteCost: 100
+  voidStoneCost: 25

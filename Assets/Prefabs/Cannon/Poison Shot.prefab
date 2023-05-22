@@ -51,4 +51,4 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: ccb719696d4aa17469debe064b2b4967, type: 2}
   delay: 0.25
   activeAugments: 09000000
-  damageOverTime: 0
+  cannonMat: {fileID: 2100000, guid: e92fdde0e64b4fd4c809d22ed7403869, type: 2}
