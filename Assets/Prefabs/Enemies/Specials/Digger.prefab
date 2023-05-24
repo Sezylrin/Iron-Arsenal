@@ -28,12 +28,12 @@ Transform:
   m_GameObject: {fileID: 1555804699919761650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.028521, y: 0, z: -43.341522}
-  m_LocalScale: {x: 1.5, y: 6, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5969074972219944497}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2335685694809016203
 Rigidbody:
@@ -103,7 +103,7 @@ MonoBehaviour:
   type: 3
   <EnemyRB>k__BackingField: {fileID: 2335685694809016203}
   data: {fileID: 11400000, guid: dedec25265d14244aa357ea96c04abba, type: 2}
-  <Wave>k__BackingField: 0
+  <Difficulty>k__BackingField: 0
   enemyEffects: {fileID: 0}
   damageFactor: 1
   speedFactor: 1
@@ -134,7 +134,7 @@ Transform:
   m_GameObject: {fileID: 5317006578503283564}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_LocalScale: {x: 1.5, y: 3, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1555804699919761656}

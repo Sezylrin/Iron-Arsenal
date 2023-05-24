@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3772610249065574377}
   - component: {fileID: 3772610249065574374}
   - component: {fileID: 3772610249065574375}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 3772610249966449139}
   - component: {fileID: 3772610249966449136}
   - component: {fileID: 3772610249966449137}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 3772610250572434497}
   - component: {fileID: 3772610250572434526}
   - component: {fileID: 3772610250572434527}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Rocket Pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 3772610250611900685}
   - component: {fileID: 3772610250611900682}
   - component: {fileID: 3772610250611900683}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

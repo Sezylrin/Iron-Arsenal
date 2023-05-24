@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7287543024287185471}
   - component: {fileID: 6510799111062939895}
   - component: {fileID: 5469646820657422093}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 2378707394382074789}
   - component: {fileID: 655126966715458468}
   - component: {fileID: 7098148206726068193}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 5052039950939029550}
   - component: {fileID: 5052039950939029549}
   - component: {fileID: 5052039950939029548}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 5052039952760676847}
   - component: {fileID: 5052039952760676846}
   - component: {fileID: 5052039952760676845}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Boss Hunt
   m_TagString: Untagged
   m_Icon: {fileID: 0}

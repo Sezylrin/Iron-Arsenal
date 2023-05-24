@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1697067235043816003}
   - component: {fileID: 5285353970022124411}
   - component: {fileID: 4116538866809860228}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 4463657492390453153}
   - component: {fileID: 4463657492390453152}
   - component: {fileID: 4463657492390453155}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 4463657494305407260}
   - component: {fileID: 4463657494305407257}
   - component: {fileID: 4463657494305407238}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 6786345728125815510}
   - component: {fileID: 7392612505531639512}
   - component: {fileID: 4883441038594649620}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

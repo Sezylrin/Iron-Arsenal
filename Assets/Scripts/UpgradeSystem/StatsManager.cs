@@ -31,6 +31,11 @@ public class StatsManager : MonoBehaviour
     public float initialBoost;
     public float diminishingValue;
 
+    public bool debug = false;
+    public bool upgradeDamage = false;
+    public bool upgradeElemental = false;
+    public bool upgradeHealth = false;
+
     private BaseFunctions playerFunctions;
     void Awake()
     {
@@ -52,6 +57,28 @@ public class StatsManager : MonoBehaviour
         playerFunctions = GameObject.FindWithTag("Player").GetComponent<BaseFunctions>();
         
     }
+
+    private void Update()
+    {
+        if (debug)
+        {
+            if (upgradeDamage)
+            {
+                upgradeDamage = !upgradeDamage;
+                UpgradeDamage();
+            }
+            if (upgradeElemental)
+            {
+                upgradeElemental = !upgradeElemental;
+                UpgradeElemental();
+            }
+            if (upgradeHealth)
+            {
+                upgradeHealth = !upgradeHealth;
+                UpgradeHealth();
+            }
+        }
+    }
     public void UpgradeDamage()
     {
         physicalScale += PhysicalUpgradeAmount();
@@ -68,7 +95,7 @@ public class StatsManager : MonoBehaviour
     public void UpgradeElemental()
     {
         elementalScale += ElementalUpgradeAmount();
-        elementalDamage *= baseElemental * (1f + elementalScale);
+        elementalDamage = baseElemental * (1f + elementalScale);
         elementalLevel++;
     }
     public float ElementalUpgradeAmount()
@@ -80,7 +107,7 @@ public class StatsManager : MonoBehaviour
     public void UpgradeHealth()
     {
         healthScale += HealthUpgradeAmount();
-        healthFactor *= baseHealth * (1f + healthScale);
+        healthFactor = baseHealth * (1f + healthScale);
         healthLevel++;
         playerFunctions.UpdateHealth();
     }
