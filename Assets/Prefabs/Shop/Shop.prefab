@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6288479529484379285}
   - component: {fileID: 4243090031645863874}
   - component: {fileID: 7303992281362554687}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1891651952038337356}
   - component: {fileID: 1891651952038337355}
   - component: {fileID: 1891651952038337354}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 1397303563002747940}
   - component: {fileID: 4274874602591518195}
   - component: {fileID: 8131689779331004742}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 7200562848142675531}
   - component: {fileID: 1521497839238865667}
   - component: {fileID: 3888680243068557296}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +458,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2555611104651271050}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

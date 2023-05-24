@@ -91,7 +91,8 @@ public abstract class Enemy : MonoBehaviour
             damage *= 1.2f;
         float finalDamage = damage * damageFactor;
         CurrentHealth -= finalDamage;
-        NumberManager.Instance.SpawnText(transform.position, finalDamage.ToString(), 1, Color.white);
+        if (finalDamage > 0)
+            NumberManager.Instance.SpawnText(transform.position, finalDamage.ToString(), 1, Color.white);
         if (enemyEffects.isLifeSteal)
         {
             baseFunctions.RecoverHealth(finalDamage * 0.05f);
@@ -99,8 +100,6 @@ public abstract class Enemy : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             StopCoroutine(TakeDamageOverTime(0f));
-            
-            OnDeath();
             if (enemyEffects.isExplode && !type.Equals(EnemyType.Exploder))
             {
                 Explosion tempExplosion = Instantiate(enemyEffects.augmentPFList[0], transform.position, Quaternion.identity).GetComponent<Explosion>();
@@ -114,6 +113,8 @@ public abstract class Enemy : MonoBehaviour
             {
                 baseFunctions.DecreaseRecovery();
             }
+
+            OnDeath();
         }
     }
 
