@@ -350,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 1467747733}
     - target: {fileID: 3200989004822059626, guid: d982d76a9603e85499fa4429e4705203, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 3200989004822059626, guid: d982d76a9603e85499fa4429e4705203, type: 3}
       propertyPath: m_LocalPosition.z
@@ -685,7 +685,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -738,7 +738,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6226,7 +6226,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2

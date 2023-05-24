@@ -44,6 +44,13 @@ public abstract class Enemy : MonoBehaviour
 
     private BaseFunctions baseFunctions;
 
+    public ParticleSystem FirePS;
+    public ParticleSystem PoisonPS;
+    public ParticleSystem IcePS;
+    public bool isFirePSActive = false;
+    public bool isPoisonPSActive = false;
+    public bool isIcePSActive = false;
+
     protected virtual void Init()
     {
         Player = GameObject.Find("Player");
@@ -51,6 +58,18 @@ public abstract class Enemy : MonoBehaviour
         Manager = EnemyManager.Instance;
         Difficulty = Manager.Difficulty;
         SetStats(Manager.EnemyBaseHealth);
+    }
+
+    protected virtual void Awake()
+    {
+        Init();
+    }
+
+    protected virtual void Update()
+    {
+        CheckEffectState();
+        SetRotation();
+        Move();
     }
 
     public virtual void SetStats(float baseHealth)
@@ -188,5 +207,77 @@ public abstract class Enemy : MonoBehaviour
         enemyEffects.SetAugmentState();
         enemyEffects.augmentPFList = augmentPF;
         
+    }
+
+    public void SetParticleSystemState(int particleSystem, bool state)
+    {
+        if (particleSystem == 0)
+        {
+            if (state)
+            {
+                FirePS.Play();
+                isFirePSActive = true;
+            }
+            if (!state)
+            {
+                FirePS.Stop();
+                isFirePSActive = false;
+            }
+        }
+        else if (particleSystem == 1)
+        {
+            if (state)
+            {
+                PoisonPS.Play();
+                isPoisonPSActive = true;
+
+            }
+            if (!state)
+            {
+                PoisonPS.Stop();
+                isPoisonPSActive = false;
+            }
+        }
+        else if (particleSystem == 2)
+        {
+            if (state)
+            {
+                IcePS.Play();
+                isIcePSActive = true;
+            }
+            if (!state)
+            {
+                IcePS.Stop();
+                isIcePSActive = false;
+            }
+        }
+    }
+
+    public void CheckEffectState()
+    {
+        if (enemyEffects.fireTick > 0 && !isFirePSActive)
+        {
+            SetParticleSystemState(0, true);
+        }
+        if (enemyEffects.fireTick == 0 && isFirePSActive)
+        {
+            SetParticleSystemState(0, false);
+        }
+        if (enemyEffects.poisonTick > 0 && !isPoisonPSActive)
+        {
+            SetParticleSystemState(1, true);
+        }
+        if (enemyEffects.poisonTick == 0 && isPoisonPSActive)
+        {
+            SetParticleSystemState(1, false);
+        }
+        if (enemyEffects.frozenAmount > 0 && !isIcePSActive)
+        {
+            SetParticleSystemState(2, true);
+        }
+        if (enemyEffects.frozenAmount == 0 && isIcePSActive)
+        {
+            SetParticleSystemState(2, false);
+        }
     }
 }

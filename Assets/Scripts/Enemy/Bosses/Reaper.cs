@@ -35,7 +35,7 @@ public class Reaper : Boss
 
 
 
-    void Awake()
+    protected override void Awake()
     {
         NumberOfPatterns = 6;
 
@@ -56,7 +56,7 @@ public class Reaper : Boss
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         SetRotation();
 

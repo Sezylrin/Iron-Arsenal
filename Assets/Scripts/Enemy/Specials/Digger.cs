@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class Digger : Enemy
 {
-    private BoxCollider enemyBC;
-    private bool digging;
-
-    void Awake()
-    {
-        Init();
-        enemyBC = GetComponent<BoxCollider>();
-    }
+    public BoxCollider enemyBC;
+    public bool digging;
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +14,9 @@ public class Digger : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        CheckEffectState();
         SetRotation();
         Move();
 

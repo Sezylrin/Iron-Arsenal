@@ -22,7 +22,7 @@ public class Destroyer : Boss
 
     private bool canCharge;
 
-    void Awake()
+    protected override void Awake()
     {
         NumberOfPatterns = 5;
 
@@ -41,7 +41,7 @@ public class Destroyer : Boss
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         SetRotation();
 
