@@ -12,6 +12,7 @@ public class PlayerData : ScriptableObject
     [Range(0.1f, 2f)] public float accelPower;
     public bool allowStopPower;
     [Range(0.1f, 2f)] public float stopPower;
+    public float rotateSpeed;
 
     [Header("Friction")] public float frictionAmount;
 }

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _moveInput;
     private Rigidbody _rb;
     private Vector3 rotate;
-    public float angleSpeed;
+    private Coroutine lookCoroutine;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -43,15 +43,33 @@ public class PlayerController : MonoBehaviour
         // MovePlayer(1);
         NewMovePlayer(1);
         if (_moveInput.magnitude > 0.8f)
-            rotate =  new Vector3(_moveInput.x, 0, _moveInput.y);
-        Quaternion rotation;
-        if (rotate != Vector3.zero)
         {
-            rotation = Quaternion.LookRotation(rotate, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * angleSpeed);
+            rotate = new Vector3(_moveInput.x, 0, _moveInput.y);
+            
         }
+        Quaternion lookRotate = Quaternion.LookRotation(rotate, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotate, playerData.rotateSpeed * 180 * Time.deltaTime);
+    }
+    public void StartRotating()
+    {
+        if(lookCoroutine!= null)
+        {
+            StopCoroutine(lookCoroutine);
+        }
+        lookCoroutine = StartCoroutine(LookAt());
     }
 
+    private IEnumerator LookAt()
+    {
+        Quaternion lookRotation = Quaternion.LookRotation(rotate + transform.position);
+        float time = 0;
+        while (time < 1)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, time);
+            time += Time.deltaTime * playerData.rotateSpeed;
+            yield return null;
+        }
+    }
     public void MovePlayer(float lerpAmount)
     {
         Vector3 movementVector3 = new Vector3(_moveInput.x, 0f, _moveInput.y);

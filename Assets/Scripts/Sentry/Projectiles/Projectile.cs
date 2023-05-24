@@ -102,6 +102,7 @@ public class Projectile : MonoBehaviour
             defaultMask = LayerMask.NameToLayer("projectileOver");
         else
             defaultMask = LayerMask.NameToLayer("projectileUnder");
+        SetLayerRecursively(gameObject, LayerMask.NameToLayer("projectileOver"));
         Invoke("SetLayer", 0.2f);
     }
 
