@@ -63,7 +63,39 @@ Transform:
   - {fileID: 5099565300703248956}
   - {fileID: 1859355995}
   - {fileID: 3718382921269069829}
+  - {fileID: 564832185837492937}
   m_Father: {fileID: 5099565300877849572}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3475803863166701754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 564832185837492937}
+  m_Layer: 0
+  m_Name: MiscContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &564832185837492937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475803863166701754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3466602170220352806}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5099565300703248957
@@ -177,7 +209,8 @@ MonoBehaviour:
   groundTile: {fileID: 4615277617440184175, guid: b4d5e1293210fca4c9dc451d739be638, type: 3}
   groundMapTile: {fileID: 3751377949531917548, guid: f7de2f10e535c3d44b02236c4bfac47f, type: 3}
   undiscoveredGroundMapTile: {fileID: 6325665929944485418, guid: 5c99d03a3a9f26c41afd98a727bb0a22, type: 3}
-  undiscoveredEventMapTile: {fileID: 131144766746459055, guid: 4ad124df4bff7ff47abe6ec08a1d7dc8, type: 3}
+  undiscoveredEventMapTile: {fileID: 6553077968444212982, guid: 58c8df80c8434944f92837cc927bb6ba, type: 3}
+  radarMapTileHighlight: {fileID: 4292456823423361242, guid: 9e64cd1a61ebf384b908ffdebe384cf2, type: 3}
   spawnableEventList:
   - eventToSpawn: {fileID: 5100279081852817202, guid: 637c161f44b007a4b96886eb0307d689, type: 3}
     chanceToSpawn: 20
@@ -208,8 +241,9 @@ MonoBehaviour:
   eventTilesContainer: {fileID: 5099565300703248956}
   mapTilesContainer: {fileID: 1859355995}
   undiscoveredMapTilesContainer: {fileID: 3718382921269069829}
+  miscContainer: {fileID: 564832185837492937}
   groundRadius: 10
-  eventRadius: 25
+  eventRadius: 26
   tileOffset: 9
   minTilesBtwnEvents: 5
 --- !u!1 &7202865628498427888
