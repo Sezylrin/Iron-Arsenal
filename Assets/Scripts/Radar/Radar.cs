@@ -9,6 +9,9 @@ using UnityEngine.UI;
 public class Radar : MonoBehaviour
 {
     public MapGenerator mapGenerator;
+    public GameObject minimapRadarOverlay;
+    private RectTransform minimapRadarOverlayRectTrans;
+    public Transform radarButtonsContainer;
     // public Vector2 sizeScale = new Vector2(100, 100);
     public float sizeScale = 100f;
     public Vector3 startLocalPos;
@@ -17,10 +20,13 @@ public class Radar : MonoBehaviour
     // public GameObject mapCanvas;
     private List<MapGenerator.SpawnableEvent> spawnableEventsList;
     private List<Button> buttonsList = new List<Button>();
+    public MapGenerator.EventTile scannedEvent = null;
+    public bool isActiveScan = false;
     // private List<UnityAction> listeners = new List<UnityAction>();
     // Start is called before the first frame update
     void Start()
     {
+        minimapRadarOverlayRectTrans = minimapRadarOverlay.GetComponent<RectTransform>();
         if (buttonOffset < sizeScale) Debug.LogWarning("Button Offset should be >= Size Scale or the buttons overlap");
         spawnableEventsList = mapGenerator.spawnableEventList;
         CreateButtons();
@@ -29,19 +35,6 @@ public class Radar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            MapGenerator.EventTile eventTile = Scan(spawnableEventsList[0]);
-            if (eventTile == null)
-            {
-                Debug.Log("No " + spawnableEventsList[0].eventToSpawn.name +" found");
-            }
-            else
-            {
-                Debug.Log(eventTile.tileObjectPtr.transform.position);
-                Debug.Log(eventTile.tileObjectPtr.name);
-            }
-        }
     }
 
     private void CreateButtons()
@@ -58,7 +51,7 @@ public class Radar : MonoBehaviour
     {
         GameObject buttonObject = TMP_DefaultControls.CreateButton(resources);
 
-        buttonObject.transform.SetParent(gameObject.transform, false);
+        buttonObject.transform.SetParent(radarButtonsContainer, false);
         RectTransform buttonRectTrans = buttonObject.GetComponent<RectTransform>();
         buttonRectTrans.sizeDelta = new Vector2(sizeScale, sizeScale);
         if (i < maxButtonsInRow)
@@ -106,14 +99,18 @@ public class Radar : MonoBehaviour
 
     private void RevealEvent(MapGenerator.EventTile eventTile)
     {
-        if (eventTile == null)
+        scannedEvent = eventTile;
+        if (scannedEvent == null)
         {
             Debug.Log("Unluggy");
             return;
         }
-        eventTile.isDiscovered = true;
-        Debug.Log(eventTile.tileObjectPtr.transform.position);
+        scannedEvent.isDiscovered = true;
+        Debug.Log(scannedEvent.tileObjectPtr.transform.position);
         //TODO: Do UI things
+        mapGenerator.SpawnRadarHighlight(scannedEvent.tileObjectPtr.transform.position);
+        isActiveScan = true;
+        minimapRadarOverlay.SetActive(true);
     }
 
     private float DistFromPlayer(Vector3 pos) => Vector3.Distance(pos, mapGenerator.player.transform.position);

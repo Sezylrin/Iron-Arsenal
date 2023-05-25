@@ -12,8 +12,8 @@ public class MapGenerator : MonoBehaviour
     public GameObject groundTile;
     public GameObject groundMapTile;
     public GameObject undiscoveredGroundMapTile;
-
     public GameObject undiscoveredEventMapTile;
+    public GameObject radarMapTileHighlight;
 
     [Serializable]
     public class SpawnableEvent
@@ -30,6 +30,7 @@ public class MapGenerator : MonoBehaviour
     public Transform eventTilesContainer;
     public Transform mapTilesContainer;
     public Transform undiscoveredMapTilesContainer;
+    public Transform miscContainer;
 
     [Header("How many tiles away from the player that ground will spawn")]
     public int groundRadius = 10;
@@ -240,6 +241,12 @@ public class MapGenerator : MonoBehaviour
         return tileType;
     }
 
+    public void SpawnRadarHighlight(Vector3 pos)
+    {
+        GameObject obj = Instantiate(radarMapTileHighlight, pos, Quaternion.identity, miscContainer);
+        obj.GetComponent<RadarMapTileHighlight>().mapGenerator = this;
+    }
+
     private class GroundTile
     {
         public float cTimestamp;
@@ -299,9 +306,9 @@ public class MapGenerator : MonoBehaviour
         return false;
     }
 
-    private float DistFromPlayer(GameObject obj)
+    public float DistFromPlayer(GameObject obj)
     {
         return Vector3.Distance( new Vector3(obj.transform.position.x, 0, obj.transform.position.z),
-            new Vector3(XPlayerLocation, 0, ZPlayerLocation));
+            new Vector3(player.transform.position.x, 0, player.transform.position.z));
     }
 }

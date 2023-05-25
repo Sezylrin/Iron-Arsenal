@@ -14,6 +14,10 @@ public class RadarCanvasManager : MonoBehaviour
     private float radarTimer = 0;
     public bool isRadarOffCooldown = true;
 
+    public Radar radar;
+    public MapGenerator mapGenerator;
+    public RectTransform minimapRadarOverlayRectTrans;
+
     private void Awake()
     {
         if (Instance != null)
@@ -34,6 +38,8 @@ public class RadarCanvasManager : MonoBehaviour
     void Update()
     {
         TickRadarCooldown();
+        ControlRadarOverlay();
+        RotateRadarOverlay();
     }
 
     private void TickRadarCooldown()
@@ -50,15 +56,30 @@ public class RadarCanvasManager : MonoBehaviour
         }
     }
 
+    public void ToggleRadarMenu()
+    {
+        if (!isRadarOffCooldown) return;
+        radarMenu.SetActive(!radarMenu.activeSelf);
+    }
+
     public void ResetRadarCooldown()
     {
         radarTimer = 0;
         isRadarOffCooldown = false;
     }
 
-    public void ToggleRadarMenu()
+    private void ControlRadarOverlay()
     {
-        if (!isRadarOffCooldown) return;
-        radarMenu.SetActive(!radarMenu.activeSelf);
+        if (radar.scannedEvent == null || mapGenerator.DistFromPlayer(radar.scannedEvent.tileObjectPtr) < mapGenerator.tileOffset) radar.isActiveScan = false;
+        minimapRadarOverlayRectTrans.gameObject.SetActive(!(!radar.isActiveScan || mapGenerator.DistFromPlayer(radar.scannedEvent.tileObjectPtr) < mapGenerator.tileOffset * 5));
+    }
+
+    private void RotateRadarOverlay()
+    {
+        if (!minimapRadarOverlayRectTrans.gameObject.activeSelf || radar.scannedEvent == null) return;
+        Vector3 tilePos = radar.scannedEvent.tileObjectPtr.transform.position;
+        Vector3 playerPos = mapGenerator.player.transform.position;
+
+        minimapRadarOverlayRectTrans.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(-(tilePos.x - playerPos.x), (tilePos.z - playerPos.z)) * Mathf.Rad2Deg);
     }
 }

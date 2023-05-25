@@ -163,6 +163,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 952258115}
     m_Modifications:
+    - target: {fileID: 1855059123322950584, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
+      propertyPath: m_Name
+      value: MapOverlay
+      objectReference: {fileID: 0}
     - target: {fileID: 1855059123989932641, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -272,7 +276,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1855059123989932641, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 835452668}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1855059123989932642, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 249045436}
   m_SourcePrefab: {fileID: 100100000, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
 --- !u!224 &125248752 stripped
 RectTransform:
@@ -558,6 +565,57 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1855059123989932642, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
   m_PrefabInstance: {fileID: 125248751}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &249045436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249045435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a649953bf029c4182cde004cef95b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerator: {fileID: 824777049}
+  minimapRadarOverlay: {fileID: 1264345010}
+  radarButtonsContainer: {fileID: 835452668}
+  sizeScale: 100
+  startLocalPos: {x: 0, y: 0, z: 0}
+  buttonOffset: 150
+  maxButtonsInRow: 4
+  isActiveScan: 0
+--- !u!1 &439838693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 439838694}
+  m_Layer: 0
+  m_Name: MiscContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &439838694
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439838693}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1063297994}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &518774359
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +660,7 @@ GameObject:
   - component: {fileID: 521823591}
   - component: {fileID: 521823590}
   m_Layer: 5
-  m_Name: Image
+  m_Name: DulledImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,6 +825,14 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: miscContainer
+      value: 
+      objectReference: {fileID: 439838694}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      propertyPath: radarMapTileHighlight
+      value: 
+      objectReference: {fileID: 4292456823423361242, guid: 9e64cd1a61ebf384b908ffdebe384cf2, type: 3}
+    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
       propertyPath: undiscoveredEventMapTile
       value: 
       objectReference: {fileID: 6553077968444212982, guid: 58c8df80c8434944f92837cc927bb6ba, type: 3}
@@ -872,7 +938,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3466602170220352806, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 439838694}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
 --- !u!1 &717110170
@@ -1105,9 +1174,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 835452668}
-  - component: {fileID: 835452669}
   m_Layer: 5
-  m_Name: Radars
+  m_Name: RadarButtonsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1133,23 +1201,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -359}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &835452669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835452667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21a649953bf029c4182cde004cef95b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapGenerator: {fileID: 824777049}
-  sizeScale: 100
-  startLocalPos: {x: 0, y: 0, z: 0}
-  buttonOffset: 150
-  maxButtonsInRow: 4
 --- !u!1 &850284813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,6 +1537,9 @@ MonoBehaviour:
   cooldown: 5
   radarMenu: {fileID: 835452667}
   isRadarOffCooldown: 1
+  radar: {fileID: 249045436}
+  mapGenerator: {fileID: 824777049}
+  minimapRadarOverlayRectTrans: {fileID: 1264345011}
 --- !u!4 &1055231291
 Transform:
   m_ObjectHideFlags: 0
@@ -1501,6 +1555,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1063297994 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3466602170220352806, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+  m_PrefabInstance: {fileID: 660501568}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1069118555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,7 +1665,7 @@ GameObject:
   - component: {fileID: 1093180253}
   - component: {fileID: 1093180252}
   m_Layer: 5
-  m_Name: Image
+  m_Name: RadarMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1853,6 +1912,97 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1264345010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1264345011}
+  - component: {fileID: 1264345013}
+  - component: {fileID: 1264345012}
+  - component: {fileID: 1264345014}
+  m_Layer: 5
+  m_Name: RadarOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1264345011
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264345010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1945449196}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 760, y: 340}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1264345012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264345010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9056604, g: 0.28622285, b: 0.29811063, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 591de36dc554b1f4da8b0a11abe6851f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1264345013
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264345010}
+  m_CullTransparentMesh: 1
+--- !u!114 &1264345014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264345010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d233743841ccc68448c428ea31db8231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerator: {fileID: 0}
+  active: 0
 --- !u!1 &1280456020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2708,7 +2858,7 @@ GameObject:
   - component: {fileID: 1556493142}
   - component: {fileID: 1556493141}
   m_Layer: 5
-  m_Name: RadarButton
+  m_Name: RadarButtonImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3322,13 +3472,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 952258115}
     m_Modifications:
-    - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+    - target: {fileID: 8251727062273463127, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+    - target: {fileID: 8251727062273463127, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251727062273463127, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251727062273463127, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251727062273463127, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251727062273463127, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251727062273463127, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 760
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251727062273463127, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 340
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+      propertyPath: m_Pivot.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
       propertyPath: m_RootOrder
@@ -3336,19 +3518,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3388,11 +3570,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -910
       objectReference: {fileID: 0}
     - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -490
       objectReference: {fileID: 0}
     - target: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3410,9 +3592,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minimap
       objectReference: {fileID: 0}
+    - target: {fileID: 8251727062663705059, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+      propertyPath: m_Name
+      value: MinimapOverlay
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8251727062418803024, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1264345011}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3ed074971f99ad448df4dea7f84ea78, type: 3}
 --- !u!224 &1945449196 stripped
