@@ -22,6 +22,7 @@ public class Radar : MonoBehaviour
     private List<Button> buttonsList = new List<Button>();
     public MapGenerator.EventTile scannedEvent = null;
     public bool isActiveScan = false;
+    public bool levelCanvas = true;
     // private List<UnityAction> listeners = new List<UnityAction>();
     // Start is called before the first frame update
     void Start()
@@ -75,8 +76,16 @@ public class Radar : MonoBehaviour
         }
 
         button.onClick.AddListener(() => RevealEvent(Scan(spawnableEventsList[i])));
-        button.onClick.AddListener(RadarCanvasManager.Instance.ToggleRadarMenu);
-        button.onClick.AddListener(RadarCanvasManager.Instance.ResetRadarCooldown);
+        if (levelCanvas)
+        {
+            button.onClick.AddListener(LevelCanvasManager.Instance.ToggleRadarMenu);
+            button.onClick.AddListener(LevelCanvasManager.Instance.ResetRadarCooldown);
+        }
+        else
+        {
+            button.onClick.AddListener(RadarCanvasManager.Instance.ToggleRadarMenu);
+            button.onClick.AddListener(RadarCanvasManager.Instance.ResetRadarCooldown);
+        }
         buttonsList.Add(button);
     }
 
