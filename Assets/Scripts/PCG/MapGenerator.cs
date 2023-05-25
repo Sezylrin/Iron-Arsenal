@@ -41,6 +41,8 @@ public class MapGenerator : MonoBehaviour
     [Header("Tiles between event spawns")]
     public int minTilesBtwnEvents;
 
+    public bool spawnTiles = true;
+
     private Vector3 startPos = Vector3.zero;
 
     private int XPlayerMove => (int)(player.transform.position.x - startPos.x);
@@ -62,6 +64,7 @@ public class MapGenerator : MonoBehaviour
         {
             player = LevelManager.Instance.player;
         }
+        if (!spawnTiles) return;
         GenerateTiles();
         // UpdateActiveTiles();
         UpdateMapTiles();
@@ -69,6 +72,7 @@ public class MapGenerator : MonoBehaviour
 
     private void Update()
     {
+        if (!spawnTiles) return;
         UpdateMapTiles();
         if (!PlayerHasMoved()) return;
         GenerateTiles();

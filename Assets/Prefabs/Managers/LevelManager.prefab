@@ -4760,6 +4760,13 @@ MonoBehaviour:
   instantiatedToolTip: {fileID: 0}
   overMenu: 0
   mapUI: {fileID: 1855059123350522713}
+  radarButton: {fileID: 0}
+  radarCooldown: 60
+  radarMenu: {fileID: 0}
+  isRadarOffCooldown: 1
+  radar: {fileID: 0}
+  mapGenerator: {fileID: 0}
+  minimapRadarOverlayRectTrans: {fileID: 0}
 --- !u!114 &5309985938440111603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15767,6 +15774,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1715962026865805885}
     m_Modifications:
+    - target: {fileID: 1556493141, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1715962026865805886}
     - target: {fileID: 1855059123989932641, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

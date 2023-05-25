@@ -164,6 +164,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 952258115}
     m_Modifications:
     - target: {fileID: 249045436, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
+      propertyPath: levelCanvas
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 249045436, guid: af8f670e48db56844b2ed4edfd4b7abb, type: 3}
       propertyPath: mapGenerator
       value: 
       objectReference: {fileID: 824777049}
