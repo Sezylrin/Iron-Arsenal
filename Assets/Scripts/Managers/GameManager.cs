@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System.Collections;
 
 public enum CurrentSelection
 {
@@ -30,10 +32,34 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject BGM80;
     [SerializeField] private GameObject BGM100;
 
-    [Header("Volume")]
-    public int SFXVolume = 100;
-    public int BGMVolume = 100;
-    
+    [Header("Sound")]
+    [SerializeField] private AudioClip clickSound;
+    private AudioSource audioSrc;
+    private float _sfxVolume = 1f;
+    public float SFXVolume
+    {
+        get { return _sfxVolume; }
+        set
+        {
+            _sfxVolume = value;
+            NotifySFXVolumeObservers();
+        }
+    }
+
+    private float _bgmVolume = 1f;
+    public float BGMVolume
+    {
+        get { return _bgmVolume; }
+        set
+        {
+            _bgmVolume = value;
+            NotifyBGMVolumeObservers();
+        }
+    }
+
+    private List<ISFXVolumeObserver> sfxVolumeObservers = new List<ISFXVolumeObserver>();
+    private List<IBGMVolumeObserver> bgmVolumeObservers = new List<IBGMVolumeObserver>();
+
     private LevelManager levelManager;
     public CurrentSelection currentSelection = CurrentSelection.Playing;
 
@@ -48,10 +74,15 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+    private void Start()
+    {
+
         if (LevelManager.Instance != null)
         {
             levelManager = LevelManager.Instance;
         }
+        audioSrc = gameObject.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -82,14 +113,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void PlayClickSound()
+    {
+        audioSrc.clip = clickSound;
+        audioSrc.Play();
+    }
+
     public void PlayGame()
     {
         currentSelection = CurrentSelection.Playing;
+        StartCoroutine(LoadPlayScene());
+    }
+
+    IEnumerator LoadPlayScene()
+    {
+        yield return new WaitForSeconds(0.5f);
         Loader.Load(SceneState.Game);
     }
 
     public void QuitGame()
     {
+        StartCoroutine(LoadQuitGame());
+    }
+
+    IEnumerator LoadQuitGame()
+    {
+        yield return new WaitForSeconds(0.5f);
         Application.Quit();
     }
 
@@ -109,6 +158,7 @@ public class GameManager : MonoBehaviour
     {
         currentSelection = CurrentSelection.Playing;
         pauseMenu.SetActive(false);
+        PlayClickSound();
     }
 
     public void HandleDisplaySettings()
@@ -117,23 +167,25 @@ public class GameManager : MonoBehaviour
         currentSelection = CurrentSelection.Settings;
         pauseMenu.SetActive(false);
         settingsMenu.SetActive(true);
+        PlayClickSound();
     }
 
     public void HandleQuit()
     {
         pauseMenu.SetActive(false);
         Loader.Load(SceneState.MainMenu);
+        PlayClickSound();
         DestroyImmediate(this);
     }
 
     public void IncreaseSFX()
     {
-        if (SFXVolume < 100)
+        if (SFXVolume < 1f)
         {
-            SFXVolume += 20;
-            if (SFXVolume > 100)
+            SFXVolume += 0.2f;
+            if (SFXVolume > 1f)
             {
-                SFXVolume = 100;
+                SFXVolume = 1f;
             }
             UpdateSFXBars();
         }
@@ -141,12 +193,12 @@ public class GameManager : MonoBehaviour
 
     public void DecreaseSFX()
     {
-        if (SFXVolume > 0)
+        if (SFXVolume > 0f)
         {
-            SFXVolume -= 20;
-            if (SFXVolume < 0)
+            SFXVolume -= 0.2f;
+            if (SFXVolume < 0f)
             {
-                SFXVolume = 0;
+                SFXVolume = 0f;
             }
             UpdateSFXBars();
         }
@@ -154,12 +206,12 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseBGM()
     {
-        if (BGMVolume < 100)
+        if (BGMVolume < 1f)
         {
-            BGMVolume += 20;
-            if (BGMVolume > 100)
+            BGMVolume += 0.2f;
+            if (BGMVolume > 1f)
             {
-                BGMVolume = 100;
+                BGMVolume = 1f;
             }
             UpdateBGMBars();
         }
@@ -167,12 +219,12 @@ public class GameManager : MonoBehaviour
 
     public void DecreaseBGM()
     {
-        if (BGMVolume > 0)
+        if (BGMVolume > 0f)
         {
-            BGMVolume -= 20;
-            if (BGMVolume < 0)
+            BGMVolume -= 0.2f;
+            if (BGMVolume < 0f)
             {
-                BGMVolume = 0;
+                BGMVolume = 0f;
             }
             UpdateBGMBars();
         }
@@ -180,31 +232,37 @@ public class GameManager : MonoBehaviour
 
     private void UpdateSFXBars()
     {
-        SFX20.SetActive(SFXVolume >= 20);
-        SFX40.SetActive(SFXVolume >= 40);
-        SFX60.SetActive(SFXVolume >= 60);
-        SFX80.SetActive(SFXVolume >= 80);
-        SFX100.SetActive(SFXVolume >= 100);
+        SFX20.SetActive(SFXVolume >= 0.2f);
+        SFX40.SetActive(SFXVolume >= 0.4f);
+        SFX60.SetActive(SFXVolume >= 0.6f);
+        SFX80.SetActive(SFXVolume >= 0.8f);
+        SFX100.SetActive(SFXVolume >= 1f);
     }
 
     private void UpdateBGMBars()
     {
-        BGM20.SetActive(BGMVolume >= 20);
-        BGM40.SetActive(BGMVolume >= 40);
-        BGM60.SetActive(BGMVolume >= 60);
-        BGM80.SetActive(BGMVolume >= 80);
-        BGM100.SetActive(BGMVolume >= 100);
+        BGM20.SetActive(BGMVolume >= 0.2f);
+        BGM40.SetActive(BGMVolume >= 0.4f);
+        BGM60.SetActive(BGMVolume >= 0.6f);
+        BGM80.SetActive(BGMVolume >= 0.8f);
+        BGM100.SetActive(BGMVolume >= 1f);
     }
 
     public void HandleSaveSettings()
     {
-        currentSelection = CurrentSelection.Paused;
+        PlayClickSound();
+        Scene currentScene = SceneManager.GetActiveScene();
         settingsMenu.SetActive(false);
-        pauseMenu.SetActive(true);
+        if (currentScene.name == SceneState.Game.ToString())
+        {
+            currentSelection = CurrentSelection.Paused;
+            pauseMenu.SetActive(true);
+        }
     }
 
     public void HandleExitSettings()
     {
+        PlayClickSound();
         Scene currentScene = SceneManager.GetActiveScene();
         settingsMenu.SetActive(false);
         if (currentScene.name == SceneState.Game.ToString())
@@ -222,5 +280,53 @@ public class GameManager : MonoBehaviour
     public void HandleVictory()
     {
         Loader.Load(SceneState.Victory);
+    }
+
+    public void RegisterSFXVolumeObserver(ISFXVolumeObserver observer)
+    {
+        if (!sfxVolumeObservers.Contains(observer))
+        {
+            sfxVolumeObservers.Add(observer);
+        }
+    }
+
+    public void UnregisterSFXVolumeObserver(ISFXVolumeObserver observer)
+    {
+        if (sfxVolumeObservers.Contains(observer))
+        {
+            sfxVolumeObservers.Remove(observer);
+        }
+    }
+
+    public void RegisterBGMVolumeObserver(IBGMVolumeObserver observer)
+    {
+        if (!bgmVolumeObservers.Contains(observer))
+        {
+            bgmVolumeObservers.Add(observer);
+        }
+    }
+
+    public void UnregisterBGMVolumeObserver(IBGMVolumeObserver observer)
+    {
+        if (bgmVolumeObservers.Contains(observer))
+        {
+            bgmVolumeObservers.Remove(observer);
+        }
+    }
+
+    private void NotifySFXVolumeObservers()
+    {
+        foreach (ISFXVolumeObserver observer in sfxVolumeObservers)
+        {
+            observer.OnSFXVolumeChanged(SFXVolume);
+        }
+    }
+
+    private void NotifyBGMVolumeObservers()
+    {
+        foreach (IBGMVolumeObserver observer in bgmVolumeObservers)
+        {
+            observer.OnBGMVolumeChanged(BGMVolume);
+        }
     }
 }

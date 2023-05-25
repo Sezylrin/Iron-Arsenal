@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2285969793866708957}
   - component: {fileID: 1597327573500159768}
   - component: {fileID: 4949247403972368733}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TempGroundTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 362598566149298418}
   - component: {fileID: 362598566149298421}
   - component: {fileID: 362598566149298420}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Mining Area
   m_TagString: MiningArea
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 362598567437902552}
   - component: {fileID: 362598567437902555}
   - component: {fileID: 362598567437902554}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 362598567648167907}
   - component: {fileID: 362598567648167906}
   - component: {fileID: 362598567648167909}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Voidstone Mining Outpost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 2597844643383136459}
   - component: {fileID: 376757222310840051}
   - component: {fileID: 6704544462924006984}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 5043226595694865071}
   - component: {fileID: 7312541637731787403}
   - component: {fileID: 7966475003627266338}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
