@@ -82,12 +82,9 @@ public class GameManager : MonoBehaviour
         {
             levelManager = LevelManager.Instance;
         }
-    }
-
-    private void Start()
-    {
         audioSrc = gameObject.GetComponent<AudioSource>();
     }
+
 
     private void Update()
     {
