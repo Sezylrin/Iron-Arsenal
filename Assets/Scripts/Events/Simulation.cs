@@ -21,6 +21,7 @@ public class Simulation : Event
     protected override void Begin()
     {
         playerCannonScript.UnlockRandomCannon();
+        WeaponWheelButtonController.UpdateUnlockedCannons();
         playerCannonScript.SetSwitchingEnabledState(false);
         EnemyManager.Instance.StartRushWithTimer(LengthInSeconds);
         LevelCanvasManager.Instance.StartTimer(LengthInSeconds);
