@@ -8,7 +8,7 @@ public class ASIceShards : MonoBehaviour
     private bool isInit = false;
     void Start()
     {
-        Invoke("DestroySelf", 1f);
+        Invoke("DestroySelf", 0.5f);
     }
 
     // Update is called once per frame
@@ -16,7 +16,7 @@ public class ASIceShards : MonoBehaviour
     {
         if (!isInit)
             return;
-        transform.Translate(Vector3.forward * 4 * Time.deltaTime);
+        transform.Translate(Vector3.forward * 8 * Time.deltaTime);
     }
 
     public void Init(Vector3 dir)

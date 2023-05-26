@@ -12,7 +12,7 @@ public class Breeder : Boss
     public bool canSpawnBasic;
     public bool canSpawnSpecial;
 
-    void Awake()
+    protected override void Awake()
     {
         NumberOfPatterns = 6;
 
@@ -29,7 +29,7 @@ public class Breeder : Boss
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         SetRotation();
 

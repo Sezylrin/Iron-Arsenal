@@ -37,6 +37,8 @@ public class Sentry : MonoBehaviour
 
     private SentryEffects sentryEffects;
 
+    public ParticleSystem muzzleFlash;
+
     public bool isDouble = false;
     void Start()
     {
@@ -124,6 +126,8 @@ public class Sentry : MonoBehaviour
 
     private void ShootTarget(Vector3 offSet)
     {
+        muzzleFlash.Play();
+        
         GameObject bullet;
         Projectile bulletProj;
         if (pooledBullets.ListCount() > 0)

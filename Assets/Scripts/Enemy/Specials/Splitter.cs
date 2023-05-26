@@ -8,24 +8,6 @@ public class Splitter : Enemy
     public Transform spawnPoint1;
     public Transform spawnPoint2;
 
-    void Awake()
-    {
-        Init();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        SetRotation();
-        Move();
-    }
-
     protected override void OnDeath()
     {
         Manager.SpawnEnemy(false, 0, spawnPoint1.position);

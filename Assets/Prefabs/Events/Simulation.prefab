@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3513971951733025315}
   - component: {fileID: 4519692380745000022}
   - component: {fileID: 3538536659956082410}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 4615687775555331033}
   - component: {fileID: 4615687775555331032}
   - component: {fileID: 4615687775555331035}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 4615687775888522596}
   - component: {fileID: 4615687775888522593}
   - component: {fileID: 4615687775888522592}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Simulation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 6910675348469943805}
   - component: {fileID: 5639042845673016673}
   - component: {fileID: 4268809379659140988}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

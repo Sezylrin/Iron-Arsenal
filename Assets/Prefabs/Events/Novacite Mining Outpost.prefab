@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9020374503857610527}
   - component: {fileID: 8056875562013455380}
   - component: {fileID: 8828590916475832385}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 5100279080220998507}
   - component: {fileID: 5100279080220998506}
   - component: {fileID: 5100279080220998509}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Mining Area
   m_TagString: MiningArea
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 5100279080379219050}
   - component: {fileID: 5100279080379219053}
   - component: {fileID: 5100279080379219052}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 5100279081852817200}
   - component: {fileID: 5100279081852817203}
   - component: {fileID: 5100279081852817100}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Novacite Mining Outpost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,6 +507,7 @@ MonoBehaviour:
   canvas: {fileID: 1075403317139514154}
   type: 0
   miningArea: {fileID: 5100279080220998511}
+  <text>k__BackingField: {fileID: 8828590916475832385}
 --- !u!1 &6602918104687742404
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +520,7 @@ GameObject:
   - component: {fileID: 1075403317139514154}
   - component: {fileID: 1063480170849066134}
   - component: {fileID: 6623391275524784865}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

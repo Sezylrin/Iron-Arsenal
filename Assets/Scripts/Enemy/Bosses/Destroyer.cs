@@ -22,7 +22,7 @@ public class Destroyer : Boss
 
     private bool canCharge;
 
-    void Awake()
+    protected override void Awake()
     {
         NumberOfPatterns = 5;
 
@@ -41,7 +41,7 @@ public class Destroyer : Boss
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         SetRotation();
 
@@ -106,7 +106,7 @@ public class Destroyer : Boss
         if (canCharge)
         {
             canCharge = false;
-            EnemyRB.AddForce(Vector3.Normalize(new Vector3(Player.transform.position.x - transform.position.x, 0, Player.transform.position.z - transform.position.z)) * 20, ForceMode.Impulse);
+            EnemyRB.AddForce(Vector3.Normalize(new Vector3(Player.transform.position.x - transform.position.x, 0, Player.transform.position.z - transform.position.z)) * 30, ForceMode.Impulse);
         }
     }
 

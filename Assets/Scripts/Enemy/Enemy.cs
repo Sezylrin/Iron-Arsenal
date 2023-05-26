@@ -44,6 +44,13 @@ public abstract class Enemy : MonoBehaviour
 
     private BaseFunctions baseFunctions;
 
+    public ParticleSystem FirePS;
+    public ParticleSystem PoisonPS;
+    public ParticleSystem IcePS;
+    public bool isFirePSActive = false;
+    public bool isPoisonPSActive = false;
+    public bool isIcePSActive = false;
+
     protected virtual void Init()
     {
         Player = GameObject.Find("Player");
@@ -51,6 +58,18 @@ public abstract class Enemy : MonoBehaviour
         Manager = EnemyManager.Instance;
         Difficulty = Manager.Difficulty;
         SetStats(Manager.EnemyBaseHealth);
+    }
+
+    protected virtual void Awake()
+    {
+        Init();
+    }
+
+    protected virtual void Update()
+    {
+        CheckEffectState();
+        SetRotation();
+        Move();
     }
 
     public virtual void SetStats(float baseHealth)
@@ -91,16 +110,15 @@ public abstract class Enemy : MonoBehaviour
             damage *= 1.2f;
         float finalDamage = damage * damageFactor;
         CurrentHealth -= finalDamage;
-        NumberManager.Instance.SpawnText(transform.position, finalDamage.ToString(), 1, Color.white);
+        if (finalDamage > 0)
+            NumberManager.Instance.SpawnText(transform.position, finalDamage.ToString(), 1, Color.white);
         if (enemyEffects.isLifeSteal)
         {
             baseFunctions.RecoverHealth(finalDamage * 0.05f);
         }
         if (CurrentHealth <= 0)
         {
-            StopCoroutine(TakeDamageOverTime(0f));
             
-            OnDeath();
             if (enemyEffects.isExplode && !type.Equals(EnemyType.Exploder))
             {
                 Explosion tempExplosion = Instantiate(enemyEffects.augmentPFList[0], transform.position, Quaternion.identity).GetComponent<Explosion>();
@@ -114,25 +132,8 @@ public abstract class Enemy : MonoBehaviour
             {
                 baseFunctions.DecreaseRecovery();
             }
-        }
-    }
 
-    public virtual void StartDamageOverTime(float damage)
-    {
-        if (gameObject.activeSelf)
-        {
-            StartCoroutine(TakeDamageOverTime(damage));
-        }
-    }
-
-    public IEnumerator TakeDamageOverTime(float damage)
-    {
-        int ticks = 0;
-        while (ticks < 5)
-        {
-            yield return new WaitForSeconds(1f);
-            TakeDamage(damage);
-            ticks++;
+            OnDeath();
         }
     }
 
@@ -143,52 +144,53 @@ public abstract class Enemy : MonoBehaviour
         {
             case EnemyType.Basic:
                 Manager.PoolEnemy(gameObject, 0);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(2, 7));
                 break;
             case EnemyType.Tank:
                 Manager.PoolEnemy(gameObject, 1);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Exploder:
                 Manager.PoolEnemy(gameObject, 2);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Digger:
                 Manager.PoolEnemy(gameObject, 3);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Charger:
                 Manager.PoolEnemy(gameObject, 4);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Shooter:
                 Manager.PoolEnemy(gameObject, 5);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Dodger:
                 Manager.PoolEnemy(gameObject, 6);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Splitter:
                 Manager.PoolEnemy(gameObject, 7);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Cloaker:
                 Manager.PoolEnemy(gameObject, 8);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Burster:
                 Manager.PoolEnemy(gameObject, 9);
-                LevelManager.Instance.GainXenorium((int)Random.Range(10, 21));
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Sprinter:
                 Manager.PoolEnemy(gameObject, 10);
+                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Boss:
                 Destroy(gameObject);
-                LevelManager.Instance.GainXenorium((int)Random.Range(200, 401));
-                LevelManager.Instance.GainNovacite((int)Random.Range(200, 401));
-                LevelManager.Instance.GainVoidStone((int)Random.Range(200, 401));
+                LevelManager.Instance.GainXenorium((int)Random.Range(50, 151));
+                LevelManager.Instance.GainNovacite((int)Random.Range(50, 151));
+                LevelManager.Instance.GainVoidStone((int)Random.Range(50, 151));
                 LevelManager.Instance.SpawnAugmentChoice();
                 break;
             default:
@@ -196,22 +198,6 @@ public abstract class Enemy : MonoBehaviour
                 break;
         }
         enemyEffects.fireTick = 0;
-    }
-
-    public virtual void StartSlow(float slowStrength)
-    {
-        if (gameObject.activeSelf)
-        {
-            StopCoroutine(SlowEnemy(slowStrength));
-            StartCoroutine(SlowEnemy(slowStrength));
-        }
-    }
-            
-    public virtual IEnumerator SlowEnemy(float slowStrength)
-    {
-        Speed = (data.speed * Mathf.Pow(1.005f, Difficulty - 1)) * slowStrength;
-        yield return new WaitForSeconds(5f);
-        Speed = data.speed * Mathf.Pow(1.005f, Difficulty - 1);
     }
 
     public void InitEnemyEffects(GameObject[] augmentPF)
@@ -224,5 +210,77 @@ public abstract class Enemy : MonoBehaviour
         enemyEffects.SetAugmentState();
         enemyEffects.augmentPFList = augmentPF;
         
+    }
+
+    public void SetParticleSystemState(int particleSystem, bool state)
+    {
+        if (particleSystem == 0)
+        {
+            if (state)
+            {
+                FirePS.Play();
+                isFirePSActive = true;
+            }
+            if (!state)
+            {
+                FirePS.Stop();
+                isFirePSActive = false;
+            }
+        }
+        else if (particleSystem == 1)
+        {
+            if (state)
+            {
+                PoisonPS.Play();
+                isPoisonPSActive = true;
+
+            }
+            if (!state)
+            {
+                PoisonPS.Stop();
+                isPoisonPSActive = false;
+            }
+        }
+        else if (particleSystem == 2)
+        {
+            if (state)
+            {
+                IcePS.Play();
+                isIcePSActive = true;
+            }
+            if (!state)
+            {
+                IcePS.Stop();
+                isIcePSActive = false;
+            }
+        }
+    }
+
+    public void CheckEffectState()
+    {
+        if (enemyEffects.fireTick > 0 && !isFirePSActive)
+        {
+            SetParticleSystemState(0, true);
+        }
+        if (enemyEffects.fireTick == 0 && isFirePSActive)
+        {
+            SetParticleSystemState(0, false);
+        }
+        if (enemyEffects.poisonTick > 0 && !isPoisonPSActive)
+        {
+            SetParticleSystemState(1, true);
+        }
+        if (enemyEffects.poisonTick == 0 && isPoisonPSActive)
+        {
+            SetParticleSystemState(1, false);
+        }
+        if (enemyEffects.frozenAmount > 0 && !isIcePSActive)
+        {
+            SetParticleSystemState(2, true);
+        }
+        if (enemyEffects.frozenAmount == 0 && isIcePSActive)
+        {
+            SetParticleSystemState(2, false);
+        }
     }
 }

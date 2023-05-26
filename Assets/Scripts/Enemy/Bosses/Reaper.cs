@@ -35,7 +35,7 @@ public class Reaper : Boss
 
 
 
-    void Awake()
+    protected override void Awake()
     {
         NumberOfPatterns = 6;
 
@@ -56,7 +56,7 @@ public class Reaper : Boss
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         SetRotation();
 
@@ -91,7 +91,7 @@ public class Reaper : Boss
 
     protected override void Pattern3() //Shooting Burst
     {
-        StartCoroutine(PatternLength(3));
+        StartCoroutine(PatternLength(5));
 
         if (Vector3.Distance(Player.transform.position, transform.position) < 15 && ableToShoot)
         {
@@ -117,7 +117,7 @@ public class Reaper : Boss
 
     protected override void Pattern4() //Phazing
     {
-        StartCoroutine(PatternLength(10));
+        StartCoroutine(PatternLength(8));
 
         if (!phazing)
         {
@@ -128,7 +128,7 @@ public class Reaper : Boss
         }
     }
 
-    protected override void Pattern5() //Dash Burst -- May update to go through player
+    protected override void Pattern5() //Dash Burst
     {
         StartCoroutine(PatternLength(7));
 
@@ -136,7 +136,7 @@ public class Reaper : Boss
         {
             canDash = false;
 
-            EnemyRB.AddForce(Vector3.Normalize(new Vector3(Player.transform.position.x - transform.position.x, 0, Player.transform.position.z - transform.position.z)) * 20, ForceMode.Impulse);
+            EnemyRB.AddForce(Vector3.Normalize(new Vector3(Player.transform.position.x - transform.position.x, 0, Player.transform.position.z - transform.position.z)) * 25, ForceMode.Impulse);
 
             StartCoroutine(DelayDashBurst(3f));
         }

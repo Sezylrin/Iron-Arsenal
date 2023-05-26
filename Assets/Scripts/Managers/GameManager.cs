@@ -74,6 +74,10 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+    private void Start()
+    {
+
         if (LevelManager.Instance != null)
         {
             levelManager = LevelManager.Instance;
