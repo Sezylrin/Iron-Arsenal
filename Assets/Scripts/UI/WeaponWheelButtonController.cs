@@ -12,10 +12,14 @@ public class WeaponWheelButtonController : MonoBehaviour
     [SerializeField] private Sprite icon;
 
     private bool selected = false;
+    private Image bgColor;
+    private Color selectedColor = new Color(0f, 0.859f, 1f, 1f);
+    private Color normalColor = new Color(1f, 1f, 1f, 0.647f);
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        bgColor = gameObject.GetComponent<Image>();
     }
 
     void Update()
@@ -25,20 +29,18 @@ public class WeaponWheelButtonController : MonoBehaviour
             selectedItem.sprite = icon;
             itemText.text = itemName;
         }
+        if (WeaponWheelController.weaponID != id)
+        {
+            selected = false;
+            bgColor.color = normalColor;
+        }
     }
 
     public void Selected()
     {
-        Debug.Log("running selected");
         selected = true;
+        gameObject.GetComponent<Image>().color = selectedColor;
         WeaponWheelController.weaponID = id;
-    }
-
-    public void Deselected()
-    {
-        Debug.Log("running deselect");
-        selected = false;
-        WeaponWheelController.weaponID = 0;
     }
 
     public void HoverEnter()
