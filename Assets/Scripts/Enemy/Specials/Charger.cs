@@ -7,11 +7,6 @@ public class Charger : Enemy
     private bool ableToCharge;
     private Vector3 chargeDirection;
 
-    void Awake()
-    {
-        Init();
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +14,9 @@ public class Charger : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        CheckEffectState();
         SetRotation();
 
         if (Vector3.Distance(Player.transform.position, transform.position) > 15)
