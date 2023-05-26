@@ -75,18 +75,14 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    private void Start()
-    {
-
-        if (LevelManager.Instance != null)
-        {
-            levelManager = LevelManager.Instance;
-        }
-    }
 
     private void Start()
     {
         audioSrc = gameObject.GetComponent<AudioSource>();
+        if (LevelManager.Instance != null)
+        {
+            levelManager = LevelManager.Instance;
+        }
     }
 
     private void Update()
