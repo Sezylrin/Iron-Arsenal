@@ -11,7 +11,15 @@ public class WeaponWheelController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Debug.Log(LevelManager.Instance.playerFunctions.cannon.switchingEnabled);
+            LevelManager.Instance.playerFunctions.cannon.SetSwitchingEnabledState(true);
+            LevelManager.Instance.playerFunctions.cannon.UnlockRandomCannon();
+            WeaponWheelButtonController.UpdateUnlockedCannons();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab) && LevelManager.Instance.playerFunctions.cannon.switchingEnabled)
         {
             weaponWheelSelected = !weaponWheelSelected;
         }

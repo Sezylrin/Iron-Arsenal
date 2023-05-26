@@ -29,6 +29,14 @@ public class WeaponWheelButtonController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            foreach (int cannon in unlockedCannons)
+            {
+                Debug.Log(cannon);
+            }
+            Debug.Log("End");
+        }
         if (!unlockedCannons.Contains(id))
         {
             button.interactable = false;
