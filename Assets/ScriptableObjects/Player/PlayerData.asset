@@ -18,4 +18,5 @@ MonoBehaviour:
   accelPower: 1
   allowStopPower: 1
   stopPower: 0.1
+  rotateSpeed: 2
   frictionAmount: 0.2
