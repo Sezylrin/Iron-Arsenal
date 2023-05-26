@@ -60,6 +60,7 @@ MonoBehaviour:
   damageScale: 1
   projMesh: {fileID: 8528025904140244502}
   boxCollider: {fileID: 3721315267408821031}
+  trailPS: {fileID: 6872728095733143030}
   rb: {fileID: 8737183202234941745}
   artificalHitbox: {fileID: 586033576487524514}
   artificalRotate: {fileID: 461279045109559773}
@@ -380,7 +381,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 1
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
