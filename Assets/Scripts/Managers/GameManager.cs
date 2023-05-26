@@ -87,8 +87,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("SFX: " + _sfxVolume);
-        Debug.Log("BGM: " + _bgmVolume);
         if (currentSelection != CurrentSelection.Playing)
         {
             PauseGame();
