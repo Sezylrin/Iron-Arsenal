@@ -28,7 +28,28 @@ public class WeaponWheelController : MonoBehaviour
         switch (weaponID)
         {
             case 0:
-                selectedItem.sprite = pistolImg;
+                //Pistol
+                break;
+            case 1:
+                //Shotgun
+                break;
+            case 2:
+                //Rapid fire
+                break;
+            case 3:
+                //Slow Gun
+                break;
+            case 4:
+                //Poison
+                break;
+            case 5:
+                //Rocket Launcher
+                break;
+            case 6:
+                //Flamethrower
+                break;
+            case 7:
+                //Sniper
                 break;
         }
     }
