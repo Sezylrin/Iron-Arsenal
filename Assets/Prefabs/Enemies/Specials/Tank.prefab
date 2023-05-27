@@ -4945,9 +4945,9 @@ MonoBehaviour:
   enemyEffects: {fileID: 0}
   damageFactor: 1
   speedFactor: 1
-  FirePS: {fileID: 0}
-  PoisonPS: {fileID: 0}
-  IcePS: {fileID: 0}
+  FirePS: {fileID: 1080129404707167721}
+  PoisonPS: {fileID: 1519107814072017390}
+  IcePS: {fileID: 140375963417682438}
   isFirePSActive: 0
   isPoisonPSActive: 0
   isIcePSActive: 0
