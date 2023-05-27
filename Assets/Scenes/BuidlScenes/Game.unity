@@ -423,6 +423,14 @@ PrefabInstance:
       propertyPath: angleSpeed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2021412381409304334, guid: d982d76a9603e85499fa4429e4705203, type: 3}
+      propertyPath: leftDustPS
+      value: 
+      objectReference: {fileID: 528567155}
+    - target: {fileID: 2021412381409304334, guid: d982d76a9603e85499fa4429e4705203, type: 3}
+      propertyPath: rightDustPS
+      value: 
+      objectReference: {fileID: 609008592}
     - target: {fileID: 3200989004822059626, guid: d982d76a9603e85499fa4429e4705203, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
@@ -1043,6 +1051,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478991093}
   m_CullTransparentMesh: 1
+--- !u!198 &528567155 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1422183456098420738, guid: d982d76a9603e85499fa4429e4705203, type: 3}
+  m_PrefabInstance: {fileID: 190739820}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &606322313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,6 +1209,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607852523}
   m_CullTransparentMesh: 1
+--- !u!198 &609008592 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3947426538323054089, guid: d982d76a9603e85499fa4429e4705203, type: 3}
+  m_PrefabInstance: {fileID: 190739820}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &619122840 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1715962026865805885, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
