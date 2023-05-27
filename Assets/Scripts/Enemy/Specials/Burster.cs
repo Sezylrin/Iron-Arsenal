@@ -16,23 +16,10 @@ public class Burster : Enemy
     private GameObject newEnemyBullet;
     private Transform projectilesParent;
 
-    void Awake()
+    protected override void Awake()
     {
         Init();
         projectilesParent = projectilesParent = GameObject.Find("Projectiles Parent").transform;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        SetRotation();
-
-        Move();
     }
 
     protected override void OnDeath()

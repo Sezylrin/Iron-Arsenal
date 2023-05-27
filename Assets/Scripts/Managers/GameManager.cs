@@ -75,14 +75,14 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+
     private void Start()
     {
-
+        audioSrc = gameObject.GetComponent<AudioSource>();
         if (LevelManager.Instance != null)
         {
             levelManager = LevelManager.Instance;
         }
-        audioSrc = gameObject.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -113,7 +113,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void PlayClickSound()
+    public void LoadMainMenu()
+    {
+        Loader.Load(SceneState.MainMenu);
+    }
+
+    public void PlayClickSound()
     {
         audioSrc.clip = clickSound;
         audioSrc.Play();
@@ -158,24 +163,19 @@ public class GameManager : MonoBehaviour
     {
         currentSelection = CurrentSelection.Playing;
         pauseMenu.SetActive(false);
-        PlayClickSound();
     }
 
     public void HandleDisplaySettings()
     {
-        settingsMenu.SetActive(false);
         currentSelection = CurrentSelection.Settings;
         pauseMenu.SetActive(false);
         settingsMenu.SetActive(true);
-        PlayClickSound();
     }
 
     public void HandleQuit()
     {
         pauseMenu.SetActive(false);
         Loader.Load(SceneState.MainMenu);
-        PlayClickSound();
-        DestroyImmediate(this);
     }
 
     public void IncreaseSFX()
@@ -250,7 +250,6 @@ public class GameManager : MonoBehaviour
 
     public void HandleSaveSettings()
     {
-        PlayClickSound();
         Scene currentScene = SceneManager.GetActiveScene();
         settingsMenu.SetActive(false);
         if (currentScene.name == SceneState.Game.ToString())
@@ -262,7 +261,6 @@ public class GameManager : MonoBehaviour
 
     public void HandleExitSettings()
     {
-        PlayClickSound();
         Scene currentScene = SceneManager.GetActiveScene();
         settingsMenu.SetActive(false);
         if (currentScene.name == SceneState.Game.ToString())
@@ -316,6 +314,7 @@ public class GameManager : MonoBehaviour
 
     private void NotifySFXVolumeObservers()
     {
+        audioSrc.volume = SFXVolume;
         foreach (ISFXVolumeObserver observer in sfxVolumeObservers)
         {
             observer.OnSFXVolumeChanged(SFXVolume);

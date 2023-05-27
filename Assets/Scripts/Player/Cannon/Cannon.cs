@@ -26,11 +26,13 @@ public class Cannon : MonoBehaviour
 
     public GameObject projectilePF;
     private GameObject newCannonProjectile;
-    private ParticleSystem flamethrower;
+    public ParticleSystem flamethrower;
     private bool ableToShoot;
     private Transform projectilesParent;
     private bool mouseHeldDown = false;
     private bool firing = false;
+
+    public ParticleSystem muzzleFlash;
 
     private Pooling pooledBullets = new Pooling();      // 0 - Default (Bullets)
     private Pooling pooledShotguns = new Pooling();     // 1 - Shotgun
@@ -46,7 +48,6 @@ public class Cannon : MonoBehaviour
     void Awake()
     {
         projectilesParent = GameObject.Find("Projectiles Parent").transform;
-        flamethrower = gameObject.GetComponent<ParticleSystem>();
     }
 
     // Start is called before the first frame update
@@ -117,6 +118,11 @@ public class Cannon : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0) && ableToShoot)
         {
             ableToShoot = false;
+
+            if (activeCannonProjectile != flamethrowerIndex)
+            {
+                muzzleFlash.Play();
+            }
 
             if (pools[unlockedCannonProjectiles[activeCannonProjectile]].ListCount() > 0)
             {

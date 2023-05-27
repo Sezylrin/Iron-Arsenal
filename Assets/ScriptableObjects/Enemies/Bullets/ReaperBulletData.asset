@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ReaperBulletData
   m_EditorClassIdentifier: 
   damage: 20
-  projectileSpeed: 7.5
+  projectileSpeed: 10
   fireDelay: 0.2
   projectileLifetime: 10

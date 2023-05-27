@@ -26,9 +26,9 @@ public class Chest : Event
 
     protected override void End()
     {
-        LevelManager.Instance.GainXenorium((int)Random.Range(100, 201));
-        LevelManager.Instance.GainNovacite((int)Random.Range(100, 201));
-        LevelManager.Instance.GainVoidStone((int)Random.Range(100, 201));
+        LevelManager.Instance.GainXenorium((int)Random.Range(50, 101));
+        LevelManager.Instance.GainNovacite((int)Random.Range(50, 151));
+        LevelManager.Instance.GainVoidStone((int)Random.Range(50, 151));
         LevelManager.Instance.SpawnAugmentChoice();
         LevelManager.Instance.SpawnAttributeChoice();
         base.End();

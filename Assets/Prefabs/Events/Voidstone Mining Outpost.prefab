@@ -367,6 +367,7 @@ MonoBehaviour:
   canvas: {fileID: 2597844643383136459}
   type: 1
   miningArea: {fileID: 362598566149298423}
+  <text>k__BackingField: {fileID: 7966475003627266338}
 --- !u!1 &5253997268409849548
 GameObject:
   m_ObjectHideFlags: 0
