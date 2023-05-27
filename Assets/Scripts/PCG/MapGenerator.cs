@@ -64,19 +64,86 @@ public class MapGenerator : MonoBehaviour
         {
             player = LevelManager.Instance.player;
         }
-        if (!spawnTiles) return;
-        GenerateTiles();
-        // UpdateActiveTiles();
-        UpdateMapTiles();
+
+        if (spawnTiles)
+        {
+            GenerateTiles();
+            UpdateMapTiles();
+        }
+        else
+        {
+            TutorialSpawn();
+            UpdateMapTiles();
+        }
     }
 
     private void Update()
     {
-        if (!spawnTiles) return;
-        UpdateMapTiles();
-        if (!PlayerHasMoved()) return;
-        GenerateTiles();
-        startPos = player.transform.position;
+        if (spawnTiles)
+        {
+            UpdateMapTiles();
+            if (!PlayerHasMoved()) return;
+            GenerateTiles();
+            startPos = player.transform.position;
+        }
+        else
+        {
+            TutorialSpawn();
+            UpdateMapTiles();
+        }
+    }
+
+    private void TutorialSpawn()
+    {
+        float cTime = Time.realtimeSinceStartup;
+
+        for (int x = -groundRadius; x <= groundRadius; x++)
+        {
+            for (int z = -groundRadius; z <= groundRadius; z++)
+            {
+                Vector3 pos = new Vector3(x * tileOffset + XPlayerLocation, 0, z * tileOffset + ZPlayerLocation);
+
+                // If a ground tile hasn't spawned in that position yet
+                if (!allGroundTiles.ContainsKey(pos))
+                {
+                    SpawnNewGroundTile(pos, cTime);
+                    EventTile newGroundEventTile = SpawnNewGroundEventTile(pos);
+                    SpawnNewMapTile(pos, newGroundEventTile);
+                }
+                // If a tile occupies that position
+                else
+                {
+                    // Update the timestamp to be the current time
+                    allGroundTiles[pos].cTimestamp = cTime;
+                    // If the tile is not active
+                    if (!activeGroundTiles.ContainsKey(pos))
+                    {
+                        // Activate that tile
+                        allGroundTiles[pos].tileObjectPtr.SetActive(true);
+                        activeGroundTiles.Add(pos, allGroundTiles[pos]);
+                    }
+                }
+            }
+        }
+
+        var newActiveGroundTiles = new Dictionary<Vector3, GroundTile>();
+
+        // Loop through all active tiles
+        foreach (var tile in activeGroundTiles)
+        {
+            // If they aren't in bounds of current time
+            if (!tile.Value.cTimestamp.Equals(cTime))
+            {
+                // Disable object
+                tile.Value.tileObjectPtr.SetActive(false);
+            }
+            else
+            {
+                newActiveGroundTiles.Add(tile.Key, tile.Value);
+            }
+        }
+
+        activeGroundTiles = newActiveGroundTiles;
     }
 
     private void GenerateTiles()
@@ -148,6 +215,8 @@ public class MapGenerator : MonoBehaviour
 
     private void UpdateMapTiles()
     {
+        float revealRadius = groundRadius * tileOffset;
+        if (!spawnTiles) revealRadius = 10 * tileOffset;
         foreach (var tile in allEventTiles)
         {
             // Destroy mapTiles of completed events
@@ -156,7 +225,7 @@ public class MapGenerator : MonoBehaviour
                 Destroy(tile.Value.eventMapTilePtr);
             }
 
-            if (tile.Value.eventMapTilePtr && DistFromPlayer(tile.Value.eventMapTilePtr) < groundRadius * tileOffset)
+            if (tile.Value.eventMapTilePtr && DistFromPlayer(tile.Value.eventMapTilePtr) < revealRadius)
             {
                 tile.Value.isDiscovered = true;
             }
@@ -169,7 +238,7 @@ public class MapGenerator : MonoBehaviour
 
         foreach (var tile in groundEventTiles)
         {
-            if (tile.Value.eventMapTilePtr && DistFromPlayer(tile.Value.eventMapTilePtr) < groundRadius * tileOffset)
+            if (tile.Value.eventMapTilePtr && DistFromPlayer(tile.Value.eventMapTilePtr) < revealRadius)
             {
                 tile.Value.isDiscovered = true;
             }
