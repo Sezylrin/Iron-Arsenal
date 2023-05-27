@@ -6,8 +6,11 @@ using UnityEngine;
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
+    [TextArea]
     public string[] lines;
     public float textSpeed;
+    public bool stayActive = false;
+    public bool pauseDuringDialogue = true;
 
     private int index;
     // Start is called before the first frame update
@@ -15,22 +18,31 @@ public class Dialogue : MonoBehaviour
     {
         textComponent.text = string.Empty;
         StartDialogue();
+        if (pauseDuringDialogue)
+        {
+            GameManager.Instance.PauseGame();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     OnClick();
+        // }
+    }
+
+    public void OnClick()
+    {
+        if (textComponent.text == lines[index])
         {
-            if (textComponent.text == lines[index])
-            {
-                NextLine();
-            }
-            else
-            {
-                StopAllCoroutines();
-                textComponent.text = lines[index];
-            }
+            NextLine();
+        }
+        else
+        {
+            StopAllCoroutines();
+            textComponent.text = lines[index];
         }
     }
 
@@ -45,7 +57,7 @@ public class Dialogue : MonoBehaviour
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSecondsRealtime(textSpeed);
         }
     }
 
@@ -59,7 +71,12 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
+            if (stayActive) return;
             gameObject.SetActive(false);
+            if (pauseDuringDialogue)
+            {
+                GameManager.Instance.ResumeGame();
+            }
         }
     }
 }

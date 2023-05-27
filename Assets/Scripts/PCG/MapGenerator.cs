@@ -126,6 +126,13 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
+        Vector3 tutSpawn = new Vector3(0f, 0f, 125f);
+        if (!allEventTiles.ContainsKey(tutSpawn))
+        {
+            EventTile newEventTile = SpawnNewEventTile(tutSpawn, spawnableEventList[0]);
+            SpawnNewMapTile(tutSpawn, newEventTile);
+        }
+
         var newActiveGroundTiles = new Dictionary<Vector3, GroundTile>();
 
         // Loop through all active tiles
@@ -187,7 +194,8 @@ public class MapGenerator : MonoBehaviour
 
                 if (!allEventTiles.ContainsKey(pos))
                 {
-                    EventTile newEventTile = SpawnNewEventTile(pos);
+                    SpawnableEvent tileType = RandomEventTile();
+                    EventTile newEventTile = SpawnNewEventTile(pos, tileType);
                     SpawnNewMapTile(pos, newEventTile);
                 }
             }
@@ -216,7 +224,7 @@ public class MapGenerator : MonoBehaviour
     private void UpdateMapTiles()
     {
         float revealRadius = groundRadius * tileOffset;
-        if (!spawnTiles) revealRadius = 10 * tileOffset;
+        if (!spawnTiles) revealRadius = 8 * tileOffset;
         foreach (var tile in allEventTiles)
         {
             // Destroy mapTiles of completed events
@@ -266,9 +274,8 @@ public class MapGenerator : MonoBehaviour
         return tile;
     }
 
-    private EventTile SpawnNewEventTile(Vector3 pos)
+    private EventTile SpawnNewEventTile(Vector3 pos, SpawnableEvent tileType)
     {
-        SpawnableEvent tileType = RandomEventTile();
         EventTile tile = new EventTile();
         if (tileType != null && !EventIsNearOtherEvents(pos) && pos != Vector3.zero)
         {
