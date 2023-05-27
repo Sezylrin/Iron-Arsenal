@@ -66,7 +66,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3066471075511189716}
-  - {fileID: 7872043589487686961}
   - {fileID: 7335762739186077071}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -122,14 +121,33 @@ MonoBehaviour:
   enemyEffects: {fileID: 0}
   damageFactor: 1
   speedFactor: 1
---- !u!65 &6709176958193211835
-BoxCollider:
-  FirePS: {fileID: 4710573350800441206}
-  PoisonPS: {fileID: 1219655607434512066}
-  IcePS: {fileID: 3853868535031339832}
+  FirePS: {fileID: 0}
+  PoisonPS: {fileID: 0}
+  IcePS: {fileID: 0}
   isFirePSActive: 0
   isPoisonPSActive: 0
   isIcePSActive: 0
+--- !u!65 &6709176958193211835
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3061924111405816818}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 3, z: 2}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &3730708584840277591
 GameObject:
   m_ObjectHideFlags: 0
@@ -14642,27 +14660,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &8512008560791496812
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3061924111405816818}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.5, y: 3, z: 1.25}
-  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1001 &3243984053793695551
 PrefabInstance:
   m_ObjectHideFlags: 0
