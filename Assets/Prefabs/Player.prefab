@@ -11350,7 +11350,7 @@ Transform:
   - {fileID: 7531928520130859881}
   - {fileID: 4222642091481828930}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2021412381409304334
 MonoBehaviour:
@@ -11365,8 +11365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 615bc8c378d16474a9688ed155868487, type: 2}
-  leftDustPS: {fileID: 0}
-  rightDustPS: {fileID: 0}
+  leftDustPS: {fileID: 1422183456098420738}
+  rightDustPS: {fileID: 3947426538323054089}
   dustActive: 0
 --- !u!114 &2021412381409304333
 MonoBehaviour:
@@ -25198,11 +25198,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 282743462219769481, guid: dc98a696c5452704895689e369995245, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.16
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 282743462219769481, guid: dc98a696c5452704895689e369995245, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.74
+      value: 0.878
       objectReference: {fileID: 0}
     - target: {fileID: 282743462981689434, guid: dc98a696c5452704895689e369995245, type: 3}
       propertyPath: m_RootOrder

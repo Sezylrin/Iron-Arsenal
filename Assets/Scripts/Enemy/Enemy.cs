@@ -274,13 +274,16 @@ public abstract class Enemy : MonoBehaviour
         {
             SetParticleSystemState(1, false);
         }
-        if (enemyEffects.frozenAmount > 0 && !isIcePSActive)
+        if (type != EnemyType.Boss)
         {
-            SetParticleSystemState(2, true);
-        }
-        if (enemyEffects.frozenAmount == 0 && isIcePSActive)
-        {
-            SetParticleSystemState(2, false);
+            if (enemyEffects.frozenAmount > 0 && !isIcePSActive)
+            {
+                SetParticleSystemState(2, true);
+            }
+            if (enemyEffects.frozenAmount == 0 && isIcePSActive)
+            {
+                SetParticleSystemState(2, false);
+            }
         }
     }
 }

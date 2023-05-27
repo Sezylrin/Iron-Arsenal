@@ -31,6 +31,7 @@ public class Breeder : Boss
     // Update is called once per frame
     protected override void Update()
     {
+        CheckEffectState();
         SetRotation();
 
         if (Vector3.Distance(Player.transform.position, transform.position) > 12)
