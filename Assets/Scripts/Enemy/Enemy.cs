@@ -53,7 +53,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Init()
     {
-        Player = GameObject.Find("Player");
+        Player = LevelManager.Instance.player;
         baseFunctions = Player.GetComponent<BaseFunctions>();
         Manager = EnemyManager.Instance;
         Difficulty = Manager.Difficulty;
