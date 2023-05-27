@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
         Friction(playerData.frictionAmount);
         // MovePlayer(1);
         NewMovePlayer(1);
+        
         if (_moveInput.magnitude > 0.8f)
         {
             rotate = new Vector3(_moveInput.x, 0, _moveInput.y);

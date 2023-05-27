@@ -6,6 +6,7 @@ public class Charger : Enemy
 {
     private bool ableToCharge;
     private Vector3 chargeDirection;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -39,15 +40,18 @@ public class Charger : Enemy
 
     IEnumerator StartChargingUp()
     {
+        anim.SetTrigger("PrepCharge");
         yield return new WaitForSeconds(2);
         StartCoroutine(Charge());
     }
 
     IEnumerator Charge()
     {
+        anim.SetTrigger("Charge");
         chargeDirection = (Player.transform.position - transform.position).normalized;
         EnemyRB.AddForce(chargeDirection * 1000);
         yield return new WaitForSeconds(3);
         ableToCharge = true;
+        anim.SetTrigger("Walk");
     }
 }

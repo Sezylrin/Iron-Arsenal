@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2497997828539013424}
   - component: {fileID: 2497997828539013425}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Sentry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2497997829222323732}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: SpawnPoint
   m_TagString: BulletSpawnPoint
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4206342168767036583}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Turret_basic_lvl1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 4206342168852149077}
   - component: {fileID: 4206342168852149079}
   - component: {fileID: 4206342168852149078}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: TBasic_lvl1_top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 4206342169640625167}
   - component: {fileID: 4206342169640625161}
   - component: {fileID: 4206342169640625160}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: TBasic_lvl1_bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
