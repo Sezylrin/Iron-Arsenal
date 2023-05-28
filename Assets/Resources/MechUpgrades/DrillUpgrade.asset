@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeType: 1
   icon: {fileID: 21300000, guid: 7f35d3d4cace9fe409ae2c613ae807f7, type: 3}
-  upgradeName: Outpost Effiency
-  description: Increase the output at outposts
+  upgradeName: Outpost Efficiency
+  description: Increase the output of resources at outposts
   xenoriumCost: 0
   novaciteCost: 50
   voidStoneCost: 50

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c98771e7ed34dfa46a4abd22a764758a, type: 3}
   m_Name: EnemyBasicBulletData
   m_EditorClassIdentifier: 
-  damage: 10
-  projectileSpeed: 5
+  damage: 30
+  projectileSpeed: 7.5
   fireDelay: 1
   projectileLifetime: 3

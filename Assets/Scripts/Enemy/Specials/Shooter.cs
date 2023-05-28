@@ -18,7 +18,7 @@ public class Shooter : Enemy
     private bool ableToShoot;
     private Transform projectilesParent;
 
-    void Awake()
+    protected override void Awake()
     {
         Init();
         projectilesParent = projectilesParent = GameObject.Find("Projectiles Parent").transform;
@@ -31,8 +31,9 @@ public class Shooter : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        CheckEffectState();
         SetRotation();
 
         if (Vector3.Distance(Player.transform.position, transform.position) > 10)

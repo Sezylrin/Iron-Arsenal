@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SplitterData
   m_EditorClassIdentifier: 
   HealthScale: 0.75
-  damageOnCollide: 10
-  speed: 2
+  damageOnCollide: 40
+  speed: 4
   ramLaunchMultiplier: 20

@@ -41,10 +41,20 @@ public class Projectile : MonoBehaviour
 
     private bool isDouble = false;
 
+    private LayerMask defaultMask;
+
+    public ParticleSystem trailPS;
+
+    [SerializeField]
     private Rigidbody rb;
+
+    [SerializeField]
+    private GameObject artificalHitbox;
+    [SerializeField]
+    private GameObject artificalRotate;
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -80,7 +90,11 @@ public class Projectile : MonoBehaviour
         if (!data.colliderSize.Equals(Vector3.zero))
             boxCollider.size = data.colliderSize;
         if (data.invisible)
+        {
             projMesh.mesh = null;
+        }
+        else trailPS.Play();
+            
         damageScale = 1;
     }
 
@@ -88,12 +102,50 @@ public class Projectile : MonoBehaviour
     {
         transform.LookAt(transform.position + dir, Vector3.up);
         transform.Translate(offset);
+        artificalRotate.transform.LookAt(Vector3.forward + artificalRotate.transform.position, Vector3.up);
+        artificalHitbox.transform.LookAt(dir + artificalHitbox.transform.position, Vector3.up);
+        if (this.dir.z > 0)
+            defaultMask = LayerMask.NameToLayer("projectileOver");
+        else
+            defaultMask = LayerMask.NameToLayer("projectileUnder");
+        SetLayerRecursively(gameObject, LayerMask.NameToLayer("projectileOver"));
+        Invoke("SetLayer", 0.2f);
     }
 
-    public void setSpawn(Vector3 pos)
+    private void SetLayer()
+    {
+        SetLayerRecursively(gameObject, defaultMask);
+    }
+    public void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (null == obj)
+        {
+            return;
+        }
+
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            if (null == child)
+            {
+                continue;
+            }
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
+    }
+    public void setSpawn(Vector3 pos, bool IsCannon = false)
     {
         transform.position = pos;
         spawnPos = pos;
+        if (artificalHitbox.transform.position.y > 1)
+        {
+            float offSetAmount = artificalHitbox.transform.position.y - 1;
+            Vector3 offSet = new Vector3(0, -offSetAmount, 0);
+            if (IsCannon)
+                offSet.z = offSetAmount / 26 * 15;
+            artificalHitbox.transform.position = offSet + artificalHitbox.transform.position;
+        }      
     }
     public void SetProjectileData(ProjectileData data, Sentry owner,StatAttribute attribute)
     {
@@ -137,6 +189,7 @@ public class Projectile : MonoBehaviour
                     cannonOwner.PoolProj(gameObject);
                 gameObject.SetActive(false);
             }
+            SetLayerRecursively(gameObject, LayerMask.NameToLayer("projectileUnder"));
         }
         else if (other.gameObject.tag == "Wall")
         {
@@ -150,7 +203,10 @@ public class Projectile : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Enemy")
+        {
             modifiedPierce--;
+            SetLayerRecursively(gameObject, defaultMask);
+        }
     }
 
     public Sentry GetOwner()

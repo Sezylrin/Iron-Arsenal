@@ -5,7 +5,8 @@ using UnityEngine;
 public class Explosion : MonoBehaviour
 {
     float damage = 50f;
-    
+    public SphereCollider explosionCollider;
+    bool isPlayer = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class Explosion : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !isPlayer)
         {
             other.gameObject.GetComponent<BaseFunctions>().TakeDamage(damage);
         }
@@ -31,9 +32,10 @@ public class Explosion : MonoBehaviour
         }
     }
 
-    public void SetDamage(float damage)
+    public void SetDamage(float damage, bool Player)
     {
         this.damage = damage;
+        isPlayer = Player;
     }
 
     public void SetScale(Vector3 newScale)
@@ -44,6 +46,8 @@ public class Explosion : MonoBehaviour
     private IEnumerator Delete()
     {
         yield return new WaitForSeconds(0.3f);
+        explosionCollider.enabled = false;
+        yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
 }

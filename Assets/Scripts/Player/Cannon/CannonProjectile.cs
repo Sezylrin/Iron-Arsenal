@@ -76,7 +76,7 @@ public abstract class CannonProjectile : MonoBehaviour
             augmentBase.Respawn();
         }
         Vector3 spawn = Owner.cannonProjectileSpawnPoint.position;
-        bulletProj.setSpawn(spawn);
+        bulletProj.setSpawn(spawn,true);
         Vector3 targetDir = dir;
         targetDir.y = 0;
         bulletProj.dir = targetDir.normalized;

@@ -145,7 +145,7 @@ Material:
     - _Flickering: 1
     - _Flickeringintensity: 3.46
     - _Fresnel: 1
-    - _Fresnelfalloff: 1
+    - _Fresnelfalloff: 0.2
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

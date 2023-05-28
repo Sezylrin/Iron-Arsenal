@@ -30,11 +30,11 @@ TagManager:
   - BuildUI
   - Socket
   - MapTile
-  - projectile
-  - 
-  - 
-  - 
-  - 
+  - projectileOver
+  - projectileUnder
+  - Event
+  - Sentry
+  - Post processing
   - 
   - 
   - 

@@ -10,7 +10,11 @@ public class PlayerController : MonoBehaviour
     private Vector2 _moveInput;
     private Rigidbody _rb;
     private Vector3 rotate;
-    public float angleSpeed;
+    private Coroutine lookCoroutine;
+    public ParticleSystem leftDustPS;
+    public ParticleSystem rightDustPS;
+    public bool dustActive;
+    private AudioSource audioSource;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -28,11 +32,23 @@ public class PlayerController : MonoBehaviour
         // Vector3 vec3 = new Vector3(-1, 1, -1);
         // Debug.Log(vec3.normalized);
         // Debug.Log(vec3.magnitude * vec3.normalized);
+        dustActive = false;
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.volume = audioSource.volume / 2.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        if (GameManager.Instance.currentSelection == CurrentSelection.Paused && audioSource.isPlaying)
+        {
+            audioSource.Pause();
+        }
+        else if (GameManager.Instance.currentSelection == CurrentSelection.Playing && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
     }
 
     private void FixedUpdate()
@@ -42,16 +58,54 @@ public class PlayerController : MonoBehaviour
         Friction(playerData.frictionAmount);
         // MovePlayer(1);
         NewMovePlayer(1);
+        
         if (_moveInput.magnitude > 0.8f)
-            rotate =  new Vector3(_moveInput.x, 0, _moveInput.y);
-        Quaternion rotation;
-        if (rotate != Vector3.zero)
         {
-            rotation = Quaternion.LookRotation(rotate, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * angleSpeed);
+            rotate = new Vector3(_moveInput.x, 0, _moveInput.y);
+            Quaternion lookRotate = Quaternion.LookRotation(rotate, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotate, playerData.rotateSpeed * 180 * Time.deltaTime);
+
+            if (!dustActive)
+            {
+                dustActive = true;
+                leftDustPS.Play();
+                rightDustPS.Play();
+                //audioSource.Play();
+                audioSource.volume = audioSource.volume * 2f;
+            }
+        }
+        else
+        {
+            if (dustActive)
+            {
+                dustActive = false;
+                leftDustPS.Stop();
+                rightDustPS.Stop();
+                //audioSource.Pause();
+                audioSource.volume = audioSource.volume / 2f;
+            }
         }
     }
+    public void StartRotating()
+    {
+        if(lookCoroutine!= null)
+        {
+            StopCoroutine(lookCoroutine);
+        }
+        lookCoroutine = StartCoroutine(LookAt());
+    }
 
+    private IEnumerator LookAt()
+    {
+        Quaternion lookRotation = Quaternion.LookRotation(rotate + transform.position);
+        float time = 0;
+        while (time < 1)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, time);
+            time += Time.deltaTime * playerData.rotateSpeed;
+            yield return null;
+        }
+    }
     public void MovePlayer(float lerpAmount)
     {
         Vector3 movementVector3 = new Vector3(_moveInput.x, 0f, _moveInput.y);
@@ -105,5 +159,15 @@ public class PlayerController : MonoBehaviour
         force.z *= Mathf.Sign(velocity.z);
 
         _rb.AddForce(-force, ForceMode.Impulse);
+    }
+
+    public void PauseDrivingSound()
+    {
+        audioSource.Pause();
+    }
+
+    public void ResumeDrivingSound()
+    {
+        audioSource.Play();
     }
 }

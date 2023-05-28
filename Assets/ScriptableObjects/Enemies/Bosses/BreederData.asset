@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthScale: 30
   damageOnCollide: 100
-  speed: 1
+  speed: 2
   ramLaunchMultiplier: 10

@@ -6,117 +6,40 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class RocketPart : MonoBehaviour
+public class RocketPart : Event
 {
-    public new string name;
-    [Serializable]
-    public struct RequiredMaterials
-    {
-        public int novaciteAmount;
-        public int voidstoneAmount;
-        public int xenoriumAmount;
-    }
-    public RequiredMaterials requiredMaterials;
-    public float timeToCraft;
-    // public Image image;
-    [SerializeField] public TextMeshProUGUI text;
-
-    [SerializeField] private PlayerInput controls;
-    private Canvas canvas;
-    private Transform cameraTransform;
-    public int eventTime;
-
-    private void Awake()
-    {
-        canvas = GetComponentInChildren<Canvas>();
-        cameraTransform = FindObjectOfType<Camera>().transform;
-    }
+    [field: SerializeField] private int RushLength { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        controls = LevelManager.Instance.player.GetComponent<PlayerInput>();
-        var interactAction = controls.currentActionMap.FindAction("Interact");
-        interactAction.performed += OnInteractDown;
-        interactAction.canceled += OnInteractUp;
-        UpdateTextGUI();
+        Init();
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckBeginInput();
 
-    }
-
-    private void OnDestroy()
-    {
-        if (!controls) return;
-        var interactAction = controls.currentActionMap.FindAction("Interact");
-        interactAction.performed -= OnInteractDown;
-        interactAction.canceled -= OnInteractUp;
-    }
-
-    private void OnInteractDown(InputAction.CallbackContext context)
-    {
-        if (!canvas.enabled) return;
-        //TODO: Add an error response
-        if(LevelManager.Instance.PurchaseItemIfPossible(requiredMaterials.xenoriumAmount, requiredMaterials.novaciteAmount, requiredMaterials.voidstoneAmount))
+        if (Active)
         {
-            StartCoroutine(CraftPart());
-            EnemyManager.Instance.StartRushWithTimer(eventTime);
-            EnemyManager.Instance.SpawnEnemy(true);
+            if (!EnemyManager.Instance.IsBossAlive)
+            {
+                EndCondition = true;
+            }
         }
     }
 
-    private void OnInteractUp(InputAction.CallbackContext context)
+    protected override void Begin()
     {
-        StopCoroutine(CraftPart());
+        EnemyManager.Instance.StartRushWithTimer(RushLength);
+        EnemyManager.Instance.SpawnEnemy(true);
+        base.Begin();
     }
 
-    private void OnTriggerEnter(Collider col)
+    protected override void End()
     {
-        if (!col.CompareTag("Player")) return;
-        canvas.enabled = true;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        OrientCanvasToCamera();
-        UpdateTextGUI();
-    }
-
-    private void OnTriggerExit(Collider col)
-    {
-        if (!col.CompareTag("Player")) return;
-        canvas.enabled = false;
-        StopCoroutine(CraftPart());
-    }
-
-    IEnumerator CraftPart()
-    {
-        // float timer = 0f; TODO: Add image filling for prompt as you hold
-
-        yield return new WaitForSeconds(timeToCraft);
-
         RocketManager.collectRocketPart();
-        Debug.Log("Rocket Part Collected"); // TODO: Add to UI
-        Destroy(gameObject);
-
-        yield return null;
-    }
-
-    private void OrientCanvasToCamera()
-    {
-        if (!canvas.enabled) return;
-        canvas.transform.rotation = Quaternion.LookRotation(transform.position - new Vector3(transform.position.x,
-                                                                                            cameraTransform.position.y,
-                                                                                            cameraTransform.position.z));
-    }
-
-    private void UpdateTextGUI()
-    {
-        // TODO: Replace this with their sprite instead
-        text.text = name + "\n " +
-                    "Press 'E' to craft";
+        base.End();
     }
 }

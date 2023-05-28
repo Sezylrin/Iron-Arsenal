@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TankData
   m_EditorClassIdentifier: 
   HealthScale: 2
-  damageOnCollide: 10
-  speed: 2
+  damageOnCollide: 40
+  speed: 4
   ramLaunchMultiplier: 15

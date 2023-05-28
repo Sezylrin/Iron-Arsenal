@@ -95,7 +95,7 @@ public abstract class Event : MonoBehaviour
         }
     }
 
-    private void OrientCanvasToCamera()
+    protected void OrientCanvasToCamera()
     {
         if (!canvas.enabled) return;
         canvas.transform.rotation = Quaternion.LookRotation(transform.position - new Vector3(transform.position.x,

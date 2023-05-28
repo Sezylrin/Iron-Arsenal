@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MiningOutpost : Event
@@ -9,6 +10,11 @@ public class MiningOutpost : Event
     public GameObject miningArea;
 
     private Mining miningScript;
+
+    public Animator anim;
+    private bool mining = false;
+
+    [field: SerializeField] private TextMeshProUGUI text { get; set; }
 
     // Start is called before the first frame update
 
@@ -22,10 +28,22 @@ public class MiningOutpost : Event
     void Update()
     {
         CheckBeginInput();
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        if (GameManager.Instance.currentSelection == CurrentSelection.Paused && mining && audioSource.isPlaying)
+        {
+            audioSource.Pause();
+        }
+        else if (GameManager.Instance.currentSelection == CurrentSelection.Playing && mining && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
     }
 
     protected override void Begin()
     {
+        mining = true;
+        anim.SetTrigger("Start");
+        gameObject.GetComponent<AudioSource>().Play();
         miningArea.SetActive(true);
         EnemyManager.Instance.StartRush();
         StartCoroutine(Mine());
@@ -34,7 +52,10 @@ public class MiningOutpost : Event
 
     protected override void End()
     {
+        mining = false;
         miningArea.SetActive(false);
+        gameObject.GetComponent<AudioSource>().Pause();
+        EnemyManager.Instance.StopRush();
         base.End();
     }
 
@@ -54,6 +75,7 @@ public class MiningOutpost : Event
 
     private IEnumerator Mine()
     {
+        text.text = "Stay inside the zone to keep mining";
         while (true)
         {
             yield return new WaitForSeconds(1);

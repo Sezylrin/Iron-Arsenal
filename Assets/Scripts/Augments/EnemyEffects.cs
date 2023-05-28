@@ -90,7 +90,7 @@ public class EnemyEffects : MonoBehaviour
 
     public void FreezeTarget()
     {
-        float freezeRate = frozenAmount / maxFreeze;
+        float freezeRate = (float)frozenAmount / (float)maxFreeze;
         if (!hostenemy.type.Equals(EnemyType.Boss))
             hostenemy.speedFactor = 1 - freezeRate;
         if (freezeRate > 0.5f && isFreezeDeath)
@@ -197,7 +197,7 @@ public class EnemyEffects : MonoBehaviour
 
     public void SpawnFireTrail()
     {
-        if (!isFireSpread || fireTick <= 5)
+        if (!isFireSpread || fireTick <= 3)
             return;
         Vector3 pos = transform.position;
         pos.y = 0;

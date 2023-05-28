@@ -9,6 +9,7 @@ public class BasicCamera : MonoBehaviour
     private Vector3 Rotation;
     private Camera cam;
     public Transform player;
+    public GameObject secondCam;
     private Vector3 pos;
     void Start()
     {
@@ -17,6 +18,7 @@ public class BasicCamera : MonoBehaviour
         pos = transform.position;
         Rotation = transform.eulerAngles;
         cam = GetComponent<Camera>();
+        
     }
 
     // Update is called once per frame
@@ -27,11 +29,13 @@ public class BasicCamera : MonoBehaviour
         if (LevelManager.Instance.currentState == State.Normal)
         {
             cam.orthographic = false;
+            secondCam.SetActive(true);
             cam.transform.position = player.position + pos;
             transform.eulerAngles = Rotation;
         }
         else
         {
+            secondCam.SetActive(false);
             cam.orthographic = true;
             cam.orthographicSize = 10;
             transform.position = (Vector3.up * 7) + player.position;

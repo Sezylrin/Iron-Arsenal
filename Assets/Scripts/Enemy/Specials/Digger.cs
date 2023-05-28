@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class Digger : Enemy
 {
-    private BoxCollider enemyBC;
-    private bool digging;
-
-    void Awake()
-    {
-        Init();
-        enemyBC = GetComponent<BoxCollider>();
-    }
+    public BoxCollider enemyBC;
+    public bool digging;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +14,13 @@ public class Digger : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        CheckEffectState();
         SetRotation();
         Move();
 
-        if (Vector3.Distance(Player.transform.position, transform.position) > 20 && !digging)
+        if (Vector3.Distance(Player.transform.position, transform.position) > 15 && !digging)
         {
             digging = true;
             StartCoroutine(DigDown());
@@ -45,7 +40,7 @@ public class Digger : Enemy
         while (transform.position.y >= -2.5) 
         {
             yield return new WaitForSeconds(0.01f);
-            transform.Translate(0, -0.02f, 0);
+            transform.Translate(0, -0.03f, 0);
         }
     }
 
@@ -55,7 +50,7 @@ public class Digger : Enemy
         while (transform.position.y <= 0)
         {
             yield return new WaitForSeconds(0.01f);
-            transform.Translate(0, 0.02f, 0);
+            transform.Translate(0, 0.03f, 0);
         }
         enemyBC.enabled = true;
     }

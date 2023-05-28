@@ -24,8 +24,6 @@ public class DestroyerBomb : EnemyBossProjectile
         if (other.gameObject.tag == "Player")
         {
             LevelManager.Instance.playerFunctions.TakeDamage(Damage);
-            GameObject explosionObj = Instantiate(explosion, transform.position, transform.rotation);
-            explosionObj.GetComponent<Explosion>().SetDamage(Damage);
             DeleteNow();
         }
     }

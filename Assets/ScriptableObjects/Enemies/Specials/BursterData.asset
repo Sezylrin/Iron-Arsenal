@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BursterData
   m_EditorClassIdentifier: 
   HealthScale: 1
-  damageOnCollide: 10
-  speed: 2
+  damageOnCollide: 40
+  speed: 4
   ramLaunchMultiplier: 20

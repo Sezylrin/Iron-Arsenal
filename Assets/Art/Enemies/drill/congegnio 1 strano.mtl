@@ -1,0 +1,176 @@
+# Blender MTL File: 'congegnio 1 strano.blend'
+# Material Count: 13
+
+newmtl Materiale.003
+Ns 359.999993
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Materiale.004
+Ns 359.999993
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl cerchio_giu
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\unity\\tex\\coso strano_cerchio giu_Normal.png
+map_Kd C:\\unity\\tex\\coso strano_cerchio giu_BaseColor.png
+map_Ns C:\\unity\\tex\\coso strano_cerchio giu_Roughness.png
+refl C:\\unity\\tex\\coso strano_cerchio giu_Metallic.png
+
+newmtl cerchio_su
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\unity\\tex\\laterale riprova_cerchiho su_Normal.png
+map_Kd C:\\unity\\tex\\laterale riprova_cerchiho su_BaseColor.png
+map_Ns C:\\unity\\tex\\laterale riprova_cerchiho su_Roughness.png
+refl C:\\unity\\tex\\laterale riprova_cerchiho su_Metallic.png
+
+newmtl connettore_dx
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\unity\\tex\\coso strano_connettore dx_Normal.png
+map_Kd C:\\unity\\tex\\coso strano_connettore dx_BaseColor.png
+map_Ns C:\\unity\\tex\\coso strano_connettore dx_Roughness.png
+refl C:\\unity\\tex\\coso strano_connettore dx_Metallic.png
+
+newmtl connettore_sx
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\unity\\tex\\coso strano_connettore sx_Normal.png
+map_Kd C:\\unity\\tex\\coso strano_connettore sx_BaseColor.png
+map_Ns C:\\unity\\tex\\coso strano_connettore sx_Roughness.png
+refl C:\\unity\\tex\\coso strano_connettore sx_Metallic.png
+
+newmtl laterale_dx
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\unity\\tex\\coso strano_laterale dx_Normal.png
+map_Kd C:\\unity\\tex\\coso strano_laterale dx_BaseColor.png
+map_Ns C:\\unity\\tex\\coso strano_laterale dx_Roughness.png
+refl C:\\unity\\tex\\coso strano_laterale dx_Metallic.png
+
+newmtl laterale_sx
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\unity\\tex\\coso strano_laterale sx_Normal.png
+map_Kd C:\\unity\\tex\\coso strano_laterale sx_BaseColor.png
+map_Ns C:\\unity\\tex\\coso strano_laterale sx_Roughness.png
+refl C:\\unity\\tex\\coso strano_laterale sx_Metallic.png
+
+newmtl pali
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\unity\\tex\\coso strano_pali_Normal.png
+map_Kd C:\\unity\\tex\\coso strano_pali_BaseColor.png
+map_Ns C:\\unity\\tex\\coso strano_pali_Roughness.png
+refl C:\\unity\\tex\\coso strano_pali_Metallic.png
+
+newmtl pali.001
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\unity\\tex\\coso strano_pali_Normal.png
+map_Kd C:\\unity\\tex\\coso strano_pali_BaseColor.png
+map_Ns C:\\unity\\tex\\coso strano_pali_Roughness.png
+refl C:\\unity\\tex\\coso strano_pali_Metallic.png
+
+newmtl parte_sopra
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\unity\\tex\\pezzo sopra_parte sopra_Normal.png
+map_Kd C:\\unity\\tex\\pezzo sopra_parte sopra_BaseColor.png
+map_Ns C:\\unity\\tex\\pezzo sopra_parte sopra_Roughness.png
+refl C:\\unity\\tex\\pezzo sopra_parte sopra_Metallic.png
+
+newmtl pezzo_centrale
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\unity\\tex\\coso strano_pezzo centrale_Normal.png
+map_Kd C:\\unity\\tex\\coso strano_pezzo centrale_BaseColor.png
+map_Ns C:\\unity\\tex\\coso strano_pezzo centrale_Roughness.png
+refl C:\\unity\\tex\\coso strano_pezzo centrale_Metallic.png
+
+newmtl pezzo_semi_centrale
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\unity\\tex\\coso strano_pezzo semi centrale_Normal.png
+map_Kd C:\\unity\\tex\\coso strano_pezzo semi centrale_BaseColor.png
+map_Ns C:\\unity\\tex\\coso strano_pezzo semi centrale_Roughness.png
+refl C:\\unity\\tex\\coso strano_pezzo semi centrale_Metallic.png

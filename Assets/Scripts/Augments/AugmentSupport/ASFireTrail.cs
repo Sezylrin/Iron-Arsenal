@@ -26,7 +26,6 @@ public class ASFireTrail : MonoBehaviour
             trigger = true;
             return;
         }
-        Debug.Log(host);
         if (other.CompareTag("Enemy") && !other.gameObject.Equals(host))
         {
             other.GetComponent<Enemy>().TakeDamage(StatsManager.Instance.elementalDamage * 0.25f);

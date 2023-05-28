@@ -39,7 +39,7 @@ public class AExplosive : AugmentBase
                 explosionData = spawnedExplosion.GetComponent<Explosion>();
                 Vector3 newScale = spawnedExplosion.transform.localScale * baseProjectile.data.damageFactor * explosionScale;
                 spawnedExplosion.transform.localScale =  newScale;
-                explosionData.SetDamage(damage);
+                explosionData.SetDamage(damage,true);
             }
         }
     }
