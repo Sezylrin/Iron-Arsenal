@@ -564,9 +564,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8073965042820709746, guid: e06c43320dba0e7459409fc800fac369, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: -2661596360268991406, guid: e06c43320dba0e7459409fc800fac369, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e06c43320dba0e7459409fc800fac369, type: 3}
       propertyPath: m_Name
       value: Sci-fi_Container_Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e06c43320dba0e7459409fc800fac369, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

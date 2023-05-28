@@ -565,9 +565,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3403155128824885820, guid: bc6ea04ff41921444a1c4d1b4d6ec012, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bc6ea04ff41921444a1c4d1b4d6ec012, type: 3}
       propertyPath: m_Name
       value: LandingPad (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bc6ea04ff41921444a1c4d1b4d6ec012, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -664,8 +672,16 @@ PrefabInstance:
       value: 9d30254aa69e4bc48c926f56d11b79ab.blend
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4fb5c960c1eff0a498301ecc1692c2a0, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fb5c960c1eff0a498301ecc1692c2a0, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447130140422936071, guid: 4fb5c960c1eff0a498301ecc1692c2a0, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

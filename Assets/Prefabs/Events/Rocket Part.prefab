@@ -618,6 +618,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 9d30254aa69e4bc48c926f56d11b79ab.blend
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fb5c960c1eff0a498301ecc1692c2a0, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447130140422936071, guid: 4fb5c960c1eff0a498301ecc1692c2a0, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 453620232967852777, guid: 4fb5c960c1eff0a498301ecc1692c2a0, type: 3}

@@ -563,9 +563,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6580571806018560528, guid: ac659d84cc2558742abb1443b30b59ad, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: -3128056710875868935, guid: ac659d84cc2558742abb1443b30b59ad, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac659d84cc2558742abb1443b30b59ad, type: 3}
       propertyPath: m_Name
       value: SCI-FI RADAR
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ac659d84cc2558742abb1443b30b59ad, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426669532271018066, guid: ac659d84cc2558742abb1443b30b59ad, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
