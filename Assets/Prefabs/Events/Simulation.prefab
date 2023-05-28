@@ -361,6 +361,7 @@ MonoBehaviour:
   <Active>k__BackingField: 0
   trigger: {fileID: 4615687775555331037}
   canvas: {fileID: 3513971951733025315}
+  <text>k__BackingField: {fileID: 4268809379659140988}
 --- !u!1 &6218879119549288919
 GameObject:
   m_ObjectHideFlags: 0

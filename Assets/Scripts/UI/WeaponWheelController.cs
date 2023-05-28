@@ -11,15 +11,9 @@ public class WeaponWheelController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Debug.Log(LevelManager.Instance.playerFunctions.cannon.switchingEnabled);
-            LevelManager.Instance.playerFunctions.cannon.SetSwitchingEnabledState(true);
-            LevelManager.Instance.playerFunctions.cannon.UnlockRandomCannon();
-            WeaponWheelButtonController.UpdateUnlockedCannons();
-        }
+        Cannon cannon = LevelManager.Instance.playerFunctions.cannon;
 
-        if (Input.GetKeyDown(KeyCode.Tab) && LevelManager.Instance.playerFunctions.cannon.switchingEnabled)
+        if (Input.GetKeyDown(KeyCode.Tab) && cannon.switchingEnabled)
         {
             weaponWheelSelected = !weaponWheelSelected;
         }
@@ -32,33 +26,6 @@ public class WeaponWheelController : MonoBehaviour
         {
             anim.SetBool("OpenWeaponWheel", false);
         }
-
-        switch (weaponID)
-        {
-            case 0:
-                //Pistol
-                break;
-            case 1:
-                //Shotgun
-                break;
-            case 2:
-                //Rapid fire
-                break;
-            case 3:
-                //Slow Gun
-                break;
-            case 4:
-                //Poison
-                break;
-            case 5:
-                //Rocket Launcher
-                break;
-            case 6:
-                //Flamethrower
-                break;
-            case 7:
-                //Sniper
-                break;
-        }
+        cannon.SwitchCannon(weaponID);
     }
 }

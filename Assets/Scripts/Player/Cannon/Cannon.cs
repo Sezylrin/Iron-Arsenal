@@ -66,13 +66,19 @@ public class Cannon : MonoBehaviour
         pools.Add(pooledRockets);
         pools.Add(pooledFlames);
 
-        unlockedCannonProjectiles.Add(0);
+        for (int i = 0; i < 7; i++)
+        {
+            unlockedCannonProjectiles.Add(-1);
+        }
+
+        lockedCannonProjectiles.Add(0);
         lockedCannonProjectiles.Add(1);
         lockedCannonProjectiles.Add(2);
         lockedCannonProjectiles.Add(3);
         lockedCannonProjectiles.Add(4);
         lockedCannonProjectiles.Add(5);
         lockedCannonProjectiles.Add(6);
+        UnlockCannon(0);
 
         UpdateMaterial();
 
@@ -151,66 +157,49 @@ public class Cannon : MonoBehaviour
 
         if (switchingEnabled)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1) && unlockedCannonProjectiles.Contains(0))
             {
-                activeCannonProjectile = 0;
-                UpdateMaterial();
+                WeaponWheelController.weaponID = 0;
+                SwitchCannon(0);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.Alpha2) && unlockedCannonProjectiles.Contains(1))
             {
-                if (unlockedCannonProjectiles.Count >= 2)
-                {
-                    activeCannonProjectile = 1;
-                    UpdateMaterial();
-                }
+                WeaponWheelController.weaponID = 1;
+                SwitchCannon(1);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            if (Input.GetKeyDown(KeyCode.Alpha3) && unlockedCannonProjectiles.Contains(2))
             {
-                if (unlockedCannonProjectiles.Count >= 3)
-                {
-                    activeCannonProjectile = 2;
-                    UpdateMaterial();
-                }
+                WeaponWheelController.weaponID = 2;
+                SwitchCannon(2);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
+            if (Input.GetKeyDown(KeyCode.Alpha4) && unlockedCannonProjectiles.Contains(3))
             {
-                if (unlockedCannonProjectiles.Count >= 4)
-                {
-                    activeCannonProjectile = 3;
-                    UpdateMaterial();
-                }
+                WeaponWheelController.weaponID = 3;
+                SwitchCannon(3);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
+            if (Input.GetKeyDown(KeyCode.Alpha5) && unlockedCannonProjectiles.Contains(4))
             {
-                if (unlockedCannonProjectiles.Count >= 5)
-                {
-                    activeCannonProjectile = 4;
-                    UpdateMaterial();
-                }
+                WeaponWheelController.weaponID = 4;
+                SwitchCannon(4);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha6))
+            if (Input.GetKeyDown(KeyCode.Alpha6) && unlockedCannonProjectiles.Contains(5))
             {
-                if (unlockedCannonProjectiles.Count >= 6)
-                {
-                    activeCannonProjectile = 5;
-                    UpdateMaterial();
-                }
+                WeaponWheelController.weaponID = 5;
+                SwitchCannon(5);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha7))
+            if (Input.GetKeyDown(KeyCode.Alpha7) && unlockedCannonProjectiles.Contains(6))
             {
-                if (unlockedCannonProjectiles.Count >= 7)
-                {
-                    activeCannonProjectile = 6;
-                    UpdateMaterial();
-                }
+                WeaponWheelController.weaponID = 6;
+                SwitchCannon(6);
             }
         }
 
+    }
 
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            UnlockRandomCannon();
-        }
+    public void SwitchCannon(int cannonType)
+    {
+        activeCannonProjectile = cannonType;
+        UpdateMaterial();
     }
 
     public void UpdateMaterial()
@@ -235,21 +224,35 @@ public class Cannon : MonoBehaviour
         pools[projectileType].AddObj(obj);
     }
 
+    public void UnlockCannon(int cannonIndex)
+    {
+        if (lockedCannonProjectiles.Contains(cannonIndex))
+        {
+            unlockedCannonProjectiles[cannonIndex] = cannonIndex;
+            lockedCannonProjectiles.Remove(cannonIndex);
+            if (cannonIndex == 6)
+            {
+                flamethrowerIndex = 6;
+            }
+            UpdateMaterial();
+        }
+    }
+
     public void UnlockRandomCannon()
     {
         if (lockedCannonProjectiles.Count > 0)
         {
-            int random = Random.Range(0, lockedCannonProjectiles.Count);
-            unlockedCannonProjectiles.Add(lockedCannonProjectiles[random]);
-            lockedCannonProjectiles.RemoveAt(random);
+            int randomIndex = Random.Range(0, lockedCannonProjectiles.Count);
+            int cannonToUnlock = lockedCannonProjectiles[randomIndex];
 
-            if (unlockedCannonProjectiles[unlockedCannonProjectiles.Count - 1] == 6)
+            UnlockCannon(cannonToUnlock);
+
+            if (unlockedCannonProjectiles.Contains(cannonToUnlock))
             {
-                flamethrowerIndex = unlockedCannonProjectiles.Count - 1;
+                activeCannonProjectile = cannonToUnlock;
+                WeaponWheelController.weaponID = activeCannonProjectile;
+                UpdateMaterial();
             }
-
-            activeCannonProjectile = unlockedCannonProjectiles.Count - 1;
-            UpdateMaterial();
         }
     }
 
