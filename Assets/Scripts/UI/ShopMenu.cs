@@ -65,13 +65,14 @@ public class ShopMenu : MonoBehaviour
         this.shopManager = shopManager;
 
         if (shopManager.GetPurchasableSentries().Count == 0)
-        {
             sentryPurchaseTab.SetActive(false);
-        }
         else
-        {
             sentryPurchaseTab.SetActive(true);
-        }
+        if (shopManager.GetPurchasableAugments().Count == 0)
+            augmentUpgradesTab.SetActive(false);
+        else
+            augmentUpgradesTab.SetActive(true);
+        attributeUpgradesTab.SetActive(true);
         DisplayItems(FindCurrentTab());
     }
 
