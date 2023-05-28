@@ -11,7 +11,7 @@ public enum TabType
 
 public class Tab : MonoBehaviour
 {
-    [SerializeField] private Sprite activeImg;
+    [SerializeField] public Sprite activeImg;
     [SerializeField] private Sprite inactiveImg;
 
     public TabType tabType;

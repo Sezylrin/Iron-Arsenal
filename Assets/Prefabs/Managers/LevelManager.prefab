@@ -7992,7 +7992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d8ce8a74c40ee4baf6d9ec9f215bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 0
+  debug: 1
   debugAugment: 4
   addAugmentToActive: 0
   baseDamage: 0
@@ -9096,7 +9096,7 @@ MonoBehaviour:
   <SafeSpawnArea>k__BackingField: 35
   <BasicEnemyChance>k__BackingField: 80
   <BECDecreaseOnDifficultyChange>k__BackingField: 2
-  <SpecialEnemyChance>k__BackingField: 0
+  <SpecialEnemyChance>k__BackingField: 12.5
   <IsRushActive>k__BackingField: 0
   <NumberOfSpawnsThisRush>k__BackingField: 0
   debugStartRush: 0
@@ -9124,14 +9124,14 @@ MonoBehaviour:
   - {fileID: 3061924111405816818, guid: 2fb6490e21c6eb447b04e176e2d6830a, type: 3}
   - {fileID: 1854458944056088684, guid: d1dcde8f2e7bc7e46923b263d4f3fb02, type: 3}
   - {fileID: 6069484704797165330, guid: 575097a4540569a479d7b6738c523bd2, type: 3}
-  - {fileID: 312686492115421739, guid: d7e65ca05aee81e45bcf533e20cb9909, type: 3}
   - {fileID: 5522926118580441598, guid: ce6df86deb473b445b94f8195a895034, type: 3}
   - {fileID: 3601272918170804926, guid: 08608a1c31186d74b8b465ec4dcde37a, type: 3}
   - {fileID: 4166898985344144913, guid: ec03c72217377734f9a2eb36d1f16031, type: 3}
   - {fileID: 7689516852213475515, guid: f0a5d3def0990c040a1c6579a7a266d8, type: 3}
   - {fileID: 4036122845976562098, guid: 021d8823d6ecc5b4c84b56d35ea3ecc0, type: 3}
+  - {fileID: 312686492115421739, guid: d7e65ca05aee81e45bcf533e20cb9909, type: 3}
   bossPrefabs:
-  - {fileID: 6689270825627925305, guid: c4edd487ee5ec4b42a80d4e0d284a254, type: 3}
+  - {fileID: 3061924111405816818, guid: b15e175429bb2a44a875b7eba2ef3c96, type: 3}
   - {fileID: 6315162635932650869, guid: 5d949ff6ac78ae843866d967746520e0, type: 3}
   - {fileID: 5260008939968158058, guid: 6f69160827d969448913c9411fad5e33, type: 3}
   augmentPrefabs:
