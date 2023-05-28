@@ -181,6 +181,11 @@ public class GameManager : MonoBehaviour
         Loader.Load(SceneState.MainMenu);
     }
 
+    public void LoadTutorial()
+    {
+        Loader.Load(SceneState.Tutorial);
+    }
+
     public void IncreaseSFX()
     {
         if (SFXVolume < 1f)
