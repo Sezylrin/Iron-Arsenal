@@ -430,15 +430,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Boss Hunt
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e335c2dba7c66534cb60ba73931e3566, type: 2}
+  m_sharedMaterial: {fileID: -6044822328471806603, guid: e335c2dba7c66534cb60ba73931e3566, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294953984
+  m_fontColor: {r: 0, g: 0.7994144, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.6
+  m_fontSize: 38.35
   m_fontSizeBase: 16.91
   m_fontWeight: 400
   m_enableAutoSizing: 1

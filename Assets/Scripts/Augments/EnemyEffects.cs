@@ -197,7 +197,7 @@ public class EnemyEffects : MonoBehaviour
 
     public void SpawnFireTrail()
     {
-        if (!isFireSpread || fireTick <= 5)
+        if (!isFireSpread || fireTick <= 3)
             return;
         Vector3 pos = transform.position;
         pos.y = 0;

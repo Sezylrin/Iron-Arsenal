@@ -35,20 +35,21 @@ public class WeaponWheelController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab) && cannon.switchingEnabled)
         {
+            
             weaponWheelSelected = !weaponWheelSelected;
+            if (weaponWheelSelected == true)
+                GameManager.Instance.PauseGame();
+            else
+                GameManager.Instance.ResumeGame();
         }
 
         if (weaponWheelSelected)
         {
             anim.SetBool("OpenWeaponWheel", true);
-            if (GameManager.Instance.currentSelection != CurrentSelection.Paused)
-                GameManager.Instance.PauseGame();
         }
         else
         {
             anim.SetBool("OpenWeaponWheel", false);
-            if (GameManager.Instance.currentSelection != CurrentSelection.Playing)
-                GameManager.Instance.ResumeGame();
         }
         cannon.SwitchCannon(weaponID);
     }
@@ -56,5 +57,8 @@ public class WeaponWheelController : MonoBehaviour
     public void closeMenu()
     {
         weaponWheelSelected = false;
+
+        if (GameManager.Instance.currentSelection != CurrentSelection.Playing)
+            GameManager.Instance.ResumeGame();
     }
 }

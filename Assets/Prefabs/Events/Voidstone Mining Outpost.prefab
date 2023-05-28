@@ -523,7 +523,7 @@ RectTransform:
   m_GameObject: {fileID: 2852315471208098430}
   m_LocalRotation: {x: 0.23977318, y: -0, z: -0, w: 0.97082895}
   m_LocalPosition: {x: 0, y: 0, z: 0.33}
-  m_LocalScale: {x: 0.012174408, y: 0.012174408, z: 0.012174408}
+  m_LocalScale: {x: 0.02217441, y: 0.02217441, z: 0.012174408}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7584459721473899482}
@@ -633,7 +633,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 200, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8386101459308791633
 CanvasRenderer:
@@ -665,15 +665,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: VoidStone Outpost
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e335c2dba7c66534cb60ba73931e3566, type: 2}
+  m_sharedMaterial: {fileID: -6044822328471806603, guid: e335c2dba7c66534cb60ba73931e3566, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294953984
+  m_fontColor: {r: 0, g: 0.8, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -690,7 +690,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.05
+  m_fontSize: 21.1
   m_fontSizeBase: 16.91
   m_fontWeight: 400
   m_enableAutoSizing: 1
