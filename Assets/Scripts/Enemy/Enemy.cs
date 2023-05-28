@@ -53,7 +53,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Init()
     {
-        Player = GameObject.Find("Player");
+        Player = LevelManager.Instance.player;
         baseFunctions = Player.GetComponent<BaseFunctions>();
         Manager = EnemyManager.Instance;
         Difficulty = Manager.Difficulty;
@@ -121,6 +121,7 @@ public abstract class Enemy : MonoBehaviour
             
             if (enemyEffects.isExplode && !type.Equals(EnemyType.Exploder))
             {
+                Debug.Log("why");
                 Explosion tempExplosion = Instantiate(enemyEffects.augmentPFList[0], transform.position, Quaternion.identity).GetComponent<Explosion>();
                 tempExplosion.SetDamage(MaxHealth * 0.3f);
             }
@@ -154,7 +155,7 @@ public abstract class Enemy : MonoBehaviour
                 Manager.PoolEnemy(gameObject, 2);
                 LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
-            case EnemyType.Digger:
+            case EnemyType.Sprinter:
                 Manager.PoolEnemy(gameObject, 3);
                 LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
@@ -174,16 +175,8 @@ public abstract class Enemy : MonoBehaviour
                 Manager.PoolEnemy(gameObject, 7);
                 LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
-            case EnemyType.Cloaker:
-                Manager.PoolEnemy(gameObject, 8);
-                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
-                break;
             case EnemyType.Burster:
-                Manager.PoolEnemy(gameObject, 9);
-                LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
-                break;
-            case EnemyType.Sprinter:
-                Manager.PoolEnemy(gameObject, 10);
+                Manager.PoolEnemy(gameObject, 8);
                 LevelManager.Instance.GainXenorium((int)Random.Range(3, 8));
                 break;
             case EnemyType.Boss:
@@ -274,13 +267,16 @@ public abstract class Enemy : MonoBehaviour
         {
             SetParticleSystemState(1, false);
         }
-        if (enemyEffects.frozenAmount > 0 && !isIcePSActive)
+        if (type != EnemyType.Boss)
         {
-            SetParticleSystemState(2, true);
-        }
-        if (enemyEffects.frozenAmount == 0 && isIcePSActive)
-        {
-            SetParticleSystemState(2, false);
+            if (enemyEffects.frozenAmount > 0 && !isIcePSActive)
+            {
+                SetParticleSystemState(2, true);
+            }
+            if (enemyEffects.frozenAmount == 0 && isIcePSActive)
+            {
+                SetParticleSystemState(2, false);
+            }
         }
     }
 }

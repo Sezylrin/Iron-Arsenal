@@ -5,6 +5,7 @@ using UnityEngine;
 public class Explosion : MonoBehaviour
 {
     float damage = 50f;
+    public SphereCollider explosionCollider;
     
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,8 @@ public class Explosion : MonoBehaviour
     private IEnumerator Delete()
     {
         yield return new WaitForSeconds(0.3f);
+        explosionCollider.enabled = false;
+        yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
 }

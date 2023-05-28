@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class WeaponWheelController : MonoBehaviour
 {
+    [SerializeField] private bool debugSpawnWeapons = false;
     public Animator anim;
     private bool weaponWheelSelected = false;
     public Image selectedItem;
@@ -11,15 +12,16 @@ public class WeaponWheelController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        Cannon cannon = LevelManager.Instance.playerFunctions.cannon;
+
+        if (Input.GetKeyDown(KeyCode.H) && debugSpawnWeapons)
         {
-            Debug.Log(LevelManager.Instance.playerFunctions.cannon.switchingEnabled);
-            LevelManager.Instance.playerFunctions.cannon.SetSwitchingEnabledState(true);
-            LevelManager.Instance.playerFunctions.cannon.UnlockRandomCannon();
+            cannon.SetSwitchingEnabledState(true);
+            cannon.UnlockRandomCannon();
             WeaponWheelButtonController.UpdateUnlockedCannons();
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab) && LevelManager.Instance.playerFunctions.cannon.switchingEnabled)
+        if (Input.GetKeyDown(KeyCode.Tab) && cannon.switchingEnabled)
         {
             weaponWheelSelected = !weaponWheelSelected;
         }
@@ -32,33 +34,6 @@ public class WeaponWheelController : MonoBehaviour
         {
             anim.SetBool("OpenWeaponWheel", false);
         }
-
-        switch (weaponID)
-        {
-            case 0:
-                //Pistol
-                break;
-            case 1:
-                //Shotgun
-                break;
-            case 2:
-                //Rapid fire
-                break;
-            case 3:
-                //Slow Gun
-                break;
-            case 4:
-                //Poison
-                break;
-            case 5:
-                //Rocket Launcher
-                break;
-            case 6:
-                //Flamethrower
-                break;
-            case 7:
-                //Sniper
-                break;
-        }
+        cannon.SwitchCannon(weaponID);
     }
 }

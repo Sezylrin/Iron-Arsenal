@@ -61,14 +61,14 @@ public class EnemyManager : MonoBehaviour
     private Pooling pooledBasicEnemies = new Pooling();     //0 - Basic Enemies
     private Pooling pooledTankEnemies = new Pooling();      //1 - Tank Enemies
     private Pooling pooledExploderEnemies = new Pooling();  //2 - Exploder Enemies
-    private Pooling pooledDiggerEnemies = new Pooling();    //3 - Digger Enemies
+    private Pooling pooledSprinterEnemies = new Pooling();  //3 - Sprinter Enemies
     private Pooling pooledChargerEnemies = new Pooling();   //4 - Charger Enemies
     private Pooling pooledSentryEnemies = new Pooling();    //5 - Sentry Enemies
     private Pooling pooledDodgerEnemies = new Pooling();    //6 - Dodger Enemies
     private Pooling pooledSplitterEnemies = new Pooling();  //7 - Splitter Enemies
-    private Pooling pooledCloakerEnemies = new Pooling();   //8 - Cloaker Enemies
-    private Pooling pooledBursterEnemies = new Pooling();   //9 - Burster Enemies
-    private Pooling pooledSprinterEnemies = new Pooling();   //10 - Sprinter Enemies
+    private Pooling pooledBursterEnemies = new Pooling();   //8 - Cloaker Enemies
+    //private Pooling pooledBursterEnemies = new Pooling();    //9 - Burster Enemies
+    //private Pooling pooledSprinterEnemies = new Pooling();   //10 - Sprinter Enemies
     public List<Pooling> enemyPools = new List<Pooling>();
 
     public Pooling pooledEnemyBullets = new Pooling();
@@ -93,14 +93,12 @@ public class EnemyManager : MonoBehaviour
         enemyPools.Add(pooledBasicEnemies);
         enemyPools.Add(pooledTankEnemies);
         enemyPools.Add(pooledExploderEnemies);
-        enemyPools.Add(pooledDiggerEnemies);
+        enemyPools.Add(pooledSprinterEnemies);
         enemyPools.Add(pooledChargerEnemies);
         enemyPools.Add(pooledSentryEnemies);
         enemyPools.Add(pooledDodgerEnemies);
         enemyPools.Add(pooledSplitterEnemies);
-        enemyPools.Add(pooledCloakerEnemies);
         enemyPools.Add(pooledBursterEnemies);
-        enemyPools.Add(pooledSprinterEnemies);
 
         IsBossAlive = false;
         IsRushActive = false;
