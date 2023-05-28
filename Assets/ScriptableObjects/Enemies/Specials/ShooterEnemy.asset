@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ShooterEnemy
   m_EditorClassIdentifier: 
   HealthScale: 0.75
-  damageOnCollide: 10
+  damageOnCollide: 40
   speed: 5
   ramLaunchMultiplier: 20
