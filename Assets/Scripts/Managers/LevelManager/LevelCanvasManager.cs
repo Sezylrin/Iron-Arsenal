@@ -54,6 +54,19 @@ public class LevelCanvasManager : MonoBehaviour
 
     private SentrySocket socket;
 
+    // Radar stuff
+    [Header("Radar")]
+    public Image radarButton;
+    public float radarCooldown = 60;
+    public GameObject radarMenu;
+
+    private float radarTimer = 0;
+    public bool isRadarOffCooldown = true;
+
+    public Radar radar;
+    public MapGenerator mapGenerator;
+    public RectTransform minimapRadarOverlayRectTrans;
+
     public static LevelCanvasManager Instance { get; private set; }
 
     private void Awake()
@@ -71,6 +84,7 @@ public class LevelCanvasManager : MonoBehaviour
     private void Start()
     {
         closeBtn.onClick.AddListener(CloseBuildMenu);
+        isRadarOffCooldown = true;
     }
 
     private void Update()
@@ -144,6 +158,9 @@ public class LevelCanvasManager : MonoBehaviour
                 CloseRemoveSentryBtn();
             }
         }
+        TickRadarCooldown();
+        ControlRadarOverlay();
+        RotateRadarOverlay();
     }
 
     public void SetXenoriumAmount(int xenoriumAmount)
@@ -282,6 +299,47 @@ public class LevelCanvasManager : MonoBehaviour
     public void CloseMap()
     {
         mapUI.SetActive(false);
+    }
+
+    private void TickRadarCooldown()
+    {
+        radarTimer += Time.deltaTime;
+        if (radarTimer >= radarCooldown) isRadarOffCooldown = true;
+        if (!isRadarOffCooldown)
+        {
+            radarButton.fillAmount = radarTimer/radarCooldown;
+        }
+        else
+        {
+            radarButton.fillAmount = 1;
+        }
+    }
+
+    public void ToggleRadarMenu()
+    {
+        if (!isRadarOffCooldown) return;
+        radarMenu.SetActive(!radarMenu.activeSelf);
+    }
+
+    public void ResetRadarCooldown()
+    {
+        radarTimer = 0;
+        isRadarOffCooldown = false;
+    }
+
+    private void ControlRadarOverlay()
+    {
+        if (radar.scannedEvent == null || mapGenerator.DistFromPlayer(radar.scannedEvent.tileObjectPtr) < mapGenerator.tileOffset) radar.isActiveScan = false;
+        minimapRadarOverlayRectTrans.gameObject.SetActive(!(!radar.isActiveScan || mapGenerator.DistFromPlayer(radar.scannedEvent.tileObjectPtr) < mapGenerator.tileOffset * 5));
+    }
+
+    private void RotateRadarOverlay()
+    {
+        if (!minimapRadarOverlayRectTrans.gameObject.activeSelf || radar.scannedEvent == null) return;
+        Vector3 tilePos = radar.scannedEvent.tileObjectPtr.transform.position;
+        Vector3 playerPos = mapGenerator.player.transform.position;
+
+        minimapRadarOverlayRectTrans.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(-(tilePos.x - playerPos.x), (tilePos.z - playerPos.z)) * Mathf.Rad2Deg);
     }
 
     public void StartTimer(int seconds)
