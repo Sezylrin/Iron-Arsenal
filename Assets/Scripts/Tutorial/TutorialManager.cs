@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -25,7 +26,28 @@ public class TutorialManager : MonoBehaviour
     public GameObject mapDialogue;
     public GameObject map;
     public GameObject radarDialogue;
-    // public GameObject Dialogue;
+    [Header("Sequence 4")]
+    public GameObject outpostDialogue;
+    [Header("Sequence 5")]
+    public GameObject shopMenu;
+    public GameObject statsTab;
+    public GameObject augmentsTab;
+    public GameObject sentriesTab;
+    public GameObject spendDialogue;
+    public GameObject upgradesDialogue;
+    public GameObject statsDialogue;
+    public GameObject augmentsDialogue;
+    public GameObject shopSentriesDialogue;
+    [Header("Sequence 6")]
+    public GameObject nextZoneDialogue;
+    public GameObject eventsDialogue;
+    public GameObject miningDialogue;
+    public GameObject chestDialogue;
+    public GameObject armoryDialogue;
+    public GameObject bossDialogue;
+    public GameObject rocketsDialogue;
+    [Header("Sequence 7")]
+    public GameObject exitDialogue;
 
     public static TutorialManager Instance {get; private set;}
 
@@ -108,5 +130,74 @@ public class TutorialManager : MonoBehaviour
 
         mapDialogue.SetActive(false);
         radarDialogue.SetActive(true);
+    }
+
+    public void Collision4()
+    {
+        radarDialogue.SetActive(false);
+        outpostDialogue.SetActive(true);
+    }
+
+    public void Sequence5()
+    {
+        outpostDialogue.SetActive(false);
+        StartCoroutine(Sequence5Coroutine());
+    }
+
+    IEnumerator Sequence5Coroutine()
+    {
+        spendDialogue.SetActive(true);
+
+        while (!shopMenu.activeSelf)
+        {
+            yield return null;
+        }
+
+        spendDialogue.SetActive(false);
+        upgradesDialogue.SetActive(true);
+
+        while (statsTab.GetComponent<Image>() != statsTab.GetComponent<Tab>().activeImg)
+        {
+            yield return null;
+        }
+
+        upgradesDialogue.SetActive(false);
+        statsDialogue.SetActive(true);
+
+        while (augmentsTab.GetComponent<Image>() != augmentsTab.GetComponent<Tab>().activeImg)
+        {
+            yield return null;
+        }
+
+        statsDialogue.SetActive(false);
+        augmentsDialogue.SetActive(true);
+
+        while (sentriesTab.GetComponent<Image>() != sentriesTab.GetComponent<Tab>().activeImg)
+        {
+            yield return null;
+        }
+
+        augmentsDialogue.SetActive(false);
+        shopSentriesDialogue.SetActive(true);
+
+        while (shopMenu.activeSelf)
+        {
+            yield return null;
+        }
+
+        shopSentriesDialogue.SetActive(false);
+        nextZoneDialogue.SetActive(true);
+    }
+
+    public void Collision6()
+    {
+        nextZoneDialogue.SetActive(false);
+        StartCoroutine(Sequence6Coroutine());
+    }
+
+    IEnumerator Sequence6Coroutine()
+    {
+        eventsDialogue.SetActive(true);
+        yield return null;
     }
 }

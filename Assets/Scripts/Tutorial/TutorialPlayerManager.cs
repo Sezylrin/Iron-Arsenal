@@ -6,6 +6,8 @@ using UnityEngine;
 public class TutorialPlayerManager : MonoBehaviour
 {
     public BoxCollider col1;
+    public BoxCollider col2;
+    public BoxCollider col3;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,14 @@ public class TutorialPlayerManager : MonoBehaviour
         {
             Destroy(other.gameObject);
             TutorialManager.Instance.Collision1();
+        }
+        else if (other == col2)
+        {
+            TutorialManager.Instance.Collision4();
+        }
+        else if (other == col3)
+        {
+            TutorialManager.Instance.Sequence5();
         }
     }
 }
