@@ -634,6 +634,7 @@ MonoBehaviour:
   mapGenerator: {fileID: 0}
   minimapRadarOverlay: {fileID: 0}
   radarButtonsContainer: {fileID: 835452668}
+  radarButtonBackground: {fileID: 342872971819447653, guid: 871eafdd799d3904a962b81eaff6c21a, type: 3}
   sizeScale: 100
   startLocalPos: {x: 0, y: 0, z: 0}
   buttonOffset: 150
