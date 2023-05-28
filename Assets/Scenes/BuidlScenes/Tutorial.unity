@@ -728,6 +728,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 965557607}
     m_Modifications:
+    - target: {fileID: 4463657492390453155, guid: c00cd279673156d48afdf71942bc832c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4463657494305407259, guid: c00cd279673156d48afdf71942bc832c, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -783,6 +787,10 @@ PrefabInstance:
     - target: {fileID: 4463657494305407259, guid: c00cd279673156d48afdf71942bc832c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463657494305407260, guid: c00cd279673156d48afdf71942bc832c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4463657494305407263, guid: c00cd279673156d48afdf71942bc832c, type: 3}
       propertyPath: m_Name
@@ -5935,6 +5943,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1767645923}
     m_Modifications:
+    - target: {fileID: 5052039950939029548, guid: b0d9f2b454364544f89739d8c4faf2bd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5052039952760676834, guid: b0d9f2b454364544f89739d8c4faf2bd, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -5982,6 +5994,10 @@ PrefabInstance:
     - target: {fileID: 5052039952760676844, guid: b0d9f2b454364544f89739d8c4faf2bd, type: 3}
       propertyPath: m_Name
       value: Boss Hunt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5052039952760676847, guid: b0d9f2b454364544f89739d8c4faf2bd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7916,9 +7932,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1356241156}
     m_Modifications:
+    - target: {fileID: 114454608414645444, guid: 9bea9768685718f43856017ed97cc670, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 114454609238557304, guid: 9bea9768685718f43856017ed97cc670, type: 3}
       propertyPath: m_Name
       value: Rocket Part
+      objectReference: {fileID: 0}
+    - target: {fileID: 114454609238557307, guid: 9bea9768685718f43856017ed97cc670, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114454609238557308, guid: 9bea9768685718f43856017ed97cc670, type: 3}
       propertyPath: m_RootOrder
@@ -9667,6 +9691,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1687617943}
     m_Modifications:
+    - target: {fileID: 362598567437902554, guid: 78847fb21d402414a8083dbb55faf9b5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 362598567648167907, guid: 78847fb21d402414a8083dbb55faf9b5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 362598567648167908, guid: 78847fb21d402414a8083dbb55faf9b5, type: 3}
       propertyPath: m_Name
       value: Voidstone Mining Outpost
@@ -11271,6 +11303,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1129077136}
     m_Modifications:
+    - target: {fileID: 3772610250572434497, guid: e1cc1f4bddda500429cd08e3122abbf9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3772610250572434498, guid: e1cc1f4bddda500429cd08e3122abbf9, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -11318,6 +11354,10 @@ PrefabInstance:
     - target: {fileID: 3772610250572434524, guid: e1cc1f4bddda500429cd08e3122abbf9, type: 3}
       propertyPath: m_Name
       value: Rocket Pad
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772610250611900683, guid: e1cc1f4bddda500429cd08e3122abbf9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11511,6 +11551,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1474216949}
     m_Modifications:
+    - target: {fileID: 5100279080379219052, guid: 637c161f44b007a4b96886eb0307d689, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5100279081852817103, guid: 637c161f44b007a4b96886eb0307d689, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -11554,6 +11598,10 @@ PrefabInstance:
     - target: {fileID: 5100279081852817103, guid: 637c161f44b007a4b96886eb0307d689, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100279081852817200, guid: 637c161f44b007a4b96886eb0307d689, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5100279081852817202, guid: 637c161f44b007a4b96886eb0307d689, type: 3}
       propertyPath: m_Name
@@ -12727,6 +12775,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2084276170}
     m_Modifications:
+    - target: {fileID: 4615687775555331035, guid: 368ee64a6932e0741aff22c6fb29615c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4615687775888522595, guid: 368ee64a6932e0741aff22c6fb29615c, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -12770,6 +12822,10 @@ PrefabInstance:
     - target: {fileID: 4615687775888522595, guid: 368ee64a6932e0741aff22c6fb29615c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4615687775888522596, guid: 368ee64a6932e0741aff22c6fb29615c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4615687775888522599, guid: 368ee64a6932e0741aff22c6fb29615c, type: 3}
       propertyPath: m_Name
