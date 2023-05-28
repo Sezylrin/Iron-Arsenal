@@ -35,6 +35,11 @@ public class LevelManager : MonoBehaviour
     public Mining playerMining;
     public State currentState = State.Normal;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip gameSound;
+    [SerializeField] private AudioClip pauseSound;
+
+    [Header("Debug")]
     [SerializeField] private bool unlimitedResources = false;
 
     private void Awake()
@@ -58,6 +63,9 @@ public class LevelManager : MonoBehaviour
         levelCanvasManager = LevelCanvasManager.Instance;
         playerFunctions = player.GetComponent<BaseFunctions>();
         playerMining = player.GetComponent<Mining>();
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = gameSound;
+        audioSource.Play();
     }
 
     //Temp for now. Eventually these will be called by other classes
@@ -167,5 +175,19 @@ public class LevelManager : MonoBehaviour
     public ResourcesAmount GetResources()
     {
         return new ResourcesAmount(buildManager.xenorium, buildManager.novacite, buildManager.voidStone);
+    }
+
+    public void PlayGameSound()
+    {
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = gameSound;
+        audioSource.Play();
+    }
+    
+    public void PlayPauseSound()
+    {
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = pauseSound;
+        audioSource.Play();
     }
 }

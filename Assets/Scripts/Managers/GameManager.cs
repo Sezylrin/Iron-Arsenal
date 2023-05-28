@@ -101,11 +101,13 @@ public class GameManager : MonoBehaviour
             if (currentScene.name != SceneState.Game.ToString()) return;
             pauseMenu.SetActive(true);
             currentSelection = CurrentSelection.Paused;
+            levelManager.PlayPauseSound();
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && currentSelection == CurrentSelection.Paused)
         {
             currentSelection = CurrentSelection.Playing;
             pauseMenu.SetActive(false);
+            levelManager.PlayGameSound();
         }
         if (Input.GetKeyDown(KeyCode.Escape) && currentSelection == CurrentSelection.Settings)
         {
@@ -163,6 +165,7 @@ public class GameManager : MonoBehaviour
     {
         currentSelection = CurrentSelection.Playing;
         pauseMenu.SetActive(false);
+        levelManager.PlayGameSound();
     }
 
     public void HandleDisplaySettings()
