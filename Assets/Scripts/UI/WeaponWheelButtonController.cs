@@ -15,7 +15,7 @@ public class WeaponWheelButtonController : MonoBehaviour
     private bool selected = false;
     private Image bgColor;
     private Button button;
-    private Color selectedColor = new Color(0f, 0.859f, 1f, 1f);
+    private Color selectedColor = new Color32(0, 219, 255, 255);
     private Color normalColor = new Color(1f, 1f, 1f, 0.647f);
     private static List<int> unlockedCannons;
 
@@ -29,17 +29,13 @@ public class WeaponWheelButtonController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            foreach (int cannon in unlockedCannons)
-            {
-                Debug.Log(cannon);
-            }
-            Debug.Log("End");
-        }
         if (!unlockedCannons.Contains(id))
         {
             button.interactable = false;
+        }
+        else
+        {
+            button.interactable = true;
         }
         if (selected)
         {

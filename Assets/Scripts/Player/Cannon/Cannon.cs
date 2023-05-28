@@ -148,69 +148,12 @@ public class Cannon : MonoBehaviour
             }
             cannonProjectileScript.Init();
         }
+    }
 
-        if (switchingEnabled)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                activeCannonProjectile = 0;
-                UpdateMaterial();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                if (unlockedCannonProjectiles.Count >= 2)
-                {
-                    activeCannonProjectile = 1;
-                    UpdateMaterial();
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                if (unlockedCannonProjectiles.Count >= 3)
-                {
-                    activeCannonProjectile = 2;
-                    UpdateMaterial();
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                if (unlockedCannonProjectiles.Count >= 4)
-                {
-                    activeCannonProjectile = 3;
-                    UpdateMaterial();
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                if (unlockedCannonProjectiles.Count >= 5)
-                {
-                    activeCannonProjectile = 4;
-                    UpdateMaterial();
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                if (unlockedCannonProjectiles.Count >= 6)
-                {
-                    activeCannonProjectile = 5;
-                    UpdateMaterial();
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha7))
-            {
-                if (unlockedCannonProjectiles.Count >= 7)
-                {
-                    activeCannonProjectile = 6;
-                    UpdateMaterial();
-                }
-            }
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            UnlockRandomCannon();
-        }
+    public void SwitchCannon(int cannonType)
+    {
+        activeCannonProjectile = cannonType;
+        UpdateMaterial();
     }
 
     public void UpdateMaterial()

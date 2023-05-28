@@ -11,15 +11,15 @@ public class WeaponWheelController : MonoBehaviour
 
     void Update()
     {
+        Cannon cannon = LevelManager.Instance.playerFunctions.cannon;
         if (Input.GetKeyDown(KeyCode.H))
         {
-            Debug.Log(LevelManager.Instance.playerFunctions.cannon.switchingEnabled);
-            LevelManager.Instance.playerFunctions.cannon.SetSwitchingEnabledState(true);
-            LevelManager.Instance.playerFunctions.cannon.UnlockRandomCannon();
+            cannon.SetSwitchingEnabledState(true);
+            cannon.UnlockRandomCannon();
             WeaponWheelButtonController.UpdateUnlockedCannons();
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab) && LevelManager.Instance.playerFunctions.cannon.switchingEnabled)
+        if (Input.GetKeyDown(KeyCode.Tab) && cannon.switchingEnabled)
         {
             weaponWheelSelected = !weaponWheelSelected;
         }
@@ -32,33 +32,34 @@ public class WeaponWheelController : MonoBehaviour
         {
             anim.SetBool("OpenWeaponWheel", false);
         }
+        //cannon.SwitchCannon(weaponID);
 
-        switch (weaponID)
-        {
-            case 0:
-                //Pistol
-                break;
-            case 1:
+        //switch (weaponID)
+        //{
+            //case 0:
+                //cannon.SwitchCannon(weaponID);
+                //break;
+            //case 1:
                 //Shotgun
-                break;
-            case 2:
+                //break;
+           // case 2:
                 //Rapid fire
-                break;
-            case 3:
+                //break;
+            //case 3:
                 //Slow Gun
-                break;
-            case 4:
+                //break;
+            //case 4:
                 //Poison
-                break;
-            case 5:
+                //break;
+            //case 5:
                 //Rocket Launcher
-                break;
-            case 6:
+                //break;
+            //case 6:
                 //Flamethrower
-                break;
-            case 7:
+                //break;
+            //case 7:
                 //Sniper
-                break;
-        }
+                //break;
+        //}
     }
 }
