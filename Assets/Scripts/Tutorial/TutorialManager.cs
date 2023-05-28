@@ -27,8 +27,10 @@ public class TutorialManager : MonoBehaviour
     public GameObject map;
     public GameObject radarDialogue;
     [Header("Sequence 4")]
+    public GameObject eventsContainer;
     public GameObject outpostDialogue;
     [Header("Sequence 5")]
+    public GameObject shop;
     public GameObject shopMenu;
     public GameObject statsTab;
     public GameObject augmentsTab;
@@ -39,13 +41,20 @@ public class TutorialManager : MonoBehaviour
     public GameObject augmentsDialogue;
     public GameObject shopSentriesDialogue;
     [Header("Sequence 6")]
+    public GameObject events;
     public GameObject nextZoneDialogue;
     public GameObject eventsDialogue;
     public GameObject miningDialogue;
-    public GameObject chestDialogue;
-    public GameObject armoryDialogue;
-    public GameObject bossDialogue;
     public GameObject rocketsDialogue;
+    public GameObject chestDialogue;
+    public GameObject ruinsDialogue;
+    public GameObject bossDialogue;
+
+    private bool miningEventViewed;
+    private bool rocketsEventViewed;
+    private bool chestEventViewed;
+    private bool ruinsEventViewed;
+    private bool bossEventViewed;
     [Header("Sequence 7")]
     public GameObject exitDialogue;
 
@@ -137,16 +146,23 @@ public class TutorialManager : MonoBehaviour
     {
         radarDialogue.SetActive(false);
         outpostDialogue.SetActive(true);
+        StartCoroutine(Sequence4Coroutine());
     }
 
-    public void Sequence5()
+    IEnumerator Sequence4Coroutine()
     {
+        while (eventsContainer.transform.childCount != 0)
+        {
+            yield return null;
+        }
+
         outpostDialogue.SetActive(false);
         StartCoroutine(Sequence5Coroutine());
     }
 
     IEnumerator Sequence5Coroutine()
     {
+        shop.SetActive(true);
         spendDialogue.SetActive(true);
 
         while (!shopMenu.activeSelf)
@@ -157,7 +173,7 @@ public class TutorialManager : MonoBehaviour
         spendDialogue.SetActive(false);
         upgradesDialogue.SetActive(true);
 
-        while (statsTab.GetComponent<Image>() != statsTab.GetComponent<Tab>().activeImg)
+        while (statsTab.GetComponent<Image>().sprite != statsTab.GetComponent<Tab>().activeImg)
         {
             yield return null;
         }
@@ -165,7 +181,7 @@ public class TutorialManager : MonoBehaviour
         upgradesDialogue.SetActive(false);
         statsDialogue.SetActive(true);
 
-        while (augmentsTab.GetComponent<Image>() != augmentsTab.GetComponent<Tab>().activeImg)
+        while (augmentsTab.GetComponent<Image>().sprite != augmentsTab.GetComponent<Tab>().activeImg)
         {
             yield return null;
         }
@@ -173,7 +189,7 @@ public class TutorialManager : MonoBehaviour
         statsDialogue.SetActive(false);
         augmentsDialogue.SetActive(true);
 
-        while (sentriesTab.GetComponent<Image>() != sentriesTab.GetComponent<Tab>().activeImg)
+        while (sentriesTab.GetComponent<Image>().sprite != sentriesTab.GetComponent<Tab>().activeImg)
         {
             yield return null;
         }
@@ -198,7 +214,46 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator Sequence6Coroutine()
     {
+        events.SetActive(true);
         eventsDialogue.SetActive(true);
+        while (!miningEventViewed)
         yield return null;
     }
+
+    IEnumerator Sequence7Coroutine()
+    {
+        exitDialogue.SetActive(true);
+        yield return null;
+    }
+
+    public void MiningTrigger()
+    {
+        miningEventViewed = true;
+        miningDialogue.SetActive(true);
+    }
+
+    public void RocketsTrigger()
+    {
+        rocketsEventViewed = true;
+        rocketsDialogue.SetActive(true);
+    }
+
+    public void ChestTrigger()
+    {
+        chestEventViewed = true;
+        chestDialogue.SetActive(true);
+    }
+
+    public void RuinsTrigger()
+    {
+        ruinsEventViewed = true;
+        ruinsDialogue.SetActive(true);
+    }
+
+    public void BossTrigger()
+    {
+        bossEventViewed = true;
+        bossDialogue.SetActive(true);
+    }
+
 }
