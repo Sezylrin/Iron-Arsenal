@@ -360,7 +360,7 @@ MonoBehaviour:
   <EndCondition>k__BackingField: 0
   <CanStart>k__BackingField: 0
   <Active>k__BackingField: 0
-  trigger: {fileID: 4463657492390453157}
+  trigger: {fileID: 248280302653813572}
   canvas: {fileID: 2960119192001155277}
   <RushLength>k__BackingField: 30
 --- !u!1 &8067794824889357077

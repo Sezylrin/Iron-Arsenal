@@ -59,8 +59,7 @@ public class RocketPad : Event
     private void UpdateTextGUI()
     {
         // TODO: Replace this with their sprite instead
-        text.text = "Rocket Components Collected: " + RocketManager.rocketPartsCollected + "/" + RocketManager.requiredRocketPartsToEscape + "\n" +
-                    "Press 'E' to launch";
+        text.text = RocketManager.rocketPartsCollected + "/" + RocketManager.requiredRocketPartsToEscape ;
     }
 
     protected override void OnTriggerStay(Collider other)

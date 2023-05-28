@@ -65,13 +65,14 @@ public class ShopMenu : MonoBehaviour
         this.shopManager = shopManager;
 
         if (shopManager.GetPurchasableSentries().Count == 0)
-        {
             sentryPurchaseTab.SetActive(false);
-        }
         else
-        {
             sentryPurchaseTab.SetActive(true);
-        }
+        if (shopManager.GetPurchasableAugments().Count == 0)
+            augmentUpgradesTab.SetActive(false);
+        else
+            augmentUpgradesTab.SetActive(true);
+        attributeUpgradesTab.SetActive(true);
         DisplayItems(FindCurrentTab());
     }
 
@@ -79,10 +80,14 @@ public class ShopMenu : MonoBehaviour
     {
         Tab mechUpgradesTabComponent = mechUpgradesTab.GetComponent<Tab>();
         Tab sentryPurchaseTabComponent = sentryPurchaseTab.GetComponent<Tab>();
+        Tab attributePurchase = attributeUpgradesTab.GetComponent<Tab>();
+        Tab augmentsTab = augmentUpgradesTab.GetComponent<Tab>();
         shopManager.currTab = TabType.mechUpgrades;
         HandleClickTab(mechUpgradesTab.GetComponent<Tab>());
         LevelCanvasManager.Instance.CloseShopMenu();
         sentryPurchaseTabComponent.DeactivateTab();
+        attributePurchase.DeactivateTab();
+        augmentsTab.DeactivateTab();
         mechUpgradesTabComponent.ClickTab();
     }
 
@@ -193,9 +198,10 @@ public class ShopMenu : MonoBehaviour
     {
         List<AttributeUpgradeData> purchasableAttributes = shopManager.GetAttributeUpgradesRemaining();
         item1.GetComponent<PurchaseItem>().SetAttributeUpgrade(purchasableAttributes[0], TabType.attributeUpgrades, this);
-
+        ResetSlot(purchasableAttributes.Count);
         if (purchasableAttributes.Count == 1)
         {
+
             item2.SetActive(false);
             item3.SetActive(false);
         }
@@ -215,7 +221,7 @@ public class ShopMenu : MonoBehaviour
     {
         List<AugmentData> purchasableAugments = shopManager.GetPurchasableAugments();
         item1.GetComponent<PurchaseItem>().SetAugmentPurchase(purchasableAugments[0], TabType.augmentPurchases, this);
-
+        ResetSlot(purchasableAugments.Count);
         if (purchasableAugments.Count == 1)
         {
             item2.SetActive(false);
@@ -237,7 +243,7 @@ public class ShopMenu : MonoBehaviour
     {
         List<SentryData> purchasableSentries = shopManager.GetPurchasableSentries();
         item1.GetComponent<PurchaseItem>().SetSentryPurchase(purchasableSentries[0], TabType.sentryPurchases, this);
-        
+        ResetSlot(purchasableSentries.Count);
         if (purchasableSentries.Count == 1)
         {
             item2.SetActive(false);
@@ -280,5 +286,24 @@ public class ShopMenu : MonoBehaviour
             return sentryPurchTab;
         }
         return mechUpgTab;
+    }
+
+    public void ResetSlot(int resetAmount)
+    {
+        if (resetAmount == 1)
+        {
+            item1.SetActive(true);
+        }
+        if( resetAmount == 2)
+        {
+            item1.SetActive(true);
+            item2.SetActive(true);
+        }
+        if (resetAmount == 3)
+        {
+            item1.SetActive(true);
+            item2.SetActive(true);
+            item3.SetActive(true);
+        }
     }
 }
