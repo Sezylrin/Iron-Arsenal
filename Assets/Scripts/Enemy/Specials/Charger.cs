@@ -8,6 +8,7 @@ public class Charger : Enemy
     private bool charging = false;
     private Vector3 chargeDirection;
     public Animator anim;
+    public ParticleSystem blueFlame;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,7 @@ public class Charger : Enemy
     IEnumerator Charge()
     {
         anim.SetTrigger("Charge");
+        blueFlame.Play();
         chargeDirection = (Player.transform.position - transform.position).normalized;
         EnemyRB.AddForce(chargeDirection * 1500);
         Invoke("Walk", 1);
@@ -61,5 +63,6 @@ public class Charger : Enemy
     public void Walk()
     {
         anim.SetTrigger("Walk");
+        blueFlame.Stop();
     }
 }
