@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
     private List<ISFXVolumeObserver> sfxVolumeObservers = new List<ISFXVolumeObserver>();
     private List<IBGMVolumeObserver> bgmVolumeObservers = new List<IBGMVolumeObserver>();
 
-    private LevelManager levelManager;
     public CurrentSelection currentSelection = CurrentSelection.Playing;
 
     private void Awake()
@@ -79,10 +78,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         audioSrc = gameObject.GetComponent<AudioSource>();
-        if (LevelManager.Instance != null)
-        {
-            levelManager = LevelManager.Instance;
-        }
     }
 
     private void Update()
@@ -102,14 +97,14 @@ public class GameManager : MonoBehaviour
             {
                 pauseMenu.SetActive(true);
                 currentSelection = CurrentSelection.Paused;
-                levelManager.PlayPauseSound();
+                LevelManager.Instance.PlayPauseSound();
             }
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && currentSelection == CurrentSelection.Paused)
         {
             currentSelection = CurrentSelection.Playing;
             pauseMenu.SetActive(false);
-            levelManager.PlayGameSound();
+            LevelManager.Instance.PlayGameSound();
         }
         if (Input.GetKeyDown(KeyCode.Escape) && currentSelection == CurrentSelection.Settings)
         {
@@ -132,6 +127,18 @@ public class GameManager : MonoBehaviour
     {
         currentSelection = CurrentSelection.Playing;
         StartCoroutine(LoadPlayScene());
+    }
+
+    public void PlayTutorial()
+    {
+        currentSelection = CurrentSelection.Playing;
+        StartCoroutine(LoadTutorialScene());
+    }
+
+    IEnumerator LoadTutorialScene()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Loader.Load(SceneState.Tutorial);
     }
 
     IEnumerator LoadPlayScene()
@@ -167,7 +174,7 @@ public class GameManager : MonoBehaviour
     {
         currentSelection = CurrentSelection.Playing;
         pauseMenu.SetActive(false);
-        levelManager.PlayGameSound();
+        LevelManager.Instance.PlayGameSound();
     }
 
     public void HandleDisplaySettings()
@@ -181,11 +188,6 @@ public class GameManager : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Loader.Load(SceneState.MainMenu);
-    }
-
-    public void LoadTutorial()
-    {
-        Loader.Load(SceneState.Tutorial);
     }
 
     public void IncreaseSFX()

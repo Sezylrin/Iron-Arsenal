@@ -114,13 +114,11 @@ public class LevelCanvasManager : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && LevelManager.Instance.currentState == State.Building)
         {
-            Debug.Log("attempting build");
             Vector3 MousePos = MousePosition.MouseToWorld3D(Camera.main, -1);
             MousePos.y = transform.position.y;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, layer))
             {
-                Debug.Log("ray hit");
                 if (hit.collider.CompareTag("Socket"))
                 {
                     socket = hit.collider.GetComponent<SentrySocket>();
