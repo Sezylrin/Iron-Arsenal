@@ -23,6 +23,7 @@ public class Cannon : MonoBehaviour
     public Transform rotatePoint;
     public Transform cannonProjectileSpawnPoint;
     public LayerMask groundMask;
+    private WeaponSounds weaponSounds;
 
     public GameObject projectilePF;
     private GameObject newCannonProjectile;
@@ -53,6 +54,7 @@ public class Cannon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        weaponSounds = gameObject.GetComponent<WeaponSounds>();
         activeCannonProjectile = 0;
         flamethrowerIndex = -1;
         ableToShoot = true;
@@ -153,6 +155,7 @@ public class Cannon : MonoBehaviour
                 }
             }
             cannonProjectileScript.Init();
+            weaponSounds.ShootWeapon(activeCannonProjectile);
         }
 
         if (switchingEnabled)
