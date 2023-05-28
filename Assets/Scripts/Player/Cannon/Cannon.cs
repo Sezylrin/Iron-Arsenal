@@ -154,6 +154,46 @@ public class Cannon : MonoBehaviour
             }
             cannonProjectileScript.Init();
         }
+
+        if (switchingEnabled)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1) && unlockedCannonProjectiles.Contains(0))
+            {
+                WeaponWheelController.weaponID = 0;
+                SwitchCannon(0);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2) && unlockedCannonProjectiles.Contains(1))
+            {
+                WeaponWheelController.weaponID = 1;
+                SwitchCannon(1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3) && unlockedCannonProjectiles.Contains(2))
+            {
+                WeaponWheelController.weaponID = 2;
+                SwitchCannon(2);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4) && unlockedCannonProjectiles.Contains(3))
+            {
+                WeaponWheelController.weaponID = 3;
+                SwitchCannon(3);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5) && unlockedCannonProjectiles.Contains(4))
+            {
+                WeaponWheelController.weaponID = 4;
+                SwitchCannon(4);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6) && unlockedCannonProjectiles.Contains(5))
+            {
+                WeaponWheelController.weaponID = 5;
+                SwitchCannon(5);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7) && unlockedCannonProjectiles.Contains(6))
+            {
+                WeaponWheelController.weaponID = 6;
+                SwitchCannon(6);
+            }
+        }
+
     }
 
     public void SwitchCannon(int cannonType)
