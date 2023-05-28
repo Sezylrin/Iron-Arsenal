@@ -1489,7 +1489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -13.9, y: 841}
+  m_AnchoredPosition: {x: -163, y: 840}
   m_SizeDelta: {x: 478, y: 188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &194631619
@@ -1535,8 +1535,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1489429050}
   lines:
-  - Stats do this
-  - Click on Augments
+  - The 'STATS' tab will also have 3 permanent options.
+  - These upgrades provide a permament increase to your stats.
+  - Click on the 'AUGMENTS' tab.
   textSpeed: 0.05
   stayActive: 1
   pauseDuringDialogue: 0
@@ -2449,6 +2450,7 @@ MonoBehaviour:
   col1: {fileID: 671695159}
   col2: {fileID: 1978848518}
   col3: {fileID: 380573746}
+  miningMatsCollider: {fileID: 0}
   miningTrigger: {fileID: 118333293}
   rocketsTrigger: {fileID: 1158837649}
   chestTrigger: {fileID: 1147534957}
@@ -3883,7 +3885,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 470, y: 894}
+  m_AnchoredPosition: {x: 144, y: 840}
   m_SizeDelta: {x: 478, y: 188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584985173
@@ -3929,7 +3931,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1362795193}
   lines:
-  - Sentries do this.
+  - The 'SENTIRES' tab will have 3 random sentry choices that you can purchase.
+  - 'Bought sentries unlock the sentry type, which you can then build '
   - Get out.
   textSpeed: 0.05
   stayActive: 1
@@ -10281,10 +10284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1263682825}
   lines:
-  - 'Use the radar at the bottom of the map to scan for an event.
-
-    Use the markers
-    on the map and minimap to find that event.'
+  - Use the radar at the bottom of the map to scan for an event.
+  - Use the markers on the map and minimap to find that event.
   textSpeed: 0.05
   stayActive: 0
   pauseDuringDialogue: 0
@@ -10513,7 +10514,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 113.099976, y: 840}
+  m_AnchoredPosition: {x: -23, y: 840}
   m_SizeDelta: {x: 478, y: 188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1563173898
@@ -10559,8 +10560,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1774194389}
   lines:
-  - Augments do this.
-  - Click on Sentries.
+  - The 'AUGMENTS' tab will have 3 random augments that you can purchase.
+  - 'Augments change how your '
+  - Click on the 'SENTRIES' tab.
   textSpeed: 0.05
   stayActive: 1
   pauseDuringDialogue: 0
@@ -10942,7 +10944,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -153.7, y: 844.2}
+  m_AnchoredPosition: {x: -304.3, y: 840}
   m_SizeDelta: {x: 478, y: 188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1593213637
@@ -10988,9 +10990,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1657202425}
   lines:
-  - This is shop
-  - Upgrades do this
-  - Click on stats
+  - You'll find many shops as you explore the world.
+  - The 'UPGRADES' tab will always have the same 3 choices.
+  - Click on the 'STATS' tab.
   textSpeed: 0.05
   stayActive: 1
   pauseDuringDialogue: 0
@@ -12532,7 +12534,7 @@ MonoBehaviour:
   textComponent: {fileID: 827227145}
   lines:
   - Shops are where you can spend your resources.
-  - Go to the shop.
+  - Interact with the shop to see what is available.
   textSpeed: 0.05
   stayActive: 1
   pauseDuringDialogue: 0

@@ -221,6 +221,7 @@ public class TutorialManager : MonoBehaviour
         shopSentriesDialogue.SetActive(false);
         eventsZone.SetActive(true);
         nextZoneDialogue.SetActive(true);
+        shop.SetActive(false);
     }
 
     public void Collision6()
