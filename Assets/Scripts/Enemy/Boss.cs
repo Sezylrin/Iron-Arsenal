@@ -19,6 +19,7 @@ public abstract class Boss : Enemy
 
     [field: Header("Boss Other")]
     public BossType bossType;
+    public ParticleSystem heal;
 
     protected bool canHeal;
 
@@ -119,6 +120,7 @@ public abstract class Boss : Enemy
         }
         else CurrentHealth += healthToHeal;
         LevelCanvasManager.Instance.SetBossHealthBar(GetPercentageHealthRemaining());
+        heal.Play();
     }
 
     protected override void OnDeath()
