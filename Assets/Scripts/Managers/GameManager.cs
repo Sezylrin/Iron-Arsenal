@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
     private List<ISFXVolumeObserver> sfxVolumeObservers = new List<ISFXVolumeObserver>();
     private List<IBGMVolumeObserver> bgmVolumeObservers = new List<IBGMVolumeObserver>();
 
+    public bool canUnpause = true;
+
     public CurrentSelection currentSelection = CurrentSelection.Playing;
 
     private void Awake()
@@ -167,8 +169,11 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        currentSelection = CurrentSelection.Playing;
-        Time.timeScale = 1;
+        if (canUnpause)
+        {
+            currentSelection = CurrentSelection.Playing;
+            Time.timeScale = 1;
+        }
     }
 
     public void HandleResume()
