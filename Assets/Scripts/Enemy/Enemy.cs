@@ -44,6 +44,9 @@ public abstract class Enemy : MonoBehaviour
 
     private BaseFunctions baseFunctions;
 
+    public AudioSource damageAudio;
+    public GameObject deathAudio;
+
     public ParticleSystem FirePS;
     public ParticleSystem PoisonPS;
     public ParticleSystem IcePS;
@@ -118,7 +121,7 @@ public abstract class Enemy : MonoBehaviour
         }
         if (CurrentHealth <= 0)
         {
-            
+
             if (enemyEffects.isExplode && !type.Equals(EnemyType.Exploder))
             {
                 Debug.Log("why");
@@ -136,6 +139,7 @@ public abstract class Enemy : MonoBehaviour
 
             OnDeath();
         }
+        else damageAudio.Play();
     }
 
     protected virtual void OnDeath()
@@ -191,6 +195,7 @@ public abstract class Enemy : MonoBehaviour
                 break;
         }
         enemyEffects.fireTick = 0;
+        Instantiate(deathAudio, transform.position, Quaternion.identity);
     }
 
     public void InitEnemyEffects(GameObject[] augmentPF)
