@@ -121,10 +121,8 @@ public abstract class Enemy : MonoBehaviour
         }
         if (CurrentHealth <= 0)
         {
-            Debug.Log("why");
             if (enemyEffects.isExplode && !type.Equals(EnemyType.Exploder))
             {
-                Debug.Log("why");
                 Explosion tempExplosion = Instantiate(enemyEffects.augmentPFList[0], transform.position, Quaternion.identity).GetComponent<Explosion>();
                 tempExplosion.SetDamage(MaxHealth * 0.3f, true);
             }
