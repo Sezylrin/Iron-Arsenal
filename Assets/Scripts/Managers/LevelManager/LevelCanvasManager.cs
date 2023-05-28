@@ -329,7 +329,14 @@ public class LevelCanvasManager : MonoBehaviour
 
     private void ControlRadarOverlay()
     {
-        if (radar.scannedEvent == null || mapGenerator.DistFromPlayer(radar.scannedEvent.tileObjectPtr) < mapGenerator.tileOffset) radar.isActiveScan = false;
+        if (radar.scannedEvent == null)
+        {
+            radar.isActiveScan = false;
+        }
+        else if (radar.scannedEvent != null && mapGenerator.DistFromPlayer(radar.scannedEvent.tileObjectPtr) < mapGenerator.tileOffset)
+        {
+            radar.isActiveScan = false;
+        }
         minimapRadarOverlayRectTrans.gameObject.SetActive(!(!radar.isActiveScan || mapGenerator.DistFromPlayer(radar.scannedEvent.tileObjectPtr) < mapGenerator.tileOffset * 5));
     }
 

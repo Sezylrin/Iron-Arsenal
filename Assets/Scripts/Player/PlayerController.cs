@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem leftDustPS;
     public ParticleSystem rightDustPS;
     public bool dustActive;
+    private AudioSource audioSource;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -32,6 +33,8 @@ public class PlayerController : MonoBehaviour
         // Debug.Log(vec3.normalized);
         // Debug.Log(vec3.magnitude * vec3.normalized);
         dustActive = false;
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.volume = audioSource.volume / 2.0f;
     }
 
     // Update is called once per frame
@@ -58,6 +61,8 @@ public class PlayerController : MonoBehaviour
                 dustActive = true;
                 leftDustPS.Play();
                 rightDustPS.Play();
+                //audioSource.Play();
+                audioSource.volume = audioSource.volume * 2f;
             }
         }
         else
@@ -67,6 +72,8 @@ public class PlayerController : MonoBehaviour
                 dustActive = false;
                 leftDustPS.Stop();
                 rightDustPS.Stop();
+                //audioSource.Pause();
+                audioSource.volume = audioSource.volume / 2f;
             }
         }
     }

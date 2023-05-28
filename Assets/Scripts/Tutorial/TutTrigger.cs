@@ -19,6 +19,6 @@ public class TutTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        TutorialManager.Instance.Collision6();
+        TutorialManager.Instance.Sequence5();
     }
 }
