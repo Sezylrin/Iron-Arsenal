@@ -12,6 +12,8 @@ public class RocketPad : Event
     [field: SerializeField] private int RushLength { get; set; }
     [field: SerializeField] private TextMeshProUGUI text { get; set; }
 
+    public GameObject rocket;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,7 @@ public class RocketPad : Event
     {
         if (Input.GetKeyDown(KeyCode.E) && CanStart && !EventManager.Instance.EventActive && RocketManager.canBuildEscapeRocket())
         {
+            rocket.SetActive(true);
             Begin();
             canvas.enabled = false;
         }
@@ -51,7 +54,6 @@ public class RocketPad : Event
 
     protected override void End()
     {
-        RocketManager.collectRocketPart();
         base.End();
     }
 

@@ -153,7 +153,9 @@ public class BaseFunctions : MonoBehaviour
         }
         else
         {
-            float shieldSegment = currentShield % (maxShieldHealth * 0.25f);
+            float shieldSegment =  Mathf.CeilToInt(currentShield) % Mathf.CeilToInt((maxShieldHealth * 0.25f)) ;
+            if (shieldSegment == 0)
+                shieldSegment = Mathf.CeilToInt((maxShieldHealth * 0.25f));
             float overflow = shieldSegment - amount;
             if (overflow < 0)
             {

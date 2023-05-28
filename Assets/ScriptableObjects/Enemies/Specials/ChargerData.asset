@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ChargerData
   m_EditorClassIdentifier: 
   HealthScale: 1
-  damageOnCollide: 20
+  damageOnCollide: 40
   speed: 5
   ramLaunchMultiplier: 20

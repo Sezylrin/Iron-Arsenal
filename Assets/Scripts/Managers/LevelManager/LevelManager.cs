@@ -84,10 +84,6 @@ public class LevelManager : MonoBehaviour
             LevelCanvasManager.Instance.CloseBuildMenu();
             LevelCanvasManager.Instance.CloseRemoveSentryBtn();
         }
-        
-        if (!AugmentManager.Instance.selectingAugment && Input.GetKeyDown(KeyCode.P)) {
-            SpawnAugmentChoice();
-        }
     }
     public bool CanBuildSentry(SentryName sentryName)
     {

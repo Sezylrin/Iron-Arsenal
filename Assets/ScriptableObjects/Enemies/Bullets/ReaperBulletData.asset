@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c98771e7ed34dfa46a4abd22a764758a, type: 3}
   m_Name: ReaperBulletData
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 30
   projectileSpeed: 10
   fireDelay: 0.2
   projectileLifetime: 10
