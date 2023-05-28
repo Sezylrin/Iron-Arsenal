@@ -29,7 +29,7 @@ public class WeaponWheelButtonController : MonoBehaviour
 
     void Update()
     {
-        if (!unlockedCannons.Contains(id))
+        if (!unlockedCannons.Contains(id) && id != 0)
         {
             button.interactable = false;
         }
@@ -49,6 +49,7 @@ public class WeaponWheelButtonController : MonoBehaviour
         }
         if (WeaponWheelController.weaponID == id && !selected)
         {
+            Debug.Log("trigger");
             Selected();
         }
     }
@@ -59,6 +60,7 @@ public class WeaponWheelButtonController : MonoBehaviour
         selected = true;
         gameObject.GetComponent<Image>().color = selectedColor;
         WeaponWheelController.weaponID = id;
+        WeaponWheelController.Instance.closeMenu();
     }
 
     public void HoverEnter()

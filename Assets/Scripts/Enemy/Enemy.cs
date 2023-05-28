@@ -121,7 +121,7 @@ public abstract class Enemy : MonoBehaviour
         }
         if (CurrentHealth <= 0)
         {
-
+            Debug.Log("why");
             if (enemyEffects.isExplode && !type.Equals(EnemyType.Exploder))
             {
                 Debug.Log("why");

@@ -84,6 +84,11 @@ public class LevelManager : MonoBehaviour
             LevelCanvasManager.Instance.CloseBuildMenu();
             LevelCanvasManager.Instance.CloseRemoveSentryBtn();
         }
+
+        /*if (Input.GetKeyDown(KeyCode.P))
+        {
+            SpawnAugmentChoice();
+        }*/
     }
     public bool CanBuildSentry(SentryName sentryName)
     {
@@ -159,6 +164,7 @@ public class LevelManager : MonoBehaviour
         augmentManager.CreateAugmentChoices();
         if (augmentManager.augmentChoices.Count > 0)
         {
+            GameManager.Instance.PauseGame();
             levelCanvasManager.ShowAugmentChoices(augmentManager.augmentChoices);
         }
     }
