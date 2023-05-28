@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rb;
     private Vector3 rotate;
     private Coroutine lookCoroutine;
+    public ParticleSystem leftDustPS;
+    public ParticleSystem rightDustPS;
+    public bool dustActive;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
         // Vector3 vec3 = new Vector3(-1, 1, -1);
         // Debug.Log(vec3.normalized);
         // Debug.Log(vec3.magnitude * vec3.normalized);
+        dustActive = false;
     }
 
     // Update is called once per frame
@@ -48,6 +52,22 @@ public class PlayerController : MonoBehaviour
             rotate = new Vector3(_moveInput.x, 0, _moveInput.y);
             Quaternion lookRotate = Quaternion.LookRotation(rotate, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotate, playerData.rotateSpeed * 180 * Time.deltaTime);
+
+            if (!dustActive)
+            {
+                dustActive = true;
+                leftDustPS.Play();
+                rightDustPS.Play();
+            }
+        }
+        else
+        {
+            if (dustActive)
+            {
+                dustActive = false;
+                leftDustPS.Stop();
+                rightDustPS.Stop();
+            }
         }
     }
     public void StartRotating()

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 320101039571035069}
   - component: {fileID: 9124742576245998335}
   - component: {fileID: 4155563441187441389}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4849,7 +4849,7 @@ GameObject:
   - component: {fileID: 6224005361997408101}
   - component: {fileID: 8814670306289277497}
   - component: {fileID: 6118085829126871827}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Poison
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9769,7 +9769,7 @@ GameObject:
   - component: {fileID: 8749130367323756107}
   - component: {fileID: 5968319427593488065}
   - component: {fileID: 8877470733881329083}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}

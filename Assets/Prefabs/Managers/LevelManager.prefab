@@ -3983,7 +3983,7 @@ Transform:
   - {fileID: 1715962026865805885}
   - {fileID: 940047202}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2077974866772937153
 MonoBehaviour:
@@ -5203,14 +5203,12 @@ MonoBehaviour:
   - {fileID: 3061924111405816818, guid: 2fb6490e21c6eb447b04e176e2d6830a, type: 3}
   - {fileID: 1854458944056088684, guid: d1dcde8f2e7bc7e46923b263d4f3fb02, type: 3}
   - {fileID: 6069484704797165330, guid: 575097a4540569a479d7b6738c523bd2, type: 3}
-  - {fileID: 1555804699919761650, guid: ec2e6da22e4e00b4ea28d3eb24b0a3f9, type: 3}
+  - {fileID: 312686492115421739, guid: d7e65ca05aee81e45bcf533e20cb9909, type: 3}
   - {fileID: 5522926118580441598, guid: ce6df86deb473b445b94f8195a895034, type: 3}
   - {fileID: 3601272918170804926, guid: 08608a1c31186d74b8b465ec4dcde37a, type: 3}
   - {fileID: 4166898985344144913, guid: ec03c72217377734f9a2eb36d1f16031, type: 3}
   - {fileID: 7689516852213475515, guid: f0a5d3def0990c040a1c6579a7a266d8, type: 3}
-  - {fileID: 7355445405899335906, guid: df4c41f053c529c49ad612740ab78d8e, type: 3}
   - {fileID: 4036122845976562098, guid: 021d8823d6ecc5b4c84b56d35ea3ecc0, type: 3}
-  - {fileID: 312686492115421739, guid: d7e65ca05aee81e45bcf533e20cb9909, type: 3}
   bossPrefabs:
   - {fileID: 6689270825627925305, guid: c4edd487ee5ec4b42a80d4e0d284a254, type: 3}
   - {fileID: 6315162635932650869, guid: 5d949ff6ac78ae843866d967746520e0, type: 3}
