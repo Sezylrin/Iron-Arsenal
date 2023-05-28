@@ -8,7 +8,11 @@ public static class RocketManager
     public static int rocketPartsCollected { get; private set; }
     public static int requiredRocketPartsToEscape = 3;
 
-    public static void collectRocketPart() => rocketPartsCollected++;
+    public static void collectRocketPart()
+    {
+        rocketPartsCollected++;
+        LevelCanvasManager.Instance.SetRocketPartAmount(rocketPartsCollected);
+    }
 
     public static bool canBuildEscapeRocket() => rocketPartsCollected >= requiredRocketPartsToEscape;
 }
