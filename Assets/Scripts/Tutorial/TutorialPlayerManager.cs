@@ -24,16 +24,18 @@ public class TutorialPlayerManager : MonoBehaviour
     {
         if (other == col1)
         {
-            Destroy(other.gameObject);
             TutorialManager.Instance.Collision1();
+            Destroy(other.gameObject);
         }
         else if (other == col2)
         {
             TutorialManager.Instance.Collision4();
+            Destroy(other.gameObject);
         }
         else if (other == col3)
         {
-            TutorialManager.Instance.Sequence5();
+            TutorialManager.Instance.Collision6();
+            Destroy(other.gameObject);
         }
     }
 }
