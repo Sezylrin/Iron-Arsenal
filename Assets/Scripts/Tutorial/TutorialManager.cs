@@ -28,7 +28,9 @@ public class TutorialManager : MonoBehaviour
     public GameObject radarDialogue;
     [Header("Sequence 4")]
     public GameObject eventsContainer;
+    public GameObject enemyManager;
     public GameObject outpostDialogue;
+    public GameObject miningMatsDialogue;
     [Header("Sequence 5")]
     public GameObject shop;
     public GameObject shopMenu;
@@ -42,10 +44,12 @@ public class TutorialManager : MonoBehaviour
     public GameObject shopSentriesDialogue;
     [Header("Sequence 6")]
     public GameObject events;
+    public GameObject eventsZone;
     public GameObject nextZoneDialogue;
     public GameObject eventsDialogue;
     public GameObject miningDialogue;
     public GameObject rocketsDialogue;
+    public GameObject rocketPartsDialogue;
     public GameObject chestDialogue;
     public GameObject ruinsDialogue;
     public GameObject bossDialogue;
@@ -140,12 +144,24 @@ public class TutorialManager : MonoBehaviour
 
         mapDialogue.SetActive(false);
         radarDialogue.SetActive(true);
+
+        while (map.activeSelf)
+        {
+            yield return null;
+        }
+
+        radarDialogue.SetActive(false);
     }
 
     public void Collision4()
     {
-        radarDialogue.SetActive(false);
         outpostDialogue.SetActive(true);
+        StartCoroutine(Sequence4Coroutine());
+    }
+
+    public void Sequence4()
+    {
+        miningMatsDialogue.SetActive(true);
         StartCoroutine(Sequence4Coroutine());
     }
 
@@ -156,7 +172,7 @@ public class TutorialManager : MonoBehaviour
             yield return null;
         }
 
-        outpostDialogue.SetActive(false);
+        miningMatsDialogue.SetActive(false);
         StartCoroutine(Sequence5Coroutine());
     }
 
@@ -203,6 +219,7 @@ public class TutorialManager : MonoBehaviour
         }
 
         shopSentriesDialogue.SetActive(false);
+        eventsZone.SetActive(true);
         nextZoneDialogue.SetActive(true);
     }
 
@@ -216,14 +233,25 @@ public class TutorialManager : MonoBehaviour
     {
         events.SetActive(true);
         eventsDialogue.SetActive(true);
-        while (!miningEventViewed)
-        yield return null;
+
+        while (!miningEventViewed || !rocketsEventViewed || !chestEventViewed || !ruinsEventViewed || !bossEventViewed)
+        {
+            yield return null;
+        }
+
+        while (miningDialogue.activeSelf || rocketsDialogue.activeSelf || chestDialogue.activeSelf ||
+               ruinsDialogue.activeSelf || bossDialogue.activeSelf)
+        {
+            yield return null;
+        }
+
+        // StartCoroutine(Sequence7Coroutine());
+        Sequence7();
     }
 
-    IEnumerator Sequence7Coroutine()
+    public void Sequence7()
     {
         exitDialogue.SetActive(true);
-        yield return null;
     }
 
     public void MiningTrigger()
@@ -235,7 +263,19 @@ public class TutorialManager : MonoBehaviour
     public void RocketsTrigger()
     {
         rocketsEventViewed = true;
+        StartCoroutine(RocketsTriggerCoroutine());
+    }
+
+    IEnumerator RocketsTriggerCoroutine()
+    {
         rocketsDialogue.SetActive(true);
+
+        while (rocketsDialogue.activeSelf)
+        {
+            yield return null;
+        }
+
+        rocketPartsDialogue.SetActive(true);
     }
 
     public void ChestTrigger()

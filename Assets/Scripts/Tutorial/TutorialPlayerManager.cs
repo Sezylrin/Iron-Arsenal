@@ -9,23 +9,13 @@ public class TutorialPlayerManager : MonoBehaviour
     public BoxCollider col2;
     public BoxCollider col3;
 
+    public BoxCollider miningMatsCollider;
+
     public BoxCollider miningTrigger;
     public BoxCollider rocketsTrigger;
     public BoxCollider chestTrigger;
     public BoxCollider ruinsTrigger;
     public BoxCollider bossTrigger;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -43,6 +33,10 @@ public class TutorialPlayerManager : MonoBehaviour
         {
             TutorialManager.Instance.Collision6();
             Destroy(other.gameObject);
+        }
+        else if (other == miningMatsCollider)
+        {
+            TutorialManager.Instance.Sequence4();
         }
         else if (other == miningTrigger)
         {
