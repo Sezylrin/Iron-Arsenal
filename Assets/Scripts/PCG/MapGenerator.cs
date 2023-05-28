@@ -126,7 +126,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        Vector3 tutSpawn = new Vector3(0f, 0f, 125f);
+        Vector3 tutSpawn = new Vector3(0f, 0f, 126f);
         if (!allEventTiles.ContainsKey(tutSpawn))
         {
             EventTile newEventTile = SpawnNewEventTile(tutSpawn, spawnableEventList[0]);

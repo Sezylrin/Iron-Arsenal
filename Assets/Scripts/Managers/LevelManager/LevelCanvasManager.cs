@@ -340,6 +340,7 @@ public class LevelCanvasManager : MonoBehaviour
         else if (radar.scannedEvent != null && mapGenerator.DistFromPlayer(radar.scannedEvent.tileObjectPtr) < mapGenerator.tileOffset)
         {
             radar.isActiveScan = false;
+            radar.scannedEvent = null;
         }
         minimapRadarOverlayRectTrans.gameObject.SetActive(!(!radar.isActiveScan || mapGenerator.DistFromPlayer(radar.scannedEvent.tileObjectPtr) < mapGenerator.tileOffset * 5));
     }

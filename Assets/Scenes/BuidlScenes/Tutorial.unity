@@ -221,7 +221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &20907318
 Transform:
   m_ObjectHideFlags: 0
@@ -914,7 +914,7 @@ MonoBehaviour:
     They give this.'
   textSpeed: 0.05
   stayActive: 0
-  pauseDuringDialogue: 0
+  pauseDuringDialogue: 1
 --- !u!114 &138831029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -967,7 +967,7 @@ GameObject:
   - component: {fileID: 141162194}
   - component: {fileID: 141162193}
   m_Layer: 5
-  m_Name: ArmoryDialogue
+  m_Name: RuinsDialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1042,7 +1042,7 @@ MonoBehaviour:
     They give this.'
   textSpeed: 0.05
   stayActive: 0
-  pauseDuringDialogue: 0
+  pauseDuringDialogue: 1
 --- !u!114 &141162195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2034,7 +2034,7 @@ GameObject:
   - component: {fileID: 337907599}
   - component: {fileID: 337907598}
   m_Layer: 5
-  m_Name: NextZoneDiaglogue
+  m_Name: NextZoneDialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2246,6 +2246,11 @@ MonoBehaviour:
   col1: {fileID: 671695159}
   col2: {fileID: 1978848518}
   col3: {fileID: 380573746}
+  miningTrigger: {fileID: 118333293}
+  rocketsTrigger: {fileID: 1158837649}
+  chestTrigger: {fileID: 1147534957}
+  ruinsTrigger: {fileID: 220800506}
+  bossTrigger: {fileID: 83910788}
 --- !u!1 &358307922
 GameObject:
   m_ObjectHideFlags: 0
@@ -3351,7 +3356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1280353363}
   lines:
-  - Defeating enemies grant basic resources.
+  - Defeating enemies grant the green resource - Xenorium.
   textSpeed: 0.05
   stayActive: 1
   pauseDuringDialogue: 0
@@ -5815,7 +5820,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965557606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.9, y: 0, z: -12.7}
+  m_LocalPosition: {x: 30.9, y: 0, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6123,7 +6128,7 @@ MonoBehaviour:
     They give this.'
   textSpeed: 0.05
   stayActive: 0
-  pauseDuringDialogue: 0
+  pauseDuringDialogue: 1
 --- !u!114 &1012655951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6704,7 +6709,7 @@ MonoBehaviour:
     They give this.'
   textSpeed: 0.05
   stayActive: 0
-  pauseDuringDialogue: 0
+  pauseDuringDialogue: 1
 --- !u!114 &1109519047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7057,7 +7062,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1147534955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.7, y: 0, z: -13}
+  m_LocalPosition: {x: 14.7, y: 0, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7783,8 +7788,8 @@ MonoBehaviour:
 
     Leave before you get overwhelmed.'
   textSpeed: 0.05
-  stayActive: 0
-  pauseDuringDialogue: 1
+  stayActive: 1
+  pauseDuringDialogue: 0
 --- !u!114 &1266834808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8042,8 +8047,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 732405901}
   lines:
-  - "Build a basic sentry by first selecting a socket, then a sentry. \nOnce you're
-    done exit the build menu with 'B'"
+  - 'Build a basic sentry by first selecting a socket, then a sentry. '
+  - You can also remove sentries by clicking on the socket and pressing 'Remove Sentry'.
+  - Once you're done, exit the build menu with 'B'
   textSpeed: 0.05
   stayActive: 1
   pauseDuringDialogue: 1
@@ -8850,7 +8856,9 @@ MonoBehaviour:
   mapDialogue: {fileID: 992009718}
   map: {fileID: 1336674996}
   radarDialogue: {fileID: 1494840956}
+  eventsContainer: {fileID: 1837953966}
   outpostDialogue: {fileID: 1266834804}
+  shop: {fileID: 1392528075}
   shopMenu: {fileID: 1542839270}
   statsTab: {fileID: 783648138}
   augmentsTab: {fileID: 1571976746}
@@ -8860,13 +8868,14 @@ MonoBehaviour:
   statsDialogue: {fileID: 194631617}
   augmentsDialogue: {fileID: 1563173896}
   shopSentriesDialogue: {fileID: 584985171}
+  events: {fileID: 20907317}
   nextZoneDialogue: {fileID: 337907596}
   eventsDialogue: {fileID: 293358974}
   miningDialogue: {fileID: 138831025}
-  chestDialogue: {fileID: 2108548989}
-  armoryDialogue: {fileID: 141162191}
-  bossDialogue: {fileID: 1109519043}
   rocketsDialogue: {fileID: 1012655947}
+  chestDialogue: {fileID: 2108548989}
+  ruinsDialogue: {fileID: 141162191}
+  bossDialogue: {fileID: 1109519043}
   exitDialogue: {fileID: 2019297335}
 --- !u!4 &1380198386
 Transform:
@@ -8971,7 +8980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1392528076
 Transform:
   m_ObjectHideFlags: 0
@@ -8980,7 +8989,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392528075}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 150}
+  m_LocalPosition: {x: 0, y: 1.5, z: 135}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9525,7 +9534,7 @@ MonoBehaviour:
     Use the markers
     on the map and minimap to find that event.'
   textSpeed: 0.05
-  stayActive: 1
+  stayActive: 0
   pauseDuringDialogue: 0
 --- !u!114 &1494840960
 MonoBehaviour:
@@ -10817,7 +10826,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1767645922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30, y: 0, z: -10.8}
+  m_LocalPosition: {x: -30, y: 0, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11136,10 +11145,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16384
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 49151
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -11271,6 +11280,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1821975418}
   m_CullTransparentMesh: 1
+--- !u!1 &1837953966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5099565300703248957, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
+  m_PrefabInstance: {fileID: 441571953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1850985634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3041052365063705489, guid: 719d6e11a431f014abf9f537a2036450, type: 3}
@@ -12433,7 +12447,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 691683859}
   lines:
-  - Good job. You've gained enough resources to build a sentry.
+  - Good job. Once you've defeated enough enemies you'll be able to build a sentry.
+  - Since we're on a time crunch, I'll give you some of my Xenorium.
   - Press 'B' to enter the build menu.
   textSpeed: 0.05
   stayActive: 1
@@ -12627,7 +12642,7 @@ MonoBehaviour:
     They give this.'
   textSpeed: 0.05
   stayActive: 0
-  pauseDuringDialogue: 0
+  pauseDuringDialogue: 1
 --- !u!114 &2108548993
 MonoBehaviour:
   m_ObjectHideFlags: 0

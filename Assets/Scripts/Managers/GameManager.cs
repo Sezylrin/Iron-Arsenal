@@ -264,7 +264,7 @@ public class GameManager : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         settingsMenu.SetActive(false);
-        if (currentScene.name == SceneState.Game.ToString())
+        if (currentScene.name == SceneState.Game.ToString() || currentScene.name == SceneState.Tutorial.ToString())
         {
             currentSelection = CurrentSelection.Paused;
             pauseMenu.SetActive(true);
@@ -275,7 +275,7 @@ public class GameManager : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         settingsMenu.SetActive(false);
-        if (currentScene.name == SceneState.Game.ToString())
+        if (currentScene.name == SceneState.Game.ToString() || currentScene.name == SceneState.Tutorial.ToString())
         {
             currentSelection = CurrentSelection.Paused;
             pauseMenu.SetActive(true);

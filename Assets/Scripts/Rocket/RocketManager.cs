@@ -10,6 +10,7 @@ public static class RocketManager
 
     public static void collectRocketPart()
     {
+        if (rocketPartsCollected >= requiredRocketPartsToEscape) return;
         rocketPartsCollected++;
         LevelCanvasManager.Instance.SetRocketPartAmount(rocketPartsCollected);
     }
