@@ -197,8 +197,24 @@ PrefabInstance:
       propertyPath: bossPrefabs.Array.data[2]
       value: 
       objectReference: {fileID: 3061924111405816818, guid: 5db3b14967905d64eb16708fcf4b7474, type: 3}
+    - target: {fileID: 3075346082217855632, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: <BasicEnemyChance>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075346082217855632, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: <SpecialEnemyChance>k__BackingField
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 3335142613592545756, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3335142613592545756, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: debugAugment
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3335142613592545756, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: addAugmentToActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4797737709738731196, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}

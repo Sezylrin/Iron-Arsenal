@@ -11,6 +11,8 @@ public class MiningOutpost : Event
 
     private Mining miningScript;
 
+    public Animator anim;
+
     [field: SerializeField] private TextMeshProUGUI text { get; set; }
 
     // Start is called before the first frame update
@@ -29,6 +31,7 @@ public class MiningOutpost : Event
 
     protected override void Begin()
     {
+        anim.SetTrigger("Start");
         miningArea.SetActive(true);
         EnemyManager.Instance.StartRush();
         StartCoroutine(Mine());

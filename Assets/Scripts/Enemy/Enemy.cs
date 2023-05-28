@@ -126,7 +126,7 @@ public abstract class Enemy : MonoBehaviour
             {
                 Debug.Log("why");
                 Explosion tempExplosion = Instantiate(enemyEffects.augmentPFList[0], transform.position, Quaternion.identity).GetComponent<Explosion>();
-                tempExplosion.SetDamage(MaxHealth * 0.3f);
+                tempExplosion.SetDamage(MaxHealth * 0.3f, true);
             }
             if (enemyEffects.isFreezeShard)
             {

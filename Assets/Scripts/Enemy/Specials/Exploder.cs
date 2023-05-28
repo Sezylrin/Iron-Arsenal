@@ -17,7 +17,7 @@ public class Exploder : Enemy
     protected override void OnDeath()
     {
         GameObject explosionObj = Instantiate(explosion, transform.position, transform.rotation);
-        explosionObj.GetComponent<Explosion>().SetDamage(DamageOnCollide);
+        explosionObj.GetComponent<Explosion>().SetDamage(DamageOnCollide, false);
         base.OnDeath();
     }
 }

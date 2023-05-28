@@ -383,6 +383,7 @@ MonoBehaviour:
   canvas: {fileID: 2597844643383136459}
   type: 1
   miningArea: {fileID: 362598566149298423}
+  anim: {fileID: 2141972194630484038}
   <text>k__BackingField: {fileID: 7966475003627266338}
 --- !u!1 &5253997268409849548
 GameObject:
@@ -1880,6 +1881,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 7656040550689414596, guid: 5a044fe586b30e44bb25cd8e6cf507be, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7656040550689414597, guid: 5a044fe586b30e44bb25cd8e6cf507be, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -1949,6 +1954,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a044fe586b30e44bb25cd8e6cf507be, type: 3}
+--- !u!95 &2141972194630484038 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7656040550689414596, guid: 5a044fe586b30e44bb25cd8e6cf507be, type: 3}
+  m_PrefabInstance: {fileID: 8612685744624033154}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2141972194630484039 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7656040550689414597, guid: 5a044fe586b30e44bb25cd8e6cf507be, type: 3}
