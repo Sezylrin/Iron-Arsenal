@@ -360,7 +360,7 @@ PrefabInstance:
     - target: {fileID: 849711726, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 123295386}
+      objectReference: {fileID: 1533336791}
     - target: {fileID: 849711726, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ToggleRadarMenu
@@ -372,7 +372,7 @@ PrefabInstance:
     - target: {fileID: 1440095998, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: mapGenerator
       value: 
-      objectReference: {fileID: 1830001051}
+      objectReference: {fileID: 0}
     - target: {fileID: 1622900871, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: mapGenerator
       value: 
@@ -412,6 +412,10 @@ PrefabInstance:
     - target: {fileID: 1855059123350522713, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1855059123350522714, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 78
       objectReference: {fileID: 0}
     - target: {fileID: 2077974866772937153, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: player
@@ -501,7 +505,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1440095998, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1766765862, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
     - {fileID: 471922853, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
