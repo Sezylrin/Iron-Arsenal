@@ -16,6 +16,7 @@ public class SFXAudioObserver : MonoBehaviour, ISFXVolumeObserver
     {
         audioSrc = GetComponent<AudioSource>();
         GameManager.Instance.RegisterSFXVolumeObserver(this);
+        OnSFXVolumeChanged(GameManager.Instance.SFXVolume);
     }
 
     public void OnSFXVolumeChanged(float newSFXVolume)

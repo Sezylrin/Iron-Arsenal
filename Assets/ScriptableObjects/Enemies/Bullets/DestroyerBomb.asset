@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DestroyerBomb
   m_EditorClassIdentifier: 
   damage: 200
-  projectileSpeed: 5
+  projectileSpeed: 7
   fireDelay: 3
   projectileLifetime: 10

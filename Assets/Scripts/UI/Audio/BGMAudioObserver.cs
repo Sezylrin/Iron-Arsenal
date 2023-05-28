@@ -16,6 +16,7 @@ public class BGMAudioObserver : MonoBehaviour, IBGMVolumeObserver
     {
         audioSrc = GetComponent<AudioSource>();
         GameManager.Instance.RegisterBGMVolumeObserver(this);
+        OnBGMVolumeChanged(GameManager.Instance.BGMVolume);
     }
 
     public void OnBGMVolumeChanged(float newBGMVolume)

@@ -43,6 +43,8 @@ public class Projectile : MonoBehaviour
 
     private LayerMask defaultMask;
 
+    public ParticleSystem trailPS;
+
     [SerializeField]
     private Rigidbody rb;
 
@@ -88,7 +90,11 @@ public class Projectile : MonoBehaviour
         if (!data.colliderSize.Equals(Vector3.zero))
             boxCollider.size = data.colliderSize;
         if (data.invisible)
+        {
             projMesh.mesh = null;
+        }
+        else trailPS.Play();
+            
         damageScale = 1;
     }
 
