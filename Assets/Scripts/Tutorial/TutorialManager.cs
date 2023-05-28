@@ -111,6 +111,7 @@ public class TutorialManager : MonoBehaviour
         while (LevelManager.Instance.currentState != State.Building) yield return null;
 
         endCombatDialogue.SetActive(false);
+        LevelManager.Instance.GainXenorium(100);
         sentryDialogue.SetActive(true);
 
         while (LevelManager.Instance.currentState != State.Normal) yield return null;

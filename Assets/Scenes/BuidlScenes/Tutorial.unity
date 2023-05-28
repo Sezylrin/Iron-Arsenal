@@ -3351,7 +3351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1280353363}
   lines:
-  - Defeating enemies grant basic resources.
+  - Defeating enemies grant the green resource - Xenorium.
   textSpeed: 0.05
   stayActive: 1
   pauseDuringDialogue: 0
@@ -12433,7 +12433,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 691683859}
   lines:
-  - Good job. You've gained enough resources to build a sentry.
+  - Good job. Once you've defeated enough enemies you'll be able to build a sentry.
+  - Since we're on a time crunch, I'll give you some of my Xenorium.
   - Press 'B' to enter the build menu.
   textSpeed: 0.05
   stayActive: 1
