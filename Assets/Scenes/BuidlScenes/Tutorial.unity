@@ -939,11 +939,11 @@ RectTransform:
   m_Father: {fileID: 2067759725}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -529, y: 918.6}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -450, y: -10}
   m_SizeDelta: {x: 478, y: 188}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &121372719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,8 +987,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 656889648}
   lines:
-  - Staying within the zone will grant resources.
-  textSpeed: 0.05
+  - As you can see, your blue resource (Novacite) is increasing while you stay in
+    range of the outpost.
+  textSpeed: 0.08
   stayActive: 1
   pauseDuringDialogue: 0
 --- !u!114 &121372721
@@ -1113,9 +1114,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1339960333}
   lines:
-  - 'Mining Outposts do this.
-
-    They give this.'
+  - As you may recall, this is a mining outpost. These give resources while you stay
+    inside the red zone after activating the outpost.
+  - There are two different types of mining outposts, one gives the blue resource
+    (Novacite) and the other gives the purple resource (Void Stone).
   textSpeed: 0.05
   stayActive: 0
   pauseDuringDialogue: 1
@@ -1241,9 +1243,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1802184024}
   lines:
-  - 'Armory do this.
-
-    They give this.'
+  - This is a ruin. When you activate it, you'll be given a new weapon that you will
+    need to use until you hold off enemies for a short time.
+  - After the ruin has ended, you'll be able to switch weapons again and will have
+    a permanently unlocked weapon!
+  - 'You can press Tab to open the weapon wheel. '
+  - From there you can use the mouse or number keys to switch weapons that you have
+    unlocked.
   textSpeed: 0.05
   stayActive: 0
   pauseDuringDialogue: 1
@@ -1314,7 +1320,7 @@ RectTransform:
   m_GameObject: {fileID: 163803888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 517921006}
@@ -1378,8 +1384,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 517921007}
   lines:
-  - Welcome to Iron Arsenal.
-  - Move to the marked position to get started.
+  - Welcome to planet Zephyria. You are going to have to upgrade your mech to survive
+    against the feral machines on this planet.
+  - 'In order to escape, you''ll need to find three rocket parts to build a rocket
+    to get you off this planet. '
+  - Move to the marked position to learn how to survive this cruel planet.
   textSpeed: 0.05
   stayActive: 0
   pauseDuringDialogue: 1
@@ -1877,7 +1886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 58246245}
   lines:
-  - There are x events. Go to them to find out what they do.
+  - There are five events. Go to them to find out what they do.
   textSpeed: 0.05
   stayActive: 0
   pauseDuringDialogue: 1
@@ -2308,7 +2317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 805078320}
   lines:
-  - Head to next to zone to proceed.
+  - Head to next to the zone to proceed.
   textSpeed: 0.05
   stayActive: 0
   pauseDuringDialogue: 1
@@ -3534,18 +3543,18 @@ RectTransform:
   m_GameObject: {fileID: 549238257}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9291298, y: 0.9291298, z: 0.9291298}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1280353362}
   m_Father: {fileID: 2067759725}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -529, y: 989}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -460, y: -10}
   m_SizeDelta: {x: 478, y: 188}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &549238259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3560,7 +3569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1280353363}
   lines:
-  - Defeating enemies grant the green resource - Xenorium.
+  - Defeating any types of enemies grant the green resource - Xenorium.
   textSpeed: 0.05
   stayActive: 1
   pauseDuringDialogue: 0
@@ -3932,8 +3941,9 @@ MonoBehaviour:
   textComponent: {fileID: 1362795193}
   lines:
   - The 'SENTIRES' tab will have 3 random sentry choices that you can purchase.
-  - 'Bought sentries unlock the sentry type, which you can then build '
-  - Get out.
+  - Once you purchase a sentry, you will permenantly be able to build that sentry
+    in the build menu.
+  - Close the shop.
   textSpeed: 0.05
   stayActive: 1
   pauseDuringDialogue: 0
@@ -6600,9 +6610,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 687869047}
   lines:
-  - 'Rockets do this.
-
-    They give this.'
+  - This is how you escape the planet. You'll need to collect three rocket parts
+    to escape the planet.
+  - If you collect three rocket parts and activate the rocket pad, you will start
+    a boss rush. This will be your toughest challenge yet.
+  - If you beat the boss rush, you can escape the planet!
   textSpeed: 0.05
   stayActive: 0
   pauseDuringDialogue: 1
@@ -6923,7 +6935,7 @@ RectTransform:
   m_GameObject: {fileID: 1074372968}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 875187279}
@@ -6949,10 +6961,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 875187280}
   lines:
-  - These are the most basic enemy you will encounter.
+  - These are the most basic enemies you will encounter.
   - Enemies of varying types will constantly try to attack you as you move around
     the world.
-  - Defeat the enemies by shooting them to proceed.
+  - To proceed, destroy these enemies.
   textSpeed: 0.05
   stayActive: 0
   pauseDuringDialogue: 1
@@ -7185,9 +7197,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1479282011}
   lines:
-  - 'Boss do this.
-
-    They give this.'
+  - Activating this will spawn a powerful boss! If you manage to destroy it, you'll
+    get resources and a free permanent Augment to make you stronger.
   textSpeed: 0.05
   stayActive: 0
   pauseDuringDialogue: 1
@@ -7855,7 +7866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 723005191}
   lines:
-  - Rocket Parts are here. You need 3 :)
+  - You can see how many rocket parts you have collected over here.
   textSpeed: 0.05
   stayActive: 0
   pauseDuringDialogue: 1
@@ -8536,8 +8547,8 @@ MonoBehaviour:
   textComponent: {fileID: 562570014}
   lines:
   - This is a mining outpost.
-  - After you interact with it, you will start mining resources, but more enemies
-    will start attacking you.
+  - After you interact with the outpost, you will start mining resources if you stay
+    in range of it, but hordes of enemies will start to attack you!
   - You should leave the area before you get overwhelmed.
   textSpeed: 0.05
   stayActive: 0
@@ -8799,8 +8810,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 732405901}
   lines:
-  - 'Build a basic sentry by first selecting a socket, then a sentry. '
-  - You can also remove sentries by clicking on the socket and pressing 'Remove Sentry'.
+  - 'Build a basic sentry by first selecting a red socket, then a sentry. '
+  - You can also remove sentries by clicking on a socket with a Sentry on it and
+    pressing 'Remove Sentry'.
   - Once you're done, exit the build menu with 'B'
   textSpeed: 0.05
   stayActive: 1
@@ -10561,7 +10573,8 @@ MonoBehaviour:
   textComponent: {fileID: 1774194389}
   lines:
   - The 'AUGMENTS' tab will have 3 random augments that you can purchase.
-  - 'Augments change how your '
+  - Augments give your Cannon and Sentries various different effects. Try out different
+    combinations to see what works best for you!
   - Click on the 'SENTRIES' tab.
   textSpeed: 0.05
   stayActive: 1
@@ -12533,7 +12546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 827227145}
   lines:
-  - Shops are where you can spend your resources.
+  - You can spend your resources at Shops.
   - Interact with the shop to see what is available.
   textSpeed: 0.05
   stayActive: 1
@@ -13084,7 +13097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 381132109}
   lines:
-  - Pause by pressing 'Esc' and exit the tutorial.
+  - Pause by pressing 'Esc'. Click 'Exit' to leave the tutorial.
   textSpeed: 0.05
   stayActive: 1
   pauseDuringDialogue: 0
@@ -13424,7 +13437,7 @@ RectTransform:
   m_GameObject: {fileID: 2083418445}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 691683858}
@@ -13450,7 +13463,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 691683859}
   lines:
-  - Good job. Once you've defeated enough enemies you'll be able to build a sentry.
+  - Nice work! Once you've defeated enough enemies you'll be able to build sentries
+    on your mech to help you defend.
   - Since we're on a time crunch, I'll give you some of my Xenorium.
   - Press 'B' to enter the build menu.
   textSpeed: 0.05
@@ -13640,9 +13654,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 815232096}
   lines:
-  - 'Chests do this.
-
-    They give this.'
+  - Chests are great! They will give you resources and an attribute or augment but
+    will attract a rush of enemies to your location.
+  - Make sure you open chests when you feel like you can deal with many enemies!
   textSpeed: 0.05
   stayActive: 0
   pauseDuringDialogue: 1
