@@ -12,6 +12,7 @@ public class Radar : MonoBehaviour
     public GameObject minimapRadarOverlay;
     private RectTransform minimapRadarOverlayRectTrans;
     public Transform radarButtonsContainer;
+    public GameObject radarButtonBackground;
     // public Vector2 sizeScale = new Vector2(100, 100);
     public float sizeScale = 100f;
     public Vector3 startLocalPos;
@@ -52,17 +53,26 @@ public class Radar : MonoBehaviour
     {
         GameObject buttonObject = TMP_DefaultControls.CreateButton(resources);
 
+        GameObject background = Instantiate(radarButtonBackground, Vector3.zero, Quaternion.identity, radarButtonsContainer);
+        RectTransform backgroundRectTrans = background.GetComponent<RectTransform>();
+
         buttonObject.transform.SetParent(radarButtonsContainer, false);
         RectTransform buttonRectTrans = buttonObject.GetComponent<RectTransform>();
         buttonRectTrans.sizeDelta = new Vector2(sizeScale, sizeScale);
+
+
         if (i < maxButtonsInRow)
         {
+            Vector3 pos = startLocalPos + new Vector3(buttonOffset * i, 0, 0);
             // buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * i, 0, 0);
-            buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * i, 0, 0);
+            buttonRectTrans.localPosition = pos;
+            backgroundRectTrans.localPosition = pos;
         }
         else
         {
-            buttonRectTrans.localPosition = startLocalPos + new Vector3(buttonOffset * (i % maxButtonsInRow), buttonOffset * (Mathf.FloorToInt(i/maxButtonsInRow)), 0);
+            Vector3 pos = startLocalPos + new Vector3(buttonOffset * (i % maxButtonsInRow), buttonOffset * (Mathf.FloorToInt(i/maxButtonsInRow)), 0);
+            buttonRectTrans.localPosition = pos;
+            backgroundRectTrans.localPosition = pos;
         }
         // buttonRectTrans.localPosition = new Vector3(-600 + 150 * i, -500, 0);
 

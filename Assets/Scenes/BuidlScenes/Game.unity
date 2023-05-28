@@ -190,6 +190,10 @@ PrefabInstance:
       value: LevelManager
       objectReference: {fileID: 0}
     - target: {fileID: 1715962026865805886, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
+      propertyPath: mapGenerator
+      value: 
+      objectReference: {fileID: 1830001051}
+    - target: {fileID: 1715962026865805886, guid: 0b6ce17a85e8eef4a861918ef58870b5, type: 3}
       propertyPath: rocketPartsLabel
       value: 
       objectReference: {fileID: 1607602498}
@@ -1008,14 +1012,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapGenerator
       objectReference: {fileID: 0}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[2].eventMapTile
-      value: 
-      objectReference: {fileID: 1527707717304764863, guid: 21019ad5de5d5824ab43d040a4118d14, type: 3}
-    - target: {fileID: 5099565301087661870, guid: f82db21a62b851f4b9d9422c2d484376, type: 3}
-      propertyPath: spawnableEventList.Array.data[3].eventMapTile
-      value: 
-      objectReference: {fileID: 6373782544702899194, guid: 70a67b0fc3e4cd04c9ce7ef231473e9e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
