@@ -1,0 +1,23 @@
+{
+  "prompt_text": "dirt ground, environment design, extreme fine details",
+  "patch": {
+    "ext": "png",
+    "dtype": "uint8",
+    "width": 512,
+    "height": 512,
+    "url": "https://static-dev.withpoly.com/v3-voronoi/textures/patches/c411b960-c3ca-4473-861e-b289dca252ef.png",
+    "patch_id": "mGyjXmkNdu"
+  },
+  "seamless_prompt_text": "dirt ground, environment design, extreme fine details",
+  "seamless_patch_scale": 0.8,
+  "upscale_prompt_text": "dirt ground, environment design, extreme fine details",
+  "upscale_resolution": 4096,
+  "is_seamless": true,
+  "pbr_mode": "matte",
+  "pbr_generate_color": true,
+  "pbr_generate_normal": true,
+  "pbr_generate_height": true,
+  "pbr_generate_ao": true,
+  "pbr_generate_roughness": true,
+  "pbr_generate_metallic": false
+}
