@@ -29,7 +29,9 @@ public class Chest : Event
         LevelManager.Instance.GainXenorium((int)Random.Range(50, 101));
         LevelManager.Instance.GainNovacite((int)Random.Range(50, 151));
         LevelManager.Instance.GainVoidStone((int)Random.Range(50, 151));
+        if (Random.Range(0,2) == 0)
         LevelManager.Instance.SpawnAugmentChoice();
+        else
         LevelManager.Instance.SpawnAttributeChoice();
         base.End();
     }
