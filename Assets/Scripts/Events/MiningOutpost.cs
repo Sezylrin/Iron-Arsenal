@@ -32,6 +32,7 @@ public class MiningOutpost : Event
     protected override void Begin()
     {
         anim.SetTrigger("Start");
+        gameObject.GetComponent<AudioSource>().Play();
         miningArea.SetActive(true);
         EnemyManager.Instance.StartRush();
         StartCoroutine(Mine());
@@ -41,6 +42,7 @@ public class MiningOutpost : Event
     protected override void End()
     {
         miningArea.SetActive(false);
+        gameObject.GetComponent<AudioSource>().Pause();
         EnemyManager.Instance.StopRush();
         base.End();
     }
