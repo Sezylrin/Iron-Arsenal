@@ -153,6 +153,7 @@ public class BaseFunctions : MonoBehaviour
         }
         else
         {
+            Debug.Log("shield");
             float shieldSegment = currentShield % (maxShieldHealth * 0.25f);
             float overflow = shieldSegment - amount;
             if (overflow < 0)
