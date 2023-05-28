@@ -47,6 +47,10 @@ public class WeaponWheelButtonController : MonoBehaviour
             selected = false;
             bgColor.color = normalColor;
         }
+        if (WeaponWheelController.weaponID == id && !selected)
+        {
+            Selected();
+        }
     }
 
     public void Selected()

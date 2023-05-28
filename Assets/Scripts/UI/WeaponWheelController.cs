@@ -32,7 +32,7 @@ public class WeaponWheelController : MonoBehaviour
         {
             anim.SetBool("OpenWeaponWheel", false);
         }
-        //cannon.SwitchCannon(weaponID);
+        cannon.SwitchCannon(weaponID);
 
         //switch (weaponID)
         //{

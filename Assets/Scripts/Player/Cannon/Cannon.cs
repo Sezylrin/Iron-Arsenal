@@ -66,13 +66,19 @@ public class Cannon : MonoBehaviour
         pools.Add(pooledRockets);
         pools.Add(pooledFlames);
 
-        unlockedCannonProjectiles.Add(0);
+        for (int i = 0; i < 7; i++)
+        {
+            unlockedCannonProjectiles.Add(-1);
+        }
+
+        lockedCannonProjectiles.Add(0);
         lockedCannonProjectiles.Add(1);
         lockedCannonProjectiles.Add(2);
         lockedCannonProjectiles.Add(3);
         lockedCannonProjectiles.Add(4);
         lockedCannonProjectiles.Add(5);
         lockedCannonProjectiles.Add(6);
+        UnlockCannon(0);
 
         UpdateMaterial();
 
@@ -178,21 +184,35 @@ public class Cannon : MonoBehaviour
         pools[projectileType].AddObj(obj);
     }
 
+    public void UnlockCannon(int cannonIndex)
+    {
+        if (lockedCannonProjectiles.Contains(cannonIndex))
+        {
+            unlockedCannonProjectiles[cannonIndex] = cannonIndex;
+            lockedCannonProjectiles.Remove(cannonIndex);
+            if (cannonIndex == 6)
+            {
+                flamethrowerIndex = 6;
+            }
+            UpdateMaterial();
+        }
+    }
+
     public void UnlockRandomCannon()
     {
         if (lockedCannonProjectiles.Count > 0)
         {
-            int random = Random.Range(0, lockedCannonProjectiles.Count);
-            unlockedCannonProjectiles.Add(lockedCannonProjectiles[random]);
-            lockedCannonProjectiles.RemoveAt(random);
+            int randomIndex = Random.Range(0, lockedCannonProjectiles.Count);
+            int cannonToUnlock = lockedCannonProjectiles[randomIndex];
 
-            if (unlockedCannonProjectiles[unlockedCannonProjectiles.Count - 1] == 6)
+            UnlockCannon(cannonToUnlock);
+
+            if (unlockedCannonProjectiles.Contains(cannonToUnlock))
             {
-                flamethrowerIndex = unlockedCannonProjectiles.Count - 1;
+                activeCannonProjectile = cannonToUnlock;
+                WeaponWheelController.weaponID = activeCannonProjectile;
+                UpdateMaterial();
             }
-
-            activeCannonProjectile = unlockedCannonProjectiles.Count - 1;
-            UpdateMaterial();
         }
     }
 
