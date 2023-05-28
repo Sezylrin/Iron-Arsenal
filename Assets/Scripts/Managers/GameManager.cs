@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
     public void PlayGame()
     {
         currentSelection = CurrentSelection.Playing;
+        RocketManager.rocketPartsCollected = 0;
         StartCoroutine(LoadPlayScene());
     }
 
