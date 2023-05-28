@@ -7,6 +7,7 @@ public class WeaponSounds : MonoBehaviour
     [SerializeField] private AudioClip basicWeapon;
     [SerializeField] private AudioClip shotgun;
     [SerializeField] private AudioClip flamethrower;
+    [SerializeField] private AudioClip rocketLauncher;
 
     private AudioSource flamethrowerAudioSource;
 
@@ -25,12 +26,15 @@ public class WeaponSounds : MonoBehaviour
             case 2:
             case 3:
             case 4:
-            case 5:
                 PlaySound(basicWeapon);
                 StopFlamethrowerIfPlaying();
                 break;
             case 1:
                 PlaySound(shotgun);
+                StopFlamethrowerIfPlaying();
+                break;
+            case 5:
+                PlaySound(rocketLauncher);
                 StopFlamethrowerIfPlaying();
                 break;
             case 6:
@@ -45,6 +49,8 @@ public class WeaponSounds : MonoBehaviour
         audioSourceGameObject.transform.SetParent(this.transform);
 
         AudioSource audioSource = audioSourceGameObject.AddComponent<AudioSource>();
+        SFXAudioObserver sfxAudioObserver = audioSourceGameObject.AddComponent<SFXAudioObserver>();
+
         audioSource.clip = clip;
         audioSource.Play();
 
