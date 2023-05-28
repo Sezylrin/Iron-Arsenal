@@ -132,6 +132,18 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadPlayScene());
     }
 
+    public void PlayTutorial()
+    {
+        currentSelection = CurrentSelection.Playing;
+        StartCoroutine(LoadTutorialScene());
+    }
+
+    IEnumerator LoadTutorialScene()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Loader.Load(SceneState.Tutorial);
+    }
+
     IEnumerator LoadPlayScene()
     {
         yield return new WaitForSeconds(0.5f);
@@ -179,11 +191,6 @@ public class GameManager : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Loader.Load(SceneState.MainMenu);
-    }
-
-    public void LoadTutorial()
-    {
-        Loader.Load(SceneState.Tutorial);
     }
 
     public void IncreaseSFX()

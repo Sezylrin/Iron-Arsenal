@@ -20,6 +20,7 @@ public class MainMenuBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         ResumeGame,
         DisplaySettings,
         LoadMainMenu,
+        LoadTutorial,
     }
 
     private void Start()
@@ -54,6 +55,9 @@ public class MainMenuBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 break;
             case ButtonAction.LoadMainMenu:
                 GameManager.Instance.LoadMainMenu();
+                break;
+            case ButtonAction.LoadTutorial:
+                GameManager.Instance.PlayTutorial();
                 break;
         }
     }

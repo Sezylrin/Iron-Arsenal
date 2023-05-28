@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverSound: {fileID: 8300000, guid: b75ffcf2da86f5f4d9dd500e06804c72, type: 3}
-  action: 0
+  action: 6
 --- !u!114 &521497546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1170,6 +1170,10 @@ PrefabInstance:
     - target: {fileID: 435629368356605949, guid: 6b003c8133ce48640b5e1923070eab0d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 435629368747679811, guid: 6b003c8133ce48640b5e1923070eab0d, type: 3}
+      propertyPath: action
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 435629368747679822, guid: 6b003c8133ce48640b5e1923070eab0d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
