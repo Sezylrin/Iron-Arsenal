@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,6 +22,7 @@ public class Dialogue : MonoBehaviour
         if (pauseDuringDialogue)
         {
             GameManager.Instance.PauseGame();
+            GameManager.Instance.canUnpause = false;
         }
     }
 
@@ -71,12 +73,41 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            if (stayActive) return;
-            gameObject.SetActive(false);
-            if (pauseDuringDialogue)
+            if (!stayActive)
             {
-                GameManager.Instance.ResumeGame();
+                if (pauseDuringDialogue)
+                {
+                    GameManager.Instance.canUnpause = true;
+                    GameManager.Instance.ResumeGame();
+                }
+                gameObject.SetActive(false);
             }
+            else
+            {
+                if (pauseDuringDialogue)
+                {
+                    GameManager.Instance.canUnpause = true;
+                }
+            }
+            // else if (pauseDuringDialogue)
+            // {
+            //     GameManager.Instance.canUnpause = true;
+            //     GameManager.Instance.ResumeGame();
+            // }
+            // gameObject.SetActive(false);
+            // if (pauseDuringDialogue)
+            // {
+            //     GameManager.Instance.canUnpause = true;
+            //     GameManager.Instance.ResumeGame();
+            // }
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (pauseDuringDialogue)
+        {
+            GameManager.Instance.canUnpause = true;
         }
     }
 }
