@@ -40,6 +40,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        if (GameManager.Instance.currentSelection == CurrentSelection.Paused && audioSource.isPlaying)
+        {
+            audioSource.Pause();
+        }
+        else if (GameManager.Instance.currentSelection == CurrentSelection.Playing && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
     }
 
     private void FixedUpdate()
@@ -150,5 +159,15 @@ public class PlayerController : MonoBehaviour
         force.z *= Mathf.Sign(velocity.z);
 
         _rb.AddForce(-force, ForceMode.Impulse);
+    }
+
+    public void PauseDrivingSound()
+    {
+        audioSource.Pause();
+    }
+
+    public void ResumeDrivingSound()
+    {
+        audioSource.Play();
     }
 }

@@ -12,6 +12,7 @@ public class MiningOutpost : Event
     private Mining miningScript;
 
     public Animator anim;
+    private bool mining = false;
 
     [field: SerializeField] private TextMeshProUGUI text { get; set; }
 
@@ -27,10 +28,20 @@ public class MiningOutpost : Event
     void Update()
     {
         CheckBeginInput();
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        if (GameManager.Instance.currentSelection == CurrentSelection.Paused && mining && audioSource.isPlaying)
+        {
+            audioSource.Pause();
+        }
+        else if (GameManager.Instance.currentSelection == CurrentSelection.Playing && mining && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
     }
 
     protected override void Begin()
     {
+        mining = true;
         anim.SetTrigger("Start");
         gameObject.GetComponent<AudioSource>().Play();
         miningArea.SetActive(true);
@@ -41,6 +52,7 @@ public class MiningOutpost : Event
 
     protected override void End()
     {
+        mining = false;
         miningArea.SetActive(false);
         gameObject.GetComponent<AudioSource>().Pause();
         EnemyManager.Instance.StopRush();
