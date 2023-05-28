@@ -56,6 +56,7 @@ public class Cannon : MonoBehaviour
     {
         weaponSounds = gameObject.GetComponent<WeaponSounds>();
         activeCannonProjectile = 0;
+        WeaponWheelController.weaponID = activeCannonProjectile;
         flamethrowerIndex = -1;
         ableToShoot = true;
         switchingEnabled = true;

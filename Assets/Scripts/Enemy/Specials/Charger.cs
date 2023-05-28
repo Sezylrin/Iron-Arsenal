@@ -15,7 +15,11 @@ public class Charger : Enemy
     {
         ableToCharge = true;
     }
-
+    protected override void Init()
+    {
+        ableToCharge = true;
+        base.Init();
+    }
     // Update is called once per frame
     protected override void Update()
     {
