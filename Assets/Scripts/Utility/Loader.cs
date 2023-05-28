@@ -5,6 +5,7 @@ public enum SceneState
     Game,
     Defeat,
     Victory,
+    Tutorial,
 }
 
 public static class Loader
