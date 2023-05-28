@@ -98,10 +98,12 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && currentSelection == CurrentSelection.Playing)
         {
             Scene currentScene = SceneManager.GetActiveScene();
-            if (currentScene.name != SceneState.Game.ToString()) return;
-            pauseMenu.SetActive(true);
-            currentSelection = CurrentSelection.Paused;
-            levelManager.PlayPauseSound();
+            if (currentScene.name == SceneState.Game.ToString() || currentScene.name == SceneState.Tutorial.ToString())
+            {
+                pauseMenu.SetActive(true);
+                currentSelection = CurrentSelection.Paused;
+                levelManager.PlayPauseSound();
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && currentSelection == CurrentSelection.Paused)
         {
