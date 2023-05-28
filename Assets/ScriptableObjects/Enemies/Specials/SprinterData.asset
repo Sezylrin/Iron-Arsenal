@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SprinterData
   m_EditorClassIdentifier: 
   HealthScale: 1
-  damageOnCollide: 10
+  damageOnCollide: 40
   speed: 7
   ramLaunchMultiplier: 20

@@ -8074,7 +8074,7 @@ Transform:
   - {fileID: 1715962026865805885}
   - {fileID: 940047202}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2077974866772937153
 MonoBehaviour:
@@ -9421,9 +9421,9 @@ MonoBehaviour:
   - {fileID: 4036122845976562098, guid: 021d8823d6ecc5b4c84b56d35ea3ecc0, type: 3}
   - {fileID: 312686492115421739, guid: d7e65ca05aee81e45bcf533e20cb9909, type: 3}
   bossPrefabs:
-  - {fileID: 3061924111405816818, guid: b15e175429bb2a44a875b7eba2ef3c96, type: 3}
+  - {fileID: 3061924111405816818, guid: 5db3b14967905d64eb16708fcf4b7474, type: 3}
   - {fileID: 6315162635932650869, guid: 5d949ff6ac78ae843866d967746520e0, type: 3}
-  - {fileID: 5260008939968158058, guid: 6f69160827d969448913c9411fad5e33, type: 3}
+  - {fileID: 3061924111405816818, guid: b15e175429bb2a44a875b7eba2ef3c96, type: 3}
   augmentPrefabs:
   - {fileID: 4843264019670425020, guid: eacfb151fd5c4884eb165108d41304e4, type: 3}
   - {fileID: 6429212493458960621, guid: f3e5e65cdc032f34eb99a592caa5f28f, type: 3}
