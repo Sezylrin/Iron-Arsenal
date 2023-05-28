@@ -19,6 +19,7 @@ public class LevelCanvasManager : MonoBehaviour
     [SerializeField] private TMP_Text xenoriumLabel;
     [SerializeField] private TMP_Text novaciteLabel;
     [SerializeField] private TMP_Text voidStoneLabel;
+    [SerializeField] private TMP_Text rocketPartsLabel;
 
     [Header("BuildMenu")]
     [SerializeField] private Button closeBtn;
@@ -174,6 +175,11 @@ public class LevelCanvasManager : MonoBehaviour
     public void SetVoidStoneAmount(int voidStoneAmount)
     {
         voidStoneLabel.text = voidStoneAmount.ToString();
+    }
+
+    public void SetRocketPartAmount(int rocketPartAmount)
+    {
+        rocketPartsLabel.text = rocketPartAmount + "/3";
     }
 
     public void ShowAugmentChoices(List<AugmentData> augments)
